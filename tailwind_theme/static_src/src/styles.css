@@ -82,4 +82,14 @@
     * {
         font-family: sans-serif;
     }
+    .darkChart tspan, .darkChart span{
+      fill: rgba(255, 255, 255, 0.661);
+      color: rgba(255, 255, 255, 0.661) !important;
+    }
+    .darkChart line{
+      stroke: rgba(255, 255, 255, 0.246);
+    }
+    .chart line{
+      stroke: rgba(105, 105, 105, 0.327) !important;
+    }
 }

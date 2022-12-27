@@ -10,7 +10,7 @@ $(document).ready(function() {
             $('#page_title_body').css({"font-size":"1.25rem"})
             $('#page_title_body_sub').css({"display":"none"})
         } else {
-            $('#header').css({"backdrop-filter":"blur(0px)","top":"25px", "position":"relative !important"});
+            $('#header').css({"backdrop-filter":"blur(0px)","top":"5px", "position":"relative !important"});
             $('#header').removeClass('scrolled');
             $('#left-logo').css({"display":"none"})
             $('#page_title_body').css({"font-size":"1.75rem"})
