@@ -825,8 +825,20 @@ select {
   position: sticky !important;
 }
 
-.right-0 {
-  right: 0px;
+.top-5 {
+  top: 1.25rem;
+}
+
+.z-\[0\] {
+  z-index: 0;
+}
+
+.z-\[1\] {
+  z-index: 1;
+}
+
+.z-\[200\] {
+  z-index: 200;
 }
 
 .float-right {
@@ -945,6 +957,18 @@ select {
   margin-top: 1rem;
 }
 
+.ml-\[18\%\] {
+  margin-left: 18%;
+}
+
+.mt-\[-25px\] {
+  margin-top: -25px;
+}
+
+.mt-\[5vh\] {
+  margin-top: 5vh;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -957,16 +981,20 @@ select {
   margin-right: 1.25rem;
 }
 
-.mb-1 {
-  margin-bottom: 0.25rem;
+.mt-\[-3px\] {
+  margin-top: -3px;
 }
 
-.ml-3 {
-  margin-left: 0.75rem;
+.mr-\[2px\] {
+  margin-right: 2px;
 }
 
 .mt-0 {
   margin-top: 0px;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
 }
 
 .ml-2 {
@@ -985,8 +1013,16 @@ select {
   margin-bottom: 0.75rem;
 }
 
+.mt-\[-7px\] {
+  margin-top: -7px;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
 }
 
 .mt-1 {
@@ -995,22 +1031,6 @@ select {
 
 .mr-3 {
   margin-right: 0.75rem;
-}
-
-.mt-\[-2px\] {
-  margin-top: -2px;
-}
-
-.mt-\[-5px\] {
-  margin-top: -5px;
-}
-
-.mt-\[-10px\] {
-  margin-top: -10px;
-}
-
-.mt-\[-7px\] {
-  margin-top: -7px;
 }
 
 .block {
@@ -1061,36 +1081,33 @@ select {
   height: 100vh;
 }
 
-.h-full {
-  height: 100%;
+.h-\[700px\] {
+  height: 700px;
 }
 
 .h-\[100vh\] {
   height: 100vh;
 }
 
-.h-\[200px\] {
-  height: 200px;
-}
-
-.h-\[500px\] {
-  height: 500px;
-}
-
-.h-\[700px\] {
-  height: 700px;
-}
-
-.w-\[full\] {
-  width: full;
+.h-\[15px\] {
+  height: 15px;
 }
 
 .w-full {
   width: 100%;
 }
 
-.w-\[90vw\] {
-  width: 90vw;
+.w-\[570px\] {
+  width: 570px;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
+.translate-y-\[10px\] {
+  --tw-translate-y: 10px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .resize {
@@ -1101,24 +1118,16 @@ select {
   grid-auto-flow: row;
 }
 
-.grid-flow-col {
-  grid-auto-flow: column;
-}
-
-.grid-cols-\[10fr_90fr\] {
-  grid-template-columns: 10fr 90fr;
-}
-
-.grid-cols-\[5fr_95fr\] {
-  grid-template-columns: 5fr 95fr;
-}
-
-.grid-cols-\[50px_90fr\] {
-  grid-template-columns: 50px 90fr;
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-\[100px_90fr\] {
   grid-template-columns: 100px 90fr;
+}
+
+.grid-cols-\[45fr_5fr_45fr\] {
+  grid-template-columns: 45fr 5fr 45fr;
 }
 
 .flex-row {
@@ -1137,16 +1146,24 @@ select {
   align-items: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .justify-center {
   justify-content: center;
 }
 
-.gap-5 {
-  gap: 1.25rem;
+.justify-between {
+  justify-content: space-between;
 }
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .truncate {
@@ -1155,24 +1172,24 @@ select {
   white-space: nowrap;
 }
 
-.rounded {
-  border-radius: 0.25rem;
-}
-
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.rounded-\[40px\] {
-  border-radius: 40px;
-}
-
 .rounded-\[20px\] {
   border-radius: 20px;
 }
 
+.rounded-md {
+  border-radius: 0.375rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .border {
   border-width: 1px;
+}
+
+.border-\[rgba\(200\2c 200\2c 200\2c 0\.5\)\] {
+  border-color: rgba(200,200,200,0.5);
 }
 
 .bg-gray-50 {
@@ -1185,6 +1202,16 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#FF8A00\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 138 0 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#2A2A2A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 42 42 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#363636\] {
   --tw-bg-opacity: 1;
   background-color: rgb(54 54 54 / var(--tw-bg-opacity));
@@ -1193,11 +1220,6 @@ select {
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-\[orange\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 165 0 / var(--tw-bg-opacity));
 }
 
 .p-5 {
@@ -1210,6 +1232,10 @@ select {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .p-4 {
@@ -1236,6 +1262,16 @@ select {
   padding-right: 1.25rem;
 }
 
+.px-\[4vw\] {
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1259,8 +1295,8 @@ select {
   padding-bottom: 0.5rem;
 }
 
-.pr-1 {
-  padding-right: 0.25rem;
+.pb-\[2vh\] {
+  padding-bottom: 2vh;
 }
 
 .pt-3 {
@@ -1291,14 +1327,38 @@ select {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+.font-sans {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
 }
 
+.text-\[82px\] {
+  font-size: 82px;
+}
+
+.text-\[18px\] {
+  font-size: 18px;
+}
+
+.text-\[12px\] {
+  font-size: 12px;
+}
+
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .uppercase {
@@ -1313,8 +1373,20 @@ select {
   line-height: 1.5;
 }
 
+.leading-\[1\] {
+  line-height: 1;
+}
+
+.leading-\[0\] {
+  line-height: 0;
+}
+
 .tracking-normal {
   letter-spacing: 0em;
+}
+
+.tracking-\[-2px\] {
+  letter-spacing: -2px;
 }
 
 .text-white {
@@ -1366,4 +1438,50 @@ select {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.sidebarItemActive {
+  background: rgba(255, 136, 0, 0.324);
+  border: 1px solid rgba(255, 138, 0, 0.3);
+  box-shadow: 0px 0px 33px -8px rgba(255, 138, 0, 0.46);
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.navigatorBlock {
+  padding: 20px;
+  padding-left: 25px;
+  text-align: left;
+  line-height:1;
+  background: #363636;
+  border-radius: 29px;
+  border: 1px solid rgba(255, 255, 255, 0);
+}
+
+.navigatorBlock:hover {
+  border: 1px solid white;
+  background: #555555;
+}
+
+.navigatorBlock .title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  /* identical to box height */
+  letter-spacing: -0.04em;
+}
+
+.navigatorBlock .subtitle {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+* {
+  font-family: sans-serif;
+}
+
+.hover\:opacity-\[0\.5\]:hover {
+  opacity: 0.5;
 }
