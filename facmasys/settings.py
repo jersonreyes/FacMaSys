@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'tinymce',
     'mathfilters',
     'dashboard',
+    'feed',
     'user',
     'sales',
     'inventory',
@@ -168,7 +169,7 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'dashboard-index'
+LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'user-login'
 

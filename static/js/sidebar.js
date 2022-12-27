@@ -2,13 +2,16 @@ $(document).ready(function() {
     $(document).scroll(function () {
         var $nav = $("#header");
         if ($(this).scrollTop() > 70) {
-            $('#header').css({"backdrop-filter":"blur(50px)","top":"0px","padding-bottom":"10px","padding-top":"10px"});
+            $('#header').css({"backdrop-filter":"blur(50px)","top":"0px","padding-bottom":"20px","padding-top":"20px"});
+            $('#header').addClass('scrolled');
+            $('#header').css({"position":"fixed !important"});
             $('#left-logo').css({"display":"block"})
             $('#center-logo').css({"display":"none"})
             $('#page_title_body').css({"font-size":"1.25rem"})
             $('#page_title_body_sub').css({"display":"none"})
         } else {
-            $('#header').css({"backdrop-filter":"blur(0px)","top":"25px"});
+            $('#header').css({"backdrop-filter":"blur(0px)","top":"25px", "position":"relative !important"});
+            $('#header').removeClass('scrolled');
             $('#left-logo').css({"display":"none"})
             $('#page_title_body').css({"font-size":"1.75rem"})
             $('#page_title_body_sub').css({"display":"block"})

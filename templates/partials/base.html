@@ -1,7 +1,7 @@
 {% load static %}
 {% load tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
     <head>
         <!-- TAILWIND CSS -->
         {% tailwind_css %}
@@ -67,13 +67,13 @@
             </div>
             <div class="p-2 z-[200]">
                 <div class="relative">
-                    <div id="header" class="transition-all z-[200] fixed px-[4vw] justify-between items-center top-5 flex gap-2" style="width:93vw">
-                        <div class=" text-white leading-[0] flex translate-y-[10px]">
+                    <div id="header" class="transition-all z-[200] px-[4vw] justify-between items-center top-5 flex gap-2 fixed" style="width:93vw">
+                        <div class=" text-white dark:white leading-[0] flex translate-y-[10px]">
                             <a id="left-logo" href="{% url 'index' %}" class="transition-all translate-x-[-2vw] translate-y-[-10px] hidden hover:border hover:border-white flex justify-center w-[40px]">
                                 <img src="{% static '/images/logo.png' %}" style="width: auto; height: 40px;" alt="Search Icon">
                             </a>
                             <div>
-                                <h3 id="page_title_body" class="transition duration-75 font-semibold">BulSU CICT Faculty</h3>
+                                <h3 id="page_title_body" class="transition-all duration-75 font-semibold">BulSU CICT Faculty</h3>
                                 <p id="page_title_body_sub" class="transition-all text-[12px] mt-[-3px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
                             </div>
                         </div>
