@@ -15,7 +15,7 @@ from .tables import *
 from django_tables2 import SingleTableMixin
 from django_tables2.export.views import ExportMixin
 from time import strftime, localtime
-from speedlabproject.utils import add_activity, get_api_json, post_api_json, put_api_json, ExportPDF
+from facmasys.utils import add_activity, get_api_json, post_api_json, put_api_json, ExportPDF
 from django.core.mail import send_mail
 import json, base64, pandas as pd
 

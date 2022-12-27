@@ -3,7 +3,7 @@ from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib import messages
-from speedlabproject.utils import add_activity
+from facmasys.utils import add_activity
 from django.contrib.auth.views import PasswordChangeView
 from time import strftime, localtime
 from django.core.paginator import Paginator

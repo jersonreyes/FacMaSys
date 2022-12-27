@@ -7,7 +7,7 @@ from django.contrib import messages
 from .models import *
 from .forms import CustomerForm
 from datetime import timedelta
-from speedlabproject.utils import get_api_json, post_api_json, to_peso, add_activity, ExportPDF, HTTPResponseHXRedirect
+from facmasys.utils import get_api_json, post_api_json, to_peso, add_activity, ExportPDF, HTTPResponseHXRedirect
 import json, pandas as pd, numpy as np
 from time import strftime, localtime
 from django.urls import reverse_lazy

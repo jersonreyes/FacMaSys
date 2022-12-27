@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from datetime import datetime, timedelta
-from speedlabproject.utils import add_activity, render_to_pdf, get_api_json, to_peso_safe, ExportPDF
+from facmasys.utils import add_activity, render_to_pdf, get_api_json, to_peso_safe, ExportPDF
 from sales.models import Order, OrderProduct
 from .models import ActivityLog
 

@@ -8,7 +8,7 @@ import signal
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'speedlabproject.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'facmasys.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
