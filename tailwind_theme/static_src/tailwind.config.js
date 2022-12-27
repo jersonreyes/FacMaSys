@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+    darkMode: "class",
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
@@ -44,6 +45,7 @@ module.exports = {
     theme: {
         extend: {},
     },
+    variants: ['dark', 'dark-hover', 'dark-group-hover', 'dark-even', 'dark-odd'],
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling

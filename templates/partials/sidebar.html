@@ -1,37 +1,43 @@
 {% load static %}
 {% if user.is_authenticated %}
 <!--  SIDE BAR -->
-<div class="bg-[#363636] h-full fixed p-[0.7vw]">
+<div class="dark:bg-[#363636] h-full fixed p-[0.7vw]">
     <nav class="">
       <div class="">          
         <div class="flex flex-col h-[100vh] pb-[5vh] justify-between gap-2"> 
             <div class="grid grid-flow-row gap-2 justify-center"> 
                 <a value="Home" href="{% url 'index' %}" class="animate glow delay-1 sidebarItem file:text-white no-underline grid items-center place-items-center justify-center {% if state == 'home' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Home</span>                      
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Home</span>                      
                 </a>
 
                 <a value="Dashboard" href="{% url 'dashboard-index' %}" class="animate glow delay-2 sidebarItem selection:text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Dashboard</span>                      
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Dashboard</span>                      
                 </a>
                 <a value="Feed" href="{% url 'dashboard-index' %}" class="animate glow delay-3 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'feed' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Feed</span>                      
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Feed</span>                      
                 </a>
                 <a value="Researches" href="{% url 'dashboard-index' %}" class="animate glow delay-4 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'researches' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Researches</span>                      
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Researches</span>                      
                 </a>
                 <a value="Subjects" href="{% url 'dashboard-index' %}" class="animate glow delay-5 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'subjects' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Subjects</span>                      
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Subjects</span>                      
                 </a>
             </div>
-            <a value="Settings" href="{% url 'dashboard-index' %}" class="animate glow delay-7 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'settings' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
-                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                <span class="mt-[-7px] text-xs">Settings</span>                      
-            </a>
+            <div>
+
+                <p value="Toggle Dark/Light Mode" class="animate glow delay-7 themeToggler sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'settings' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
+                    <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="dark:invert"/>                   
+                </p>
+                <a value="Settings" href="{% url 'dashboard-index' %}" class="animate glow delay-8 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'settings' %}sidebarItemActive{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
+                    <img class="invert dark:invert-0" style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-[-7px] text-xs text-black dark:white">Settings</span>                      
+                </a>
+            </div>
         </div>
       </div> 
   </nav>    

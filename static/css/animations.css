@@ -10,7 +10,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Fade In */
-  .animate.fade {
+  .animate.fade-animator {
     animation-name: animate-fade;
     animation-timing-function: ease;
   }
@@ -21,7 +21,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Pop In */
-  .animate.pop { animation-name: animate-pop; }
+  .animate.pop-animator { animation-name: animate-pop; }
   
   @keyframes animate-pop {
     0% {
@@ -35,7 +35,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Blur In */
-  .animate.blur {
+  .animate.blur-animator {
     animation-name: animate-blur;
     animation-timing-function: ease;
   }
@@ -71,7 +71,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Grow In */
-  .animate.grow { animation-name: animate-grow; }
+  .animate.grow-animator { animation-name: animate-grow; }
   
   @keyframes animate-grow {
     0% {
@@ -86,7 +86,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Splat In */
-  .animate.splat { animation-name: animate-splat; }
+  .animate.splat-animator { animation-name: animate-splat; }
   
   @keyframes animate-splat {
     0% {
@@ -109,7 +109,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Roll In */
-  .animate.roll { animation-name: animate-roll; }
+  .animate.roll-animator { animation-name: animate-roll; }
   
   @keyframes animate-roll {
     0% {
@@ -123,7 +123,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Flip In */
-  .animate.flip {
+  .animate.flip-animator {
     animation-name: animate-flip;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -141,7 +141,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Spin In */
-  .animate.spin {
+  .animate.spin-animator {
     animation-name: animate-spin;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -159,7 +159,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Slide In */
-  .animate.slide { animation-name: animate-slide; }
+  .animate.slide-animator { animation-name: animate-slide; }
   
   @keyframes animate-slide {
     0% {
@@ -173,7 +173,7 @@ Animation System by Neale Van Fleet from Rogue Amoeba
   }
   
   /* Drop In */
-  .animate.drop { 
+  .animate.drop-animator { 
     animation-name: animate-drop; 
     animation-timing-function: cubic-bezier(.77, .14, .91, 1.25);
   }

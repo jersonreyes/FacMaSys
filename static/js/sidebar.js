@@ -5,12 +5,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $('#page_title_body').animate({
             'opacity' : 0
         }, 400, function(){
-            $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 400);});
+            if($(root).attr('value') == 'Toggle Dark/Light Mode')
+                $(this).html($(root).attr('value')).animate({'opacity': 1}, 400)
+            else $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 400);});
     }, function() {
         $('#page_title_body').animate({
             'opacity' : 0
         }, 400, function(){
             $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 400);});
+    })
+    var value = localStorage.theme;
+    if(value == 'dark') {
+        document.documentElement.classList.add('dark');
+    }   else {
+        document.documentElement.classList.remove('dark');
+    }
+    
+    $('.themeToggler').click(function() {
+        var value = localStorage.theme;
+        if(value == 'dark') {
+            localStorage.theme = 'light'
+            document.documentElement.classList.remove('dark');
+        }   else {
+            localStorage.theme = 'dark'
+            document.documentElement.classList.add('dark');
+        }
     })
     const showNavbar = (toggleId, navId, bodyId, headerId) =>{
     const toggle = document.getElementById(toggleId),

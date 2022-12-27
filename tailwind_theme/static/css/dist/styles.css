@@ -1133,27 +1133,9 @@ select {
   width: 60px;
 }
 
-.grow {
-  flex-grow: 1;
-}
-
 .translate-y-\[10px\] {
   --tw-translate-y: 10px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
 }
 
 .resize {
@@ -1162,6 +1144,10 @@ select {
 
 .grid-flow-row {
   grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
 }
 
 .grid-cols-2 {
@@ -1261,14 +1247,17 @@ select {
   background-color: rgb(255 138 0 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#2A2A2A\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(42 42 42 / var(--tw-bg-opacity));
+.bg-\[\#ffffffa8\] {
+  background-color: #ffffffa8;
 }
 
-.bg-\[\#363636\] {
+.bg-\[rgba\(200\2c 200\2c 200\2c 0\.2\)\] {
+  background-color: rgba(200,200,200,0.2);
+}
+
+.bg-\[\#ffffff\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(54 54 54 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .p-5 {
@@ -1459,14 +1448,14 @@ select {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.text-\[\#FF9214\] {
-  --tw-text-opacity: 1;
-  color: rgb(255 146 20 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.text-\[\#FF9214\] {
+  --tw-text-opacity: 1;
+  color: rgb(255 146 20 / var(--tw-text-opacity));
 }
 
 .no-underline {
@@ -1510,6 +1499,10 @@ select {
   transition-duration: 150ms;
 }
 
+.white {
+  color: white !important;
+}
+
 .sidebarItemActive {
   background: rgba(255, 136, 0, 0.324);
   border: 1px solid rgba(255, 138, 0, 0.3);
@@ -1523,8 +1516,11 @@ select {
   padding: 5px;
   border-radius: 12px;
   border: 1px solid rgba(255, 138, 0, 0);
-  color: white !important;
   transition: 150ms ease-in-out;
+}
+
+a, a:visited, a:hover {
+  color: inherit;
 }
 
 .navigatorBlock {
@@ -1533,7 +1529,6 @@ select {
   text-align: left;
   line-height:1;
   cursor: pointer;
-  background: #363636a8;
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
   border-radius: 29px;
@@ -1541,8 +1536,8 @@ select {
 }
 
 .navigatorBlock:hover {
-  border: 1px solid white;
-  background: #555555;
+  border: 1px solid rgb(162, 162, 162);
+  opacity:0.9;
 }
 
 .navigatorBlock .title {
@@ -1557,7 +1552,7 @@ select {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  color: #FFFFFF;
+  opacity:0.7;
 }
 
 .dropdownBlock {
@@ -1565,14 +1560,13 @@ select {
   padding-left: 25px;
   text-align: left;
   line-height:1;
-  background: #363636;
   border-radius: 29px;
   border: 1px solid rgba(255, 255, 255, 0);
 }
 
 .dropdownBlock:hover {
-  border: 1px solid white;
-  background: #555555;
+  border: 1px solid rgb(165, 165, 165);
+  opacity:0.9;
 }
 
 .dropdownBlock .title {
@@ -1640,4 +1634,37 @@ select {
   border-radius: 12px;
   padding: 5px;
   text-decoration:none;
+}
+
+.dark .dark\:bg-\[\#363636a8\] {
+  background-color: #363636a8;
+}
+
+.dark .dark\:bg-\[\#363636\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(54 54 54 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:bg-\[\#2A2A2A\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 42 42 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.dark .dark\:invert-0 {
+  --tw-invert: invert(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.dark .dark\:invert {
+  --tw-invert: invert(100%);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.dark .dark\:white {
+  color: white !important;
 }
