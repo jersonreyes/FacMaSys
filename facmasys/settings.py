@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-from django.contrib.messages import constants as messages
 
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -59,10 +59,10 @@ INSTALLED_APPS = [
     'facmasys',
     'django_q',
     'tailwind',
-    'theme',
+    'tailwind_theme',
 ]
 
-TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = 'tailwind_theme'
 
 INTERNAL_IPS = [
     "127.0.0.1",
