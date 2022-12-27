@@ -1,0 +1,87 @@
+{% extends 'partials/base.html' %}
+{% block title %}Settings Page{% endblock %}
+{% block headers %} SETTINGS {% endblock %}
+{% load crispy_forms_tags %}
+{% load django_tables2 %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+        }
+        .htmx-indicator {
+            display: none;
+        }
+        .htmx-indicator.htmx-request {
+            display: block;
+        }
+        .carousel-indicators li {
+            display: flex;
+            opacity: 0.8;
+            border: solid;
+        }
+        .carousel-indicators li, .thumbnail{
+            width: 90px;
+            height: 70px;
+        }
+    </style>
+
+    <div style="margin-top: 64px;">
+        
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    
+            <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="{% url 'settings_view' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Settings </a>               
+                </li>       
+            </ul>
+            </div>
+        </nav>
+            
+            <div class="my-3 mx-4 d-flex">
+                
+                <form class="form-inline float-left">
+                    <div class="d-flex justify-content-end">
+                        {{ filter.form|crispy }}
+                        <a class="btn btn-danger mx-2"href="{% url 'settings'%}">Clear</a>
+                        <input type="submit" value="Filter" class="btn btn-dark">
+                    </div>
+                </form>
+                
+                {% if request.user.is_staff %}
+                    <div class="col">
+                        <div class="float-right">
+                            <span class="tooltips_top">
+                                <div class="btn-group" style="width:auto">
+                                    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="tooltiptext_top"> Export </span>  
+                                        <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" alt="Download">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" style="width:auto">
+                                        {% for format in view.export_formats %}
+                                            <a class="dropdown-item" href="{% export_url format %}">
+                                                <code>.{{ format }}</code>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>    
+                {% endif %} 
+            </div>
+        </div>
+        {% if request.user.is_staff or request.user.is_authenticated %}
+        <div id="item-list">
+            <div class="mx-4">
+                {% render_table table %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+{% endblock %}

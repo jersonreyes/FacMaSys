@@ -1,0 +1,14 @@
+{% extends 'partials/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block headers %} DASHBOARD {% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    {% include 'partials/topnav.html' %}
+{% else %}
+    {% include 'dashboard/staff_index.html' %}
+{% endif %}
+
+{% endblock %}

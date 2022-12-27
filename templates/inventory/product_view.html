@@ -1,0 +1,73 @@
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="viewModalLabel">View Product</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body p-3">
+                <div class="row">
+                    <div id="productImages" class="carousel slide" data-ride="carousel" style="width:600px; height:500px">
+                        <!-- Thumbnails -->
+                        <ol class="carousel-indicators">
+                            {% for image in product.images %}
+                                {% if forloop.counter|add:"-1" == 0 %}
+                                    <li data-target="#productImages" data-slide-to="{{ forloop.counter|add:"-1" }}" class="active">
+                                        <img class="img-fluid" src="{{ image.src }}">
+                                    </li>
+                                {% else %}
+                                    <li data-target="#productImages" data-slide-to="{{ forloop.counter|add:"-1" }}">
+                                        <img src="{{ image.src }}" class="img-fluid">
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
+
+                        <div class="carousel-inner mb-5 shadow-1-strong rounded-3">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{ product.images.0.src }}" alt="{{ product.title }}" style="width:auto; height:500px">
+                            </div>
+                            {% for image in product.images|slice:"1:" %}
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="{{ image.src }}" alt="{{ product.title }}" style="width:auto; height:500px">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% if product.images|length > 1 %}
+                            <!-- Controls -->
+                            <a class="carousel-control-prev" href="#productImages" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#productImages" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="col mr-5">
+                        <span class="h4 pb-2">  {{ product.title }} </span><br> 
+                        <hr>
+                        <span class="h5 pb-2"><span class="text-muted"> ID: </span> &nbsp;&nbsp;  {{ product.id }}</span><br>
+                        <span class="h5 pb-2"><span class="text-muted"> Product Type: </span> &nbsp;&nbsp; {{ product.product_type }}</span><br>
+                        <span class="h5 pb-2"><span class="text-muted"> Vendor: </span> &nbsp;&nbsp; {{ product.vendor }}</span><br>
+                        <span class="h5 pb-2"><span class="text-muted"> Tags: </span> &nbsp;&nbsp; {{ product.tags|join:"" }}</span><br>
+                        <span class="h5 pb-2"><span class="text-muted"> Price: </span> &nbsp;&nbsp; {{ product.variants.0.price }}</span><br>
+                        <span class="h5 pb-2"><span class="text-muted"> Quantity: </span> &nbsp;&nbsp; {{ product.variants.0.inventory_quantity }}</span><br>
+
+                        <!--
+                        <h5> ID: {{ product.id }}</h5>
+                        <h5>Product Type: {{ product.product_type }}</h5>
+                        <h5>Vendor: {{ product.vendor }}</h5>
+                        <h5>Tags: {{ product.tags|join:"" }}</h5>
+                        <h5>Price: &#8369;{{ product.variants.0.price }}</h5>
+                        <h5>Quantity: {{ product.variants.0.inventory_quantity }}</h5>
+                        -->
+                    </div>
+                </div>
+                <div class="row px-4 py-2"><h3 class="py-3">Description:</h3><div class="px-5">{{ product.body_html|safe }}</div></div>
+             </div> 
+       </div>
+   </div>

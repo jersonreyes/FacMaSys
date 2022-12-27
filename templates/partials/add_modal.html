@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+<div class="modal fade" {% block modal-id %} id="addModal" {% endblock %} tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+               <h4 class="modal-title" id="addModalLabel">{% block modal-title %}Add Supplier{% endblock %}</h4>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+               <form method="POST" {% block action %} {% endblock %} enctype="multipart/form-data">
+                 {% csrf_token %}
+                 <div class="modal-body">
+                    {% block form %}
+                        {{ form|crispy }}
+                    {% endblock %}
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                     <button type="submit" class="btn btn-primary">{% block btn-label%}Add Supplier{% endblock %}</button>
+                 </div>
+             </form>       
+          </div>
+       </div>
+   </div>

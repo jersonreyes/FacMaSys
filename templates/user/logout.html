@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %}
+{% block title %} Logout Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <style>
+     body {
+            background-image: url('/static/images/bg_gray.png');
+     }
+    </style>
+    
+    <div class="container" style="margin-top: 250px;">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="border p-4 bg-white">
+                    <h3>Logout Page</h3>
+                    <hr>
+                    <div class="alert alert-danger">
+                        <h5>You have logged out.</h5>
+                    </div>  
+                    <div style="display: flex; justify-content: flex-end;">
+                        <a class="btn btn-primary" href="{% url 'user-login' %}" style="background-color:#173f7a;">Log In</a>  
+                    </div>            
+                                           
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

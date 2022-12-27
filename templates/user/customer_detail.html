@@ -1,0 +1,114 @@
+{% extends 'partials/base.html' %}
+{% block title %}Customer Detail Page{% endblock %}
+{% block headers %} CUSTOMER DETAILS {% endblock %}
+{% load static %}
+{% block content %}
+<style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;         
+        }
+</style>
+
+<div style="margin-top: 64px;">
+    <!-- NAVIGATION LAYER 1-->
+    
+    <!-- NAVIGATION LAYER 2 -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
+    
+        <div class="mx-3" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard-customer' %}"> <img src="{% static 'images/icon_back_btn.png' %}" style="width:13px; height:13px;" alt="Back Button"> Back to Customers </a>               
+            </li>       
+        </ul>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-left: 10px;">
+
+            <div class="container">   
+                <div class="row my-3">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">
+                                Customer Detail Page
+                            </div>
+                            
+                            <div class="card-body p-5">
+                                <div class="row">
+                                   
+                                    <span class="h3">Customer Details</span>
+                                    <hr>
+                                    <table class="table bg-white table-borderless m-3">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Name:</th>
+                                                <td>{{ customer.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Email:</th>
+                                                <td>{{ customer.email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Phone:</th>
+                                                <td>{{ customer.contact }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Address:</th>
+                                                <td>{{ customer.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Car Make:</th>
+                                                <td>{{  customer.car_make  }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Plate Number:</th>
+                                                <td>{{  customer.plate_no  }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>         
+                                    <hr>
+                                    <span class="h3"> Order History </span>   
+                                    <hr>
+                                    <table class="table bg-white text-center">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Invoice Number</th>
+                                                <th scope="col">Date created</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Payment Method</th>
+                                                <th scope="col">Payment Reference Number</th>
+                                                <th scope="col">Subtotal</th>
+                                                <th scope="col">VAT (12%%)</th>
+                                                <th scope="col">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in orders %}
+                                            <tr>
+                                                <td>{{ order.invoice_number }}</td>
+                                                <td>{{ order.date_created }}</td>
+                                                <td>{{ order.status }}</td>
+                                                <td>{{ order.pay_method }}</td>
+                                                <td>{{ order.pay_id }}</td>
+                                                <td>{{ order.subtotal }}</td>
+                                                <td>{{ order.vat }}</td>
+                                                <td>{{ order.total }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>                           
+                                </div>                          
+                            </div>
+
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+    </div>
+
+</div>
+{% endblock %}

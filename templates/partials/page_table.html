@@ -1,0 +1,171 @@
+{% extends 'partials/base.html' %}
+{% block title %}Product Page{% endblock %}
+{% block headers %} INVENTORY {% endblock %}
+{% load crispy_forms_tags %}
+{% load django_tables2 %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+        }
+        .htmx-indicator {
+            display: none;
+        }
+        .htmx-indicator.htmx-request {
+            display: block;
+        }
+        .carousel-indicators li {
+            display: flex;
+            opacity: 0.8;
+            border: solid;
+        }
+        .carousel-indicators li, .thumbnail{
+            width: 90px;
+            height: 70px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            {% if view.modal == 'update' %}
+                $('#updateModal').modal('show');
+            {% endif %}
+
+            $('.modal').on('hidden.bs.modal', function () {
+                window.location.replace({% block redirect %}'/inventory/supplier'{% endblock %})
+            });
+        });
+
+    </script>
+
+    <div style="margin-top: 64px;">
+        
+        <!-- NAVIGATION LAYER 2 -->
+        <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
+        
+            <div class="mx-4" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item mr-2">
+                        <a class="nav-link" href="{% url 'inventory-product'%}"><span class="default-state {% if view.inventorypage_active == 'product' or inventorypage_active == 'product' %} navtab-active {% endif %}">PRODUCT</span></a>
+                    </li>
+
+                    <li class="nav-item mr-2">
+                        <a class="nav-link" href="{% url 'inventory-service'%}"><span class="default-state {% if view.inventorypage_active == 'service' or inventorypage_active == 'service' %} navtab-active {% endif %}">SERVICE</span></a>
+                    </li>
+                    {% if request.user.is_staff %}
+                        {% comment %} <li class="nav-item mr-2">
+                            <a class="nav-link" href="{% url 'inventory-car'%}"><span class="default-state {% if view.inventorypage_active == 'car' or inventorypage_active == 'car' %} navtab-active {% endif %}">CAR</span></a>
+                        </li> {% endcomment %}
+
+                        <li class="nav-item mr-2">
+                            <a class="nav-link" href="{% url 'inventory-supplier'%}"><span class="default-state {% if view.inventorypage_active == 'supplier' or inventorypage_active == 'supplier' %} navtab-active {% endif %}">SUPPLIER</span></a>
+                        </li>
+
+                        <li class="nav-item mr-2">
+                            <a class="nav-link" href="{% url 'inventory-shipment'%}"><span class="default-state {% if view.inventorypage_active == 'shipment' or inventorypage_active == 'shipment' %} navtab-active {% endif %}">SHIPMENT</span></a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} my-2" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="mx-3 mt-2">
+                <ul class="nav d-flex justify-content-start">
+                    <li class="nav-item">      
+                        <a class="nav-link" {% block active-list %} href="{% url 'inventory-shipment'%}" {% endblock %}><span class="default-state-status {% if view.inventorystatus_active == 'active' or inventorystatus_active == 'active' %} navtab-status-active {% endif %}">ACTIVE</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" {% block archive-list %} href="{% url 'inventory-shipment-archived' %}" {% endblock %}><span class="default-state-status {% if view.inventorystatus_active == 'archive' or inventorystatus_active == 'archive' %} navtab-status-active {% endif %}">ARCHIVED</span></a>
+                    </li>
+                </ul>                 
+            </div>
+
+                      {% comment %}
+                      <div class="my-3 mx-4 d-flex">
+                           <form class="form-inline float-left"
+                              {% block filter-url %}hx-get="{% url 'inventory-product-search' %}"{% endblock %}
+                              hx-target="#table-container" 
+                              hx-swap="outerHTML"
+                              hx-trigger="change, input delay:0.3s"
+                              hx-indicator=".htmx-indicator">
+                      {% endcomment %}
+            <div class="mt-2 mb-3 mx-4 d-flex">
+            
+                <form class="form-inline float-left">
+                    <div class="d-flex justify-content-end">
+                        {{ filter.form|crispy }}
+
+                        <span class="tooltips_top">
+                            <a class="btn btn-danger mx-2"{% block clear_redirect %}href=""{% endblock %}>
+                                <span class="tooltiptext_top"> Clear </span>                        
+                                <img src="{% static 'images/icon_remove_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
+                            </a>
+                        </span>
+
+                        <span class="tooltips_top">
+                            <button type="submit" class="btn btn-dark">
+                                <span class="tooltiptext_top"> Filter </span>                        
+                                <img src="{% static 'images/icon_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
+                            </button>
+                        </span>
+                                                               
+                    </div>
+                </form>
+                {% if request.user.is_staff %}
+                    <div class="col">
+                        <div class="float-right">
+
+                            <!-- Button trigger modal --> 
+                            {% block add-btn %}                       
+                                <span class="tooltips_top">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal">  
+                                        <span class="tooltiptext_top"> Add </span>                        
+                                        <img src="{% static 'images/icon_add.png' %}" style="width:15px; height:15px;" alt="Add">                        
+                                    </button>
+                                </span>
+                            {% endblock %}
+
+                            <span class="tooltips_top">
+                                <div class="btn-group" style="width:auto">
+                                    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="tooltiptext_top"> Export </span>  
+                                        <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" alt="Download">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" style="width:auto">
+                                        {% for format in view.export_formats %}
+                                            <a class="dropdown-item" href="{% export_url format %}">
+                                                <code>.{{ format }}</code>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>    
+                {% endif %} 
+            </div>
+        </div>
+
+        <div id="item-list">
+            <div class="mx-4">
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+
+    {% block modals %}{% endblock %}
+    
+{% endblock %}

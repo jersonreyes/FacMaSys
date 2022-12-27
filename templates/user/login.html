@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+    <!--<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen">--> 
+    
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" media="screen" />
+    <title>Welcome to SpeedLab</title>
+  </head>
+
+  <body style="background-image: url('/static/images/bg_rev.png');">
+    <div class="container mt-5 pt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6 bg-light text"> 
+          <div class="row d-flex justify-content-center mt-5">
+            <img id="logo_home" src="{% static 'images/icon_logo_invert.png' %}" alt="SpeedLab Logo" style="width: 100px; height: 100px;">
+          </div>
+          
+
+          {% comment %} LOGIN MESSAGES {% endcomment %}
+          <div class="alert alert-{{message.tags}} mx-5">
+          {% for message in messages %}
+              {% if message %}
+                {{message}}
+              {% endif %}
+          {% endfor %}
+          </div>
+    
+          <!-- Login Form -->
+          <form class="m-5 text-dark" id="formLogin" method="POST">
+              {% csrf_token %}
+              {{ form|crispy }}
+              
+              <button class="btn btn-primary btn-lg btn-block my-4" id="loginBtn" type="submit" style="background-color:#173f7a;">Login</button>
+              
+              <div class="row d-flex justify-content-center">
+                <a class="mx-4" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
+              </div>       
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  </body>
+</html>

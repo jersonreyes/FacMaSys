@@ -1,0 +1,179 @@
+{% extends 'partials/base.html' %}
+{% block title %}Product Page{% endblock %}
+{% block headers %} INVENTORY {% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('.toast').toast();
+            {% if messages %}
+                $('.toast').show();
+            {% endif %}
+            {% block script %}
+            
+            {% endblock %}
+        });
+
+    </script>
+
+    <style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+            
+        }
+        .htmx-indicator {
+            display: none;
+        }
+        
+        .htmx-indicator.htmx-request {
+            display: block;
+        }
+        .carousel-indicators li {
+            display: flex;
+            opacity: 0.8;
+            border: solid;
+        }
+        .carousel-indicators li, .thumbnail{
+            width: 90px;
+            height: 70px;
+        }
+    </style>
+
+
+    <div style="margin-top: 64px;">
+        <!-- NAVIGATION LAYER 2 -->
+
+        <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
+        
+            <div class="mx-4" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mr-2">
+                    <a class="nav-link" href="{% url 'inventory-product'%}"><span class="default-state {% if view.inventorypage_active == 'product' or inventorypage_active == 'product' %} navtab-active {% endif %}">PRODUCT</span></a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="nav-link {% block service-state %}{% endblock %}" href="{% url 'inventory-service'%}"><span class="default-state">SERVICE</span></a>
+                </li>
+                {% if request.user.is_staff %}
+                {% comment %} <li class="nav-item mr-2">
+                <a class="nav-link {% block car-state %}{% endblock %}" href="{% url 'inventory-car'%}"><span class="default-state">CAR</span></a>
+                </li> {% endcomment %}
+                <li class="nav-item mr-2">
+                <a class="nav-link {% block supplier-state %}{% endblock %}" href="{% url 'inventory-supplier'%}"><span class="default-state">SUPPLIER</span></a>
+                </li>
+                <li class="nav-item mr-2">
+                <a class="nav-link {% block stock-state %}{% endblock %}" href="{% url 'inventory-shipment'%}"><span class="default-state">SHIPMENT</span></a>
+                </li>
+                {% endif %}
+            </ul>
+            </div>
+        </nav>
+        
+        <div>
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} my-2 mx-4" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+
+               {% block nav-filter %}{% endblock %}
+               
+                <div class="my-3 mx-4">
+                    <form class="form-inline my-2 my-lg-0" 
+                        {% block filter-url %}hx-get="{% url 'inventory-product-search' %}"{% endblock %}
+                        hx-target="#item-list" 
+                        hx-swap="outerHTML"
+                        hx-trigger="submit, input delay:0.3s"
+                        hx-indicator=".htmx-indicator">
+              
+                            {% block filters %}
+    
+                            <div class="col">
+                                <div>
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown">
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Open this select menu</option>
+                                        <option value="1">One</option>
+                                    </select>
+                                </div>
+                            </div>
+                    
+                        {% endblock %}
+                            {% if request.user.is_staff %}
+                            <div class="col">
+                                <div class="float-right">                             
+                                <!-- Button trigger modal --> 
+                                {% block add-btn %}                       
+                                    <span class="tooltips_top">
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" {% block add-modal %}data-target="#addProductModal"{% endblock %}>  
+                                            <span class="tooltiptext_top"> Add </span>                        
+                                            <img src="{% static 'images/icon_add.png' %}" style="width:15px; height:15px;" alt="Add">                        
+                                        </button>
+                                    </span>
+                                {% endblock %}
+                                <span class="tooltips_top">
+                                    <div class="btn-group" style="width:auto">
+                                        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="tooltiptext_top"> Download </span>  
+                                            <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" alt="Download">
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right" style="width:auto">
+                                            <a class="dropdown-item" {% block export-excel %}href="#"{% endblock %}><code>.xls</code></a>
+                                            <a class="dropdown-item" {% block export-pdf %}href="#"{% endblock %}><code>.pdf</code></a>
+                                        </div>
+                                    </div>
+                                </span>
+                                </div>
+                            </div>    
+                            {% endif %} 
+                            
+                        
+
+        
+                    </form>
+                </div>
+         
+        </div>
+
+        {% block table %}
+        
+        {% endblock %}
+    </div>
+
+    {% block conditions %}
+        
+    {% endblock %}
+
+    {% comment %} {% for message in messages %}
+        {% if message %}
+            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+                <div class="toast" style="position: absolute; top: 0; right: 0;">
+                <div class="toast-header">
+                    <img src="..." class="rounded mr-2" alt="...">
+                    <strong class="mr-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    Hello, world! This is a toast message.
+                </div>
+                </div>
+            </div>              
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{message}}
+            </div>
+        {% endif %}
+    {% endfor %} {% endcomment %}
+    
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'partials/base.html' %}
+{% block title %}Staff Detail Page{% endblock %}
+{% block headers %} VIEW ACCOUNT {% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        background: rgb(230, 227, 227);
+        overflow: hidden;
+    }
+</style>
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('.toast').toast();
+        {% if messages %}
+            $('.toast').show();
+        {% endif %}
+        {% block script %}
+        
+        {% endblock %}
+    });
+
+</script>
+
+<div style="margin-top: 64px;">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+    
+        <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'dashboard-index' %}"> <img src="{% static 'images/icon_back_btn.png' %}" style="width:13px; height:13px;" alt="Back Button"> Back to Dashboard </a>               
+            </li>       
+        </ul>
+        </div>
+    </nav>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} my-2 mx-4" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    
+    
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row my-3">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            Profile Information
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-md-4 p-5 d-flex justify-content-center">
+                                    <img class="img-thumbnail" src="{{ user.profile.image.url }}" alt="">
+                                </div>
+
+                                <div class="col-md-8 p-5">
+
+                                    <div class="pb-1">
+                                        {% if request.user.is_superuser  %}
+                                        <span class="h3"><span class="text-muted"> SUPERADMIN </span> &nbsp; <strong>{{user.username}}</strong></span>
+                                        {% elif request.user.is_staff %}
+                                        <span class="h3"><span class="text-muted"> ADMIN </span> &nbsp; <strong>{{user.username}}</strong></span> 
+                                        {% else %}
+                                        <span class="h3"><span class="text-muted"> CASHIER </span> &nbsp; <strong>{{user.username}}</strong></span> 
+                                        {% endif %}                                                                                 
+                                        <a class="btn btn-dark btn-sm float-right" href="{% url 'user-profile-update' %}"> &nbsp;&nbsp;Edit Profile&nbsp;&nbsp; </a>
+                                        <a class="btn btn-dark btn-sm float-right" href="{% url 'change-password' %}" style="margin-right:10px ;"> &nbsp;&nbsp;Change Password&nbsp;&nbsp; </a>
+                                    </div>                                 
+                                    <hr>
+
+                                    <table class="table bg-white table-borderless m-3">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Email</th>
+                                                <td>{{user.email}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Phone</th>
+                                                <td>{{user.profile.phone}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Address</th>
+                                                <td>{{user.profile.address}}</td>
+                                            </tr>
+                                        </tbody>                                
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+{% endblock %}

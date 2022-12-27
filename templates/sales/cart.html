@@ -1,0 +1,140 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+    <div class="col-xxl-4" id="cart">
+        {% include 'sales/order_summary.html' %}
+
+        <script type="text/javascript">
+            $(window).on('load', function() {
+            {% if err_msg %}
+                $('#orderSummaryModal').modal('show');
+            {% endif %} 
+            });
+        </script>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags != 'danger' %}
+                <div class="alert alert-{{ message.tags }} my-2" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div class= "card p-3 bg-light">
+            <h6 class="mb-3"> <strong> ITEM SUMMARY: </strong> </h6>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Price</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cart_products %}
+                    {% for item in cart_products %}
+                    <tr>
+                        <td>{{ item.product_title }}</td>
+                        <td><input hx-get="{% url 'add-cart-product' item.item_id %}" 
+                            hx-trigger="change" 
+                            hx-include="[name='quantity{{ item.item_id }}']"
+                            hx-vals="{'cart_type': 'Product'}"
+                            hx-target="#cart"
+                            hx-indicator=".htmx-indicator"
+                            hx-swap="outerHTML" type="number" class="form-control" name="quantity{{ item.item_id }}" value="{{ item.quantity }}" min="1">
+                        </td>
+                        <td>&#8369;{{item.total_price|intcomma}}</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm tooltips_top" hx-get="{% url 'delete-cart-product' item.item_id %}"
+                                hx-trigger="click" 
+                                hx-target="#cart" 
+                                hx-indicator=".htmx-indicator"
+                                hx-swap="outerHTML">
+                            <span class="tooltiptext_top"> Delete Product </span> 
+                            <img src="{% static 'images/icon_delete.png' %}" style="width:18px; height:18px;" alt="Delete Product">
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                    {% else %}
+                    <tr><td colspan="4" class="text-center"><h6 class="my-2">  
+                        <img src="{% static 'images/icon_cart_translucent.png' %}" style="width:22px; height:22px; margin-bottom:5px" alt="Add">
+                        <span class="text-muted" style="font-weight: 600;"><em>&nbsp;&nbsp; NO ITEMS IN CART...</em></span>  </h6></td></tr>
+                    {% endif %}
+                </tbody>   
+            </table>          
+            <hr>
+
+            <h6 class="mb-3"> <strong> SERVICE SUMMARY: </strong>  </h6>
+            <table class="table table-striped bg-white">
+                <thead>
+                    <tr>
+                        <th scope="col">Service</th>
+                        <th><th>
+                        <th scope="col">Labor</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cart_services %}
+                    {% for item in cart_services %}
+                    <tr>
+                        <td>{{item.service}}</td>
+                        <td>&#8369;<td>
+                        <td><input hx-get="{% url 'add-cart-service' item.service.id %}" 
+                                hx-trigger="change" 
+                                hx-include="[name='labor{{item.id}}']"
+                                hx-target="#cart" 
+                                hx-indicator=".htmx-indicator"
+                                hx-swap="outerHTML" type="number" class="form-control" name="labor{{item.id}}" value="{{item.labor}}" min="1" step="1">
+                        </td>
+                        <td>
+                            <a class="btn btn-danger btn-sm tooltips_top" hx-get="{% url 'delete-cart-service' item.service.id %}" 
+                                hx-trigger="click" 
+                                hx-target="#cart" 
+                                hx-indicator=".htmx-indicator"
+                                hx-swap="outerHTML">
+                                <span class="tooltiptext_top"> Delete Service </span> 
+                                <img src="{% static 'images/icon_delete.png' %}" style="width:18px; height:18px;" alt="Delete Service">
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                    {% else %}
+                    <tr><td colspan="5" class="text-center"><h6 class="my-2"> <img src="{% static 'images/icon_wrench_translucent.png' %}" style="width:22px; height:22px; margin-bottom:5px" alt="Add">
+                        <span class="text-muted" style="font-weight: 600;"><em>&nbsp;&nbsp; NO SERVICES IN CART...</em></span>  </h6></td></tr>
+                    {% endif %}
+                </tbody>   
+            </table>
+            <hr> 
+            <div class="form-group row h6 px-3 py-0 my-0">
+                <label for="staticEmail" class="col-sm-6 col-form-label text-muted">Subtotal:&nbsp;&nbsp;&nbsp;</label>    
+                <div class="col-6">
+                    <input type="text" readonly class="form-control-plaintext h6" id="staticEmail" value="&#8369;{{ subtotal|intcomma }}">
+                </div>
+            </div>
+
+            <div class="form-group row h6 px-3 py-0 my-0">
+                <label for="staticEmail" class="col-sm-6 col-form-label text-muted">VAT(12%):&nbsp;&nbsp;&nbsp;</label>
+                <div class="col-6">
+                    <input type="text" readonly class="form-control-plaintext h6" id="staticEmail" value="&#8369;{{ vat|intcomma }}">
+                </div>
+            </div>
+
+            <div class="form-group row h5 px-3 mt-4 mb-0">
+                <label for="staticEmail" class="col-sm-6 col-form-label text-muted">Total:&nbsp;&nbsp;&nbsp;</label>
+                <div class="col-6">
+                    <input type="text" readonly class="form-control-plaintext h5" id="staticEmail" value="&#8369;{{ total|intcomma }}">
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row mx-1">
+                <button type="button" data-toggle="modal" data-target="#orderSummaryModal" class="btn btn-primary {{ button }}">Checkout</button>
+            </div>                 
+        </div>
+    </div>

@@ -1,0 +1,14 @@
+{% extends 'partials/page_table.html' %}
+
+{% block redirect %}'/inventory/shipment/archived'{% endblock %}
+{% block clear_redirect %}href="{% url 'inventory-shipment-archived'%}"{%endblock%}
+
+{% block active-list %}href="{% url 'inventory-shipment'%}"{% endblock %}
+{% block archive-list %}href="{% url 'inventory-shipment-archived' %}"{% endblock %}
+
+{% block filter-url %}hx-get="{% url 'inventory-shipment-archived' %}"{% endblock %}
+{% block add-btn %}{% endblock %}
+
+{% block modals %}
+  {% include 'partials/modal_confirm.html' %}
+{% endblock %}

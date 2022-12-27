@@ -1,0 +1,89 @@
+{% extends 'partials/base.html' %}
+{% block title %}Settings Page{% endblock %}
+{% block headers %} SETTINGS {% endblock %}
+{% load django_tables2 %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+        }
+        .htmx-indicator {
+            display: none;
+        }
+        .htmx-indicator.htmx-request {
+            display: block;
+        }
+        .carousel-indicators li {
+            display: flex;
+            opacity: 0.8;
+            border: solid;
+        }
+        .carousel-indicators li, .thumbnail{
+            width: 90px;
+            height: 70px;
+        }
+    </style>
+
+    <div style="margin-top: 64px;">
+        
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} my-2" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+                <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{% url 'notif-view' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Notification Settings </a>               
+                    </li>       
+                </ul>
+                </div>
+            </nav>
+            
+            <div style="margin-top: 64px;">
+                <!-- NAVIGATION LAYER 1
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <h3 class="navbar-brand ml-3 p-2" href="#">CUSTOMER ORDER DETAILS</h3>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                </nav> -->  
+                <!-- NAVIGATION LAYER 2 -->
+            
+                
+                <div class="container-fluid">
+                        <div class="container">
+                            <div class="row my-3">
+                                <div class="col-md-8">
+                        
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header bg-info text-white">
+                                           Change Notification Settings                                                                                        
+                                        </div>
+                                        {{ form.media }}
+                                        <div class="card-body px-5 py-4">
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                {{ form|crispy }}
+                                                <input class="btn btn-primary" type="submit" value="Update">
+                                            </form>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+{% endblock %}

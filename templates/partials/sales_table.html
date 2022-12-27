@@ -1,0 +1,128 @@
+{% extends 'partials/base.html' %}
+{% block title %}Sales Page{% endblock %}
+{% block headers %} SALES {% endblock %}
+{% load crispy_forms_tags %}
+{% load django_tables2 %}
+{% load static %}
+
+{% block content %}
+
+    <style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+        }
+        .htmx-indicator {
+            display: none;
+        }
+        .htmx-indicator.htmx-request {
+            display: block;
+        }
+        .carousel-indicators li {
+            display: flex;
+            opacity: 0.8;
+            border: solid;
+        }
+        .carousel-indicators li, .thumbnail{
+            width: 90px;
+            height: 70px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('.modal').on('hidden.bs.modal', function () {
+                window.location.replace('/sales')
+            });
+        });
+
+    </script>
+
+    <div style="margin-top: 64px;">
+        
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} my-2" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="mx-2">
+                <ul class="nav d-flex justify-content-start">
+                    <li class="nav-item">      
+                        <a class="nav-link" {% block active-list %} href="{% url 'inventory-shipment'%}" {% endblock %}><span class="text-muted"><strong>ACTIVE</strong></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link active" {% block archive-list %} href="{% url 'inventory-shipment-archived' %}" {% endblock %}><span class="text-muted">ARCHIVED</span></a>
+                    </li>
+                </ul>         
+            </div>
+            
+            <div class="my-3 mx-4 d-flex">
+                <form class="form-inline float-left">
+                    <div class="d-flex justify-content-end">
+                        {{ filter.form|crispy }}
+
+                        <span class="tooltips_top">
+                            <a class="btn btn-danger mx-2"{% block clear_redirect %}href=""{% endblock %}>
+                                <span class="tooltiptext_top"> Clear </span>                        
+                                <img src="{% static 'images/icon_remove_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
+                            </a>
+                        </span>
+
+                        <span class="tooltips_top">
+                            <button type="submit" class="btn btn-dark">
+                                <span class="tooltiptext_top"> Filter </span>                        
+                                <img src="{% static 'images/icon_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
+                            </button>
+                        </span>
+
+                    </div>
+                </form>
+                {% if request.user.is_staff %}
+                    <div class="col">
+                        <div class="float-right">
+
+                            <!-- Button trigger modal --> 
+                            {% block add-btn %}                       
+                                <span class="tooltips_top">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal">  
+                                        <span class="tooltiptext_top"> Add </span>                        
+                                        <img src="{% static 'images/icon_add.png' %}" style="width:15px; height:15px;" alt="Add">                        
+                                    </button>
+                                </span>
+                            {% endblock %}
+
+                            <span class="tooltips_top">
+                                <div class="btn-group" style="width:auto">
+                                    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="tooltiptext_top"> Export </span>  
+                                        <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" alt="Download">
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" style="width:auto">
+                                        {% for format in view.export_formats %}
+                                            <a class="dropdown-item" href="{% export_url format %}">
+                                                <code>.{{ format }}</code>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>    
+                {% endif %} 
+            </div>
+        </div>
+
+        <div id="item-list">
+            <div class="mx-4">
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+
+    {% block modals %}{% endblock %}
+    
+{% endblock %}

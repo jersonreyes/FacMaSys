@@ -1,0 +1,39 @@
+$theme-colors: (
+    "primary": #0c2140,
+    "secondary": #212121,
+    "info": #0c2140,
+    "danger": #c03a3a,
+    "dark": #0c2140,
+); 
+
+$font-family-sans-serif: 'Barlow', sans-serif;
+
+$bs-link-color: #0c2140;
+$bs-link-hover-color: #0c2140;
+$bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(12, 33, 64, 0.25);
+
+$pagination-color: #0c2140;
+$pagination-bg: #ffffff;
+$pagination-active-color: #fff;
+$pagination-active-bg: #0c2140;
+$pagination-active-border-color: #0c2140;
+
+$bs-nav-link-color: #495057;
+$bs-nav-tabs-link-active-color: #0c2140; 
+
+.page-item.active .page-link {
+    background-color: #0c2140;
+    border-color: #0c2140;
+}
+
+.nav-link{
+    color: #495057 !important;
+}
+
+.nav-tabs .nav-link.active{
+    color:#0c2140;
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+

@@ -1,0 +1,129 @@
+{% load static %}
+<div id="item-list">
+    <div class="mx-4">
+        <img class="htmx-indicator mt-3 mb-2" src="{% static 'images/loading_animation.gif' %}"/>
+        <div class="">
+            <table class="table bg-white text-center">
+                <thead>
+                    <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">ID</th>
+                    <th scope="col" style="width: 30%;">Name</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Vendor</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Qty</th>
+                    <th scope="col" style="width: 15%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in page %}
+                    <tr>
+                        <td><img src="{{ item.images }}" alt="{{ item.title }}" width="50" height="50"></td>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.product_type }}</td>
+                        <td>{{ item.vendor }}</td>
+                        <td>{{ item.tags|join:"" }}</td>
+                        <td>&#8369;{{ item.price }}</td>
+                        <td {% if item.quantity == 0 %} style="color: red;" {% endif %}><strong>{{ item.quantity }} in stock</strong></td>
+                        <td>
+                            {% if request.user.is_authenticated  %}
+                            <span class="tooltips_top"> 
+                                <a class="btn btn-dark btn-sm pb-1" href="{% url 'inventory-product-view' item.id %}">
+                                <span class="tooltiptext_top"> View Product </span> 
+                                <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
+                                </a>
+                            </span>
+                            {% endif %}
+                            
+                            {% if request.user.is_staff %}
+                            <span class="tooltips_top">
+                                <a class="btn btn-dark btn-sm pb-1" href="{% url 'inventory-product-add-stock' item.id %}">
+                                <span class="tooltiptext_top"> Add Stock </span> 
+                                <img src="{% static 'images/icon_addstock.png' %}" style="width:18px; height:18px;" alt="Add Stock">
+                                </a>                        
+                            </span>
+                            <span class="tooltips_top">
+                                <a class="btn btn-dark btn-sm pb-1" href="{% url 'inventory-product-update' item.id %}">
+                                <span class="tooltiptext_top"> Update Product </span> 
+                                <img src="{% static 'images/icon_update.png' %}" style="width:18px; height:18px;" alt="Update Product">
+                                </a>
+                            </span>
+                            {% endif %}
+                            {% if inventorystatus_active != 'archived' %}
+                            <span class="tooltips_top">
+                                <input type="hidden" id="link{{ item.id }}" value="{% url 'inventory-product-archive' item.id %}">
+                                <button class="btn btn-danger btn-sm pb-1" onclick="confirm({{ item.id }}, '{{ item.title }}','ARCHIVE')" data-toggle="modal" data-target="#confirmModal">
+                                    <span class="tooltiptext_top"> Archive </span> 
+                                    <img src="{% static 'images/icon_archive.png' %}" style="width:18px; height:18px;" alt="Archive">
+                                </button>
+                            </span>
+                            {% else %}
+                            <span class="tooltips_top">
+                                <input type="hidden" id="link{{ item.id }}" value="{% url 'inventory-product-restore' item.id %}">
+                                <button class="btn btn-dark btn-sm pb-1" onclick="confirm({{ item.id }}, '{{ item.title }}','RESTORE')" data-toggle="modal" data-target="#confirmModal">
+                                    <span class="tooltiptext_top"> Restore </span> 
+                                    <img src="{% static 'images/icon_restore.png' %}" style="width:18px; height:18px;" alt="Restore">
+                                </button>
+                            </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% include 'partials/modal_confirm.html' %}
+    <!-- SHOWING X OF X PRODUCTS -->
+    <p class="ml-4 text-muted">  
+        Showing <strong> {{ count }} </strong>  of  <strong> {{ itemcount }} </strong> Products 
+        &nbsp;&nbsp; | &nbsp;&nbsp; 
+        Page: <strong> {{ page.number }} </strong> / <strong> {{ page.paginator.num_pages }} </strong> 
+    </p>
+
+    <!-- PAGINATION -->
+    <div class="row my-1">
+        <div class="col d-flex justify-content-center">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                    {% if page.has_previous %}
+                        <a class="page-link" href="{% url 'inventory-product' %}?page={{ page.previous_page_number }}">Previous</a>     
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    {% for num_page in page.paginator.page_range %}
+                    <br>
+                    {% if page.number == num_page %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="{% url 'inventory-product' %}?page={{ num_page }}">{{ num_page }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item" aria-current="page">
+                        <a class="page-link" href="{% url 'inventory-product' %}?page={{ num_page }}">{{ num_page }}</a>
+                    </li>
+                    {% endif %}
+                    <br>
+                    {% endfor %}
+                
+                    <li class="page-item">
+                    {% if page.has_next %}
+                        <a class="page-link" href="{% url 'inventory-product' %}?page={{ page.next_page_number }}">Next</a>               
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

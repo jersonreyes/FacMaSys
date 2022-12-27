@@ -1,0 +1,15 @@
+{% extends 'partials/page_table.html' %}
+
+{% block redirect %}'/inventory/service'{% endblock %}
+{% block clear_redirect %}href="{% url 'inventory-service'%}"{%endblock%}
+
+{% block active-list %}href="{% url 'inventory-service'%}"{% endblock %}
+{% block archive-list %}href="{% url 'inventory-service-archived' %}"{% endblock %}
+
+{% block filter-url %}hx-get="{% url 'inventory-service' %}"{% endblock %}
+
+{% block modals %}
+  {% include 'partials/modal_add.html' %}
+  {% include 'partials/modal_update.html' %}
+  {% include 'partials/modal_confirm.html' %}
+{% endblock %}

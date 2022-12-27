@@ -1,0 +1,64 @@
+{% load static %}
+{% if user.is_authenticated %}
+<!--  SIDE BAR -->
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav" id="navbar-settings">
+      <div>          
+        <div class="nav_logo" id="text_link"> 
+          <img style="width:50px; height:50px;" src="{% static 'images/icon_logo.png' %}" alt="Speedlab">           
+          <span class="nav_logo-name">&nbsp;&nbsp;Speedlab</span> 
+        </div>
+        
+          <div class="nav_list"> 
+            <a href="{% url 'dashboard-index' %}" class="nav_link sidebar-hovered {% if state == 'dashboard' %}sidebar-active{% endif %}" id="text_link">                                                                                    
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                <span class="nav_name side_name" style="font-weight:500;">&nbsp;&nbsp;Dashboard</span>                      
+            </a>
+
+            <a href="{% url 'order' %}" class="nav_link sidebar-hovered {% if state == 'order' %}sidebar-active{% endif %}" id="text_link">
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_transaction.png' %}" alt="Transactions">
+                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Transactions</span>  
+            </a>
+
+            <a href="{% url 'inventory-product' %}" class="nav_link sidebar-hovered {% if view.state == 'inventory' or state == 'inventory' %}sidebar-active{% endif %}" id="text_link">
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_inventory.png' %}" alt="Products">
+                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Inventory</span>                
+            </a> 
+
+            <a href="{% url 'sales' %}" class="nav_link sidebar-hovered {% if view.state == 'sales' %}sidebar-active{% endif %}"  id="text_link">
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_inventory_data.png' %}" alt="Inventory Data">
+                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Sales</span>              
+            </a>
+
+            <a href="{% url 'analytics' %}" class="nav_link sidebar-hovered {% if state == 'analytics' %}sidebar-active{% endif %}" id="text_link">
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_sales_reports.png' %}" alt="Sales Report">
+                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Analytics</span>
+            </a>
+            {% if request.user.is_superuser  %}
+                <a href="{% url 'dashboard-staff' %}" class="nav_link sidebar-hovered {% if state == 'accounts' %}sidebar-active{% endif %}" id="text_link">
+                    <img style="width:50px; height:50px;" src="{% static 'images/icon_staff.png' %}" alt="Accounts">
+                    <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Accounts</span>
+                </a>   
+            {% elif request.user.is_authenticated %}
+                <a href="{% url 'dashboard-customer' %}" class="nav_link sidebar-hovered {% if state == 'accounts' %}sidebar-active{% endif %}" id="text_link">
+                    <img style="width:50px; height:50px;" src="{% static 'images/icon_staff.png' %}" alt="Accounts">
+                    <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Accounts</span>
+                </a> 
+            {% endif %}     
+          </div>
+      </div> 
+
+      {% comment %} LOGOUT BUTTON {% endcomment %}
+
+      <a href="{% url 'settings_view' %}" class="nav_link sidebar-hovered" id="text_link"> 
+        <img style="width:50px; height:50px;" src="{% static 'images/icon_settings.png' %}" alt="Settings">
+        <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Settings</span>
+      </a>          
+      <!-- <a href="{% url 'logout_confirmation' %}" class="nav_link" id="text_link">
+          <img style="width:50px; height:50px;" src="{% static 'images/icon_logout.png' %}" alt="Logo">
+          <span class="nav_name">Logout</span>
+      </a> -->  
+  </nav>    
+</div>
+
+{% endif %}  

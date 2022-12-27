@@ -1,0 +1,33 @@
+
+
+{% extends 'partials/base.html' %}
+{% block title %} Logout Confirmation {% endblock %}
+{% block headers %} CONFIRMATION {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <style>
+     body {
+            background-image: url('/static/images/bg_gray.png');
+     }
+    </style>
+    
+    <div class="container" style="margin-top: 250px;">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="border p-4 bg-white">
+                    <h3>Logout Confirmation</h3>
+                    <hr>
+                    <div class="alert alert-danger">
+                        <h5>Are you sure you want to Log out?</h5>
+                    </div>  
+                    <div style="display: flex; justify-content: flex-end;">
+                        <a class="btn btn-primary" href="{% url 'user-logout' %}" style="background-color:#173f7a; margin-left: 10px;">Log out</a>
+                        <a class="btn btn-primary" href="{% url 'dashboard-index' %}" style="background-color:#173f7a; margin-left: 10px;">Cancel</a>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

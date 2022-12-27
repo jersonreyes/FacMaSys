@@ -1,0 +1,14 @@
+{% extends 'partials/page_table.html' %}
+
+{% block redirect %}'/inventory/car/archived'{% endblock %}
+{% block clear_redirect %}href="{% url 'inventory-car-archived'%}"{%endblock%}
+
+{% block active-list %}href="{% url 'inventory-car'%}"{% endblock %}
+{% block archive-list %}href="{% url 'inventory-car-archived' %}"{% endblock %}
+
+{% block filter-url %}hx-get="{% url 'inventory-car-archived' %}"{% endblock %}
+{% block add-btn %}{% endblock %}
+
+{% block modals %}
+  {% include 'partials/modal_confirm.html' %}
+{% endblock %}

@@ -1,0 +1,196 @@
+{% load crispy_forms_tags %}
+{% load humanize %}
+
+<div class="row my-4 mx-3" id="graphs">
+
+    <div class="col-8">
+        <div class= "card bg-light mb-3">
+            <div class="tab-content p-3">
+                <h5 class="mb-3">Total Sales:</h5>
+                <canvas class="mb-5" id="lineChart" width="100" height="40"></canvas>
+                <script>//line
+                    var ctxL = document.getElementById("lineChart").getContext('2d');
+                    var myLineChart = new Chart(ctxL, {
+                    type: 'line',
+                    data: {
+                        labels: [{% for months in monthly_sales.index %} '{{ months }}', {% endfor %}],
+                        datasets: [
+                        {
+                        label: "Total Sales",
+                        data: [{% for total in monthly_sales.total %} {{ total }}, {% endfor %}],
+                        backgroundColor: [
+                            'rgba(0, 137, 132, .2)',
+                        ],
+                        borderColor: [
+                            'rgba(0, 10, 130, .7)',
+                        ],
+                        borderWidth: 2
+                        }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    callback: function(value, index, values) {
+                                    return value.toLocaleString("en-US",{style:"currency", currency:"PHP"});
+                                    }
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            callbacks: {
+                                label: function(tooltipItem, data) {
+                                    return tooltipItem.yLabel.toLocaleString("en-US",{style:"currency", currency:"PHP"});
+                                }
+                            }
+                        }
+                    }
+                    });
+                    
+                </script>
+            </div>
+        </div>
+
+        <div class= "card bg-light mb-3">        
+            <div class="tab-content p-3">
+         
+                <h5 class="my-3">Products Sold: </h5>
+                <canvas id="barChart" width="100" height="40"></canvas>
+                    <script>//line
+                        var ctxB = document.getElementById("barChart").getContext('2d');
+                        var myBarChart = new Chart(ctxB, {
+                        type: 'bar',
+                        data: {
+                            labels: [{% for product in products_count %} '{{ product.product_title|truncatechars:15 }}', {% endfor %}],
+                            datasets: [{
+                            label: 'Products Sold',
+                            data: [{% for product in products_count %} '{{ product.total }}', {% endfor %}],
+                            backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                 'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        callback: function(value, index, values) {
+                                        return value.toLocaleString("en-US",{style:"currency", currency:"PHP"});
+                                        }
+                                    }
+                                }]
+                            },
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        return tooltipItem.yLabel.toLocaleString("en-US",{style:"currency", currency:"PHP"});
+                                    }
+                                }
+                            }
+                        }
+                        });
+                    </script>   
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">   
+        <div class= "card bg-light mb-3">
+            <div class="p-3">
+                <h5 class="mb-3">Sales</h5>
+                <h3 class="mb-3"><strong> {% if sales_change > 0%}+{% endif %} {{ sales_change|floatformat:-2 }}% </strong></h5>
+                {% comment %} <div class="form-group row my-0">
+                    <label for="staticEmail" class="col-sm-6 col-form-label ">Net:</label>
+                    <div class="col-sm-6">
+                    <input type="text" readonly class="form-control-plaintext h6" id="staticEmail" value="&#8369; {{ net|intcomma }}">                     
+                    </div>
+                </div> {% endcomment %}
+    
+                <div class="form-group row my-0">
+                    <label for="staticEmail" class="col-sm-6 col-form-label">Total Sales:</label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext h6" id="staticEmail" value="&#8369; {{ total_sales|intcomma }}">
+                    </div>
+                </div>
+    
+                <div class="form-group row my-0">
+                    <label for="staticEmail" class="col-sm-6 col-form-label">Sales last {{ time }}:</label>
+                    <div class="col-sm-6">
+                        <input type="text" readonly class="form-control-plaintext h6" id="staticEmail" value="&#8369; {{ prev_sales|intcomma }}">
+                    </div>
+                </div>
+            </div>    
+        </div> 
+
+        <div class= "card bg-light mb-3">
+            <div class="p-3">
+                <h5 class="mb-3">Order Count</h5>
+                <h3 class="mb-3"><strong> {{ order_count }} </strong></h5>
+                <table class="table table-striped bg-white">
+                    <tr>
+                        <td>Products Sold<td>
+                        <td>{{ products_sold }}<td>
+                        <td>{% if quantity_change > 0 %}+{% elif quantity_change < 0 %}-{% endif %}{{ quantity_change|floatformat:-2 }}%<td>
+                    </tr>
+                </table> 
+            </div>
+        </div>
+
+        <div class="card bg-light mb-3">
+            <div class="p-3" id="cart">
+                <h5 class="mb-3">Top products by units sold </h5>
+                <table class="table table-striped bg-white">
+                    {% for product in products_count %}
+                    <tr>
+                        <td>{{ product.images.0.src }}</td>
+                        <td>{{ product.product_title }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.percent|floatformat:-2 }}%</td>
+                    </tr>
+                    {% endfor %}
+                </table>    
+            </div>                             
+        </div>      
+    </div>
+                                                            
+</div>
