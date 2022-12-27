@@ -9,13 +9,24 @@
         box-shadow: 0px 0px 33px -8px rgba(255, 138, 0, 0.46);
         border-radius: 12px;
         padding: 5px;
+        text-decoration:none;
     }    
+    .sidebarItem {
+        padding: 5px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 138, 0, 0);
+        color: white !important;
+        transition: 150ms ease-in-out;
+    } 
+    
     .navigatorBlock {
         padding: 20px;
         padding-left: 25px;
         text-align: left;
         line-height:1;
-        background: #363636;
+        cursor: pointer;
+        background: #363636a8;
+        backdrop-filter: blur(20px);
         border-radius: 29px;
         border: 1px solid rgba(255, 255, 255, 0);
     }
@@ -36,6 +47,34 @@
         font-weight: 400;
         font-size: 14px;
 
+        color: #FFFFFF;
+    }
+    .dropdownBlock {
+        padding: 20px;
+        padding-left: 25px;
+        text-align: left;
+        line-height:1;
+        background: #363636;
+        border-radius: 29px;
+        border: 1px solid rgba(255, 255, 255, 0);
+    }
+    .dropdownBlock:hover {
+        border: 1px solid white;
+        background: #555555;
+    }
+    .dropdownBlock .title {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 24px;
+        /* identical to box height */
+
+        letter-spacing: -0.04em;
+    }
+    .dropdownBlock .subtitle {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        margin-top: -5px;
         color: #FFFFFF;
     }
     * {

@@ -1,21 +1,17 @@
-var timer;
-var delay = 700;
-const trigger_icon = document.getElementById("nav-bar").classList;
-
-$("#nav-bar").hover(function() {
-    // on mouse in, start a timeout
-
-    timer = setTimeout(function() {
-        trigger_icon.add("sidebar_hovered");
-    }, delay);
-}, function() {
-    // on mouse out, cancel the timer
-    clearTimeout(timer);
-    trigger_icon.remove("sidebar_hovered");
-});
-
 document.addEventListener("DOMContentLoaded", function(event) {
    
+    $(".sidebarItem").hover(function() {
+        var root = this;
+        $('#page_title_body').animate({
+            'opacity' : 0
+        }, 400, function(){
+            $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 400);});
+    }, function() {
+        $('#page_title_body').animate({
+            'opacity' : 0
+        }, 400, function(){
+            $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 400);});
+    })
     const showNavbar = (toggleId, navId, bodyId, headerId) =>{
     const toggle = document.getElementById(toggleId),
     nav = document.getElementById(navId),
