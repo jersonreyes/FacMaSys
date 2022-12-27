@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- TAILWIND CSS -->
+        <link rel="stylesheet" href="{% static 'css/output.css' %}" media="screen" />
+
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,6 +38,7 @@
     </head>
 
     <body id="body-pd" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <div class="bg-black w-[100vw] h-[50vh]">asdasd</div>
         {% if user.is_authenticated %}
         <div>
             <header class="header d-flex justify-content-between" id="header">

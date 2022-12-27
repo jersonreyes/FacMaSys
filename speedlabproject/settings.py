@@ -27,8 +27,10 @@ SECRET_KEY = 'django-insecure-y2^82pkv&n1z0()j0^k73ti7@jeuvwttndkwpqgsl&eds3xfg!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['facmasys.loca.lt', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = [
+    'https://facmasys.loca.lt'
+]
 
 # Application definition
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django_extensions',
     "django_htmx",
     "bootstrap_datepicker_plus",
+    "django_browser_reload",
     'django_filters',
     'django_tables2',
     'crispy_forms',
@@ -54,7 +57,17 @@ INSTALLED_APPS = [
     'inventory',
     'reports',
     'django_q',
+    'tailwind',
+    'theme',
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +78,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django_htmx.middleware.HtmxMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'speedlabproject.urls'
