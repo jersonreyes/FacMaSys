@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
         var root = this;
         $('#page_title_body').animate({
             'opacity' : 0
-        }, 400, function(){
+        }, 200, function(){
             if($(root).attr('value') == 'Toggle Dark/Light Mode')
-                $(this).html($(root).attr('value')).animate({'opacity': 1}, 400)
-            else $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 400);});
+                $(this).html($(root).attr('value')).animate({'opacity': 1}, 200)
+            else $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 200);});
     }, function() {
         $('#page_title_body').animate({
             'opacity' : 0
-        }, 400, function(){
-            $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 400);});
+        }, 200, function(){
+            $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
     })
     var value = localStorage.theme;
     if(value == 'dark') {

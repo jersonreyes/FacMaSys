@@ -1454,6 +1454,16 @@ select {
   transition-duration: 150ms;
 }
 
+.transition-\[200ms\] {
+  transition-property: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-75 {
+  transition-duration: 75ms;
+}
+
 .sidebarItemActive {
   background: rgba(255, 136, 0, 0.324);
   border: 1px solid rgba(255, 138, 0, 0.3);
