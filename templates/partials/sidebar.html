@@ -1,7 +1,7 @@
 {% load static %}
 {% if user.is_authenticated %}
 <!--  SIDE BAR -->
-<div class="l-navbar" id="nav-bar">
+<div class="bg-[#363636]">
     <nav class="nav" id="navbar-settings">
       <div>          
         <div class="nav_logo" id="text_link"> 
@@ -13,21 +13,6 @@
             <a href="{% url 'dashboard-index' %}" class="nav_link sidebar-hovered {% if state == 'dashboard' %}sidebar-active{% endif %}" id="text_link">                                                                                    
                 <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
                 <span class="nav_name side_name" style="font-weight:500;">&nbsp;&nbsp;Dashboard</span>                      
-            </a>
-
-            <a href="{% url 'order' %}" class="nav_link sidebar-hovered {% if state == 'order' %}sidebar-active{% endif %}" id="text_link">
-                <img style="width:50px; height:50px;" src="{% static 'images/icon_transaction.png' %}" alt="Transactions">
-                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Transactions</span>  
-            </a>
-
-            <a href="{% url 'inventory-product' %}" class="nav_link sidebar-hovered {% if view.state == 'inventory' or state == 'inventory' %}sidebar-active{% endif %}" id="text_link">
-                <img style="width:50px; height:50px;" src="{% static 'images/icon_inventory.png' %}" alt="Products">
-                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Inventory</span>                
-            </a> 
-
-            <a href="{% url 'sales' %}" class="nav_link sidebar-hovered {% if view.state == 'sales' %}sidebar-active{% endif %}"  id="text_link">
-                <img style="width:50px; height:50px;" src="{% static 'images/icon_inventory_data.png' %}" alt="Inventory Data">
-                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Sales</span>              
             </a>
 
             <a href="{% url 'analytics' %}" class="nav_link sidebar-hovered {% if state == 'analytics' %}sidebar-active{% endif %}" id="text_link">
