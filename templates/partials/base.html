@@ -32,8 +32,9 @@
         <!--<link rel="stylesheet" href="{% static 'css/home.css' %}" media="screen" />-->
 
         <link rel="stylesheet" href="{% static 'scss/style.css' %}" media="screen" />
+        <link rel="SHORTCUT ICON" href="{% static 'images/logo.png' %}" media="screen" />
 
-        <title>{{ view.label }}{{ label }} Page</title>
+        <title>FacMaSys - {% block title %}{% endblock %}</title>
     </head>
 
     <body id="body-pd" class="bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
