@@ -1793,3 +1793,7 @@ a, a:visited, a:hover {
 .\[\&\:hover\~div\>div\]\:block:hover~div>div {
   display: block;
 }
+
+.\[\&\:hover\~div\]\:block:hover~div {
+  display: block;
+}

@@ -119,44 +119,39 @@
                             </div>
             
                             <!-- PROFILE ICON -->
-                            <div class="flex flex-col justify-start text-left">
-                                <button class="bg-white [&:hover~div>div]:block transition hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="transition">
+                                <button class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <div style="background-image: url('{{ user.profile.image.url }}');height:30px; width:30px;background-size:cover;border-radius: 10px;border: 1px solid rgba(85, 85, 85, 0.553)"></div>
                                     <div class="text-md">{{ request.user.first_name }} {{ request.user.last_name.0 }}.</div>
                                     <img src="{% static 'images/arrow.png' %}" class="h-[15px]"/>
                                 </button>
             
-                                <div class="relative right-0">
-                                    <div class="transition hidden absolute right-0 bg-white rounded-md hover:block p-3" style="min-width: 250px;">
-                                        
-                                        <div class="d-flex flex-row" style="width: 250px;">
-                                            <div class="px-3">
-                                                <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
-                                            </div>
-                                            <div class="">
-                                                {% if request.user.is_superuser  %}
-                                                <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
-                                                {% elif request.user.is_staff %}
-                                                <h6 class="mb-0"><strong> ADMIN: </strong></h6>
-                                                {% else %}
-                                                <h6 class="mb-0"><strong> CASHIER: </strong></h6>
-                                                {% endif %}
-                                                <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0 w-[50%]" id="staticEmail" value="{{request.user.username}}">
-                                            </div>             
+                                <div class="dropdown-menu dropdown-menu-right p-3" style="max-width: 250px;">
+                                    
+                                    <div class="d-flex flex-row" style="width: 250px;">
+                                        <div class="px-3">
+                                            <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
                                         </div>
-                
-                                        <div class="h-1 w-full bg-gray-100 my-2"></div>       
-                                        <div class="">                                      
-                                            <a class="rounded-md px-[1.2vw] py-1 transition hover:bg-[rgba(200,200,200,0.5)] text-left text-none no-underline flex gap-4 w-full" href="{% url 'user-profile' %}">
-                                                <img class="mb-1 inline-block" src="{% static 'images/icon_view_profile_inverted.png' %}" style="width: 15px; height: 15px;" alt="View Profile"> 
-                                                <span class="text-black text-left">View Profile</span>
-                                            </a>
-                                            <button type="button" class="rounded-md px-[1.2vw] py-1 transition hover:bg-[rgba(200,200,200,0.5)] text-left text-none no-underline flex gap-4 w-full" data-toggle="modal" data-target="#logoutModal">
-                                                <img class="mb-1 inline-block" src="{% static 'images/icon_logout_inverted.png' %}" style="width: 15px; height: 15px;" alt="Logout">
-                                                <span class="text-black text-left">Logout</span>
-                                            </button>
-                                        </div>          
+                                        <div class="">
+                                            {% if request.user.is_superuser  %}
+                                            <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
+                                            {% elif request.user.is_staff %}
+                                            <h6 class="mb-0"><strong> ADMIN: </strong></h6>
+                                            {% else %}
+                                            <h6 class="mb-0"><strong> CASHIER: </strong></h6>
+                                            {% endif %}
+                                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{request.user.username}}">
+                                        </div>             
                                     </div>
+            
+                                    <div class="dropdown-divider"></div>                                                       
+                                    <a class="dropdown-item grid grid-flow-col" href="{% url 'user-profile' %}">
+                                        <img class="mb-1 inline-block" src="{% static 'images/icon_view_profile_inverted.png' %}" style="width: 15px; height: 15px;" alt="View Profile"> 
+                                        &nbsp; &nbsp; &nbsp; View Profile
+                                    </a>
+                                    <button type="button" class="dropdown-item grid grid-flow-col" data-toggle="modal" data-target="#logoutModal">
+                                        <img class="mb-1 inline-block" src="{% static 'images/icon_logout_inverted.png' %}" style="width: 15px; height: 15px;" alt="Logout"> &nbsp; &nbsp; &nbsp; Logout 
+                                    </button>
                                 </div>
                                 <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
                             </div>
@@ -173,7 +168,7 @@
         crossorigin="anonymous"></script>
         
         <script type="text/javascript"
-        src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js">
+        src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
