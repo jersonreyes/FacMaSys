@@ -19,7 +19,7 @@
             <ul class="navbar-nav mr-auto">    
                 {% if request.user.is_staff %}        
                 <li class="nav-item mr-2">
-                <a class="nav-link" href="{% url 'dashboard-staff' %}"><span class="default-state navtab-active">STAFF</span></a>
+                <a class="nav-link" href="{% url 'faculty-index' %}"><span class="default-state navtab-active">STAFF</span></a>
                 </li>
                 {% endif %}
                 <li class="nav-item mr-2">
@@ -78,7 +78,7 @@
                             <td>{{ worker.profile.user_role|title }}</td>
                             <th scope="row">                                
                                 <span class="tooltips_top"> 
-                                    <a class="btn btn-info btn-sm" href="{% url 'dashboard-staff-detail' worker.id %}">
+                                    <a class="btn btn-info btn-sm" href="{% url 'faculty-index-detail' worker.id %}">
                                     <span class="tooltiptext_top"> View Staff </span> 
                                     <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
                                     </a>

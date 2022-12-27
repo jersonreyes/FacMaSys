@@ -198,7 +198,7 @@ def customer_detail(request, pk):
 #             notif.save()
 #             messages.success(request, f'Account has been created for {username}.')
 #             add_activity(logged_user=request.user,activity_type='ADD',activity_location='USER',activity_message=f'Account has been created for {username}.')
-#             return redirect('dashboard-staff')
+#             return redirect('faculty-index')
 #     else:
 #         form = CreateUserForm()
 #     context = {

@@ -17,7 +17,7 @@ urlpatterns = [
     path('accounts/faculty',views.faculty, name='faculty-index'),
     path('accounts/customer',views.customer, name='dashboard-customer'),
     
-    path('staff/detail/<int:pk>/',views.staff_detail, name='dashboard-staff-detail'),
+    path('staff/detail/<int:pk>/',views.staff_detail, name='faculty-index-detail'),
     path('customer/detail/<int:pk>/',views.customer_detail, name='user-customer-detail'),
     
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name='password_reset'),
