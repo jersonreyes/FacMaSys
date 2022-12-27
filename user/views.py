@@ -116,15 +116,15 @@ def profile_update(request):
 
 
 @login_required
-def staff(request):
-    if request.user.is_superuser:
+def faculty(request):
+    if request.user.profile.user_role == 'depthead':
         
         if 'q' in request.GET:
             search_customer = request.GET['q']
             multiple_search =  Q(Q(username__istartswith=search_customer)|Q(email__istartswith=search_customer))
             workers = User.objects.filter(multiple_search)
         else:
-            workers = User.objects.all()
+            workers = User.objects.filter(profile__user_role='faculty')
         page = Paginator(workers,10)
         page_list = request.GET.get('page')
         page = page.get_page(page_list)
@@ -136,10 +136,9 @@ def staff(request):
             'state':'accounts',
             
         }
-        return render(request, 'user/staff.html', context)
+        return render(request, 'user/faculty.html', context)
     else:
-        messages.error(request, f'You are not authorized to access that page. Please login as superuser to be granted access.')
-        return redirect('user-login')
+        return redirect('dashboard-index')
 
 @login_required
 def customer(request):

@@ -47,25 +47,29 @@
             <!-- LOGOUT MODAL -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger">
-                            <h5>Are you sure you want to Log out?</h5>
+                    <div class="modal-content">
+                        
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="alert alert-danger">
+                                <h5>Are you sure you want to Log out?</h5>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                            <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                    <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
-                    </div>
-                </div>
                 </div>
             </div>
+            
             <div class="p-2 z-[200]">
                 <div class="relative">
                     <div id="header" class="transition-all z-[200] px-[4vw] justify-between items-center top-5 flex gap-2 fixed" style="width:93vw">
