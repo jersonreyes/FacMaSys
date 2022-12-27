@@ -124,6 +124,7 @@
                                 </div>
                             </div>
             
+                            {% if request.user.is_authenticated %}
                             <!-- PROFILE ICON -->
                             <div class="transition">
                                 <button class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,14 +140,8 @@
                                             <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
                                         </div>
                                         <div class="">
-                                            {% if request.user.is_superuser  %}
-                                            <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
-                                            {% elif request.user.is_staff %}
-                                            <h6 class="mb-0"><strong> ADMIN: </strong></h6>
-                                            {% else %}
-                                            <h6 class="mb-0"><strong> CASHIER: </strong></h6>
-                                            {% endif %}
-                                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{request.user.username}}">
+                                            <h6 class="mb-0"><strong> {{ request.user.profile.user_role|upper }}: </strong></h6>
+                                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{ request.user.username }}">
                                         </div>             
                                     </div>
             
@@ -161,6 +156,9 @@
                                 </div>
                                 <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
                             </div>
+                            {% else %}
+                                <a href="{% url 'user-login' %}"><button type="button">Sign In</button></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

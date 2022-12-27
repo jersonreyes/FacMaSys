@@ -84,6 +84,10 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'user.backends.CustomUserBackend',
+]
+
 ROOT_URLCONF = 'facmasys.urls'
 
 TEMPLATES = [
