@@ -11,24 +11,24 @@
                     <span class="mt-[-7px] text-xs">Home</span>                      
                 </a>
 
-                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}sidebarItemActive{% endif %}" id="text_link">                                                                                    
                     <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-[-7px] text-xs">Dashboard</span>                      
                 </a>
-                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'feed' %}sidebarItemActive{% endif %}" id="text_link">                                                                                    
                     <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Dashboard</span>                      
+                    <span class="mt-[-7px] text-xs">Feed</span>                      
                 </a>
-                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'researches' %}sidebarItemActive{% endif %}" id="text_link">                                                                                    
                     <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Dashboard</span>                      
+                    <span class="mt-[-7px] text-xs">Researches</span>                      
                 </a>
-                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'subjects' %}sidebarItemActive{% endif %}" id="text_link">                                                                                    
                     <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                    <span class="mt-[-7px] text-xs">Dashboard</span>                      
+                    <span class="mt-[-7px] text-xs">Subjects</span>                      
                 </a>
             </div>
-            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'settings' %}sidebarItemActive{% endif %}" id="text_link">                                                                                    
                 <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
                 <span class="mt-[-7px] text-xs">Settings</span>                      
             </a>
