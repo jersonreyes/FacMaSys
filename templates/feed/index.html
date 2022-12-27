@@ -14,15 +14,9 @@
             </div>
         </div>
         <div class="mt-[4vh] grid gap-3 grid-cols-3 grid-rows-4 [&>div]:rounded-md min-h-screen w-full">
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
-            <div class="bg-[#363636] p-[10px]"></div>
+            {% for i in "x"|rjust:"9" %}
+                <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}"></div>
+            {% endfor %}
         </div>
     </div>
 <!--End Graphs-->

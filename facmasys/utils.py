@@ -1,16 +1,18 @@
-from django.template.loader import render_to_string
-from django.http import HttpResponse, HttpResponseRedirect
-from weasyprint import HTML
-from django.contrib import messages
+import json
 from time import sleep
-import requests, pandas as pd, json
-from django.shortcuts import redirect
-from reports.models import ActivityLog
-from reports.models import StoreInfo
 
+import pandas as pd
+import requests
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
+from django.template.loader import render_to_string
+from weasyprint import HTML
+
+from reports.models import ActivityLog, StoreInfo
 
 # Shopify REST API
-api_url = 'https://speedlabpos.myshopify.com/admin/api/2022-10/'
+api_url = 'https://facmasyspos.myshopify.com/admin/api/2022-10/'
 sess = requests.Session()
 sess.headers.update({
     "X-Shopify-Access-Token": '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',

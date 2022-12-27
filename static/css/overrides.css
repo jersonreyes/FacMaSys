@@ -99,3 +99,17 @@
     color:rgba(255, 255, 255, 0.5) !important;
   }
   
+  #research-search-container {
+    position: relative;
+  }
+  
+  #research-search-container img {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+  }
+  
+  #research-search-container input {
+    padding-left: 40px;
+    color:black;
+  }

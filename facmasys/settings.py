@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'feed',
     'user',
     'sales',
+    'researches',
     'inventory',
     'reports',
     'facmasys',

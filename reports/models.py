@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 
 class ActivityLog(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
@@ -57,5 +58,5 @@ class StoreInfo(models.Model):
     address=models.CharField(max_length=50, null=True)
 
     def __str__(self) -> str:
-        return f'Speedlab'
+        return f'FacMaSys'
     

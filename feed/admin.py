@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
+
 # from .models import *
 
 
-admin.site.site_header = 'Speedlab Admin'
+admin.site.site_header = 'FacMaSys Admin'
 
 # class ProductAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'category','quantity')
