@@ -1,3 +1,21 @@
+$(document).ready(function() {
+    $(document).scroll(function () {
+        var $nav = $("#header");
+        if ($(this).scrollTop() > 70) {
+            $('#header').css({"backdrop-filter":"blur(50px)","top":"0px","padding-bottom":"10px","padding-top":"10px"});
+            $('#left-logo').css({"display":"block"})
+            $('#center-logo').css({"display":"none"})
+            $('#page_title_body').css({"font-size":"1.25rem"})
+            $('#page_title_body_sub').css({"display":"none"})
+        } else {
+            $('#header').css({"backdrop-filter":"blur(0px)","top":"25px"});
+            $('#left-logo').css({"display":"none"})
+            $('#page_title_body').css({"font-size":"1.75rem"})
+            $('#page_title_body_sub').css({"display":"block"})
+            $('#center-logo').css({"display":"block"})
+        }
+    });
+});
 document.addEventListener("DOMContentLoaded", function(event) {
    
     $(".sidebarItem").hover(function() {
