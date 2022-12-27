@@ -1,9 +1,10 @@
 {% load static %}
+{% load tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- TAILWIND CSS -->
-        <link rel="stylesheet" href="{% static 'css/output.css' %}" media="screen" />
+        {% tailwind_css %}
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -38,7 +39,6 @@
     </head>
 
     <body id="body-pd" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        <div class="bg-black w-[100vw] h-[50vh]">asdasd</div>
         {% if user.is_authenticated %}
         <div>
             <header class="header d-flex justify-content-between" id="header">

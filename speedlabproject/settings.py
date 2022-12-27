@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'sales',
     'inventory',
     'reports',
+    'speedlabproject',
     'django_q',
     'tailwind',
     'theme',
