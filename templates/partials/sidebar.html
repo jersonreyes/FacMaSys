@@ -1,48 +1,33 @@
 {% load static %}
 {% if user.is_authenticated %}
 <!--  SIDE BAR -->
-<div class="bg-[#363636]">
-    <nav class="nav" id="navbar-settings">
-      <div>          
-        <div class="nav_logo" id="text_link"> 
-          <img style="width:50px; height:50px;" src="{% static 'images/icon_logo.png' %}" alt="Speedlab">           
-          <span class="nav_logo-name">&nbsp;&nbsp;Speedlab</span> 
-        </div>
-        
-          <div class="nav_list"> 
-            <a href="{% url 'dashboard-index' %}" class="nav_link sidebar-hovered {% if state == 'dashboard' %}sidebar-active{% endif %}" id="text_link">                                                                                    
+<div class="bg-[#363636] h-[100vh]">
+    <nav class="">
+      <div class="">          
+        <div class="grid grid-flow-row gap-2 justify-center"> 
+            <a href="{% url 'index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'home' %}bg-black{% endif %}" id="text_link">                                                                                    
                 <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
-                <span class="nav_name side_name" style="font-weight:500;">&nbsp;&nbsp;Dashboard</span>                      
+                <span class="mt-[-7px] text-xs">Home</span>                      
             </a>
 
-            <a href="{% url 'analytics' %}" class="nav_link sidebar-hovered {% if state == 'analytics' %}sidebar-active{% endif %}" id="text_link">
-                <img style="width:50px; height:50px;" src="{% static 'images/icon_sales_reports.png' %}" alt="Sales Report">
-                <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Analytics</span>
+            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                <span class="mt-[-7px] text-xs">Dashboard</span>                      
             </a>
-            {% if request.user.is_superuser  %}
-                <a href="{% url 'dashboard-staff' %}" class="nav_link sidebar-hovered {% if state == 'accounts' %}sidebar-active{% endif %}" id="text_link">
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_staff.png' %}" alt="Accounts">
-                    <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Accounts</span>
-                </a>   
-            {% elif request.user.is_authenticated %}
-                <a href="{% url 'dashboard-customer' %}" class="nav_link sidebar-hovered {% if state == 'accounts' %}sidebar-active{% endif %}" id="text_link">
-                    <img style="width:50px; height:50px;" src="{% static 'images/icon_staff.png' %}" alt="Accounts">
-                    <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Accounts</span>
-                </a> 
-            {% endif %}     
-          </div>
+            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                <span class="mt-[-7px] text-xs">Dashboard</span>                      
+            </a>
+            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                <span class="mt-[-7px] text-xs">Dashboard</span>                      
+            </a>
+            <a href="{% url 'dashboard-index' %}" class="text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}bg-black{% endif %}" id="text_link">                                                                                    
+                <img style="width:50px; height:50px;" src="{% static 'images/icon_dashboard.png' %}" id="tooltip_img" alt="Dashboard">                                               
+                <span class="mt-[-7px] text-xs">Dashboard</span>                      
+            </a>
+        </div>
       </div> 
-
-      {% comment %} LOGOUT BUTTON {% endcomment %}
-
-      <a href="{% url 'settings_view' %}" class="nav_link sidebar-hovered" id="text_link"> 
-        <img style="width:50px; height:50px;" src="{% static 'images/icon_settings.png' %}" alt="Settings">
-        <span class="nav_name" style="font-weight:500;">&nbsp;&nbsp;Settings</span>
-      </a>          
-      <!-- <a href="{% url 'logout_confirmation' %}" class="nav_link" id="text_link">
-          <img style="width:50px; height:50px;" src="{% static 'images/icon_logout.png' %}" alt="Logo">
-          <span class="nav_name">Logout</span>
-      </a> -->  
   </nav>    
 </div>
 

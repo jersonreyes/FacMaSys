@@ -37,122 +37,113 @@
     </head>
 
     <body id="body-pd" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        {% if user.is_authenticated %}
-        <div>
-            <header class="header d-flex justify-content-between" id="header">
+        <div class="fixed right-0 grid grid-flow-col gap-2">
+            <div class="">
+                <button class=" dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static '/images/icon_notification.png' %}" style="width: 32px; height: 32px;" alt="Notif Icon">
+                </button>
 
-                <!-- TITLE AND TOGGLE SIDEBAR BUTTON -->
-                <div class="header_toggle">  
-                    <span class="tooltips_right">                 
-                    <img class="mb-1" style="width: 25px; height:25px;" src="{% static 'images/icon_navmenu.png' %}" id="header-toggle" alt="Logo">  
-                    <span class="tooltiptext_right"> Toggle Sidebar </span>        
-                    </span>
-                    <span class="h5 text-white ml-3">{% block headers %} TITLE {% endblock %}</span>
-                </div>
-                
-                <div class="d-flex flex-row">
-                    <!-- NOTIFICATION ICON -->
-                    <div class="dropdown pr-1">
-                        <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{% static '/images/icon_notification.png' %}" style="width: 32px; height: 32px;" alt="Notif Icon">
-                        </button>
-
-                        <div class="dropdown-menu dropdown-menu-right p-3" style="width: 500px;">
-                            <div class="row"> 
-                                <div class="col" style="font-weight:700;"> NOTIFICATIONS</div>
-                                <div class="col d-flex justify-content-end pb-1" style="color: #173f7a;">
-                                    <a style="text-decoration:none;" href="{% url 'notif-delete-all' %}"> Mark all as Read...</a>
-                                </div>
-
-                            </div>
-
-                            {% if notifications %}
-                            <table class="table table-hover p-2">
-                                {% for notif in notifications %}
-                                <tr class="pb-2">                                   
-                                    <td> {{ notif.message }} </td>
-                                    <td> <a href="{% url 'notif-delete' notif.id %}">
-                                        <button type="button" class="close" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                         </button>
-                                        </a>
-                                    </td>                                   
-                                </tr>
-                                {% endfor %} 
-                            </table>
-                            {% else %}
-                            <table class="table p-2">
-                                <tr><td colspan="4" class="text-center"><h6 class="my-2">  
-                                <span class="text-muted" style="font-weight: 600;"><em>NO ACTIVE NOTIFICATION...</em></span>  </h6></td></tr>
-                            </table>
-                            {% endif %}
-                                
-                                                        
-                                                                                                                                          
+                <div class="dropdown-menu dropdown-menu-right p-3" style="width: 500px;">
+                    <div class="row"> 
+                        <div class="col" style="font-weight:700;"> NOTIFICATIONS</div>
+                        <div class="col d-flex justify-content-end pb-1" style="color: #173f7a;">
+                            <a style="text-decoration:none;" href="{% url 'notif-delete-all' %}"> Mark all as Read...</a>
                         </div>
+
                     </div>
 
-                    <!-- PROFILE ICON -->
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 32px; height: 32px;" alt="Staff Icon">
-                        </button>
-        
-                        <div class="dropdown-menu dropdown-menu-right p-3" style="max-width: 250px;">
-                            
-                            <div class="d-flex flex-row" style="width: 250px;">
-                                <div class="px-3">
-                                    <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
-                                </div>
-                                <div class="">
-                                    {% if request.user.is_superuser  %}
-                                    <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
-                                    {% elif request.user.is_staff %}
-                                    <h6 class="mb-0"><strong> ADMIN: </strong></h6>
-                                    {% else %}
-                                    <h6 class="mb-0"><strong> CASHIER: </strong></h6>
-                                    {% endif %}
-                                    <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{request.user.username}}">
-                                </div>             
-                            </div>
-    
-                            <div class="dropdown-divider"></div>                                                       
-                            <a class="dropdown-item" href="{% url 'user-profile' %}"> <img class="mb-1" src="{% static 'images/icon_view_profile_inverted.png' %}" style="width: 15px; height: 15px;" alt="View Profile"> &nbsp; &nbsp; &nbsp; View Profile</a>
-                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
-                                <img class="mb-1" src="{% static 'images/icon_logout_inverted.png' %}" style="width: 15px; height: 15px;" alt="Logout"> &nbsp; &nbsp; &nbsp; Logout 
-                            </button>
-                        </div>
-                        <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
-                    </div>
+                    {% if notifications %}
+                    <table class="table table-hover p-2">
+                        {% for notif in notifications %}
+                        <tr class="pb-2">                                   
+                            <td> {{ notif.message }} </td>
+                            <td> <a href="{% url 'notif-delete' notif.id %}">
+                                <button type="button" class="close" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </a>
+                            </td>                                   
+                        </tr>
+                        {% endfor %} 
+                    </table>
+                    {% else %}
+                    <table class="table p-2">
+                        <tr><td colspan="4" class="text-center"><h6 class="my-2">  
+                        <span class="text-muted" style="font-weight: 600;"><em>NO ACTIVE NOTIFICATION...</em></span>  </h6></td></tr>
+                    </table>
+                    {% endif %}
+                        
+                                                
+                                                                                                                                
                 </div>
-                {% endif %}  
-            </header>
-            {% include 'partials/sidebar.html' %}
-        </div>
-
-        <!-- LOGOUT MODAL -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-danger">
-                        <h5>Are you sure you want to Log out?</h5>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                  <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
-                </div>
-              </div>
             </div>
-          </div>
 
+            <!-- PROFILE ICON -->
+            <div class="">
+                <button class="bg-white dropdown-toggle " type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 32px; height: 32px;" alt="Staff Icon">
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right p-3" style="max-width: 250px;">
+                    
+                    <div class="d-flex flex-row" style="width: 250px;">
+                        <div class="px-3">
+                            <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
+                        </div>
+                        <div class="">
+                            {% if request.user.is_superuser  %}
+                            <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
+                            {% elif request.user.is_staff %}
+                            <h6 class="mb-0"><strong> ADMIN: </strong></h6>
+                            {% else %}
+                            <h6 class="mb-0"><strong> CASHIER: </strong></h6>
+                            {% endif %}
+                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{request.user.username}}">
+                        </div>             
+                    </div>
+
+                    <div class="dropdown-divider"></div>                                                       
+                    <a class="dropdown-item" href="{% url 'user-profile' %}"> <img class="mb-1" src="{% static 'images/icon_view_profile_inverted.png' %}" style="width: 15px; height: 15px;" alt="View Profile"> &nbsp; &nbsp; &nbsp; View Profile</a>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                        <img class="mb-1" src="{% static 'images/icon_logout_inverted.png' %}" style="width: 15px; height: 15px;" alt="Logout"> &nbsp; &nbsp; &nbsp; Logout 
+                    </button>
+                </div>
+                <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
+            </div>
+        </div>
+        <div class="grid grid-cols-[100px_90fr]">
+            <div>
+                {% include 'partials/sidebar.html' %}
+            </div>
+
+            <!-- LOGOUT MODAL -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger">
+                            <h5>Are you sure you want to Log out?</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                    <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="p-2">
+                {% block content %}
+            
+                {% endblock %}
+            </div>
+        </div>
         <!-- jQuery and Bootstrap (includes Popper) -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -163,11 +154,6 @@
         crossorigin="anonymous"></script>
 
         <script src="{% static 'js/sidebar.js' %}"></script>
-        
-        {% block content %}
-        
-        {% endblock %}
-
 
     </body>
 </html>

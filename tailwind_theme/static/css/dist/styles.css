@@ -825,6 +825,10 @@ select {
   position: sticky !important;
 }
 
+.right-0 {
+  right: 0px;
+}
+
 .float-right {
   float: right;
 }
@@ -993,6 +997,22 @@ select {
   margin-right: 0.75rem;
 }
 
+.mt-\[-2px\] {
+  margin-top: -2px;
+}
+
+.mt-\[-5px\] {
+  margin-top: -5px;
+}
+
+.mt-\[-10px\] {
+  margin-top: -10px;
+}
+
+.mt-\[-7px\] {
+  margin-top: -7px;
+}
+
 .block {
   display: block;
 }
@@ -1021,6 +1041,10 @@ select {
   display: table-cell;
 }
 
+.grid {
+  display: grid;
+}
+
 .contents {
   display: contents;
 }
@@ -1037,12 +1061,76 @@ select {
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
+.h-\[100vh\] {
+  height: 100vh;
+}
+
+.h-\[200px\] {
+  height: 200px;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-\[700px\] {
+  height: 700px;
+}
+
+.w-\[full\] {
+  width: full;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-\[90vw\] {
+  width: 90vw;
+}
+
 .resize {
   resize: both;
 }
 
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.grid-cols-\[10fr_90fr\] {
+  grid-template-columns: 10fr 90fr;
+}
+
+.grid-cols-\[5fr_95fr\] {
+  grid-template-columns: 5fr 95fr;
+}
+
+.grid-cols-\[50px_90fr\] {
+  grid-template-columns: 50px 90fr;
+}
+
+.grid-cols-\[100px_90fr\] {
+  grid-template-columns: 100px 90fr;
+}
+
 .flex-row {
   flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.place-items-center {
+  place-items: center;
 }
 
 .items-center {
@@ -1053,6 +1141,14 @@ select {
   justify-content: center;
 }
 
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1061,6 +1157,18 @@ select {
 
 .rounded {
   border-radius: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.rounded-\[40px\] {
+  border-radius: 40px;
+}
+
+.rounded-\[20px\] {
+  border-radius: 20px;
 }
 
 .border {
@@ -1080,6 +1188,16 @@ select {
 .bg-\[\#363636\] {
   --tw-bg-opacity: 1;
   background-color: rgb(54 54 54 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-\[orange\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 165 0 / var(--tw-bg-opacity));
 }
 
 .p-5 {
@@ -1178,6 +1296,11 @@ select {
   line-height: 1;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
@@ -1202,6 +1325,10 @@ select {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.no-underline {
+  text-decoration-line: none;
 }
 
 .shadow {
