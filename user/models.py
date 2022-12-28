@@ -6,6 +6,10 @@ from django.contrib.auth.models import User
 # Make user email unique to avoid conflict logging in with email.
 User._meta.get_field('email')._unique = True
 
+# Make user fields required in registration or update
+User._meta.get_field('email').blank = False
+User._meta.get_field('first_name').blank = False
+User._meta.get_field('last_name').blank = False
 
 # Create your models here.
 class Profile(models.Model):
