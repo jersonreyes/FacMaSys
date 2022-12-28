@@ -1207,10 +1207,13 @@ select {
   height: 3rem;
 }
 
+<<<<<<< HEAD
 .h-6 {
   height: 1.5rem;
 }
 
+=======
+>>>>>>> 61408fed0279992e796f2f7178730ec44d5fdcc8
 .min-h-screen {
   min-height: 100vh;
 }
