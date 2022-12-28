@@ -829,6 +829,10 @@ select {
   top: 1.25rem;
 }
 
+.top-10 {
+  top: 2.5rem;
+}
+
 .z-\[0\] {
   z-index: 0;
 }
