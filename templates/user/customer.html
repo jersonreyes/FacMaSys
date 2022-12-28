@@ -20,7 +20,7 @@
             <ul class="navbar-nav mr-auto">      
                 {% if request.user.is_staff %}      
                 <li class="nav-item mr-2">
-                <a class="nav-link" href="{% url 'dashboard-staff' %}"><span class="default-state">STAFF</span></a>
+                <a class="nav-link" href="{% url 'faculty-index' %}"><span class="default-state">STAFF</span></a>
                 </li>
                 {% endif %}
                 <li class="nav-item mr-2">
