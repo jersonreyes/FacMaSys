@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'facmasys',
     'django_q',
     'tailwind',
-    'apps.tailwind_theme',
+    'tailwind_theme',
     'apps.sales',
     'apps.reports',
     'apps.researches',
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
     'apps.user',
 ]
 
-TAILWIND_APP_NAME = 'apps.tailwind_theme'
+TAILWIND_APP_NAME = 'tailwind_theme'
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -86,7 +86,7 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'user.backends.CustomUserBackend',
+    'apps.user.backends.CustomUserBackend',
 ]
 
 ROOT_URLCONF = 'facmasys.urls'
