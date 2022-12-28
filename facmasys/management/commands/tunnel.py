@@ -11,8 +11,7 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
     help = 'Run all commands'
     commands = [
-        'cd tailwind_theme/static_src && npm run dev',
-        'python manage.py runserver',
+        'lt --port 8000 --subdomain facmasys',
     ]
 
     def handle(self, *args, **options):
