@@ -40,10 +40,13 @@
     </head>
 
     <body id="body-pd" class="transition dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        <div class="grid grid-cols-[100px_90fr]">
-            <div>
-                {% include 'partials/sidebar.html' %}
-            </div>
+        <div class="{% if not ajax %}grid grid-cols-[100px_90fr]{% endif %}">
+            {% if not ajax %}
+                <div>
+                    {% include 'partials/sidebar.html' %}
+                </div>
+            {% endif %}
+            {% if not ajax %}
             <!-- LOGOUT MODAL -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -69,8 +72,10 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             
             <div class="p-2 z-[200]">
+                {% if not ajax %}
                 <div class="relative">
                     <div id="header" class="transition-all z-[200] px-[4vw] justify-between items-center top-5 flex gap-2 fixed" style="width:93vw">
                         <div class=" dark:text-white dark:white leading-[0] flex translate-y-[10px]">
@@ -166,7 +171,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-2">
+                {% endif %}
+                <div class="p-2" id="main-body">
                     {% block content %}
                 
                     {% endblock %}
@@ -187,8 +193,6 @@
         <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js" crossorigin="anonymous"></script>
         
         <script src="{% static 'js/sidebar.js' %}"></script>
-
         
-
     </body>
 </html>

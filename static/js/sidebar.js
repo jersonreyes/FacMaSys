@@ -35,6 +35,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }, 200, function(){
             $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
     })
+    var pos = $('.selected-from-url').position()
+    $("#nav-highlighter").css('top', pos.top-10);
+    
+    $("a").click(function(e) {
+        e.preventDefault();
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode") {
+            e.preventDefault();
+            var root = this;
+            var pos;
+            if(e.currentTarget.getAttribute('sidebarItem') || e.currentTarget.href == '/') {
+                pos = $('#home-nav-item').position()
+            } else {
+                pos = $(root).position()
+            }
+            $("#nav-highlighter").css('top', pos.top);
+                $("#nav-highlighter").css('left', pos.left);
+
+            e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
+            window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
+            $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
+            $("#main-body").fadeOut('500').load(e.currentTarget.href + "#main-body").fadeIn('500');       
+        } 
+    })
     
     $('.themeToggler').click(function() {
         var value = $.cookie("theme");
