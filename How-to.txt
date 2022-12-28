@@ -15,4 +15,9 @@ If mag-error about npm:
 Para mag start yung website:
 > python manage.py start
 
+Additional commands:
+Tailwind dev mode: 
+> python manage.py dev
 
+Tailwind build:
+> python manage.py build
