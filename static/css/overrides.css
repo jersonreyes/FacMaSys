@@ -113,3 +113,15 @@
     padding-left: 40px;
     color:black;
   }
+
+  .post-animating {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: opacity 0.2s ease-out, transform 0.2s;
+  }
+
+  .pre-animating {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.2s ease-out, transform 0.2s;
+  }

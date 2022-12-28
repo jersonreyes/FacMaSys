@@ -41,10 +41,12 @@
         <!-- jQuery and Bootstrap (includes Popper) -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     </head>
     {% endif %}
 
-    {% if not ajax %}<body id="body-pd" class="transition dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
+    {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
         <div class="{% if not ajax %}grid grid-cols-[100px_90fr]{% endif %}">
             {% if not ajax %}
                 <div>
@@ -175,7 +177,7 @@
                     </div>
                 </div>
                 {% endif %}
-                <div class="p-2" id="main-body">
+                <div class="p-2 transition-all" id="main-body">
                     {% block content %}
                 
                     {% endblock %}
