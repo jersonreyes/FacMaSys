@@ -8,6 +8,15 @@
         <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[700px] flex flex-col text-center justify-center items-center font-sans">
             <div class="z-[0] w-full h-[100vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
             <div class="z-[1] absolute">
+<<<<<<< HEAD
+                <p class="text-[82px] tracking-[-2px] font-bold text-white">Get Started</p>
+                <p class="text-[18px] w-[570px] ml-[18%] leading-[1] mt-[-25px] text-white">Welcome back, how may I help you today?</p>
+                <div class="grid grid-cols-2 gap-2 mt-[5vh]">
+                    <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
+                        <p class="title animate glow delay-6">Get Started</p>
+                        <p class="subtitle">Have a tour of what BulSU CICT FacMaSys can do for you</p>
+                    </div>
+=======
                 <p class="text-[82px] tracking-[-2px] font-bold text-white">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
                 <p class="text-[18px] w-[570px] ml-[18%] leading-[1] mt-[-25px] text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
                 <div class="grid grid-cols-2 gap-2 mt-[5vh]">
@@ -21,17 +30,18 @@
                         {% if not request.user.is_authenticated %}
                         </a>
                     {% endif %}
+>>>>>>> 02e5c1f3ec6a9e102b04f1caeb07bd93a5610355
                     <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
                         <p class="title animate glow delay-7">Faculty Management</p>
-                        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                        <p class="subtitle">Know more about the faculty members and their subjects </p>
                     </div>
                     <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
                         <p class="title animate glow delay-8">Research and Extensions</p>
-                        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                        <p class="subtitle">Search and explore information about research and extensions of the college </p>
                     </div>
                     <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
                         <p class="title animate glow delay-9">Post and Announcements</p>
-                        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                        <p class="subtitle">Be updated with the latest news and announcements from the college </p>
                     </div>
                 </div>
             </div>
