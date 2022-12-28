@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from reports.models import Notifications
 from sales.models import Order, OrderProduct
+from faculty_member.models import *
 
 
 # Create your views here.
@@ -43,6 +44,9 @@ def index(request):
     
     # Notifications
     notifications = Notifications.objects.filter(user=request.user)
+
+    # Summary Research Object
+    all_researches = Research.objects.all()
     
     products_sold = products.aggregate(Sum('quantity'))['quantity__sum']
     context={
@@ -58,6 +62,8 @@ def index(request):
         'quantity_change': 100 if prev_products.count() == 0 else (products.count() - prev_products.count()) / prev_products.count() * 100,
         'state':'researches',
         'notifications':notifications,
+
+        # Summary Research Object
+        'all_researches': all_researches,
     }
     return render(request, 'researches/index.html', context)
-    

@@ -214,20 +214,5 @@ class Subjects_Taught(models.Model):
         return f'Faculty ID: {self.faculty_id} | Handled Subjects: {self.handled_subjects.values().all()}'
 
 
-""" ################################# USERS ################################# """
-# class Users(models.Model):
-#     USER_TYPE = (
-#         ('Faculty', 'Faculty'),
-#         ('Department Head', 'Department Head'),
-#         ('Research Coordinator', 'Research Coordinator'),
-#         ('Extension Coordinator', 'Extension Coordinator'),
-#     )
-    
-#     name = models.CharField(max_length=100, blank=False, null=False)
-#     # logo = models.ImageField(default=None, upload_to='user_profile-pic/')
-#     user_type = models.CharField(max_length=200, choices=USER_TYPE, default="Faculty", blank=False, null=False)
-#     username = models.CharField(max_length=200, blank=False, null=False)
-#     email = models.EmailField(max_length=200, blank=False, null=False)
-#     password = models.CharField(max_length=200, choices=USER_TYPE, default="Faculty", blank=False, null=False)
     
     
