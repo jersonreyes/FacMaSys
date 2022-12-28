@@ -13,4 +13,4 @@ admin.site.register(Research)
 admin.site.register(Subjects_Taught)
 admin.site.register(Subjects)
 
-admin.site.register(Users)
+# admin.site.register(Users)

@@ -5,6 +5,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db.models import F
 import csv
 
 # with open('UpdatedSubjectLitsts.csv', mode ='r') as file:
@@ -53,8 +54,23 @@ def faculty_subjects_taught(request):
     
 # Researches
 def faculty_researches(request):
-    all_researches = Research.objects.all().filter(faculty_id=request.user)
-    return render(request, "faculty_member/researches.html", {'all_researches': all_researches})
+    research_ongoing = Research.objects.all().filter(faculty_id=request.user)
+    research_ongoing_filtered = research_ongoing.filter(research_progress__exact='Ongoing')
+    
+    print('testestst', research_ongoing.filter(research_progress__exact='Presented'))
+    
+    # Baligtad hahaha
+    research_presented = Research_Presented.objects.all().filter(faculty_id=request.user)
+    research_published = Research_Published.objects.all().filter(faculty_id=request.user)
+    
+
+    context = {
+        'research_ongoing': research_ongoing,
+        'research_ongoing_filtered': research_ongoing_filtered,
+        'research_presented': research_presented,
+        'research_published': research_published,
+    }
+    return render(request, "faculty_member/researches.html", context)
 
 # Extension Services
 def faculty_extension_services(request):
@@ -86,16 +102,99 @@ def add_researches(request):
                 new_form.faculty_id = user_instance
                 new_form.save()
                 print("Success!") 
+                print('asdf', new_form.get('research_progress'))
                 return redirect('./')   # refresh
             except:  
                 pass  
     else:  
         form = ResearchForm()         
+
         print("Failed!") 
+        
     context = {
-        'form': form
+        'form': form,
+        # 'form_presented': form_presented,
+        # 'form_published': form_published,
     }
     return render(request, 'faculty_member/crud/add_researches.html', context)  
+
+
+def add_presented(request):
+    user_instance = request.user
+    # print(User.objects.all())
+    # research_presented = Research_Presented.objects.all().filter(faculty_id=request.user)
+    # research_published = Research_Published.objects.all().filter(faculty_id=request.user)
+    
+    all_presented = Research.objects.all().filter(faculty_id=request.user)
+    all_presented2 = Research_Presented.objects.all().filter(faculty_id=request.user)
+    all_presented3 = Research_Presented.objects.all().filter(faculty_id=request.user)
+    
+    print('add_presented: ', add_presented)
+    print('add_presented2: ', all_presented2)
+    # # values = list(all_presented.faculty_id.values())
+    # # # print("values: ", values)
+    
+    # # selected_list = []
+    # # for e in values:
+    # #     selected_list.append(e['id'])
+    # # print('all_presented values: ', val)
+    # print(add_presented.values)
+    
+    if request.method == "POST":  
+        form = Research_PresentedForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                new_form = form.save(commit=False)
+                new_form.faculty_id = user_instance
+                new_form.save()
+                print("Success!") 
+                return redirect('./')   # refresh
+            except:  
+                pass  
+    else:  
+        form = Research_PresentedForm()         
+        print("Failed!") 
+        
+    context = {
+        'form': form,
+        'all_presented': all_presented,
+        'all_presented2': all_presented2,
+    }
+    return render(request, 'faculty_member/crud/add_presented.html', context) 
+ 
+def add_published(request):
+    user_instance = request.user
+    # print(User.objects.all())
+    
+    all_published = Research_Published.objects.all()
+    # print("values: ", values)
+    
+    # selected_list = []
+    # for e in values:
+    #     selected_list.append(e['id'])
+    # print('published values: ', val)
+    
+    
+    if request.method == "POST":  
+        form = Research_PublishedForm(request.POST)  
+        if form.is_valid():  
+            try:  
+                new_form = form.save(commit=False)
+                new_form.faculty_id = user_instance
+                new_form.save()
+                print("Success!") 
+                return redirect('./')   # refresh
+            except:  
+                pass  
+    else:  
+        form = Research_PublishedForm()
+        print("Failed!") 
+        
+    context = {
+        'form': form,
+        'all_published': all_published,
+    }
+    return render(request, 'faculty_member/crud/add_published.html', context)  
 
 def add_extension_services(request):  
     user_instance = request.user
@@ -186,7 +285,6 @@ def edit_extension_services(request, id):
 
 
 def update_extension_services(request, id):
-    print('update_extension_services')
     extension = ExtensionService.objects.get(id=id)  
     form = ExtensionServiceForm(request.POST, instance=extension)  
     if form.is_valid():  

@@ -1,0 +1,41 @@
+{% extends "main.html" %} 
+
+{% block title %} 
+    Add Presented
+{% endblock %} 
+
+{% block content %}
+<h1>Add Presented</h1>
+<a href="./">Go back</a>
+<form action="" method="post">
+    {% csrf_token %}
+
+
+    <div class="container_form_presented">
+        <h1>Presented: </h1>
+        {% for e in form %}
+            <div><p>{{ e.label }}</p>{{ e }}</div>
+        {% endfor %}
+
+        <!-- {{ form.presented_id }} -->
+        <!-- <select>
+        {% for value, subject in form.presented_id.field.choices %}
+            {% if subject in all_presented %}
+                <option value="{{ value }}">{{ subject }}</option>
+            {% else %}
+            {% endif %}
+        {% endfor %}
+        </select>
+
+        <p>All: {{ form.presented_id }}</p>
+        <p>All: {{ all_presented }}</p>
+        <p>All: {{ all_presented2 }}</p>
+
+        {{ form.errors }}
+        {{ form.non_field_errors }} -->
+
+        <button type="submit">Add Presented</button>
+
+    </div>
+</form>
+{% endblock %} 

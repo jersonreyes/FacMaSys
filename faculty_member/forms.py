@@ -3,13 +3,6 @@ from django import forms
 from .models import *
 
 
-class UsersForm(forms.ModelForm):
-    class Meta:
-        models = Users
-        widget = {
-            'email': forms.EmailInput(),
-            'password': forms.PasswordInput(),
-        }
 
 class SubjectTaughtForm(forms.ModelForm):
     class Meta:
@@ -41,14 +34,21 @@ class ExtensionServiceForm(forms.ModelForm):
             'email': forms.EmailInput(),
         }
 
-class Research_Presented(forms.ModelForm):
+class Research_PresentedForm(forms.ModelForm):
     class Meta:
-        models = Research_Presented
+        model = Research_Presented
+        exclude = ('faculty_id',  )
         fields = "__all__"
+        widget = {
+            'event_start_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+            'event_end_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+            'date_presented': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
+        }
 
-class Research_Published(forms.ModelForm):
+class Research_PublishedForm(forms.ModelForm):
     class Meta:
         model = Research_Published
+        exclude = ('faculty_id',  )
         fields = "__all__"
         
 class ResearchForm(forms.ModelForm):
