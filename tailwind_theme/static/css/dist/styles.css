@@ -1416,6 +1416,14 @@ select {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.border-\[rgba\(62\2c 62\2c 62\2c 0\.5\)\] {
+  border-color: rgba(62,62,62,0.5);
+}
+
+.border-\[rgba\(0\2c 0\2c 0\2c 0\.5\)\] {
+  border-color: rgba(0,0,0,0.5);
+}
+
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -1953,6 +1961,10 @@ a, a:visited, a:hover {
 
 .dark .dark\:border-\[rgba\(112\2c 112\2c 112\2c 0\.9\)\] {
   border-color: rgba(112,112,112,0.9);
+}
+
+.dark .dark\:border-\[rgba\(230\2c 230\2c 230\2c 0\.5\)\] {
+  border-color: rgba(230,230,230,0.5);
 }
 
 .dark .dark\:bg-\[\#363636\] {

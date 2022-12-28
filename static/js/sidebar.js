@@ -70,6 +70,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var pos = $('.selected-from-url').position()
     $('.selected-from-url').length > 0 && $("#nav-highlighter").css('top', pos.top-10);
     
+    /* 
+    OWN IMPLEMENTATION OF NO-RELOAD NAVIGATION BY JERSON REYES 
+    INSPIRED BY REACTJS (WITH MATCHING TRANSITION ANIMATIONS PLUS ELEMENT DELAYS)
+    */
     $("a").click(function(e) {
         e.preventDefault();
         if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode") {
