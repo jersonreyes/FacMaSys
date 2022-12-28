@@ -149,18 +149,3 @@
     transform: translateX(-220%);
   }
   
-  table {
-    background:rgba(200, 200, 200, 0.076);
-    border-radius: 15px; 
-    overflow:hidden;
-    width: 100% !important;
-  }
-
-  table tr, table td, table th {
-    border: 1px solid rgba(200, 200, 200, 0.235) !important;
-  }
-
-  table th {
-    padding: 10px;
-  }
-  

@@ -3,18 +3,19 @@
 {% block headers %} FACULTY {% endblock %}
 {% load static %}
 {% block content %}
+<style>
+        body {
+            background: #eef1f2;
+            overflow-x: hidden;
+            
+        }
+</style>
 
-<div class="mt-[10vh] dark:white w-full">
-    <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
-        <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
-        <div class="z-[1] absolute">
-            <p class="text-[82px] tracking-[-2px] font-bold text-white">Faculty / <span class="font-normal">Users</span></p>
-        </div>
-    </div>
+<div style="margin-top: 64px;">
     
     {% comment %} <!-- NAVIGATION LAYER 2 -->
     <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">    
-        <div id="navbarSupportedContent">
+        <div class="mx-4" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">    
                 {% if request.user.is_staff %}        
                 <li class="nav-item mr-2">
@@ -28,8 +29,8 @@
         </div>
     </nav> {% endcomment %}
 
-    <div class="animate fade-animator delay-2">
-        <div class="my-3">
+    <div>
+        <div class="my-3 mx-4">
             {% block filters %}
             <form class="form-inline my-2 my-lg-0" 
                 hx-target="#item-list" 
@@ -37,7 +38,7 @@
                 hx-trigger="submit, input delay:0.3s" method="get">
                     <div class="col-mr-1">
                         <div>
-                        <input class="form-control mr-sm-2 bg-transparent dark:placeholder-white dark:white dark:border-[rgba(105,105,105,0.5)]" type="search" placeholder="Search" name="q" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
                         </div>
                     </div>
                     {% endblock %}
@@ -55,15 +56,15 @@
                   
         </div>
         <div id="item-list">
-            <div>
-                <table class="dark:white text-center border-black">
+            <div class="mx-4">
+                <table class="table bg-white text-center">
                     <thead>
                         <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Phone Number</th>
-                        <th scope="col">Role</th>
+                        <th scope="col">Phone Number:</th>
+                        <th scope="col">Role:</th>
                         <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -77,11 +78,9 @@
                             <td>{{ worker.profile.user_role|title }}</td>
                             <th scope="row">                                
                                 <span class="tooltips_top"> 
-                                    <a class="bg-white" href="{% url 'faculty-index-detail' worker.id %}">
-                                        <div class="flex gap-2 dark:white text-black justify-center hover:opacity-50">
-                                            <span class="tooltiptext_top">View Staff</span> 
-                                            <img src="{% static 'images/icon_view.png' %}" class="invert dark:invert-0" style="width:18px; height:18px;" alt="View Staff">
-                                        </div>
+                                    <a class="btn btn-info btn-sm" href="{% url 'faculty-index-detail' worker.id %}">
+                                    <span class="tooltiptext_top"> View Staff </span> 
+                                    <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
                                     </a>
                                 </span>
                             
@@ -93,7 +92,7 @@
             </div>
 
             <!-- SHOWING X OF X STAFF -->
-            <p class="ml-4 text-muted mt-4 dark:text-white/70">  
+            <p class="ml-4 text-muted">  
                 Showing <strong> {{count}} </strong>  of  <strong> {{count}} </strong> Faculty
                 &nbsp;&nbsp; | &nbsp;&nbsp; 
                 Page: <strong> {{ page.number }} </strong> / <strong> {{ page.paginator.num_pages }} </strong> 
@@ -103,8 +102,8 @@
                 <div class="row my-1">
                     <div class="col d-flex justify-content-center">
                         <nav aria-label="...">
-                            <ul class="pagination dark:[&>li>a.page-link]:bg-[rgba(74,74,74,0.5)] dark:[&>li>a.page-link]:white dark:[&>li>a.page-link]:border-[rgba(88,88,88,0.5)]">
-                                <li class="dark:bg-[rgba(61,61,61,0.9)]">
+                            <ul class="pagination">
+                                <li class="page-item">
                                 {% if page.has_previous %}
                                     <a class="page-link" href="{% url 'faculty-index' %}?page={{ page.previous_page_number }}">Previous</a>
                                 </li>
@@ -117,7 +116,7 @@
                                 {% for num_page in page.paginator.page_range %}
                                 <br>
                                 {% if page.number == num_page %}
-                                <li class="page-item bg-gray-400 dark:bg-[rgba(200,200,200,0.2)]" aria-current="page">
+                                <li class="page-item active" aria-current="page">
                                     <a class="page-link" href="{% url 'faculty-index' %}?page={{ num_page }}">{{ num_page }}</a>
                                 </li>
                                 {% else %}
