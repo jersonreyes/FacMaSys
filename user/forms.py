@@ -26,9 +26,6 @@ class LoginForm(AuthenticationForm):
         
 
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(max_length=100, required=True)
-    last_name = forms.CharField(max_length=100, required=True)
-    email = forms.EmailField(required=True)
     
     class Meta:
         model = User
@@ -36,11 +33,10 @@ class RegisterForm(UserCreationForm):
         
         
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField(required=True)
     
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('first_name', 'last_name', 'username', 'email')
         
 class ProfileUpdateForm(forms.ModelForm):
     age = forms.IntegerField(min_value=10, max_value=200, required=False)

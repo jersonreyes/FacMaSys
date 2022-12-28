@@ -119,7 +119,7 @@ def profile_update(request):
 
 @login_required
 def faculty(request):
-    if request.user.profile.user_role == 'depthead':
+    if request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         
         if 'q' in request.GET:
             search_customer = request.GET['q']
@@ -214,10 +214,10 @@ def logout_confirmation(request):
     return render(request, 'user/logout_confirmation.html')
 
 
-@login_required
 def logout_view(request):
-    logout(request)
-    return render(request, 'user/login.html')
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('user-login')
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
