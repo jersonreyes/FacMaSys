@@ -1,7 +1,7 @@
 {% load crispy_forms_tags %}
 
 {% block script %}
-  <script type="text/javascript">
+  <script type="text/javascript" defer>
     function confirm(id,label,action) {
         document.getElementById("item").innerHTML = "Are you sure you want to ".concat(action, ' <strong>',label.toString(),'</strong> ?');
         document.getElementById("confirmModalLabel").innerHTML = action.concat(' Confirmation');

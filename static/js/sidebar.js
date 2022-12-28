@@ -35,8 +35,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }, 200, function(){
             $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
     })
+    $('.selected-from-url').length==0 && $("#nav-highlighter").hide()
     var pos = $('.selected-from-url').position()
-    $("#nav-highlighter").css('top', pos.top-10);
+    $('.selected-from-url').length > 0 && $("#nav-highlighter").css('top', pos.top-10);
     
     $("a").click(function(e) {
         e.preventDefault();
