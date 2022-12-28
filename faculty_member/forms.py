@@ -35,7 +35,8 @@ class SubjectForm(forms.ModelForm):
 class ExtensionServiceForm(forms.ModelForm):
     class Meta:
         model = ExtensionService
-        exclude = ('faculty_id', )
+        fields = "__all__"
+        exclude = ('faculty_id', 'ext_offeredprograms_id', 'ext_collaborator_id', )
         widget = {
             'email': forms.EmailInput(),
         }
