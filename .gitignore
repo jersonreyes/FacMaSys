@@ -1,1 +1,5 @@
 venv/
+*/__pycache__
+dashboard/migrations/__pycache__/
+facmasys/__pycache__/
+dashboard/__pycache__/

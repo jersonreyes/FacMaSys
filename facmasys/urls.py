@@ -21,6 +21,11 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
+    # FacMyLyfe
+    # path('accounts/', include('users.urls')),
+    path('faculty_member/', include('faculty_member.urls')),
+    # FacMyLyfe
+    
     path('', views.index, name='index'),
     path('dashboard/', include('dashboard.urls')),
     path('researches/', include('researches.urls')),
