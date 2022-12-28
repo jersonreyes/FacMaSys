@@ -23,17 +23,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
    
     $(".sidebarItem").hover(function() {
         var root = this;
-        $('#page_title_body').animate({
+        $('#page_title_body').stop().animate({
             'opacity' : 0
         }, 200, function(){
             if($(root).attr('value') == 'Toggle Dark/Light Mode')
-                $(this).html($(root).attr('value')).animate({'opacity': 1}, 200)
-            else $(this).html('Go to ' + $(root).attr('value')).animate({'opacity': 1}, 200);});
+                $(this).html($(root).attr('value')).stop().animate({'opacity': 1}, 200)
+            else $(this).html('Go to ' + $(root).attr('value')).stop().animate({'opacity': 1}, 200);});
     }, function() {
-        $('#page_title_body').animate({
+        $('#page_title_body').stop().animate({
             'opacity' : 0
         }, 200, function(){
-            $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
+            $(this).html('BulSU CICT Faculty').stop().animate({'opacity': 1}, 200);});
     })
     $('.selected-from-url').length==0 && $("#nav-highlighter").hide()
     var pos = $('.selected-from-url').position()

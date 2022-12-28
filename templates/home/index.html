@@ -1,6 +1,6 @@
 {% extends 'partials/base.html' %}
 {% block title %}Home{% endblock %}
-{% block headers %} DASHBOARD {% endblock %}
+{% block headers %} HOME {% endblock %}
 {% load static %}
 
 {% block content %}
@@ -8,13 +8,19 @@
         <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[700px] flex flex-col text-center justify-center items-center font-sans">
             <div class="z-[0] w-full h-[100vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
             <div class="z-[1] absolute">
-                <p class="text-[82px] tracking-[-2px] font-bold text-white">Get Started</p>
+                <p class="text-[82px] tracking-[-2px] font-bold text-white">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
                 <p class="text-[18px] w-[570px] ml-[18%] leading-[1] mt-[-25px] text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
                 <div class="grid grid-cols-2 gap-2 mt-[5vh]">
-                    <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
-                        <p class="title animate glow delay-6">Get Started</p>
-                        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
-                    </div>
+                    {% if not request.user.is_authenticated %}
+                        <a href="/user/login/?next=/">
+                        {% endif %}
+                            <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8] text-black dark:white">
+                                <p class="title animate glow delay-6">Get Started</p>
+                                <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                            </div>
+                        {% if not request.user.is_authenticated %}
+                        </a>
+                    {% endif %}
                     <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
                         <p class="title animate glow delay-7">Faculty Management</p>
                         <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>

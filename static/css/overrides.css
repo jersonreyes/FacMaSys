@@ -125,3 +125,7 @@
     transform: translateY(-20px);
     transition: opacity 0.2s ease-out, transform 0.2s;
   }
+
+  a, a:hover {
+    text-decoration: none !important;
+  }

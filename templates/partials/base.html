@@ -47,39 +47,39 @@
     {% endif %}
 
     {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
-        <div class="{% if not ajax %}grid grid-cols-[100px_90fr]{% endif %}">
+        <div class="{% if not ajax and user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
             {% if not ajax %}
                 <div>
                     {% include 'partials/sidebar.html' %}
                 </div>
             <!-- LOGOUT MODAL -->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="false">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content dark:white bg-[rgba(255,255,255,0.9)] dark:bg-[rgba(48,48,48,0.9)]">
                         
-                        <div class="modal-header">
+                        <div class="modal-header dark:border-[rgba(112,112,112,0.9)]">
                             <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true" class="dark:white">&times;</span>
                             </button>
                         </div>
 
-                        <div class="modal-body">
-                            <div class="alert alert-danger">
-                                <h5>Are you sure you want to Log out?</h5>
+                        <div class="modal-body dark:border-[rgba(112,112,112,0.9)]">
+                            <div class="">
+                                <h6>Are you sure you want to Log out?</h6>
                             </div>
                         </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                            <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
+                        <div class="modal-footer dark:border-[rgba(112,112,112,0.9)]">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                            <button onclick="window.location.href = '/user/logout'"" class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </button>
                         </div>
                     </div>
                 </div>
             </div>
             {% endif %}
             
-            <div class="p-2 z-[200]">
+            <div class="z-[200]">
                 {% if not ajax %}
                 <div class="relative">
                     <div id="header" class="transition-all z-[200] px-[4vw] justify-between items-center top-5 flex gap-2 fixed" style="width:93vw">
@@ -89,13 +89,14 @@
                             </a>
                             <div>
                                 <h3 id="page_title_body" class="transition-all duration-75 font-semibold">BulSU CICT Faculty</h3>
-                                <p id="page_title_body_sub" class="transition-all text-[12px] mt-[-3px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+                                <p id="page_title_body_sub" class="transition-all text-[10px] mt-[-1px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
                             </div>
                         </div>
                         <a href="{% url 'index' %}" id="center-logo" class="transition-all translate-x-[-2vw] hover:border hover:border-white flex justify-center w-[60px]">
                             <img src="{% static '/images/logo.png' %}" style="width: 60px; height: auto;" alt="Search Icon">
                         </a>
                         <div class="flex justify-end gap-2 items-center">
+                            {% if request.user.is_authenticated %}
                             <div class="">
                                 <button class="mr-[2px] dark:invert-0 invert" type="button" >
                                     <img src="{% static '/images/search.png' %}" style="width: 32px; height: 32px;" alt="Search Icon">
@@ -137,6 +138,7 @@
                                                                                                                                                 
                                 </div>
                             </div>
+                            {% endif %}
             
                             {% if request.user.is_authenticated %}
                             <!-- PROFILE ICON -->
@@ -171,13 +173,23 @@
                                 <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
                             </div>
                             {% else %}
-                                <a href="{% url 'user-login' %}"><button type="button">Sign In</button></a>
+                                <div class="flex items-center gap-4">
+                                    <p style="transform:translateY(10px) !important" value="Toggle Dark/Light Mode" class="animate glow delay-7 themeToggler sidebarItem cursor-pointer dark:white no-underline grid grid-flow-col gap-2 items-center place-items-center justify-center hover:sidebarItemActive" id="text_link">                                                                                    
+                                        <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="dark:invert"/>                   
+                                        <span class="cursor-pointer">Toggle</span>
+                                    </p>
+                                    <a href="{% url 'user-login' %}" class="no-underline">
+                                        <button class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="text-md no-underline text-black">Sign In</div>
+                                        </button>
+                                    </a>
+                                </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
                 {% endif %}
-                <div class="p-2 transition-all" id="main-body">
+                <div class="p-4 transition-all" id="main-body">
                     {% block content %}
                 
                     {% endblock %}
