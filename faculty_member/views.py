@@ -101,21 +101,34 @@ def add_researches(request):
     return render(request, 'faculty_member/crud/add_researches.html', context)  
 
 def add_extension_services(request):  
+    user_instance = request.user
+    
+    print("Checking...") 
     if request.method == "POST":  
+        print("Checking... POST") 
         form = ExtensionServiceForm(request.POST)  
-        if form.is_valid():  
+        if form.is_valid():
+            print("is valid")   
             try:  
-                form.save()
+                new_form = form.save(commit=False)
+                new_form.faculty_id = user_instance
+                new_form.save()
+                print("Success!") 
                 return redirect('./')   # refresh
             except:  
                 pass  
+        else:
+            print("not valid") 
     else:  
-        form = ExtensionServiceForm()  
+        form = ExtensionServiceForm()         
+        print("Failed!") 
         
     context = {
         'form': form
     }
     return render(request, 'faculty_member/crud/add_extension_services.html', context) 
+
+
 
 
 def add_taught_subjects(request):
@@ -148,21 +161,6 @@ def add_taught_subjects(request):
     return render(request, 'faculty_member/crud/add_subject_taught.html', context) 
     
 def update_taught_subjects(request, id):
-    
-    #  print("Logged User: ", request.user.id)
-    # try:
-    #     subject =  Subjects_Taught.objects.get(faculty_id=request.user)
-    #     # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
-    # except Subjects_Taught.DoesNotExist:
-    #     Subjects_Taught.objects.create(faculty_id=request.user)
-    #     # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
-    
-    # # all_subjects = 
-    
-    # context = {
-    #     'all_subjects': subject.handled_subjects.all()
-    # }
-    
     all_subjects = Subjects_Taught.objects.get(faculty_id=id)
     form = SubjectTaughtForm(request.POST, instance=all_subjects)  
     if form.is_valid():  
@@ -178,34 +176,72 @@ def update_taught_subjects(request, id):
     return render(request, 'faculty_member/crud/add_subject_taught.html', context) 
 
 
-
-""" UPDATE FUNCTIONS """
-def show_updateform_researches(request, id):
-    all_researches = Research.objects.all() 
-    research = Research.objects.get(id=id)  
+def edit_extension_services(request, id):
+    print('update_extension_services')
+    form = ExtensionServiceForm()
+    extension = ExtensionService.objects.get(id=id)
     
     context = {
-        'research': research,
+        'extension': extension,
+        'form': form,
     }
-    return render(request, 'subjects/edit.html', context)  
+    return render(request, 'faculty_member/crud/update_extension_service.html', context)  
 
 
+def update_extension_services(request, id):
+    print('update_extension_services')
+    extension = ExtensionService.objects.get(id=id)  
+    form = ExtensionServiceForm(request.POST, instance=extension)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../")  
+    
+    context = {
+        'extension': extension,
+        'form': form,
+    }
+    return render(request, 'faculty_member/crud/update_extension_service.html', context)  
+
+""" UPDATE FUNCTIONS """
+# def show_updateform_researches(request, id):
+#     form = ResearchForm()  
+#     all_researches = Research.objects.all() 
+#     research = Research.objects.get(id=id)  
+    
+#     context = {
+#         'research': research,
+#         'form': form,
+#     }
+#     return render(request, 'subjects/edit.html', context)  
+
+
+def edit_researches(request, id):
+    research = Research.objects.get(id=id)
+    return render(request, 'faculty_member/crud/update_research_details.html', context)  
+    
 def update_researches(request, id):
+    form = ResearchForm()  
     research = Research.objects.get(id=id)  
     form = ResearchForm(request.POST, instance=research)  
     if form.is_valid():  
         form.save()  
-        return redirect("subjects/")  
+        return redirect("../")  
     
     context = {
         'research': research,
+        'form': form,
     }
-    return render(request, 'subjects/edit.html', context)  
+    return render(request, 'faculty_member/crud/update_research_details.html', context)  
 
 """ DELETE FUNCTIONS """
 def delete_researches(request, id):  
     subject = Research.objects.get(id=id)  
     subject.delete()  
+    return redirect("../")
+
+def delete_extension_services(request, id):
+    ext = ExtensionService.objects.get(id=id)  
+    ext.delete()  
     return redirect("../")
 
 # <th>ID</th>

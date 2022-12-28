@@ -5205,7 +5205,8 @@ textarea.form-control-lg {
   width: 100%;
   color: var(--bs-modal-color);
   pointer-events: auto;
-  background-color: var(--bs-modal-bg);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(30px);
   background-clip: padding-box;
   border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
   border-radius: var(--bs-modal-border-radius);
@@ -5214,13 +5215,14 @@ textarea.form-control-lg {
 
 .modal-backdrop {
   --bs-backdrop-zindex: 1050;
-  --bs-backdrop-bg: #000;
+  --bs-backdrop-bg: rgba(0, 0, 0, 0);
   --bs-backdrop-opacity: 0.5;
   position: fixed;
   top: 0;
   left: 0;
   z-index: var(--bs-backdrop-zindex);
   width: 100vw;
+  backdrop-filter: blur(10px);
   height: 100vh;
   background-color: var(--bs-backdrop-bg);
 }
@@ -5228,13 +5230,14 @@ textarea.form-control-lg {
   opacity: 0;
 }
 .modal-backdrop.show {
-  opacity: var(--bs-backdrop-opacity);
+  opacity: 1;
 }
 
 .modal-header {
   display: flex;
   flex-shrink: 0;
   align-items: center;
+  font-weight: bold;
   justify-content: space-between;
   padding: var(--bs-modal-header-padding);
   border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
@@ -5248,6 +5251,8 @@ textarea.form-control-lg {
 
 .modal-title {
   margin-bottom: 0;
+  font-weight: bold;
+  letter-spacing: -1px;
   line-height: var(--bs-modal-title-line-height);
 }
 

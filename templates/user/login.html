@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-full" lang="en">
   <head>
     {% load static %}
     {% load crispy_forms_tags %}
@@ -11,47 +11,48 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     
     <!--<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen">--> 
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static './../tailwind_theme/static/css/dist/styles.css' %}"/>
     
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" media="screen" />
     <title>FacMaSys - Faculty Management System</title>
   </head>
 
-  <body style="background-image: url('/static/images/bg_rev.png');">
-    <div class="container mt-5 pt-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6 bg-light text"> 
-          <div class="row d-flex justify-content-center mt-5">
-            <img id="logo_home" src="{% static '/images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px;">
-          </div>
-          
-
-          {% comment %} LOGIN MESSAGES {% endcomment %}
-          <div class="alert alert-{{message.tags}} mx-5">
-          {% for message in messages %}
-              {% if message %}
-                {{message}}
-              {% endif %}
-          {% endfor %}
+  <body class="w-screen h-full">
+    <div class="flex min-h-full">
+      <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
+        <div class="w-full max-w-sm mx-auto lg:w-96">
+          <div>
+            <div class="flex gap-x-4">
+              <div class="flex gap-x-2">
+                <img class="w-auto h-12" src="{% static '/images/logo_bulsu-colored.png' %}"/>
+                <img class="w-auto h-12" src="{% static '/images/logo_cict-colored.png' %}"/>
+              </div>
+              <img class="w-auto h-12" src="{% static '/images/logo.png' %}"/>
+            </div>  
+            <h2 class="mt-6 text-3xl font-bold text-gray-900">Sign in to your account</h2>
           </div>
     
-          <!-- Login Form -->
-          <form class="m-5 text-dark" id="formLogin" method="POST">
+          <div class="mt-8">
+            <div class="mt-6">
+              <form class="text-dark" id="formLogin" method="POST">
               {% csrf_token %}
               {{ form|crispy }}
               
-              <button class="btn btn-primary btn-lg btn-block my-4" id="loginBtn" type="submit" style="background-color:#173f7a;">Login</button>
+              <button class="my-4 btn btn-primary btn-lg btn-block" id="loginBtn" type="submit" style="background-color:#173f7a;">Login</button>
               
               <div class="row d-flex justify-content-center">
                 <a class="mx-4" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
                 <a class="mx-4" href="{% url 'user-register' %}" style="color:#173f7a;">Don't have an account yet? Go to signup</a>
               </div>       
           </form>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="relative flex-1 hidden w-0 m-2 lg:block">
+        <img class="absolute inset-0 object-cover object-center w-full h-full rounded-2xl" src="{% static '/images/bg_login.JPG' %}" alt="" />
+      </div>
     </div>
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
   </body>
 </html>

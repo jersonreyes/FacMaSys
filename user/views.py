@@ -1,21 +1,23 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from time import localtime, strftime
+
 from django.contrib import messages
-from facmasys.utils import add_activity
-from time import strftime, localtime
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.contrib.auth.models import User
-from .models import Customer, Profile
-from sales.models import Order
-from reports.models import Notifications
-
-from django.views import View
-from django.contrib.auth.views import LoginView, PasswordChangeView
-from .forms import RegisterForm, LoginForm, UserUpdateForm, ProfileUpdateForm
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
+from django.views import View
+
+from facmasys.utils import add_activity
+from reports.models import Notifications
+from sales.models import Order
+
+from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
+from .models import Customer, Profile
 
 
 # Create your views here.
@@ -215,7 +217,7 @@ def logout_confirmation(request):
 @login_required
 def logout_view(request):
     logout(request)
-    return render(request, 'user/logout.html')
+    return render(request, 'user/login.html')
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):

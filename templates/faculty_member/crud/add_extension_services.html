@@ -13,9 +13,8 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        
-        <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
-            <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
+
+
         <div>
             <div><p>Extension Name: </p>{{ form.name }}</div>
             <div><p>Logo: </p>{{ form.logo }}</div>
@@ -25,7 +24,9 @@
             <div><p>Website URL: </p>{{ form.website }}</div>
             <div><p>Background: </p>{{ form.background }}</div>
             <div><p>Extension Head: </p>{{ form.extension_head }}</div>
-
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+            
             <button type="submit">Submit Form</button>
         </div>
     </form>
