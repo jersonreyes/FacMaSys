@@ -1,0 +1,41 @@
+{% extends "main.html" %} 
+
+{% block title %} 
+    Add Researches
+{% endblock %} 
+
+{% block content %}
+
+<h1>Add Researches</h1>
+
+<a href="../">Go back</a>
+<form action="" method="post">
+    {% csrf_token %}
+    
+    <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
+    <div>
+        <div>
+            <p>Research Title: </p>
+            {{ form.research_title }}
+        </div>
+        <div>
+            <p>Reserach Progress: </p>
+            {{ form.research_progress }}
+        </div>
+        <div>
+            <p>Area: </p>
+            {{ form.research_area }}
+        </div>
+        <div>
+            <p>Degree Level: </p>
+            {{ form.degree_level }}
+        </div>
+        <div>
+            <p>School: </p>
+            {{ form.researcher_school }}
+        </div>
+
+        <button type="submit">Add Research</button>
+    </div>
+</form>
+{% endblock %} 

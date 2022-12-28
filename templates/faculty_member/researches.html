@@ -1,0 +1,64 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Faculty Member - Researches
+{% endblock %}
+
+
+{% block content %}
+    <h3>Researches</h3>
+    <a href="../">Go back to Home</a>
+
+    <br>
+    <a href="./add_research">Add Researches</a>
+
+    {% if all_researches|length > 0 %}
+    <table>
+        <thead>
+            <tr>
+                <th>Research Title</th>
+                <th>Progress</th>
+                <th>Area</th>
+                <th>School</th>
+                <th>Degree Level</th>
+                <th>Presented ID</th>
+                <th>Published ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for element in all_researches %}
+            <tr>
+                <td>{{ element.research_title }}</td>
+                <td>{{ element.research_progress }}</td>
+                <td>{{ element.research_area }}</td>
+                <td>{{ element.researcher_school }}</td>
+                <td>{{ element.degree_level }}</td>
+
+                {% if element.presented_id != None %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+
+                {% if element.published_id != None %}
+                    <td>Yes</td>
+                {% else %}
+                    <td>No</td>
+                {% endif %}
+
+                <td>
+                    <a href="#">Update</a>
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+        <h1>No data available.</h1>
+    {% endif %}
+{% endblock %}

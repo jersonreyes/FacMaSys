@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Faculty Member - Add Extension Services
+{% endblock %}
+
+
+{% block content %}
+
+    <a href="../">Go back</a>
+    <p>Faculty Member - Add Extension Services</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
+            <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
+        <div>
+            <div><p>Extension Name: </p>{{ form.name }}</div>
+            <div><p>Logo: </p>{{ form.logo }}</div>
+            <div><p>Geo. Address: </p>{{ form.address }}</div>
+            <div><p>E-mail Address: </p>{{ form.email }}</div>
+            <div><p>Contact No.: </p>{{ form.contact_no }}</div>
+            <div><p>Website URL: </p>{{ form.website }}</div>
+            <div><p>Background: </p>{{ form.background }}</div>
+            <div><p>Extension Head: </p>{{ form.extension_head }}</div>
+
+            <button type="submit">Submit Form</button>
+        </div>
+    </form>
+{% endblock %}
