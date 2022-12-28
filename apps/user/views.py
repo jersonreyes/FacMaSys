@@ -1,5 +1,4 @@
 from time import localtime, strftime
-
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -11,13 +10,9 @@ from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-
 from apps.reports.models import Notifications
-from apps.sales.models import Order
 from facmasys.utils import add_activity
-
 from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
-from .models import Customer, Profile
 
 
 # Create your views here.
@@ -68,24 +63,20 @@ class CustomLoginView(LoginView):
 
         # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
         return super(CustomLoginView, self).form_valid(form)
+    
+
+@login_required
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('user-login')
 
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             messages.success(request, f'Account has been created for {username}. Continue to Log In')
-#             add_activity(logged_user=request.user,activity_type='ADD',activity_location='USER',activity_message=f'Account has been created for {username}.')
-#             return redirect('user-login')
-#     else:
-#         form = RegisterForm()
-#     context = {
-#         'form':form,
-#         'notifications':Notifications.objects.filter(user=request.user),
-#     }
-#     return render(request, 'user/register.html', context)
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'users/change_password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('user-profile')
+    
 
 @login_required
 def profile(request):
@@ -122,8 +113,8 @@ def faculty(request):
     if request.user.profile.user_role == 'depthead':
         
         if 'q' in request.GET:
-            search_customer = request.GET['q']
-            multiple_search =  Q(Q(username__istartswith=search_customer)|Q(email__istartswith=search_customer))
+            search_faculty = request.GET['q']
+            multiple_search =  Q(Q(username__istartswith=search_faculty)|Q(email__istartswith=search_faculty))
             workers = User.objects.filter(multiple_search)
         else:
             workers = User.objects.filter(profile__user_role='faculty')
@@ -141,50 +132,60 @@ def faculty(request):
         return render(request, 'user/faculty.html', context)
     else:
         return redirect('dashboard-index')
-
+    
+    
 @login_required
-def customer(request):
-    customers = Customer.objects.all()
-    if 'q' in request.GET:
-        search_customer = request.GET['q']
-        multiple_search =  Q(Q(name__istartswith=search_customer)|Q(email__istartswith=search_customer))
-        customers = Customer.objects.filter(multiple_search)
-    else:
-        customers = Customer.objects.all()
-        
-    page = Paginator(customers,10)
-    page_list = request.GET.get('page')
-    page = page.get_page(page_list)
-    context = {
-        'label':'Accounts',
-        'page':page,
-        'count':customers.count(),
-        'state':'accounts',
-        'notifications':Notifications.objects.filter(user=request.user),
-        
-    }
-    return render(request, 'user/customer.html', context)
-
-
-@login_required
-def staff_detail(request, pk):
+def faculty_detail(request, pk):
     worker = User.objects.get(id=pk)
     context = {
-        'label':'Accounts',
         'worker':worker,
         'notifications':Notifications.objects.filter(user=request.user),
     }
     return render(request, 'user/staff_detail.html', context)
 
-def customer_detail(request, pk):
-    customer = Customer.objects.get(id=pk)
-    context = {
-        'label':'Accounts',
-        'customer': customer,
-        'orders': Order.objects.filter(customer=customer),
-        'notifications':Notifications.objects.filter(user=request.user),
-    }
-    return render(request, 'user/customer_detail.html', context)
+
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             username = form.cleaned_data.get('username')
+#             messages.success(request, f'Account has been created for {username}. Continue to Log In')
+#             add_activity(logged_user=request.user,activity_type='ADD',activity_location='USER',activity_message=f'Account has been created for {username}.')
+#             return redirect('user-login')
+#     else:
+#         form = RegisterForm()
+#     context = {
+#         'form':form,
+#         'notifications':Notifications.objects.filter(user=request.user),
+#     }
+#     return render(request, 'user/register.html', context)
+
+
+# @login_required
+# def customer(request):
+#     customers = Customer.objects.all()
+#     if 'q' in request.GET:
+#         search_customer = request.GET['q']
+#         multiple_search =  Q(Q(name__istartswith=search_customer)|Q(email__istartswith=search_customer))
+#         customers = Customer.objects.filter(multiple_search)
+#     else:
+#         customers = Customer.objects.all()
+        
+#     page = Paginator(customers,10)
+#     page_list = request.GET.get('page')
+#     page = page.get_page(page_list)
+#     context = {
+#         'label':'Accounts',
+#         'page':page,
+#         'count':customers.count(),
+#         'state':'accounts',
+#         'notifications':Notifications.objects.filter(user=request.user),
+        
+#     }
+#     return render(request, 'user/customer.html', context)
+
 
 # @login_required
 # def register_admin(request):
@@ -208,23 +209,6 @@ def customer_detail(request, pk):
 #         'notifications':Notifications.objects.filter(user=request.user),
 #     }
 #     return render(request, 'user/register.html', context)
-
-
-def logout_confirmation(request):
-    return render(request, 'user/logout_confirmation.html')
-
-
-@login_required
-def logout_view(request):
-    logout(request)
-    return render(request, 'user/login.html')
-
-
-class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
-    template_name = 'users/change_password.html'
-    success_message = "Successfully Changed Your Password"
-    success_url = reverse_lazy('user-profile')
-
 # class CustomPasswordChangeView(PasswordChangeView):
     
 #     def get_context_data(self, *args, **kwargs):
@@ -240,6 +224,3 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 #         notif.save()
 #         messages.success(self.request,'Your password was successfully updated.')
 #         return super().form_valid(form)
-
-    
-    
