@@ -34,17 +34,17 @@
         <div class="my-3">
             {% block filters %}
             <form class="form-inline my-2 my-lg-0" method="get">
-                    <div class="col-mr-1">
+                    <div class="col-mr-1 grid grid-flow-col gap-2">
                         {{ filter.form|crispy }}
                         <span class="tooltips_top">
-                            <a class="btn btn-danger mx-2" href="{% url 'faculty-index' %}">
+                            <button class="flex p-2 rounded-md gap-2 items-center border-black border dark:border-0 bg-[rgba(184,184,184,0.5)] btn-danger mx-2" href="{% url 'faculty-index' %}">
                                 <span class="tooltiptext_top"> Clear </span>                        
                                 <img src="{% static 'images/icon_remove_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
-                            </a>
+                            </button>
                         </span>
 
                         <span class="tooltips_top">
-                            <button type="submit" class="btn btn-dark">
+                            <button type="submit" class="flex p-2 rounded-md gap-2 items-center border-black border dark:border-none bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(93,93,93,0.5)]">
                                 <span class="tooltiptext_top"> Filter </span>                        
                                 <img src="{% static 'images/icon_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
                             </button>
@@ -68,15 +68,15 @@
                 <div class="float-right">
                     <span class="tooltips_top">
                         <div class="btn-group" style="width:auto">
-                            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="translate-y-[-10px] flex p-2 rounded-md gap-2 items-center border-black border dark:border-0 bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(93,93,93,0.5)] dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="tooltiptext_top"> Export </span>  
-                                <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" alt="Download">
+                                <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" class="invert dark:invert-0" alt="Download">
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" style="width:auto">
                                 {% for format in view.export_formats %}
-                                    <a class="dropdown-item" href="{% export_url format %}">
+                                    <button class="dropdown-item" onclick="window.location.href = '{% export_url format %}'">
                                         <code>.{{ format }}</code>
-                                    </a>
+                                    </button>
                                 {% endfor %}
                             </div>
                         </div>

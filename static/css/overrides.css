@@ -160,6 +160,10 @@
     border: 1px solid rgba(200, 200, 200, 0.235) !important;
   }
 
+  table td {
+    padding: 5px !important;
+  }
+
   table th {
     padding: 10px;
   }
