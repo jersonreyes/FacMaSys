@@ -5,6 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django_filters.views import FilterView
+from django_tables2 import SingleTableMixin
+from django_tables2.export.views import ExportMixin
+from .tables import FacultyTable
+from .filters import FacultyFilter
+
+from facmasys.utils import ExportPDF
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import redirect, render
@@ -108,6 +117,27 @@ def profile_update(request):
     return render(request, 'user/profile_update.html', context)
 
 
+class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
+    table_class = FacultyTable
+    filterset_class = FacultyFilter
+    queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile')
+    paginate_by = 10
+    state = 'accounts'
+    label = 'Faculty'
+    export_formats = ('xlsx','pdf')
+    export_name = f"Faculty_List_Report_{strftime('%Y-%m-%d', localtime())}"
+    dataset_kwargs = {"title": "Faculty"}
+    
+    def get_template_names(self):
+
+        return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
+    
+    def get(self, request):
+        if (search := request.GET.get('q')) != None:
+            self.label += f' filtered by {search}'
+            
+        return super().get(request)
+
 @login_required
 def faculty(request):
     if request.user.profile.user_role == 'depthead':
@@ -141,7 +171,7 @@ def faculty_detail(request, pk):
         'worker':worker,
         'notifications':Notifications.objects.filter(user=request.user),
     }
-    return render(request, 'user/staff_detail.html', context)
+    return render(request, 'user/faculty_detail.html', context)
 
 
 

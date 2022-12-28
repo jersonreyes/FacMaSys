@@ -14,7 +14,7 @@ urlpatterns = [
     
     path('profile/', views.profile, name='user-profile'),
     path('profile/update', views.profile_update, name='user-profile-update'),
-    path('faculty/',views.faculty, name='faculty-index'),
+    path('faculty/',views.FacultyView.as_view(), name='faculty-index'),
     
     path('faculty/detail/<int:pk>/',views.faculty_detail, name='faculty-index-detail'),
     
