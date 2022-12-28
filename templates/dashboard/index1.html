@@ -38,6 +38,18 @@
                     </div>
                 </div>
             </div>
+            
+            <script src="../static/js/chartDefault.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+            <script>
+                var options = chartDefault('area',[{% for months in monthly_sales.index %} '{{ months }}', {% endfor %}], [{% for total in monthly_sales.total %} {{ total }}, {% endfor %}])
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+
+                var options2 = chartDefault('bar',[{% for product in products_count %} '{{ product.product_title|truncatechars:15 }}', {% endfor %}], [{% for product in products_count %} '{{ product.total }}', {% endfor %}])
+                var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+                chart2.render();
+            </script>
         </div>
     </div>
 <!--End Graphs-->
