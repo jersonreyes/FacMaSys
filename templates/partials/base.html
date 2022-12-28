@@ -181,11 +181,11 @@
                                         <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="dark:invert"/>                   
                                         <span class="cursor-pointer">Toggle</span>
                                     </p>
-                                    <a href="{% url 'user-login' %}" class="no-underline">
-                                        <button class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="no-underline">
+                                        <button onclick="window.location.href = '{% url 'user-login' %}'" class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <div class="text-md no-underline text-black">Sign In</div>
                                         </button>
-                                    </a>
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
