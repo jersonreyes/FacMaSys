@@ -4,6 +4,7 @@ from django.template import loader
 from .models import *
 from .forms import *
 from django.contrib import messages
+from django.contrib.auth.models import User
 import csv
 
 # with open('UpdatedSubjectLitsts.csv', mode ='r') as file:
@@ -55,7 +56,7 @@ def faculty_subjects_taught(request):
     
 # Researches
 def faculty_researches(request):
-    all_researches = Research.objects.all() 
+    all_researches = Research.objects.all().filter(faculty_id=request.user)
     return render(request, "faculty_member/researches.html", {'all_researches': all_researches})
 
 # Extension Services
@@ -76,17 +77,24 @@ def faculty_announcements(request):
 """ CREATE FUNCTIONS """
 # Create your views here.
 def add_researches(request):  
+    user_instance = request.user
+    # print(User.objects.all())
+    
     if request.method == "POST":  
         form = ResearchForm(request.POST)  
+        
         if form.is_valid():  
             try:  
-                form.save()
-                return redirect('/')   # refresh
+                new_form = form.save(commit=False)
+                new_form.faculty_id = user_instance
+                new_form.save()
+                print("Success!") 
+                return redirect('./')   # refresh
             except:  
                 pass  
     else:  
-        form = ResearchForm()  
-        
+        form = ResearchForm()         
+        print("Failed!") 
     context = {
         'form': form
     }
@@ -98,7 +106,7 @@ def add_extension_services(request):
         if form.is_valid():  
             try:  
                 form.save()
-                return redirect('/')   # refresh
+                return redirect('./')   # refresh
             except:  
                 pass  
     else:  
@@ -111,8 +119,19 @@ def add_extension_services(request):
 
 
 def add_taught_subjects(request):
+    
+    all_subjects = Subjects_Taught.objects.get(faculty_id=request.user)
+    values = list(all_subjects.handled_subjects.values())
+    # print("values: ", values)
+    
+    selected_list = []
+    for e in values:
+        selected_list.append(e['id'])
+    
+    print('selected_list: ', selected_list)
+
     if request.method == "POST":  
-        form = SubjectTaughtForm(request.POST, initial={"current_user": request.user})  
+        form = SubjectTaughtForm(request.POST)  
         if form.is_valid():  
             try:  
                 form.save()
@@ -124,11 +143,39 @@ def add_taught_subjects(request):
         
     context = {
         'form': form,
-        'current_user': request.user
+        'selected_list': selected_list
     }
     return render(request, 'faculty_member/crud/add_subject_taught.html', context) 
     
-
+def update_taught_subjects(request, id):
+    
+    #  print("Logged User: ", request.user.id)
+    # try:
+    #     subject =  Subjects_Taught.objects.get(faculty_id=request.user)
+    #     # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
+    # except Subjects_Taught.DoesNotExist:
+    #     Subjects_Taught.objects.create(faculty_id=request.user)
+    #     # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
+    
+    # # all_subjects = 
+    
+    # context = {
+    #     'all_subjects': subject.handled_subjects.all()
+    # }
+    
+    all_subjects = Subjects_Taught.objects.get(faculty_id=id)
+    form = SubjectTaughtForm(request.POST, instance=all_subjects)  
+    if form.is_valid():  
+        form.save()  
+        print("Saved!")
+        return redirect("../")  
+    else:
+        print("Noped!")
+    
+    context = {
+        'all_subjects': all_subjects.handled_subjects.all()
+    }
+    return render(request, 'faculty_member/crud/add_subject_taught.html', context) 
 
 
 
@@ -141,6 +188,7 @@ def show_updateform_researches(request, id):
         'research': research,
     }
     return render(request, 'subjects/edit.html', context)  
+
 
 def update_researches(request, id):
     research = Research.objects.get(id=id)  
@@ -156,9 +204,9 @@ def update_researches(request, id):
 
 """ DELETE FUNCTIONS """
 def delete_researches(request, id):  
-    subject = Subjects.objects.get(id=id)  
+    subject = Research.objects.get(id=id)  
     subject.delete()  
-    return redirect("../show")
+    return redirect("../")
 
 # <th>ID</th>
 # <th>Subject</th>

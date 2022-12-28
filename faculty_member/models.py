@@ -21,6 +21,7 @@ class ExtensionService_OfferedPrograms(models.Model):
     # academe = models.CharField(max_length=200) 
 
 class ExtensionService(models.Model):
+    faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=200)
     logo = models.ImageField(default=None, upload_to='extension_service_profilepic/')
     address = models.CharField(max_length=250, null=True, blank=True)
@@ -37,66 +38,6 @@ class ExtensionService(models.Model):
 
 
 """ ################################# RESEARCH ################################# """
-class Research_Presented(models.Model):
-    PRESENTATION = (
-        ("Physical", "Physical"),
-        ("Virtual", "Virtual"),
-        ("Hyrbrid", "Hyrbrid"),
-    )
-    
-    EVENT_TYPE = (
-        ('Conference', 'Conference'),
-        ("Seminars", "Seminars"),
-        ("Product Launch", "Product Launch"),
-        ("Corporate / Executive Meetings", "Corporate / Executive Meetings"),
-        ("Summits", "Summits"),
-        ("Symposium", "Symposium"),
-        ("Trade Shows", "Trade Shows"),
-        ("Others", "Others"),
-    )
-    
-    short_name = models.CharField(max_length=50, null=False, blank=False)
-    event_name = models.CharField(max_length=200, null=False, blank=False)
-    event_venue = models.CharField(max_length=200, null=False, blank=False)
-    event_start_date = models.DateField(null=False, blank=False)
-    event_end_date = models.DateField(null=False, blank=False)
-    
-    presentation_type = models.CharField(max_length=200, choices=PRESENTATION, default="Conference", blank=False, null=True)
-    event_type = models.CharField(max_length=200, choices=EVENT_TYPE, default="Physical", blank=False, null=True)
-
-    org_name = models.CharField(max_length=200, null=False, blank=False)
-    org_website_url = models.CharField(max_length=200, null=False, blank=False)
-    org_support = models.CharField(max_length=200, null=False, blank=False)
-    org_description = models.TextField(max_length=500, null=False, blank=False)
-    
-    date_presented = models.DateField(null=False)
-    
-    
-    def __str__(self) -> str:
-        return f'{self.short_name}: {self.event_name}, {self.date_presented}'
-    
-
-
-class Research_Published(models.Model):
-    RESEARCH_LICENSE = (
-        ("Creative Commons Licenses", "Creative Commons Licenses"), 
-        ("Alternatives Publishing Licenses", "Alternatives Publishing Licenses"),
-        ("Research Repository Licences", "Research Repository Licences"),
-        ("Open Access", "Open Access"),
-        ("None", "None"),
-    )
-    
-    
-    published_date = models.DateField(null=False)
-    publication = models.CharField(max_length=200, blank=False, null=False)
-    source = models.CharField(max_length=200, blank=False, null=False)
-    research_license = models.CharField(max_length=200, choices=RESEARCH_LICENSE, default="None", blank=False, null=True)
-    abstract = models.TextField(max_length=1200, blank=False, null=False)
-    
-    def __str__(self) -> str:
-        return f'{self.publication}: {self.published_date}, {self.research_license}'
-    
-
 class Research(models.Model):
     RESEARCH_PROGRESS = (
         ('Ongoing', 'Ongoing'),
@@ -141,17 +82,83 @@ class Research(models.Model):
     
     # faculty_id = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     # extension_service_id = models.ForeignKey(ExtensionService, on_delete=models.CASCADE)
-
+    faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     research_title = models.CharField(max_length=100, blank=False, null=False)
     research_progress = models.CharField(max_length=100, choices=RESEARCH_PROGRESS, blank=False, null=False, default=None)
     research_area = models.CharField(max_length=100, choices=RESEARCH_AREA, blank=True, null=True, default=None)
     degree_level = models.CharField(max_length=100, choices=DEGREE_LEVEL, blank=True, null=True, default=None)
     researcher_school = models.CharField(max_length=100, blank=False, null=False)
-    presented_id = models.ForeignKey(Research_Presented, on_delete=models.CASCADE, blank=True, null=True)
-    published_id = models.ForeignKey(Research_Published, on_delete=models.CASCADE, blank=True, null=True)
+    # presented_id = models.ForeignKey(Research_Presented, on_delete=models.CASCADE, blank=True, null=True)
+    # published_id = models.ForeignKey(Research_Published, on_delete=models.CASCADE, blank=True, null=True)
+
+    # models.OneToOneField(User, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return f'Research Title: {self.research_title} | Research Progress: {self.research_progress} | Degree Level: {self.degree_level}'
+
+
+
+class Research_Presented(models.Model):
+    PRESENTATION = (
+        ("Physical", "Physical"),
+        ("Virtual", "Virtual"),
+        ("Hyrbrid", "Hyrbrid"),
+    )
+    
+    EVENT_TYPE = (
+        ('Conference', 'Conference'),
+        ("Seminars", "Seminars"),
+        ("Product Launch", "Product Launch"),
+        ("Corporate / Executive Meetings", "Corporate / Executive Meetings"),
+        ("Summits", "Summits"),
+        ("Symposium", "Symposium"),
+        ("Trade Shows", "Trade Shows"),
+        ("Others", "Others"),
+    )
+    
+    short_name = models.CharField(max_length=50, null=False, blank=False)
+    event_name = models.CharField(max_length=200, null=False, blank=False)
+    event_venue = models.CharField(max_length=200, null=False, blank=False)
+    event_start_date = models.DateField(null=False, blank=False)
+    event_end_date = models.DateField(null=False, blank=False)
+    
+    presentation_type = models.CharField(max_length=200, choices=PRESENTATION, default="Conference", blank=False, null=True)
+    event_type = models.CharField(max_length=200, choices=EVENT_TYPE, default="Physical", blank=False, null=True)
+
+    org_name = models.CharField(max_length=200, null=False, blank=False)
+    org_website_url = models.CharField(max_length=200, null=False, blank=False)
+    org_support = models.CharField(max_length=200, null=False, blank=False)
+    org_description = models.TextField(max_length=500, null=False, blank=False)
+    
+    date_presented = models.DateField(null=False)
+    published_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
+    
+    def __str__(self) -> str:
+        return f'{self.short_name}: {self.event_name}, {self.date_presented}'
+    
+
+
+class Research_Published(models.Model):
+    RESEARCH_LICENSE = (
+        ("Creative Commons Licenses", "Creative Commons Licenses"), 
+        ("Alternatives Publishing Licenses", "Alternatives Publishing Licenses"),
+        ("Research Repository Licences", "Research Repository Licences"),
+        ("Open Access", "Open Access"),
+        ("None", "None"),
+    )
+    
+    
+    published_date = models.DateField(null=False)
+    publication = models.CharField(max_length=200, blank=False, null=False)
+    source = models.CharField(max_length=200, blank=False, null=False)
+    research_license = models.CharField(max_length=200, choices=RESEARCH_LICENSE, default="None", blank=False, null=True)
+    abstract = models.TextField(max_length=1200, blank=False, null=False)
+    presented_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
+    
+
+    def __str__(self) -> str:
+        return f'{self.publication}: {self.published_date}, {self.research_license}'
+    
 
 
 
