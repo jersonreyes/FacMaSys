@@ -227,5 +227,5 @@ class Users(models.Model):
     username = models.CharField(max_length=200, blank=False, null=False)
     email = models.EmailField(max_length=200, blank=False, null=False)
     password = models.CharField(max_length=200, choices=USER_TYPE, default="Faculty", blank=False, null=False)
-    
+
     

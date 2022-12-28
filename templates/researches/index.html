@@ -23,10 +23,27 @@
             </div>
         </div>
         <p class="mt-[2vh] tracking-[-2px] text-[25px] font-bold text-white text-center animate glow delay-4">Recent</p>
+
+        
         <div class="grid gap-3 grid-cols-3 grid-rows-4 [&>div]:rounded-md min-h-screen w-full">
+            {# For displaying the list of registered research #}
+            {% if all_researches|length > 0 %}
+                {% for element in all_researches %}
+                    <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}">
+                        <strong> {{ element.research_title}} </strong> <br>
+                        {{ element.faculty_id.first_name }}  {{ element.faculty_id.last_name }}<br>
+                        Area: {{ element.research_area}} <br>
+                        Progress: {{ element.research_progress}} <br>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+            {% comment %}
             {% for i in "x"|rjust:"9" %}
-                <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}"></div>
+ 
             {% endfor %}
+            {% endcomment %}
         </div>
     </div>
 <!--End Graphs-->
