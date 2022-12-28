@@ -11,7 +11,7 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
     help = 'Run all commands'
     commands = [
-        'cd tailwind_theme/static_src && npm run dev',
+        'cd apps/tailwind_theme/static_src && npm run dev',
     ]
 
     def handle(self, *args, **options):
