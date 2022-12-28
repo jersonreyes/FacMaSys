@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+{% if user.is_authenticated %}
 <!--Graphs-->
     <div class="mt-[10vh] dark:white w-full">
         <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
@@ -21,6 +21,6 @@
     </div>
 <!--End Graphs-->
 {% else %}
-    {% include 'dashboard/staff_index.html' %}
+    
 {% endif %}
 {% endblock %}

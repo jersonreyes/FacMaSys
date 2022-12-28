@@ -10,7 +10,7 @@
     }
 </style>
 
-<script type="text/javascript">
+<script type="text/javascript" defer>
     $(window).on('load', function() {
         $('.toast').toast();
         {% if messages %}
@@ -63,13 +63,7 @@
                                 <div class="col-md-8 p-5">
 
                                     <div class="pb-1">
-                                        {% if request.user.is_superuser  %}
-                                        <span class="h3"><span class="text-muted"> SUPERADMIN </span> &nbsp; <strong>{{user.username}}</strong></span>
-                                        {% elif request.user.is_staff %}
-                                        <span class="h3"><span class="text-muted"> ADMIN </span> &nbsp; <strong>{{user.username}}</strong></span> 
-                                        {% else %}
-                                        <span class="h3"><span class="text-muted"> CASHIER </span> &nbsp; <strong>{{user.username}}</strong></span> 
-                                        {% endif %}                                                                                 
+                                        <span class="h3"><span class="text-muted"> {{ user.profile.user_role|upper }} </span> &nbsp; <strong>{{ user.username }}</strong></span>                                                                               
                                         <a class="btn btn-dark btn-sm float-right" href="{% url 'user-profile-update' %}"> &nbsp;&nbsp;Edit Profile&nbsp;&nbsp; </a>
                                         <a class="btn btn-dark btn-sm float-right" href="{% url 'change-password' %}" style="margin-right:10px ;"> &nbsp;&nbsp;Change Password&nbsp;&nbsp; </a>
                                     </div>                                 
@@ -78,16 +72,32 @@
                                     <table class="table bg-white table-borderless m-3">
                                         <tbody>
                                             <tr>
+                                                <th scope="row">First Name</th>
+                                                <td>{{ user.first_name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Last Name</th>
+                                                <td>{{ user.last_name }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th scope="row">Email</th>
-                                                <td>{{user.email}}</td>
+                                                <td>{{ user.email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Age</th>
+                                                <td>{{ user.profile.age }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Phone</th>
-                                                <td>{{user.profile.phone}}</td>
+                                                <td>{{ user.profile.phone }}</td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">Address</th>
-                                                <td>{{user.profile.address}}</td>
+                                                <td>{{ user.profile.address }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">City of Residence</th>
+                                                <td>{{ user.profile.city_of_residence }}</td>
                                             </tr>
                                         </tbody>                                
                                     </table>

@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %} Register Page {% endblock %}
+{% block title %} Registration {% endblock %}
 {% block headers %} REGISTER PAGE {% endblock %}
 {% load crispy_forms_tags %}
 
@@ -19,7 +19,7 @@
         <div class="mx-4" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link" href="{% url 'dashboard-staff' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Account </a>               
+            <a class="nav-link" href="{% url 'user-login' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Login </a>               
             </li>       
         </ul>
         </div>
@@ -29,15 +29,11 @@
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
                 <div class="border bg-light p-5">
-                    <h3>Register new admin</h3>
+                    <h3>Faculty Registration</h3>
                     <hr>
                     <form method="POST">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <select class="form-select" name="user-type" aria-label="User Type">
-                            <option value="cashier" selected>Cashier</option>
-                            <option value="admin">Admin</option>
-                        </select>
                         <div class="row mx-1 mt-3">
                             <input class="btn btn-primary" type="submit" value="Register">
                         </div>                       

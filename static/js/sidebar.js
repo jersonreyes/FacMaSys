@@ -35,20 +35,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }, 200, function(){
             $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
     })
-    var value = localStorage.theme;
-    if(value == 'dark') {
-        document.documentElement.classList.add('dark');
-    }   else {
-        document.documentElement.classList.remove('dark');
-    }
+    $('.selected-from-url').length==0 && $("#nav-highlighter").hide()
+    var pos = $('.selected-from-url').position()
+    $('.selected-from-url').length > 0 && $("#nav-highlighter").css('top', pos.top-10);
+    
+    $("a").click(function(e) {
+        e.preventDefault();
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode") {
+            e.preventDefault();
+            var root = this;
+            var pos;
+            if(e.currentTarget.getAttribute('sidebarItem') || e.currentTarget.href == '/') {
+                pos = $('#home-nav-item').position()
+            } else {
+                pos = $(root).position()
+            }
+            $("#nav-highlighter").css('top', pos.top);
+                $("#nav-highlighter").css('left', pos.left);
+
+            e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
+            window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
+            $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
+            $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
+        } 
+    })
     
     $('.themeToggler').click(function() {
-        var value = localStorage.theme;
+        var value = $.cookie("theme");
         if(value == 'dark') {
-            localStorage.theme = 'light'
+            $.cookie('theme', 'light', { expires: 9999999, path: '/' });
             document.documentElement.classList.remove('dark');
         }   else {
-            localStorage.theme = 'dark'
+            $.cookie('theme', 'dark', { expires: 9999999, path: '/' });
             document.documentElement.classList.add('dark');
         }
     })

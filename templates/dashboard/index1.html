@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% if user.is_authenticated and user.is_staff and user.is_superuser %}
+{% if user.is_authenticated %}
 <!--Graphs-->
     <div class="w-full">
         <div class="chart grid w-full mt-[5vh]">
@@ -38,9 +38,8 @@
                     </div>
                 </div>
             </div>
-            
             <script src="../static/js/chartDefault.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+            
             <script>
                 var options = chartDefault('area',[{% for months in monthly_sales.index %} '{{ months }}', {% endfor %}], [{% for total in monthly_sales.total %} {{ total }}, {% endfor %}])
                 var chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -54,6 +53,6 @@
     </div>
 <!--End Graphs-->
 {% else %}
-    {% include 'dashboard/staff_index.html' %}
+    
 {% endif %}
 {% endblock %}

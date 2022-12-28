@@ -1,7 +1,8 @@
 {% load static %}
 {% load tailwind_tags %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="{{theme}}">
+    {% if not ajax %}
     <head>
         <!-- TAILWIND CSS -->
         {% tailwind_css %}
@@ -37,36 +38,49 @@
         <link rel="SHORTCUT ICON" href="{% static 'images/logo.png' %}" media="screen" />
 
         <title>FacMaSys - {% block title %}{% endblock %}</title>
-    </head>
+        <!-- jQuery and Bootstrap (includes Popper) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        crossorigin="anonymous"></script>
 
-    <body id="body-pd" class="transition dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        <div class="grid grid-cols-[100px_90fr]">
-            <div>
-                {% include 'partials/sidebar.html' %}
-            </div>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    </head>
+    {% endif %}
+
+    {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
+        <div class="{% if not ajax %}grid grid-cols-[100px_90fr]{% endif %}">
+            {% if not ajax %}
+                <div>
+                    {% include 'partials/sidebar.html' %}
+                </div>
             <!-- LOGOUT MODAL -->
             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-danger">
-                            <h5>Are you sure you want to Log out?</h5>
+                    <div class="modal-content">
+                        
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="logoutModalLongTitle">Logout Confirmation</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="alert alert-danger">
+                                <h5>Are you sure you want to Log out?</h5>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
+                            <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> Close </button>
-                    <a class="btn btn-danger" href="{% url 'user-logout' %}"> Logout </a>
-                    </div>
-                </div>
                 </div>
             </div>
+            {% endif %}
+            
             <div class="p-2 z-[200]">
+                {% if not ajax %}
                 <div class="relative">
                     <div id="header" class="transition-all z-[200] px-[4vw] justify-between items-center top-5 flex gap-2 fixed" style="width:93vw">
                         <div class=" dark:text-white dark:white leading-[0] flex translate-y-[10px]">
@@ -124,6 +138,7 @@
                                 </div>
                             </div>
             
+                            {% if request.user.is_authenticated %}
                             <!-- PROFILE ICON -->
                             <div class="transition">
                                 <button class="transition bg-white hover:opacity-[0.5] rounded-md border border-[rgba(200,200,200,0.5)] flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,14 +154,8 @@
                                             <img src="{{ user.profile.image.url }}" class="rounded-circle" style="width: 30px; height: 30px;" alt="Staff Icon">
                                         </div>
                                         <div class="">
-                                            {% if request.user.is_superuser  %}
-                                            <h6 class="mb-0"><strong> SUPERADMIN: </strong></h6>
-                                            {% elif request.user.is_staff %}
-                                            <h6 class="mb-0"><strong> ADMIN: </strong></h6>
-                                            {% else %}
-                                            <h6 class="mb-0"><strong> CASHIER: </strong></h6>
-                                            {% endif %}
-                                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{request.user.username}}">
+                                            <h6 class="mb-0"><strong> {{ request.user.profile.user_role|upper }}: </strong></h6>
+                                            <input type="text" readonly class="form-control-plaintext text-black py-0 mt-0 mb-0" id="staticEmail" value="{{ request.user.username }}">
                                         </div>             
                                     </div>
             
@@ -161,21 +170,23 @@
                                 </div>
                                 <!--<a href="{% url 'user-profile' %}" class="btn btn-primary"></a>-->
                             </div>
+                            {% else %}
+                                <a href="{% url 'user-login' %}"><button type="button">Sign In</button></a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="p-2">
+                {% endif %}
+                <div class="p-2 transition-all" id="main-body">
                     {% block content %}
                 
                     {% endblock %}
                 </div>
             </div>
         </div>
-        <!-- jQuery and Bootstrap (includes Popper) -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        crossorigin="anonymous"></script>
+        {% if not ajax %}
         
-        <script type="text/javascript"
+        <script type="text/javascript" defer
         src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" crossorigin="anonymous"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
@@ -185,8 +196,7 @@
         <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js" crossorigin="anonymous"></script>
         
         <script src="{% static 'js/sidebar.js' %}"></script>
-
         
-
-    </body>
+        {% endif %}
+    {% if not ajax %}</body>{% endif %}
 </html>

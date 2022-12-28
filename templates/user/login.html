@@ -21,7 +21,7 @@
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 bg-light text"> 
           <div class="row d-flex justify-content-center mt-5">
-            <img id="logo_home" src="{% static 'images/icon_logo_invert.png' %}" alt="SpeedLab Logo" style="width: 100px; height: 100px;">
+            <img id="logo_home" src="{% static '/images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px;">
           </div>
           
 
@@ -43,6 +43,7 @@
               
               <div class="row d-flex justify-content-center">
                 <a class="mx-4" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
+                <a class="mx-4" href="{% url 'user-register' %}" style="color:#173f7a;">Don't have an account yet? Go to signup</a>
               </div>       
           </form>
         </div>

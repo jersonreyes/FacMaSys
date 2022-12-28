@@ -18,7 +18,7 @@
         <div class="mx-4" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">            
                 <li class="nav-item mr-2">
-                <a class="nav-link" href="{% url 'dashboard-staff' %}"><span class="default-state {% if view.inventorypage_active == 'staff' or inventorypage_active == 'staff' %} inventorytab-active {% endif %}">STAFF</span></a>
+                <a class="nav-link" href="{% url 'faculty-index' %}"><span class="default-state {% if view.inventorypage_active == 'staff' or inventorypage_active == 'staff' %} inventorytab-active {% endif %}">STAFF</span></a>
                 </li>
                 <li class="nav-item mr-2">
                 <a class="nav-link" href="{% url 'dashboard-customer' %}"><span class="default-state {% if view.inventorypage_active == 'customer' or inventorypage_active == 'customer' %} inventorytab-active {% endif %}">CUSTOMER</span></a>
@@ -74,7 +74,7 @@
                             <td> {% if worker.is_superuser %}Super Admin{% elif worker.is_staff %}Admin{% else %}Cashier {% endif %}</td>
                             <th scope="row">                                
                                 <span class="tooltips_top"> 
-                                    <a class="btn btn-info btn-sm" href="{% url 'dashboard-staff-detail' worker.id %}">
+                                    <a class="btn btn-info btn-sm" href="{% url 'faculty-index-detail' worker.id %}">
                                     <span class="tooltiptext_top"> View Staff </span> 
                                     <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
                                     </a>
@@ -101,7 +101,7 @@
                             <ul class="pagination">
                                 <li class="page-item">
                                 {% if page.has_previous %}
-                                    <a class="page-link" href="{% url 'dashboard-staff' %}?page={{ page.previous_page_number }}">Previous</a>
+                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ page.previous_page_number }}">Previous</a>
                                 </li>
                                 {% else %}
                                 <li class="page-item disabled">
@@ -113,11 +113,11 @@
                                 <br>
                                 {% if page.number == num_page %}
                                 <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="{% url 'dashboard-staff' %}?page={{ num_page }}">{{ num_page }}</a>
+                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ num_page }}">{{ num_page }}</a>
                                 </li>
                                 {% else %}
                                 <li class="page-item" aria-current="page">
-                                    <a class="page-link" href="{% url 'dashboard-staff' %}?page={{ num_page }}">{{ num_page }}</a>
+                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ num_page }}">{{ num_page }}</a>
                                 </li>
                                 {% endif %}
                                 <br>
@@ -125,7 +125,7 @@
                             
                                 <li class="page-item">
                                 {% if page.has_next %}
-                                    <a class="page-link" href="{% url 'dashboard-staff' %}?page={{ page.next_page_number }}">Next</a>
+                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ page.next_page_number }}">Next</a>
                                 </li>
                                 {% else %}
                                 <li class="page-item disabled">
