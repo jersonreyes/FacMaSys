@@ -11,7 +11,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from apps.reports.models import Notifications
-from facmasys.utils import add_activity
+# from facmasys.utils import add_activity
 from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
 
 
@@ -92,7 +92,7 @@ def profile_update(request):
             user_form.save()
             profile_form.save()
             name = request.user.username
-            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
+            # add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
             messages.success(request,"Your profile has been successfully updated.")
             return redirect('user-profile')
     else:
