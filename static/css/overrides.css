@@ -129,3 +129,23 @@
   a, a:hover {
     text-decoration: none !important;
   }
+  
+  #top-search-input {
+    width: 0%;
+    overflow: hidden;
+    display:none;
+    transition: all 200ms ease-in-out;
+  }
+
+  #top-search-input.toggled {
+    width: 60%;
+    display:block;
+    transition: all 200ms ease-in-out;
+  }
+  
+  #top-search-button.toggled {
+    width: 40%;
+    transition: all 200ms ease-in-out;
+    transform: translateX(-220%);
+  }
+  

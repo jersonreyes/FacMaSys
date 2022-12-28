@@ -1,4 +1,35 @@
 $(document).ready(function() {
+    var $search = $('#top-search-button, #top-search-input');
+    $(document).on('click', function (e) {
+        // If element is opened and click target is outside it, hide it
+        if ($search.is(':visible') && !$search.is(e.target) && !$search.has(e.target).length) {
+            $('#top-search-input').removeClass('toggled');
+            $('#top-search-button').removeClass('toggled');
+            $('#center-logo').show();
+        }
+    });
+    $('#top-search-button').click(function() {
+        $('#top-search-input').addClass('toggled');
+        $('#top-search-button').addClass('toggled');
+        $('#center-logo').hide();
+        $('#top-search-input > input').focus();
+    })
+     // Add slideup & fadein animation to dropdown
+   $('.dropdown').on('show.bs.dropdown', function(e){
+    var $dropdown = $(this).find('.dropdown-menu');
+    var orig_margin_top = parseInt($dropdown.css('margin-top'));
+    $dropdown.css({'margin-top': (orig_margin_top + 10) + 'px', opacity: 0}).animate({'margin-top': orig_margin_top + 'px', opacity: 1}, 300, function(){
+       $(this).css({'margin-top':''});
+    });
+ });
+ // Add slidedown & fadeout animation to dropdown
+ $('.dropdown').on('hide.bs.dropdown', function(e){
+    var $dropdown = $(this).find('.dropdown-menu');
+    var orig_margin_top = parseInt($dropdown.css('margin-top'));
+    $dropdown.css({'margin-top': orig_margin_top + 'px', opacity: 1, display: 'block'}).animate({'margin-top': (orig_margin_top + 10) + 'px', opacity: 0}, 300, function(){
+       $(this).css({'margin-top':'', display:''});
+    });
+ });
     $(document).scroll(function () {
         var $nav = $("#header");
         if ($(this).scrollTop() > 70) {
