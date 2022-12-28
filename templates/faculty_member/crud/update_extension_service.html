@@ -1,0 +1,49 @@
+{% extends "main.html" %} {% block title %} Faculty Member - Update Extension
+Service {% endblock %} {% block content %}
+<p>Faculty Member - Update Extension Service</p>
+
+<a href="../">Go back</a>
+<form action="../update_service/{{ extension.id }}" method="post">
+    {% csrf_token %}
+
+    <div>
+        <label for="id_name">Name:</label>
+        <input type="text" name="name" value="{{extension.name}}" maxlength="200" required="" id="id_name" />
+    </div>
+
+    <div>
+        <label for="id_address">Address:</label>
+        <input type="text" name="address" value="{{extension.address}}" maxlength="250" id="id_address" />
+    </div>
+
+    <div>
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" value="{{extension.email}}" maxlength="254" id="id_email" />
+    </div>
+
+    <div>
+        <label for="id_contact_no">Contact no:</label>
+        <input type="text" name="contact_no" value="{{extension.contact_no}}" maxlength="15" id="id_contact_no" />
+    </div>
+
+    <div>
+        <label for="id_website">Website:</label>
+        <input type="text" name="website" value="{{extension.website}}" maxlength="100" id="id_website" />
+    </div>
+
+    <div>
+        <label for="id_background">Background:</label>
+        <textarea name="background" cols="40" rows="10" maxlength="500" required="" id="id_background">{{extension.background}}</textarea>
+    </div>
+
+    <div>
+        <label for="id_extension_head">Extension head:</label>
+        <input type="text" name="extension_head" value="{{extension.extension_head}}" maxlength="200" id="id_extension_head" />
+    </div>
+
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+
+    <button type="submit">Update Data</button>
+</form>
+{% endblock %}
