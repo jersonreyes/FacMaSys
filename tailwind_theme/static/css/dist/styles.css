@@ -1539,6 +1539,7 @@ select {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -1548,6 +1549,16 @@ select {
 >>>>>>> 61408fed0279992e796f2f7178730ec44d5fdcc8
 =======
 >>>>>>> 61408fed0279992e796f2f7178730ec44d5fdcc8
+=======
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.5\)\] {
+  background-color: rgba(255,255,255,0.5);
+}
+
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.7\)\] {
+  background-color: rgba(255,255,255,0.7);
+}
+
+>>>>>>> d082cc14fb456906e0981a8fa63e8d4fd0c7e647
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -2092,6 +2103,22 @@ a, a:visited, a:hover {
 .dark .dark\:bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.dark .dark\:bg-\[rgba\(40\2c 40\2c 40\2c 0\.5\)\] {
+  background-color: rgba(40,40,40,0.5);
+}
+
+.dark .dark\:bg-\[rgba\(40\2c 40\2c 40\2c 0\.7\)\] {
+  background-color: rgba(40,40,40,0.7);
+}
+
+.dark .dark\:bg-\[\#36363640\] {
+  background-color: #36363640;
+}
+
+.dark .dark\:bg-\[\#36363690\] {
+  background-color: #36363690;
 }
 
 .dark .dark\:text-white {

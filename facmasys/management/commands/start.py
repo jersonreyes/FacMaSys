@@ -1,16 +1,18 @@
 
-from django.core.management.base import BaseCommand
+import os
+import signal
+import time
 from subprocess import Popen
-from sys import stdout, stdin, stderr
-import time, os, signal
+from sys import stderr, stdin, stdout
+
+from django.core.management.base import BaseCommand
 
 
 class Command(BaseCommand):
     help = 'Run all commands'
     commands = [
+        'cd tailwind_theme/static_src && npm run dev',
         'python manage.py runserver',
-        'python manage.py tailwind start'
-
     ]
 
     def handle(self, *args, **options):
