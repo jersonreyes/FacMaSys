@@ -46,12 +46,9 @@ def faculty_subjects_taught(request):
         Subjects_Taught.objects.create(faculty_id=request.user)
         # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
     
-    # all_subjects = 
-    
     context = {
         'all_subjects': subject.handled_subjects.all()
     }
-    print('context: ', subject) 
     return render(request, "faculty_member/subject_taught.html", context)
     
 # Researches
