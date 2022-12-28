@@ -10,17 +10,13 @@ urlpatterns = [
                                            authentication_form=LoginForm), name='user-login'),
     path('register/', views.RegisterView.as_view(), name='user-register'),
     
-    path('logout_confirmation/',views.logout_confirmation, name='logout_confirmation'),
     path('logout/', views.logout_view, name='user-logout'),
-    path('logout1', auth_views.LogoutView.as_view(template_name='user/logout.html'), name='user-logout1'),
     
     path('profile/', views.profile, name='user-profile'),
     path('profile/update', views.profile_update, name='user-profile-update'),
-    path('accounts/faculty',views.faculty, name='faculty-index'),
-    path('accounts/customer',views.customer, name='dashboard-customer'),
+    path('faculty/',views.faculty, name='faculty-index'),
     
-    path('staff/detail/<int:pk>/',views.staff_detail, name='faculty-index-detail'),
-    path('customer/detail/<int:pk>/',views.customer_detail, name='user-customer-detail'),
+    path('faculty/detail/<int:pk>/',views.faculty_detail, name='faculty-index-detail'),
     
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name='password_reset'),
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='user/password_reset_sent.html'), name='password_reset_done'),

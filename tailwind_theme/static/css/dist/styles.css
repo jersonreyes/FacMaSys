@@ -777,6 +777,464 @@ select {
           print-color-adjust: exact;
 }
 
+.prose {
+  color: var(--tw-prose-body);
+  max-width: 65ch;
+}
+
+.prose :where([class~="lead"]):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-lead);
+  font-size: 1.25em;
+  line-height: 1.6;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-links);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.prose :where(strong):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-bold);
+  font-weight: 600;
+}
+
+.prose :where(a strong):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(blockquote strong):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(thead th strong):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(ol):not(:where([class~="not-prose"] *)) {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose :where(ol[type="A"]):not(:where([class~="not-prose"] *)) {
+  list-style-type: upper-alpha;
+}
+
+.prose :where(ol[type="a"]):not(:where([class~="not-prose"] *)) {
+  list-style-type: lower-alpha;
+}
+
+.prose :where(ol[type="A" s]):not(:where([class~="not-prose"] *)) {
+  list-style-type: upper-alpha;
+}
+
+.prose :where(ol[type="a" s]):not(:where([class~="not-prose"] *)) {
+  list-style-type: lower-alpha;
+}
+
+.prose :where(ol[type="I"]):not(:where([class~="not-prose"] *)) {
+  list-style-type: upper-roman;
+}
+
+.prose :where(ol[type="i"]):not(:where([class~="not-prose"] *)) {
+  list-style-type: lower-roman;
+}
+
+.prose :where(ol[type="I" s]):not(:where([class~="not-prose"] *)) {
+  list-style-type: upper-roman;
+}
+
+.prose :where(ol[type="i" s]):not(:where([class~="not-prose"] *)) {
+  list-style-type: lower-roman;
+}
+
+.prose :where(ol[type="1"]):not(:where([class~="not-prose"] *)) {
+  list-style-type: decimal;
+}
+
+.prose :where(ul):not(:where([class~="not-prose"] *)) {
+  list-style-type: disc;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose :where(ol > li):not(:where([class~="not-prose"] *))::marker {
+  font-weight: 400;
+  color: var(--tw-prose-counters);
+}
+
+.prose :where(ul > li):not(:where([class~="not-prose"] *))::marker {
+  color: var(--tw-prose-bullets);
+}
+
+.prose :where(hr):not(:where([class~="not-prose"] *)) {
+  border-color: var(--tw-prose-hr);
+  border-top-width: 1px;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--tw-prose-quotes);
+  border-left-width: 0.25rem;
+  border-left-color: var(--tw-prose-quote-borders);
+  quotes: "\201C""\201D""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-left: 1em;
+}
+
+.prose :where(blockquote p:first-of-type):not(:where([class~="not-prose"] *))::before {
+  content: open-quote;
+}
+
+.prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"] *))::after {
+  content: close-quote;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-headings);
+  font-weight: 800;
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: 0.8888889em;
+  line-height: 1.1111111;
+}
+
+.prose :where(h1 strong):not(:where([class~="not-prose"] *)) {
+  font-weight: 900;
+  color: inherit;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-headings);
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.prose :where(h2 strong):not(:where([class~="not-prose"] *)) {
+  font-weight: 800;
+  color: inherit;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-headings);
+  font-weight: 600;
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose :where(h3 strong):not(:where([class~="not-prose"] *)) {
+  font-weight: 700;
+  color: inherit;
+}
+
+.prose :where(h4):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-headings);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+.prose :where(h4 strong):not(:where([class~="not-prose"] *)) {
+  font-weight: 700;
+  color: inherit;
+}
+
+.prose :where(img):not(:where([class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(figure > *):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose :where(figcaption):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-captions);
+  font-size: 0.875em;
+  line-height: 1.4285714;
+  margin-top: 0.8571429em;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-code);
+  font-weight: 600;
+  font-size: 0.875em;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::before {
+  content: "`";
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: "`";
+}
+
+.prose :where(a code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(h1 code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(h2 code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+  font-size: 0.875em;
+}
+
+.prose :where(h3 code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.prose :where(h4 code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(blockquote code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(thead th code):not(:where([class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-pre-code);
+  background-color: var(--tw-prose-pre-bg);
+  overflow-x: auto;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+  margin-top: 1.7142857em;
+  margin-bottom: 1.7142857em;
+  border-radius: 0.375rem;
+  padding-top: 0.8571429em;
+  padding-right: 1.1428571em;
+  padding-bottom: 0.8571429em;
+  padding-left: 1.1428571em;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"] *)) {
+  background-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"] *))::before {
+  content: none;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+
+.prose :where(table):not(:where([class~="not-prose"] *)) {
+  width: 100%;
+  table-layout: auto;
+  text-align: left;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+}
+
+.prose :where(thead):not(:where([class~="not-prose"] *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--tw-prose-th-borders);
+}
+
+.prose :where(thead th):not(:where([class~="not-prose"] *)) {
+  color: var(--tw-prose-headings);
+  font-weight: 600;
+  vertical-align: bottom;
+  padding-right: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-left: 0.5714286em;
+}
+
+.prose :where(tbody tr):not(:where([class~="not-prose"] *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--tw-prose-td-borders);
+}
+
+.prose :where(tbody tr:last-child):not(:where([class~="not-prose"] *)) {
+  border-bottom-width: 0;
+}
+
+.prose :where(tbody td):not(:where([class~="not-prose"] *)) {
+  vertical-align: baseline;
+}
+
+.prose :where(tfoot):not(:where([class~="not-prose"] *)) {
+  border-top-width: 1px;
+  border-top-color: var(--tw-prose-th-borders);
+}
+
+.prose :where(tfoot td):not(:where([class~="not-prose"] *)) {
+  vertical-align: top;
+}
+
+.prose {
+  --tw-prose-body: #374151;
+  --tw-prose-headings: #111827;
+  --tw-prose-lead: #4b5563;
+  --tw-prose-links: #111827;
+  --tw-prose-bold: #111827;
+  --tw-prose-counters: #6b7280;
+  --tw-prose-bullets: #d1d5db;
+  --tw-prose-hr: #e5e7eb;
+  --tw-prose-quotes: #111827;
+  --tw-prose-quote-borders: #e5e7eb;
+  --tw-prose-captions: #6b7280;
+  --tw-prose-code: #111827;
+  --tw-prose-pre-code: #e5e7eb;
+  --tw-prose-pre-bg: #1f2937;
+  --tw-prose-th-borders: #d1d5db;
+  --tw-prose-td-borders: #e5e7eb;
+  --tw-prose-invert-body: #d1d5db;
+  --tw-prose-invert-headings: #fff;
+  --tw-prose-invert-lead: #9ca3af;
+  --tw-prose-invert-links: #fff;
+  --tw-prose-invert-bold: #fff;
+  --tw-prose-invert-counters: #9ca3af;
+  --tw-prose-invert-bullets: #4b5563;
+  --tw-prose-invert-hr: #374151;
+  --tw-prose-invert-quotes: #f3f4f6;
+  --tw-prose-invert-quote-borders: #374151;
+  --tw-prose-invert-captions: #9ca3af;
+  --tw-prose-invert-code: #fff;
+  --tw-prose-invert-pre-code: #d1d5db;
+  --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --tw-prose-invert-th-borders: #4b5563;
+  --tw-prose-invert-td-borders: #374151;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose :where(video):not(:where([class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(figure):not(:where([class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(li):not(:where([class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose :where(ol > li):not(:where([class~="not-prose"] *)) {
+  padding-left: 0.375em;
+}
+
+.prose :where(ul > li):not(:where([class~="not-prose"] *)) {
+  padding-left: 0.375em;
+}
+
+.prose :where(.prose > ul > li p):not(:where([class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose :where(.prose > ul > li > *:first-child):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose :where(.prose > ul > li > *:last-child):not(:where([class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose :where(.prose > ol > li > *:first-child):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose :where(.prose > ol > li > *:last-child):not(:where([class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose :where(hr + *):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h2 + *):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h3 + *):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h4 + *):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(thead th:first-child):not(:where([class~="not-prose"] *)) {
+  padding-left: 0;
+}
+
+.prose :where(thead th:last-child):not(:where([class~="not-prose"] *)) {
+  padding-right: 0;
+}
+
+.prose :where(tbody td, tfoot td):not(:where([class~="not-prose"] *)) {
+  padding-top: 0.5714286em;
+  padding-right: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-left: 0.5714286em;
+}
+
+.prose :where(tbody td:first-child, tfoot td:first-child):not(:where([class~="not-prose"] *)) {
+  padding-left: 0;
+}
+
+.prose :where(tbody td:last-child, tfoot td:last-child):not(:where([class~="not-prose"] *)) {
+  padding-right: 0;
+}
+
+.prose :where(.prose > :first-child):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(.prose > :last-child):not(:where([class~="not-prose"] *)) {
+  margin-bottom: 0;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -791,6 +1249,10 @@ select {
 
 .visible {
   visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
 }
 
 .collapse {
@@ -838,6 +1300,10 @@ select {
 
 .top-10 {
   top: 2.5rem;
+}
+
+.isolate {
+  isolation: isolate;
 }
 
 .z-\[0\] {
@@ -894,6 +1360,10 @@ select {
 
 .m-0 {
   margin: 0px;
+}
+
+.m-10 {
+  margin: 2.5rem;
 }
 
 .mx-auto {
@@ -1107,8 +1577,16 @@ select {
   display: flex;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
 .table {
   display: table;
+}
+
+.inline-table {
+  display: inline-table;
 }
 
 .table-caption {
@@ -1141,6 +1619,10 @@ select {
 
 .table-row {
   display: table-row;
+}
+
+.flow-root {
+  display: flow-root;
 }
 
 .grid {
@@ -1207,6 +1689,18 @@ select {
   height: 3rem;
 }
 
+.h-1 {
+  height: 0.25rem;
+}
+
+.h-11 {
+  height: 2.75rem;
+}
+
+.h-auto {
+  height: auto;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1263,6 +1757,26 @@ select {
   flex: 1 1 0%;
 }
 
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.border-collapse {
+  border-collapse: collapse;
+}
+
 .translate-y-\[10px\] {
   --tw-translate-y: 10px;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1291,8 +1805,19 @@ select {
   cursor: pointer;
 }
 
+.select-all {
+  -webkit-user-select: all;
+     -moz-user-select: all;
+          user-select: all;
+}
+
 .resize {
   resize: both;
+}
+
+.columns-1 {
+  -moz-columns: 1;
+       columns: 1;
 }
 
 .grid-flow-row {
@@ -1329,6 +1854,10 @@ select {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .place-items-center {
@@ -1381,6 +1910,10 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.break-all {
+  word-break: break-all;
 }
 
 .rounded-\[20px\] {
@@ -1712,6 +2245,50 @@ select {
   text-transform: capitalize;
 }
 
+.italic {
+  font-style: italic;
+}
+
+.ordinal {
+  --tw-ordinal: ordinal;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.slashed-zero {
+  --tw-slashed-zero: slashed-zero;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.lining-nums {
+  --tw-numeric-figure: lining-nums;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.oldstyle-nums {
+  --tw-numeric-figure: oldstyle-nums;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.proportional-nums {
+  --tw-numeric-spacing: proportional-nums;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.tabular-nums {
+  --tw-numeric-spacing: tabular-nums;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.diagonal-fractions {
+  --tw-numeric-fraction: diagonal-fractions;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
+.stacked-fractions {
+  --tw-numeric-fraction: stacked-fractions;
+  font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+
 .leading-normal {
   line-height: 1.5;
 }
@@ -1752,8 +2329,25 @@ select {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
+.underline {
+  text-decoration-line: underline;
+}
+
+.overline {
+  text-decoration-line: overline;
+}
+
+.line-through {
+  text-decoration-line: line-through;
+}
+
 .no-underline {
   text-decoration-line: none;
+}
+
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .opacity-80 {
@@ -1781,8 +2375,23 @@ select {
   outline-offset: 2px;
 }
 
+.outline {
+  outline-style: solid;
+}
+
+.ring {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .blur {
   --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.grayscale {
+  --tw-grayscale: grayscale(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -1798,6 +2407,11 @@ select {
 
 .saturate-0 {
   --tw-saturate: saturate(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.sepia {
+  --tw-sepia: sepia(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -1934,6 +2548,1118 @@ a, a:visited, a:hover {
 
 .chart line{
   stroke: rgba(105, 105, 105, 0.327) !important;
+}
+
+.\[contents_end\:contents_end\+2\] {
+  contents_end: contents end+2;
+}
+
+.\[start\:pointer\] {
+  start: pointer;
+}
+
+.\[pointer\:contents_end-len\(trailer\)\] {
+  pointer: contents end-len(trailer);
+}
+
+.\[start\:start\+length\] {
+  start: start+length;
+}
+
+.\[_start\:\+_end\+1\] {
+  _start: + end+1;
+}
+
+.\[endpos\:i\] {
+  endpos: i;
+}
+
+.\[endpos\:semicolon\+1\] {
+  endpos: semicolon+1;
+}
+
+.\[p\:p\+3\] {
+  p: p+3;
+}
+
+.\[i\:i\+1\] {
+  i: i+1;
+}
+
+.\[prev\:curr\] {
+  prev: curr;
+}
+
+.\[cur\:space\] {
+  cur: space;
+}
+
+.\[-2\:space\] {
+  -2: space;
+}
+
+.\[j\:chunk_end\] {
+  j: chunk end;
+}
+
+.\[start\:end\] {
+  start: end;
+}
+
+.\[month-1\:month\+1\] {
+  month-1: month+1;
+}
+
+.\[fr\:to\] {
+  fr: to;
+}
+
+.\[oldPosition\:self\.data\.position\] {
+  old-position: self.data.position;
+}
+
+.\[ind0\:ind1\] {
+  ind0: ind1;
+}
+
+.\[i0\:None\] {
+  i0: None;
+}
+
+.\[i0\:i1\] {
+  i0: i1;
+}
+
+.\[i-1\:j\] {
+  i-1: j;
+}
+
+.\[idx0\:idx1\+1\] {
+  idx0: idx1+1;
+}
+
+.\[idx0\:idx1\] {
+  idx0: idx1;
+}
+
+.\[pos\:pos\+n\] {
+  pos: pos+n;
+}
+
+.\[start\:pos\] {
+  start: pos;
+}
+
+.\[len1\:idx1\] {
+  len1: idx1;
+}
+
+.\[init_pos\:token\.endpos\(\)\] {
+  init_pos: token.endpos();
+}
+
+.\[pos0\:pos1\] {
+  pos0: pos1;
+}
+
+.\[cert_start\:cert_end\] {
+  cert_start: cert end;
+}
+
+.\[b\:e\] {
+  b: e;
+}
+
+.\[lastE\:s\] {
+  last-e: s;
+}
+
+.\[last\:s\] {
+  last: s;
+}
+
+.\[loc\:maxloc\] {
+  loc: maxloc;
+}
+
+.\[start\:loc\] {
+  start: loc;
+}
+
+.\[loc\:newloc\] {
+  loc: newloc;
+}
+
+.\[startloc\:loc\] {
+  startloc: loc;
+}
+
+.\[position\:position\] {
+  position: position;
+}
+
+.\[i\:j\] {
+  i: j;
+}
+
+.\[tzname_offset\:nul\] {
+  tzname_offset: nul;
+}
+
+.\[-7\:-4\] {
+  -7: -4;
+}
+
+.\[start_idx\:end_idx\] {
+  start_idx: end idx;
+}
+
+.\[i\:i\+2\] {
+  i: i+2;
+}
+
+.\[token_start_pos\:pos\] {
+  token_start_pos: pos;
+}
+
+.\[start_pos\:pos\] {
+  start_pos: pos;
+}
+
+.\[start\:stop\] {
+  start: stop;
+}
+
+.\[start\:j\] {
+  start: j;
+}
+
+.\[lineStartPos\:i\] {
+  line-start-pos: i;
+}
+
+.\[a\:b\] {
+  a: b;
+}
+
+.\[i\:i\+4\] {
+  i: i+4;
+}
+
+.\[i\:i\+atom_len\] {
+  i: i+atom len;
+}
+
+.\[pos\:chunk_pos\] {
+  pos: chunk pos;
+}
+
+.\[idx\:idx\+_maxRefPerRecord\] {
+  idx: idx+ maxRefPerRecord;
+}
+
+.\[pos\:pos\+1\] {
+  pos: pos+1;
+}
+
+.\[bottom\:top\] {
+  bottom: top;
+}
+
+.\[upto\:start\] {
+  upto: start;
+}
+
+.\[end\:next\] {
+  end: next;
+}
+
+.\[upto\:next\] {
+  upto: next;
+}
+
+.\[top\:bottom\] {
+  top: bottom;
+}
+
+.\[last\:pos\] {
+  last: pos;
+}
+
+.\[lower_bound\:lineno\] {
+  lower_bound: lineno;
+}
+
+.\[i\:i\+n\] {
+  i: i+n;
+}
+
+.\[idx-2\:idx\] {
+  idx-2: idx;
+}
+
+.\[lbound\:ubound\] {
+  lbound: ubound;
+}
+
+.\[index\:index\+2\] {
+  index: index+2;
+}
+
+.\[index\:index\+4\] {
+  index: index+4;
+}
+
+.\[tuplei\:next_ti\] {
+  tuplei: next ti;
+}
+
+.\[i\:i\+6\] {
+  i: i+6;
+}
+
+.\[index\:newIndex\] {
+  index: newIndex;
+}
+
+.\[j\:j\+8\] {
+  j: j+8;
+}
+
+.\[masterOffset\:masterOffset\+numDeltas\] {
+  master-offset: masterOffset+numDeltas;
+}
+
+.\[pos\:nextpos\] {
+  pos: nextpos;
+}
+
+.\[i\:i\+linelength\] {
+  i: i+linelength;
+}
+
+.\[j\:j\+chunksize\] {
+  j: j+chunksize;
+}
+
+.\[i\:i\+blockSize\] {
+  i: i+blockSize;
+}
+
+.\[lo\:i\] {
+  lo: i;
+}
+
+.\[i\:hi\] {
+  i: hi;
+}
+
+.\[i1\:i2\] {
+  i1: i2;
+}
+
+.\[start\:end\+1\] {
+  start: end+1;
+}
+
+.\[i\:i\+len\(varIdxes\)\] {
+  i: i+len(varIdxes);
+}
+
+.\[last_i\:end_args\] {
+  last_i: end args;
+}
+
+.\[start\:self\.pos_\] {
+  start: self.pos;
+}
+
+.\[j\:j\+1\] {
+  j: j+1;
+}
+
+.\[j\:j\+2\] {
+  j: j+2;
+}
+
+.\[i\:i\+3\] {
+  i: i+3;
+}
+
+.\[j\:j\+4\] {
+  j: j+4;
+}
+
+.\[declstartpos\:declstartpos\+20\] {
+  declstartpos: declstartpos+20;
+}
+
+.\[startpos\:startpos\+n\] {
+  startpos: startpos+n;
+}
+
+.\[j1\:j2\] {
+  j1: j2;
+}
+
+.\[index\:index\+1\] {
+  index: index+1;
+}
+
+.\[first_element_idx\:last_element_idx\+1\] {
+  first_element_idx: last element idx+1;
+}
+
+.\[im1\:idx\+1\] {
+  im1: idx+1;
+}
+
+.\[index\:index\] {
+  index: index;
+}
+
+.\[ii0\:ii1\] {
+  ii0: ii1;
+}
+
+.\[lasti\:i\] {
+  lasti: i;
+}
+
+.\[window_len-1\:-window_len\+1\] {
+  window_len-1: -window len+1;
+}
+
+.\[first_color\:last_color\] {
+  first_color: last color;
+}
+
+.\[maxind-5\:maxind\+5\] {
+  maxind-5: maxind+5;
+}
+
+.\[pos0-len0\:pos1-len0\] {
+  pos0-len0: pos1-len0;
+}
+
+.\[indmin\:indmax\] {
+  indmin: indmax;
+}
+
+.\[ns\:i\+1\] {
+  ns: i+1;
+}
+
+.\[start_pos\:end_pos\] {
+  start_pos: end pos;
+}
+
+.\[oldend\:sub\[0\]\] {
+  oldend: sub[0];
+}
+
+.\[i\:i\+7\] {
+  i: i+7;
+}
+
+.\[-2\:-1\] {
+  -2: -1;
+}
+
+.\[i\:i\+read_count\] {
+  i: i+read count;
+}
+
+.\[first\:last\] {
+  first: last;
+}
+
+.\[i\:i\+BLOCK\] {
+  i: i+BLOCK;
+}
+
+.\[k1\:k2\] {
+  k1: k2;
+}
+
+.\[k\:k\+n\+1\] {
+  k: k+n+1;
+}
+
+.\[n\:span\[0\]\] {
+  n: span[0];
+}
+
+.\[st\:end\] {
+  st: end;
+}
+
+.\[i\:i\+lc2\] {
+  i: i+lc2;
+}
+
+.\[j\:j\+lc2\] {
+  j: j+lc2;
+}
+
+.\[prime1_offset\:prime2_offset\] {
+  prime1_offset: prime2 offset;
+}
+
+.\[prime2_offset\:exponent1_offset\] {
+  prime2_offset: exponent1 offset;
+}
+
+.\[exponent1_offset\:exponent2_offset\] {
+  exponent1_offset: exponent2 offset;
+}
+
+.\[exponent2_offset\:coefficient_offset\] {
+  exponent2_offset: coefficient offset;
+}
+
+.\[coefficient_offset\:private_exponent_offset\] {
+  coefficient_offset: private exponent offset;
+}
+
+.\[g_offset\:public_offset\] {
+  g_offset: public offset;
+}
+
+.\[q_offset\:p_offset\] {
+  q_offset: p offset;
+}
+
+.\[p_offset\:g_offset\] {
+  p_offset: g offset;
+}
+
+.\[public_offset\:private_offset\] {
+  public_offset: private offset;
+}
+
+.\[current\:stop\] {
+  current: stop;
+}
+
+.\[start_i\:end_i\] {
+  start_i: end i;
+}
+
+.\[i\:j\+tokcount\] {
+  i: j+tokcount;
+}
+
+.\[parse_start\:parse_end\] {
+  parse_start: parse end;
+}
+
+.\[parseopt_notrack_start\:parseopt_notrack_end\] {
+  parseopt_notrack_start: parseopt notrack end;
+}
+
+.\[parseopt_start\:parseopt_end\] {
+  parseopt_start: parseopt end;
+}
+
+.\[o-rowb\:o\] {
+  o-rowb: o;
+}
+
+.\[i\:i\] {
+  i: i;
+}
+
+.\[f\:l\] {
+  f: l;
+}
+
+.\[pos\:pc\] {
+  pos: pc;
+}
+
+.\[tstart\:tend\] {
+  tstart: tend;
+}
+
+.\[pos\:nc\] {
+  pos: nc;
+}
+
+.\[-8\:-2\] {
+  -8: -2;
+}
+
+.\[-4\:-2\] {
+  -4: -2;
+}
+
+.\[-6\:-4\] {
+  -6: -4;
+}
+
+.\[-8\:-4\] {
+  -8: -4;
+}
+
+.\[i0\:il\] {
+  i0: il;
+}
+
+.\[cursor\:cursor\+20\] {
+  cursor: cursor+20;
+}
+
+.\[past\:past\+le\] {
+  past: past+le;
+}
+
+.\[firstbracket\:firstbracket\+2\] {
+  firstbracket: firstbracket+2;
+}
+
+.\[firstbracket\:firstbracket\+9\] {
+  firstbracket: firstbracket+9;
+}
+
+.\[firstbracket\:firstbracket\+4\] {
+  firstbracket: firstbracket+4;
+}
+
+.\[pastfirstbracket\:closebracket\] {
+  pastfirstbracket: closebracket;
+}
+
+.\[firstbracket\:firstbracket\+20\] {
+  firstbracket: firstbracket+20;
+}
+
+.\[cursor\:cursor\+10\] {
+  cursor: cursor+10;
+}
+
+.\[nextopenbracket\:nextopenbracket\+20\] {
+  nextopenbracket: nextopenbracket+20;
+}
+
+.\[cursor\:nextopenbracket\] {
+  cursor: nextopenbracket;
+}
+
+.\[j\:i\] {
+  j: i;
+}
+
+.\[transparency\:transparency\+3\] {
+  transparency: transparency+3;
+}
+
+.\[i\:i\+chunkSize\] {
+  i: i+chunkSize;
+}
+
+.\[pos\:pos\+columns\] {
+  pos: pos+columns;
+}
+
+.\[pos\:pos\+length\] {
+  pos: pos+length;
+}
+
+.\[glyphPos\:glyphPos\+glyphLen\] {
+  glyph-pos: glyphPos+glyphLen;
+}
+
+.\[-7\:-1\] {
+  -7: -1;
+}
+
+.\[cursorcount\:cursorcount\+20\] {
+  cursorcount: cursorcount+20;
+}
+
+.\[sFW\:sFWN\] {
+  s-f-w: sFWN;
+}
+
+.\[nmw\:nmw\+1\] {
+  nmw: nmw+1;
+}
+
+.\[sc\:ec\+2\] {
+  sc: ec+2;
+}
+
+.\[sr\:er\+1\] {
+  sr: er+1;
+}
+
+.\[sr\:er\+2\] {
+  sr: er+2;
+}
+
+.\[sc\:ec\+1\] {
+  sc: ec+1;
+}
+
+.\[hi\:n\] {
+  hi: n;
+}
+
+.\[span_sr\:n\] {
+  span_sr: n;
+}
+
+.\[pos\:i\] {
+  pos: i;
+}
+
+.\[start\:self\._l\] {
+  start: self. l;
+}
+
+.\[start\:self\._l\+1\] {
+  start: self. l+1;
+}
+
+.\[i\:len\(doc\)-j\] {
+  i: len(doc)-j;
+}
+
+.\[p\:p\] {
+  p: p;
+}
+
+.\[length\:resume_index\] {
+  length: resume index;
+}
+
+.\[start_word\:stop_word\] {
+  start_word: stop word;
+}
+
+.\[-1\:-1\] {
+  -1: -1;
+}
+
+.\[prev_end\:start\] {
+  prev_end: start;
+}
+
+.\[model_fields_start\:model_fields_end\] {
+  model_fields_start: model fields end;
+}
+
+.\[cols_start\:cols_end\] {
+  cols_start: cols end;
+}
+
+.\[j\:k\] {
+  j: k;
+}
+
+.\[ppos\:ppos\+4\] {
+  ppos: ppos+4;
+}
+
+.\[pos\:pos\+12\] {
+  pos: pos+12;
+}
+
+.\[bitLoc\:bitLoc\+8\] {
+  bit-loc: bitLoc+8;
+}
+
+.\[i\:i\+16\] {
+  i: i+16;
+}
+
+.\[i\:i\+12\] {
+  i: i+12;
+}
+
+.\[i\:i\+8\] {
+  i: i+8;
+}
+
+.\[i\:i\+indexSubTableArraySize\] {
+  i: i+indexSubTableArraySize;
+}
+
+.\[i\:i\+indexSubHeaderSize\] {
+  i: i+indexSubHeaderSize;
+}
+
+.\[pos\:endPos\] {
+  pos: endPos;
+}
+
+.\[s\:e\] {
+  s: e;
+}
+
+.\[pos\:newpos\] {
+  pos: newpos;
+}
+
+.\[n1\:regionCount\] {
+  n1: regionCount;
+}
+
+.\[pc\:pc\+1\] {
+  pc: pc+1;
+}
+
+.\[x\:x\+4\] {
+  x: x+4;
+}
+
+.\[pos-5\:pos\+15\] {
+  pos-5: pos+15;
+}
+
+.\[pos\:pos\+15\] {
+  pos: pos+15;
+}
+
+.\[nWords\:nWords\+nBytes\] {
+  n-words: nWords+nBytes;
+}
+
+.\[pos\:pos\+pointsSize\] {
+  pos: pos+pointsSize;
+}
+
+.\[offset\:offset\+64\] {
+  offset: offset+64;
+}
+
+.\[offset\:pos\] {
+  offset: pos;
+}
+
+.\[pos\:pos\+deltasSize\] {
+  pos: pos+deltasSize;
+}
+
+.\[pos\:pos\+4\] {
+  pos: pos+4;
+}
+
+.\[textOffset\:textOffset\+textLength\] {
+  text-offset: textOffset+textLength;
+}
+
+.\[offset\:offset\+4\] {
+  offset: offset+4;
+}
+
+.\[offset\:offset\+8\] {
+  offset: offset+8;
+}
+
+.\[offset\:offset\+6\] {
+  offset: offset+6;
+}
+
+.\[offset\:offset\+int\(length\)\] {
+  offset: offset+int(length);
+}
+
+.\[startOffset\:startOffset\+4\] {
+  start-offset: startOffset+4;
+}
+
+.\[startOffset\:startOffset\+5\] {
+  start-offset: startOffset+5;
+}
+
+.\[pos\:pos\+axisSize\] {
+  pos: pos+axisSize;
+}
+
+.\[pos\:pos\+instanceSize\] {
+  pos: pos+instanceSize;
+}
+
+.\[pos\:nextPos\] {
+  pos: nextPos;
+}
+
+.\[pos\:pos\+2\] {
+  pos: pos+2;
+}
+
+.\[pos\:pos\+xDataLen\] {
+  pos: pos+xDataLen;
+}
+
+.\[offset\:offset\+length\] {
+  offset: offset+length;
+}
+
+.\[index\:index\+length\] {
+  index: index+length;
+}
+
+.\[current_offset\:current_offset\+sbixStrikeOffsetFormatSize\] {
+  current_offset: current offset+sbixStrikeOffsetFormatSize;
+}
+
+.\[offset\:offset\+TRACK_DATA_FORMAT_SIZE\] {
+  offset: offset+TRACK DATA FORMAT SIZE;
+}
+
+.\[sizeTableOffset\:sizeTableOffset\+SIZE_VALUE_FORMAT_SIZE\] {
+  size-table-offset: sizeTableOffset+SIZE VALUE FORMAT SIZE;
+}
+
+.\[offset\:offset\+TRACK_TABLE_ENTRY_FORMAT_SIZE\] {
+  offset: offset+TRACK TABLE ENTRY FORMAT SIZE;
+}
+
+.\[perSizeOffset\:perSizeOffset\+PER_SIZE_VALUE_FORMAT_SIZE\] {
+  per-size-offset: perSizeOffset+PER SIZE VALUE FORMAT SIZE;
+}
+
+.\[i\:k\] {
+  i: k;
+}
+
+.\[i\:n\] {
+  i: n;
+}
+
+.\[i\:i\+9\] {
+  i: i+9;
+}
+
+.\[i\:endpos\] {
+  i: endpos;
+}
+
+.\[k\:endpos\] {
+  k: endpos;
+}
+
+.\[i\:gtpos\] {
+  i: gtpos;
+}
+
+.\[-\:Tt\] {
+  -: Tt;
+}
+
+.\[start\:delim\] {
+  start: delim;
+}
+
+.\[i-1\:i\+1\] {
+  i-1: i+1;
+}
+
+.\[here\:start\] {
+  here: start;
+}
+
+.\[end\:end\+1\] {
+  end: end+1;
+}
+
+.\[ellipsis_pos\:ellipsis_pos\+1\] {
+  ellipsis_pos: ellipsis pos+1;
+}
+
+.\[ax\:ax\+indx\.ndim\] {
+  ax: ax+indx.ndim;
+}
+
+.\[k\:k\+n\] {
+  k: k+n;
+}
+
+.\[prev\:k\] {
+  prev: k;
+}
+
+.\[offset_items\:offset_items\+count_items\] {
+  offset_items: offset items+count items;
+}
+
+.\[offset\:offset\+N\*d\.nbytes\] {
+  offset: offset+N*d.nbytes;
+}
+
+.\[s\:s\+8\] {
+  s: s+8;
+}
+
+.\[s\:s\+4\] {
+  s: s+4;
+}
+
+.\[val1\:val2\] {
+  val1: val2;
+}
+
+.\[idx\:idx\] {
+  idx: idx;
+}
+
+.\[string_start\:string_end\] {
+  string_start: string end;
+}
+
+.\[start\:edge\] {
+  start: edge;
+}
+
+.\[-5\:-2\] {
+  -5: -2;
+}
+
+.\[six\:eix\] {
+  six: eix;
+}
+
+.\[t_1\:t_2\] {
+  t_1: t 2;
+}
+
+.\[start\:\"2022\"\] {
+  start: "2022";
+}
+
+.\[value\:\"third\"\] {
+  value: "third";
+}
+
+.\[d1\:d2\] {
+  d1: d2;
+}
+
+.\[-6\:-1\] {
+  -6: -1;
+}
+
+.\[middle\:end\] {
+  middle: end;
+}
+
+.\[user\:passwd\@\] {
+  user: passwd@;
+}
+
+.\[left\:right\] {
+  left: right;
+}
+
+.\[inherit_ndx\:inherit_ndx\+1\] {
+  inherit_ndx: inherit ndx+1;
+}
+
+.\[position\:start\] {
+  position: start;
+}
+
+.\[line_offset\:end_line\] {
+  line_offset: end line;
+}
+
+.\[position\:offset\] {
+  position: offset;
+}
+
+.\[offset\:next_offset\] {
+  offset: next offset;
+}
+
+.\[pos\:new_pos\] {
+  pos: new pos;
+}
+
+.\[pos\:end_pos\] {
+  pos: end pos;
+}
+
+.\[cluster\:next_cluster\] {
+  cluster: next cluster;
+}
+
+.\[sig_end\:eof\] {
+  sig_end: eof;
+}
+
+.\[startpos\:i\+1\] {
+  startpos: i+1;
+}
+
+.\[j\:j\+bpp\] {
+  j: j+bpp;
+}
+
+.\[r_offset\:rows\+r_offset\] {
+  r_offset: rows+r offset;
+}
+
+.\[i\:i\+self\.row_regions\] {
+  i: i+self.row regions;
+}
+
+.\[col-2\:col\+3\] {
+  col-2: col+3;
+}
+
+.\[offset\:offset\+dcCount\] {
+  offset: offset+dcCount;
+}
+
+.\[j\:j\+patternlen\] {
+  j: j+patternlen;
+}
+
+.\[x\:x\+2\] {
+  x: x+2;
+}
+
+.\[b\:l\] {
+  b: l;
+}
+
+.\[p1\:p2\] {
+  p1: p2;
+}
+
+.\[ofs\:mlen\] {
+  ofs: mlen;
+}
+
+.\[-5\:-4\] {
+  -5: -4;
+}
+
+.\[dt1\:dt4\] {
+  dt1: dt4;
+}
+
+.\[-1\:3\] {
+  -1: 3;
+}
+
+.\[idx1\:idx2\] {
+  idx1: idx2;
+}
+
+.\[-2\:2\] {
+  -2: 2;
+}
+
+.\[-3\:-1\] {
+  -3: -1;
+}
+
+.\[last\:start\] {
+  last: start;
 }
 
 .selection\:text-white *::-moz-selection {
