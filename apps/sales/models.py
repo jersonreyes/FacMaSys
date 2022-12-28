@@ -1,14 +1,16 @@
+from decimal import Decimal
 from email.policy import default
 from enum import unique
-from django.db import models
-from django.core.validators import MinValueValidator 
-from decimal import Decimal
+
 from django.contrib.auth.models import User
-from django.forms import ChoiceField
-from inventory.models import Service
+from django.core.validators import MinValueValidator
+from django.db import models
 from django.db.models import Sum
+from django.forms import ChoiceField
 from django.utils import timezone
-from user.models import Customer
+
+from apps.inventory.models import Service
+from apps.user.models import Customer
 
 
 # Create your models here.

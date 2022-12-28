@@ -1,7 +1,9 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path, reverse_lazy
+
+from apps.user.forms import LoginForm
+
 from . import views
-from user.forms import LoginForm
 
 urlpatterns = [
     path('login/', views.LoginView.as_view(redirect_authenticated_user=True, template_name='user/login.html',

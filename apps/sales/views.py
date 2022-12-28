@@ -1,25 +1,30 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_http_methods
-from django.utils import timezone
-from django.core.paginator import Paginator
-from django.contrib import messages
-from .models import *
-from .forms import CustomerForm
+import json
 from datetime import timedelta
-from facmasys.utils import get_api_json, post_api_json, to_peso, add_activity, ExportPDF, HTTPResponseHXRedirect
-import json, pandas as pd, numpy as np
-from time import strftime, localtime
-from django.urls import reverse_lazy
+from time import localtime, strftime
+
+import numpy as np
+import pandas as pd
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.utils import timezone
+from django.views.decorators.http import require_http_methods
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from django_tables2.export.views import ExportMixin
-from .tables import *
-from .filters import *
-from django.http import HttpResponse
-from reports.models import Notifications
 
+from apps.reports.models import Notifications
+from facmasys.utils import (ExportPDF, HTTPResponseHXRedirect, add_activity,
+                            get_api_json, post_api_json, to_peso)
+
+from .filters import *
+from .forms import CustomerForm
+from .models import *
+from .tables import *
 
 products = []
 def refresh_products():

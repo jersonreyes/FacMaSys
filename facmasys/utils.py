@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from weasyprint import HTML
 
-from reports.models import ActivityLog, StoreInfo
+from apps.reports.models import ActivityLog, StoreInfo
 
 # Shopify REST API
 api_url = 'https://facmasyspos.myshopify.com/admin/api/2022-10/'

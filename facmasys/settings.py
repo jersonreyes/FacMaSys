@@ -51,19 +51,18 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tinymce',
     'mathfilters',
-    'dashboard',
-    'feed',
-    'user',
-    'sales',
-    'researches',
-    'inventory',
-    'reports',
     'facmasys',
     'django_q',
     'tailwind',
     'tailwind_theme',
-    
-    'faculty_member',
+    'apps.sales',
+    'apps.reports',
+    'apps.researches',
+    'apps.inventory',
+    'apps.faculty_member',
+    'apps.dashboard',
+    'apps.feed',
+    'apps.user',
 ]
 
 TAILWIND_APP_NAME = 'tailwind_theme'

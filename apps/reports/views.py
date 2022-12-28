@@ -1,37 +1,45 @@
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from time import strftime, localtime
-from django.db.models import Sum
-import xlwt, pandas as pd, datetime, json
-from django.contrib import messages
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
+import base64
+import datetime
+import json
 from datetime import datetime, timedelta
-from facmasys.utils import add_activity, render_to_pdf, get_api_json, to_peso_safe, ExportPDF
-from sales.models import Order, OrderProduct
-from .models import ActivityLog
+from time import localtime, strftime
 
+import matplotlib
+import pandas as pd
+import seaborn as sns
+import xlwt
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.utils import timezone
 from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from django_tables2.export.views import ExportMixin
-from .tables import *
+
+from apps.reports.models import Notifications
+from apps.sales.models import Order, OrderProduct
+from facmasys.utils import (ExportPDF, add_activity, get_api_json,
+                            render_to_pdf, to_peso_safe)
+
 from .filters import *
-from reports.models import Notifications
+from .models import ActivityLog
+from .tables import *
 
-import matplotlib, base64, seaborn as sns
 matplotlib.use('Agg')
-from matplotlib import pyplot as plt
-from io import BytesIO
-from .forms import StoreForm, NotificationForm
-from .models import StoreInfo, EmailNotification
-
 from datetime import timedelta
-from django.utils import timezone
-from django_q.tasks import async_task, schedule
-from django_q.models import Schedule
+from io import BytesIO
 
 from django.core.mail import send_mail
+from django.utils import timezone
+from django_q.models import Schedule
+from django_q.tasks import async_task, schedule
+from matplotlib import pyplot as plt
+
+from .forms import NotificationForm, StoreForm
+from .models import EmailNotification, StoreInfo
 
 
 # Create your views here.

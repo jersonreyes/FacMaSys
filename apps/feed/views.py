@@ -1,10 +1,14 @@
-from django.shortcuts import render
+import json
+
+import pandas as pd
 from django.contrib.auth.decorators import login_required
-from sales.models import Order, OrderProduct
 from django.db.models import Sum
+from django.shortcuts import render
 from django.utils import timezone
-from reports.models import Notifications
-import pandas as pd, json
+
+from apps.reports.models import Notifications
+from apps.sales.models import Order, OrderProduct
+
 
 # Create your views here.
 @login_required

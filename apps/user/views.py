@@ -12,9 +12,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 
+from apps.reports.models import Notifications
+from apps.sales.models import Order
 from facmasys.utils import add_activity
-from reports.models import Notifications
-from sales.models import Order
 
 from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
 from .models import Customer, Profile

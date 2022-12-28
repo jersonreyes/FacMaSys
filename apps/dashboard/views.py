@@ -6,8 +6,8 @@ from django.db.models import Sum
 from django.shortcuts import render
 from django.utils import timezone
 
-from reports.models import Notifications
-from sales.models import Order, OrderProduct
+from apps.reports.models import Notifications
+from apps.sales.models import Order, OrderProduct
 
 
 # Create your views here.
@@ -56,8 +56,8 @@ def index(request):
         'order_count':orders.count(),
         'products_sold':products_sold,
         'quantity_change': 100 if prev_products.count() == 0 else (products.count() - prev_products.count()) / prev_products.count() * 100,
-        'state':'researches',
+        'state':'dashboard',
         'notifications':notifications,
     }
-    return render(request, 'researches/index.html', context)
+    return render(request, 'dashboard/index1.html', context)
     

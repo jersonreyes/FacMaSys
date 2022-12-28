@@ -1,24 +1,29 @@
+import base64
+import json
+from time import localtime, strftime
+
+import pandas as pd
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.http import require_http_methods
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
-from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.views.decorators.http import require_http_methods
 from django.views.generic import CreateView, UpdateView
 from django_filters.views import FilterView
-from .models import *
-from reports.models import Notifications
-from .forms import *
-from .filters import *
-from .tables import *
 from django_tables2 import SingleTableMixin
 from django_tables2.export.views import ExportMixin
-from time import strftime, localtime
-from facmasys.utils import add_activity, get_api_json, post_api_json, put_api_json, ExportPDF
-from django.core.mail import send_mail
-import json, base64, pandas as pd
 
+from apps.reports.models import Notifications
+from facmasys.utils import (ExportPDF, add_activity, get_api_json,
+                            post_api_json, put_api_json)
+
+from .filters import *
+from .forms import *
+from .models import *
+from .tables import *
 
 # PRODUCTS -----------------------------------------------------------------------------------
 products, state = [], 'all'
