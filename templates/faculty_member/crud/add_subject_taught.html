@@ -9,18 +9,22 @@
 {% block content %}
 <p>Faculty Member - Add Subject Taught</p>
 
-<form action="" method="post">
+<form action="./update_taught_subjects/{{ request.user.id }}" method="post">
     {% csrf_token %}
-
+.
     {{ current_user }}
-    {{ form }}
     <div>
-        <div>
-            <p>Select your subject here...</p>
-            <p>Hindi pa nalalagay wait for User Model</p>
-
-            <p>Users LEFT JOIN Subjects</p>
-        </div>
+        <select name="handled_subjects" required id="id_handled_subjects" multiple>
+            {% for value, subject in form.handled_subjects.field.choices %}
+                {% if value in selected_list %}
+                    <option value="{{ value }}" selected="">{{ subject }}</option>
+                {% else %}
+                    <option value="{{ value }}">{{ subject }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
     </div>
+    
+    <button type="submit">Submit Data</button>
 </form>
 {% endblock %}
