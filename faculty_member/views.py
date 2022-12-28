@@ -56,7 +56,7 @@ def faculty_subjects_taught(request):
     
 # Researches
 def faculty_researches(request):
-    all_researches = Research.objects.all() 
+    all_researches = Research.objects.all().filter(faculty_id=request.user)
     return render(request, "faculty_member/researches.html", {'all_researches': all_researches})
 
 # Extension Services
