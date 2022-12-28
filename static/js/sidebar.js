@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
             window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
             $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
-            $("#main-body").fadeOut('500').load(e.currentTarget.href + "#main-body").fadeIn('500');       
+            $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
         } 
     })
     
