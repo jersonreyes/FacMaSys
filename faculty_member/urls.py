@@ -13,9 +13,12 @@ urlpatterns = [
     path('', views.faculty_member_main), # subject is the default one.
     path('subject_taught/', views.faculty_subjects_taught),
     path('subject_taught/add_subject', views.add_taught_subjects),
+    path('subject_taught/update_taught_subjects/<int:id>', views.update_taught_subjects),
     
     path('researches/', views.faculty_researches),
     path('researches/add_research', views.add_researches),
+    path('researches/delete_research/<int:id>', views.delete_researches),
+    
     # path('researches/add_presented', views.faculty_researches),
     # path('researches/add_published', views.faculty_researches),
     

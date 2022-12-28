@@ -14,7 +14,7 @@ class UsersForm(forms.ModelForm):
 class SubjectTaughtForm(forms.ModelForm):
     class Meta:
         model = Subjects_Taught
-        fields = "__all__"
+        fields = ['handled_subjects']
         widget = {
             # 'faculty_id': forms.ChoiceField(default=request.user.id),
             'handled_subjects': forms.MultipleChoiceField(),
@@ -35,7 +35,7 @@ class SubjectForm(forms.ModelForm):
 class ExtensionServiceForm(forms.ModelForm):
     class Meta:
         model = ExtensionService
-        fields = "__all__"
+        exclude = ('faculty_id', )
         widget = {
             'email': forms.EmailInput(),
         }
@@ -53,7 +53,9 @@ class Research_Published(forms.ModelForm):
 class ResearchForm(forms.ModelForm):
     class Meta:
         model = Research
-        fields = "__all__"
+        exclude = ('faculty_id', )
+        # fields = "__all__"
+        # fields = ["research_title", "research_progress", "research_area", "degree_level", "researcher_school", "presented_id", "published_id"]
         widget = {
             'research_progress': forms.ChoiceField(),
             'research_area': forms.ChoiceField(),
