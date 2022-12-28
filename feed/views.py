@@ -4,6 +4,7 @@ from sales.models import Order, OrderProduct
 from django.db.models import Sum
 from django.utils import timezone
 from reports.models import Notifications
+from .models import *
 import pandas as pd, json
 
 # Create your views here.
@@ -41,6 +42,10 @@ def index(request):
     notifications = Notifications.objects.filter(user=request.user)
     
     products_sold = products.aggregate(Sum('quantity'))['quantity__sum']
+
+    # Announcement Objects
+    announcements = Announcements.objects.all()
+
     context={
         'time':time,
         'total_sales':total_sales,
@@ -54,6 +59,9 @@ def index(request):
         'quantity_change': 100 if prev_products.count() == 0 else (products.count() - prev_products.count()) / prev_products.count() * 100,
         'state':'feed',
         'notifications':notifications,
+        
+        # Announcement Objects
+        'announcements':announcements,
     }
     return render(request, 'feed/index.html', context)
     
