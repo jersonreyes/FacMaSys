@@ -35,20 +35,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }, 200, function(){
             $(this).html('BulSU CICT Faculty').animate({'opacity': 1}, 200);});
     })
-    var value = localStorage.theme;
-    if(value == 'dark') {
-        document.documentElement.classList.add('dark');
-    }   else {
-        document.documentElement.classList.remove('dark');
-    }
     
     $('.themeToggler').click(function() {
-        var value = localStorage.theme;
+        var value = $.cookie("theme");
         if(value == 'dark') {
-            localStorage.theme = 'light'
+            $.cookie('theme', 'light', { expires: 9999999, path: '/' });
             document.documentElement.classList.remove('dark');
         }   else {
-            localStorage.theme = 'dark'
+            $.cookie('theme', 'dark', { expires: 9999999, path: '/' });
             document.documentElement.classList.add('dark');
         }
     })
