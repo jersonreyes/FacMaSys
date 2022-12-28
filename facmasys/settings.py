@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'django_q',
     'tailwind',
     'tailwind_theme',
+    
+    'faculty_member',
 ]
 
 TAILWIND_APP_NAME = 'tailwind_theme'
