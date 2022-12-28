@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Faculty Member - Subject Taught
+{% endblock %}
+
+
+{% block content %}
+    <h3>Subject Taught</h3>
+    <a href="../">Go back to Home</a>
+    
+    {% if all_subjects|length > 0 %}
+        {% for subject in all_subjects %}
+            <p>User UID: {{ request.user.id }}, Subject Taught: {{ subject }}</p>
+        {% endfor %}
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>course_code</th>
+                    <th>course_title</th>
+                    <th>course_credits</th>
+                    <th>semester</th>
+                    <th>year</th>
+                    <th>course_lec_units</th>
+                    <th>course_lab_units</th>
+                    <th>course_hours_per_week</th>
+                    <th>specialization</th>
+                    <th>pre_requisite</th>
+                    <th>course_type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in all_subjects %}
+                    <tr>
+                        <td>{{ subject.course_code }}</td>
+                        <td>{{ subject.course_title }}</td>
+                        <td>{{ subject.course_credits }}</td>
+                        <td>{{ subject.semester }}</td>
+                        <td>{{ subject.year }}</td>
+                        <td>{{ subject.course_lec_units }}</td>
+                        <td>{{ subject.course_lab_units }}</td>
+                        <td>{{ subject.course_hours_per_week }}</td>
+                        <td>{{ subject.specialization }}</td>
+                        <td>{{ subject.pre_requisite }}</td>
+                        <td>{{ subject.course_type }}</td>
+                        <td>
+                            <a href="../delete/{{subject.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+    {% else %}
+        <h1>No data available.</h1>
+    {% endif %}
+
+
+    <a href="./add_subject">Add Subject Taught</a>
+{% endblock %}

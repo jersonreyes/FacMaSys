@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Faculty Member - Add Subject Taught
+{% endblock %}
+
+
+{% block content %}
+<p>Faculty Member - Add Subject Taught</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+
+    {{ current_user }}
+    {{ form }}
+    <div>
+        <div>
+            <p>Select your subject here...</p>
+            <p>Hindi pa nalalagay wait for User Model</p>
+
+            <p>Users LEFT JOIN Subjects</p>
+        </div>
+    </div>
+</form>
+{% endblock %}
