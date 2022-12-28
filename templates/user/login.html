@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-full {{theme}}" lang="en">
   <head>
     {% load static %}
     {% load crispy_forms_tags %}
@@ -11,47 +11,76 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     
     <!--<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen">--> 
-    
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" media="screen" />
-    <title>FacMaSys - Faculty Management System</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{% static 'scss/style.css' %}" media="screen" />
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/overrides.css' %}" />
+    <link rel="SHORTCUT ICON" href="{% static 'images/logo.png' %}" media="screen" />
+
+    <title>FacMaSys - Login</title>
   </head>
 
-  <body style="background-image: url('/static/images/bg_rev.png');">
-    <div class="container mt-5 pt-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-6 bg-light text"> 
-          <div class="row d-flex justify-content-center mt-5">
-            <img id="logo_home" src="{% static '/images/logo.png' %}" alt="Logo" style="width: 100px; height: 100px;">
-          </div>
-          
-
-          {% comment %} LOGIN MESSAGES {% endcomment %}
-          <div class="alert alert-{{message.tags}} mx-5">
-          {% for message in messages %}
-              {% if message %}
-                {{message}}
-              {% endif %}
-          {% endfor %}
+  <body class="w-screen h-full transition-all dark:bg-[#2A2A2A]">
+    <div class="flex min-h-full" id="main-body">
+      <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
+        <div class="w-full max-w-sm mx-auto lg:w-96">
+          <div>
+            <div class="flex gap-x-4">
+              <div class="flex gap-x-2">
+                <img class="w-auto h-12" src="{% static '/images/logo_bulsu-colored.png' %}"/>
+                <img class="w-auto h-12" src="{% static '/images/logo_cict-colored.png' %}"/>
+              </div>
+              <img class="w-auto h-12" src="{% static '/images/logo.png' %}"/>
+            </div>  
+            <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:white">Sign in to your account</h2>
           </div>
     
-          <!-- Login Form -->
-          <form class="m-5 text-dark" id="formLogin" method="POST">
+          <div class="mt-8">
+            <div class="mt-6">
+              <form class="dark:white" id="formLogin" method="POST">
               {% csrf_token %}
               {{ form|crispy }}
               
-              <button class="btn btn-primary btn-lg btn-block my-4" id="loginBtn" type="submit" style="background-color:#173f7a;">Login</button>
+              <button class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="loginBtn" type="submit" style="background-color:#7a5117;">Login</button>
               
               <div class="row d-flex justify-content-center">
-                <a class="mx-4" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
-                <a class="mx-4" href="{% url 'user-register' %}" style="color:#173f7a;">Don't have an account yet? Go to signup</a>
+                <a class="mx-4 dark:white" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
+                <a class="mx-4 dark:white" href="{% url 'user-register' %}" style="color:#173f7a;">Don't have an account yet? Go to signup</a>
               </div>       
           </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="relative flex-1 hidden w-0 m-3 lg:block">
+        
+        <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
+          <p style="transform:translateY(10px) !important; right:40px;top:30px" value="Toggle Dark/Light Mode" class="z-[200] absolute animate glow delay-7 themeToggler sidebarItem cursor-pointer dark:white no-underline grid grid-flow-col gap-2 items-center place-items-center justify-center hover:sidebarItemActive" id="text_link">                                                                                    
+            <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="invert"/>                   
+            <span class="text-white cursor-pointer">Toggle</span>
+          </p>
+          <div style="z-index:1;width:100vw;height:100vw;position:absolute; background: rgba(143, 76, 0, 0.5)"></div>
+          <div class="z-[200] grid grid-flow-col items-center">
+            <span class="font-bold text-white" style="line-height:0.8;font-size:8vw">FAC<br/>MA<br/>SYS</span>
+            <span class="ml-5 text-white" style="line-height:1;font-size:1vw">College of<br/>Information and <br/>Communications<br/>Technology<br/><br/><p class="text-[10px]">Faculty<br/>Management<br/>System</p></span>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
   </body>
+  <script type="text/javascript" defer
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+  crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js" crossorigin="anonymous"></script>
+  
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  <script>$('.dropdown-toggle').dropdown('toggle')</script>
 </html>

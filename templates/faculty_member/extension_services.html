@@ -16,16 +16,15 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Extension Name</th>
                 <th>Extension Head</th>
-                <th>Logo</th>
+                <!-- <th>Logo</th> -->
                 <th>Geo. Address</th>
                 <th>Email Address</th>
                 <th>Contact</th>
                 <th>Website</th>
                 <th>Background</th>
-                <th>ext_offeredprograms_id</th>
-                <th>ext_collaborator_id</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -33,19 +32,18 @@
         <tbody>
             {% for element in all_extension_services %}
             <tr>
+                <td>{{ element.id }}</td>
                 <td>{{ element.name }}</td>
-                <td>{{ element.logo }}</td>
+                <!-- <td>{{ element.logo }}</td> -->
                 <td>{{ element.address }}</td>
                 <td>{{ element.email }}</td>
                 <td>{{ element.contact_no }}</td>
                 <td>{{ element.website }}</td>
                 <td>{{ element.background }}</td>
                 <td>{{ element.extension_head }}</td>
-                <td>{{ element.ext_offeredprograms_id }}</td>
-                <td>{{ element.ext_collaborator_id }}</td>
                 <td>
-                    <a href="">Update</a>
-                    <a href="">Delete</a>
+                    <a href="./edit_service/{{ element.id }}">Update</a>
+                    <a href="./delete_service/{{ element.id }}">Delete</a>
                 </td>
             </tr>
             {% endfor %}

@@ -23,18 +23,18 @@ from . import views
 urlpatterns = [
     # FacMyLyfe
     # path('accounts/', include('users.urls')),
-    path('faculty_member/', include('faculty_member.urls')),
+    path('faculty_member/', include('apps.faculty_member.urls')),
     # FacMyLyfe
     
     path('', views.index, name='index'),
-    path('dashboard/', include('dashboard.urls')),
-    path('researches/', include('researches.urls')),
-    path('feed/', include('feed.urls')),
+    path('dashboard/', include('apps.dashboard.urls')),
+    path('researches/', include('apps.researches.urls')),
+    path('feed/', include('apps.feed.urls')),
     path('admin/', admin.site.urls),
-    path('inventory/', include('inventory.urls')),
-    path('sales/', include('sales.urls')),
-    path('export/', include('reports.urls')),
-    path('user/', include('user.urls')),
+    path('inventory/', include('apps.inventory.urls')),
+    path('sales/', include('apps.sales.urls')),
+    path('export/', include('apps.reports.urls')),
+    path('user/', include('apps.user.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

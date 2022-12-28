@@ -51,22 +51,21 @@ INSTALLED_APPS = [
     'crispy_forms',
     'tinymce',
     'mathfilters',
-    'dashboard',
-    'feed',
-    'user',
-    'sales',
-    'researches',
-    'inventory',
-    'reports',
     'facmasys',
     'django_q',
     'tailwind',
-    'tailwind_theme',
-    
-    'faculty_member',
+    'apps.tailwind_theme',
+    'apps.sales',
+    'apps.reports',
+    'apps.researches',
+    'apps.inventory',
+    'apps.faculty_member',
+    'apps.dashboard',
+    'apps.feed',
+    'apps.user',
 ]
 
-TAILWIND_APP_NAME = 'tailwind_theme'
+TAILWIND_APP_NAME = 'apps.tailwind_theme'
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -103,7 +102,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'facmasys.context_processors.theme'
+                'facmasys.context_processors.theme',
+                'facmasys.context_processors.ajax'
             ],
         },
     },

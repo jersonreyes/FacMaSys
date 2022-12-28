@@ -11,9 +11,12 @@
 <a href="../">Go back</a>
 <form action="" method="post">
     {% csrf_token %}
-    
-    <!-- Yung form.something, input tag ang binabato niya hindi tinapay -->
+
     <div>
+        <div>
+            <p>Research ID: </p>
+            {{ form.faculty_id }}
+        </div>
         <div>
             <p>Research Title: </p>
             {{ form.research_title }}

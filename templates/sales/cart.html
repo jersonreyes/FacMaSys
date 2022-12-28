@@ -5,7 +5,7 @@
     <div class="col-xxl-4" id="cart">
         {% include 'sales/order_summary.html' %}
 
-        <script type="text/javascript">
+        <script type="text/javascript" defer>
             $(window).on('load', function() {
             {% if err_msg %}
                 $('#orderSummaryModal').modal('show');

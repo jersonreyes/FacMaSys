@@ -38,9 +38,8 @@
                     </div>
                 </div>
             </div>
-            
             <script src="../static/js/chartDefault.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+            
             <script>
                 var options = chartDefault('area',[{% for months in monthly_sales.index %} '{{ months }}', {% endfor %}], [{% for total in monthly_sales.total %} {{ total }}, {% endfor %}])
                 var chart = new ApexCharts(document.querySelector("#chart"), options);

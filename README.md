@@ -8,7 +8,7 @@ If mag-error, install niyo lang:
 https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer
 
 If mag-error about npm:
-> cd tailwind_theme
+> cd apps/tailwind_theme
 > cd static_src
 > npm install
 
