@@ -23,7 +23,7 @@ class ExtensionService_OfferedPrograms(models.Model):
 class ExtensionService(models.Model):
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=200)
-    logo = models.ImageField(default=None, upload_to='extension_service_profilepic/')
+    # logo = models.ImageField(default=None, upload_to='extension_service_profilepic/', blank=True, null=True)
     address = models.CharField(max_length=250, null=True, blank=True)
     email = models.EmailField(max_length=254, null=True, blank=True, unique=True)
     contact_no = models.CharField(max_length=15, null=True, blank=True)

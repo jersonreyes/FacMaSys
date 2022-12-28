@@ -17,12 +17,13 @@ urlpatterns = [
     
     path('researches/', views.faculty_researches),
     path('researches/add_research', views.add_researches),
+    path('researches/edit_research/<int:id>', views.edit_researches),
+    path('researches/update_research/<int:id>', views.update_researches),
     path('researches/delete_research/<int:id>', views.delete_researches),
     
     # path('researches/add_presented', views.faculty_researches),
     # path('researches/add_published', views.faculty_researches),
     
-    # path('researches/update', views.faculty_researches),
     # path('researches/update_presented', views.faculty_researches),
     # path('researches/update_published', views.faculty_researches),
 
@@ -31,6 +32,9 @@ urlpatterns = [
 
     path('extension_services/', views.faculty_extension_services),
     path('extension_services/add_service', views.add_extension_services),
+    path('extension_services/edit_service/<int:id>', views.edit_extension_services),
+    path('extension_services/update_service/<int:id>', views.update_extension_services),
+    path('extension_services/delete_service/<int:id>', views.delete_extension_services),
 
     path('view_announcements/', views.faculty_announcements),
     # path('extensions/', views.extensions),
