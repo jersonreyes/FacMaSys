@@ -16,11 +16,10 @@
     <table>
         <thead>
             <tr>
-                <th>User</th>
                 <th>ID</th>
                 <th>Extension Name</th>
                 <th>Extension Head</th>
-                <th>Logo</th>
+                <!-- <th>Logo</th> -->
                 <th>Geo. Address</th>
                 <th>Email Address</th>
                 <th>Contact</th>
@@ -33,10 +32,9 @@
         <tbody>
             {% for element in all_extension_services %}
             <tr>
-                <td>{{ request.user.id }}</td>
                 <td>{{ element.id }}</td>
                 <td>{{ element.name }}</td>
-                <td>{{ element.logo }}</td>
+                <!-- <td>{{ element.logo }}</td> -->
                 <td>{{ element.address }}</td>
                 <td>{{ element.email }}</td>
                 <td>{{ element.contact_no }}</td>

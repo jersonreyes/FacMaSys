@@ -61,7 +61,7 @@ def faculty_researches(request):
 
 # Extension Services
 def faculty_extension_services(request):
-    all_extension_services = ExtensionService.objects.all()
+    all_extension_services = ExtensionService.objects.all().filter(faculty_id=request.user)
     return render(request, "faculty_member/extension_services.html", {'all_extension_services': all_extension_services})
 
 # View Announcements
