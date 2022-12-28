@@ -39,16 +39,15 @@ def faculty_member_main(request):
 """ VIEW FUNCTIONS """
 # Subject Taught 
 def faculty_subjects_taught(request):
-    print("Logged User: ", request.user.id)
     try:
-        subject =  Subjects_Taught.objects.get(faculty_id=request.user)
+        my_subject =  Subjects_Taught.objects.get(faculty_id=request.user)
         # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
     except Subjects_Taught.DoesNotExist:
         Subjects_Taught.objects.create(faculty_id=request.user)
         # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
     
     context = {
-        'all_subjects': subject.handled_subjects.all()
+        'all_subjects': my_subject.handled_subjects.all()
     }
     return render(request, "faculty_member/subject_taught.html", context)
     
@@ -101,8 +100,7 @@ def add_researches(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
-                print("Success!") 
-                print('asdf', new_form.get('research_progress'))
+                print("Success! done") 
                 return redirect('./')   # refresh
             except:  
                 pass  

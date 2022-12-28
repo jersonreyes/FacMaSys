@@ -4,12 +4,15 @@ import pandas as pd
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 from apps.reports.models import Notifications
 
 from .models import *
 
+from django.apps import apps
+Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
 @login_required
@@ -47,8 +50,16 @@ def index(request):
 
     # Announcement Objects
     announcements = Announcements.objects.all()
-
+    
     # products_sold = products.aggregate(Sum('quantity'))['quantity__sum']
+    
+    field_name = 'user_role'
+    obj = Profile.objects.first()
+    field_object = Profile._meta.get_field(field_name)
+    field_value = field_object.value_from_object(obj)
+    print('field value: ', field_value)
+    
+    
     context={
         'time':time,
         # 'total_sales':total_sales,
@@ -61,10 +72,11 @@ def index(request):
         # 'products_sold':products_sold,
         # 'quantity_change': 100 if prev_products.count() == 0 else (products.count() - prev_products.count()) / prev_products.count() * 100,
         'state':'feed',
-        'notifications':notifications,
+        'notifications': notifications,
         
         # Announcement Objects
         'announcements':announcements,
+        'user_types':field_value,
     }
     return render(request, 'feed/index.html', context)
     

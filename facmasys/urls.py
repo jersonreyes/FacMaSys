@@ -23,7 +23,7 @@ from . import views
 urlpatterns = [
     # FacMyLyfe
     # path('accounts/', include('users.urls')),
-    path('faculty_member/', include('apps.faculty_member.urls')),
+    path('user/', include('apps.faculty_member.urls')),
     # FacMyLyfe
     
     path('', views.index, name='index'),
