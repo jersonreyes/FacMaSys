@@ -46,7 +46,7 @@
               {% csrf_token %}
               {{ form|crispy }}
               
-              <button class="my-4 btn btn-primary btn-lg btn-block" id="loginBtn" type="submit" style="background-color:#7a5117;">Login</button>
+              <button class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="loginBtn" type="submit" style="background-color:#7a5117;">Login</button>
               
               <div class="row d-flex justify-content-center">
                 <a class="mx-4 dark:white" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
@@ -62,12 +62,12 @@
         <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
           <p style="transform:translateY(10px) !important; right:40px;top:30px" value="Toggle Dark/Light Mode" class="z-[200] absolute animate glow delay-7 themeToggler sidebarItem cursor-pointer dark:white no-underline grid grid-flow-col gap-2 items-center place-items-center justify-center hover:sidebarItemActive" id="text_link">                                                                                    
             <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="invert"/>                   
-            <span class="cursor-pointer text-white">Toggle</span>
+            <span class="text-white cursor-pointer">Toggle</span>
           </p>
           <div style="z-index:1;width:100vw;height:100vw;position:absolute; background: rgba(143, 76, 0, 0.5)"></div>
           <div class="z-[200] grid grid-flow-col items-center">
-            <span class="text-white font-bold" style="line-height:0.8;font-size:8vw">FAC<br/>MA<br/>SYS</span>
-            <span class="text-white ml-5" style="line-height:1;font-size:1vw">College of<br/>Information and <br/>Communications<br/>Technology<br/><br/><p class="text-[10px]">Faculty<br/>Management<br/>System</p></span>
+            <span class="font-bold text-white" style="line-height:0.8;font-size:8vw">FAC<br/>MA<br/>SYS</span>
+            <span class="ml-5 text-white" style="line-height:1;font-size:1vw">College of<br/>Information and <br/>Communications<br/>Technology<br/><br/><p class="text-[10px]">Faculty<br/>Management<br/>System</p></span>
           </div>
         </div>
       </div>
