@@ -17,6 +17,10 @@ urlpatterns = [
     
     path('researches/', views.faculty_researches),
     path('researches/add_research', views.add_researches),
+    path('researches/add_presented', views.add_presented),
+    path('researches/add_published', views.add_published),
+
+
     path('researches/edit_research/<int:id>', views.edit_researches),
     path('researches/update_research/<int:id>', views.update_researches),
     path('researches/delete_research/<int:id>', views.delete_researches),

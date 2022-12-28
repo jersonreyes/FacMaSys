@@ -14,9 +14,23 @@
             </div>
         </div>
         <div class="mt-[4vh] grid gap-3 grid-cols-3 grid-rows-4 [&>div]:rounded-md min-h-screen w-full">
+            {# For displaying the list of registered announcements #}
+            {% if announcements|length > 0 %}
+                {% for element in announcements %}
+                    <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}">
+                        <strong> {{ element.title}} </strong> <br>
+                        {{ element.description }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+            {% comment %}
             {% for i in "x"|rjust:"9" %}
-                <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}"></div>
+ 
             {% endfor %}
+            {% endcomment %}
+        </div>
         </div>
     </div>
 <!--End Graphs-->

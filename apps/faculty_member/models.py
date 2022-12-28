@@ -94,7 +94,11 @@ class Research(models.Model):
     # models.OneToOneField(User, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        return f'Research Title: {self.research_title} | Research Progress: {self.research_progress} | Degree Level: {self.degree_level}'
+        # return f'Research Title: {self.research_title} | Research Progress: {self.research_progress} | Degree Level: {self.degree_level}'
+        return f'Research Title: {self.research_title}'
+    
+    def __references__(self):
+        return self.faculty_id
 
 
 
@@ -121,20 +125,18 @@ class Research_Presented(models.Model):
     event_venue = models.CharField(max_length=200, null=False, blank=False)
     event_start_date = models.DateField(null=False, blank=False)
     event_end_date = models.DateField(null=False, blank=False)
-    
     presentation_type = models.CharField(max_length=200, choices=PRESENTATION, default="Conference", blank=False, null=True)
     event_type = models.CharField(max_length=200, choices=EVENT_TYPE, default="Physical", blank=False, null=True)
-
     org_name = models.CharField(max_length=200, null=False, blank=False)
     org_website_url = models.CharField(max_length=200, null=False, blank=False)
     org_support = models.CharField(max_length=200, null=False, blank=False)
     org_description = models.TextField(max_length=500, null=False, blank=False)
-    
     date_presented = models.DateField(null=False)
-    published_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
+    presented_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
+    faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, default=None)
     
     def __str__(self) -> str:
-        return f'{self.short_name}: {self.event_name}, {self.date_presented}'
+        return f'{self.presented_id} {self.short_name}: {self.event_name}, {self.date_presented}'
     
 
 
@@ -153,11 +155,11 @@ class Research_Published(models.Model):
     source = models.CharField(max_length=200, blank=False, null=False)
     research_license = models.CharField(max_length=200, choices=RESEARCH_LICENSE, default="None", blank=False, null=True)
     abstract = models.TextField(max_length=1200, blank=False, null=False)
-    presented_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
-    
+    published_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
+    faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self) -> str:
-        return f'{self.publication}: {self.published_date}, {self.research_license}'
+        return f'{self.published_id} {self.publication}: {self.published_date}, {self.research_license}'
     
 
 
@@ -212,20 +214,5 @@ class Subjects_Taught(models.Model):
         return f'Faculty ID: {self.faculty_id} | Handled Subjects: {self.handled_subjects.values().all()}'
 
 
-""" ################################# USERS ################################# """
-class Users(models.Model):
-    USER_TYPE = (
-        ('Faculty', 'Faculty'),
-        ('Department Head', 'Department Head'),
-        ('Research Coordinator', 'Research Coordinator'),
-        ('Extension Coordinator', 'Extension Coordinator'),
-    )
-    
-    name = models.CharField(max_length=100, blank=False, null=False)
-    # logo = models.ImageField(default=None, upload_to='user_profile-pic/')
-    user_type = models.CharField(max_length=200, choices=USER_TYPE, default="Faculty", blank=False, null=False)
-    username = models.CharField(max_length=200, blank=False, null=False)
-    email = models.EmailField(max_length=200, blank=False, null=False)
-    password = models.CharField(max_length=200, choices=USER_TYPE, default="Faculty", blank=False, null=False)
     
     
