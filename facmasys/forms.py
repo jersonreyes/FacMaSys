@@ -4,11 +4,11 @@ from django.forms import ModelForm
 
 from .models import *
 
-Announcements = apps.get_model('feed', 'Announcements')
+Feeds = apps.get_model('feed', 'Feeds')
 
-class AnnouncementsForm(forms.ModelForm):
+class FeedsForm(forms.ModelForm):
     class Meta:
-        model = Announcements
+        model = Feeds
         # fields = "__all__"
         exclude = ('user_id',  )
 

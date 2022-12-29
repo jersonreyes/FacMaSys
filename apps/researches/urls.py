@@ -5,4 +5,5 @@ from . import views
 
 urlpatterns = [
     path('',views.index, name='researches-index'),
+    path('get/<int:id>',views.get_research, name="researches-get"),
 ]

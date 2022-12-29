@@ -1,17 +1,17 @@
 import json
 
 import pandas as pd
+from django.apps import apps
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.utils import timezone
 
 from apps.reports.models import Notifications
 
 from .models import *
 
-from django.apps import apps
 Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
@@ -49,7 +49,7 @@ def index(request):
     notifications = Notifications.objects.filter(user=request.user)
 
     # Announcement Objects
-    announcements = Announcements.objects.all()
+    feeds = Feeds.objects.all()
     
     # products_sold = products.aggregate(Sum('quantity'))['quantity__sum']
     
@@ -75,7 +75,7 @@ def index(request):
         'notifications': notifications,
         
         # Announcement Objects
-        'announcements':announcements,
+        'feeds':feeds,
         'user_types':field_value,
     }
     return render(request, 'feed/index.html', context)
