@@ -1,0 +1,67 @@
+<div>
+
+    {% block presented %}
+        <a href="./add_presented">Add Presented</a>
+        <!-- Research Presented -->
+        <h1>Presented: </h1>
+        {% if research_presented|length > 0 %}
+        <table class="table" id="presented">
+            <thead>
+                <tr>
+                    <th>Research ID</th>
+                    <td>short_name</td>
+                    <td>event_name</td>
+                    <td>event_venue</td>
+                    <td>event_start_date</td>
+                    <td>event_end_date</td>
+                    <td>presentation_type</td>
+                    <td>event_type</td>
+                    <td>org_name</td>
+                    <td>org_website_url</td>
+                    <td>org_support</td>
+                    <td>org_description</td>
+                    <td>date_presented</td>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for element in research_presented %}
+                <tr>
+                    <td>ID: {{ element.id }}, <b>Presented: </b>{{element.presented_id}}</td>
+                    <td>{{element.short_name}}</td> 
+                    <td>{{element.event_name}}</td> 
+                    <td>{{element.event_venue}}</td> 
+                    <td>{{element.event_start_date}}</td> 
+                    <td>{{element.event_end_date}}</td> 
+                    <td>{{element.presentation_type}}</td> 
+                    <td>{{element.event_type}}</td> 
+                    <td>{{element.org_name}}</td> 
+                    <td>{{element.org_website_url}}</td> 
+                    <td>{{element.org_support}}</td> 
+                    <td>{{element.org_description}}</td> 
+                    <td>{{element.date_presented}}</td> 
+                    <td>
+                        <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
+                        <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        {% else %}
+            <h3>No data available.</h3>
+        {% endif %}
+    
+        <script type="text/javascript" class="init">
+            $(document).ready(function() {
+            $('#presented').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+        </script>
+    {% endblock %}
+    </div>

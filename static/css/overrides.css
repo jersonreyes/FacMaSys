@@ -271,3 +271,7 @@
     -ms-user-select: none;
     user-select: none;
   }
+
+  button.dt-button {
+    background-color: white !important;
+  }

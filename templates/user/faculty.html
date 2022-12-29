@@ -34,22 +34,6 @@
         <div class="my-3">
             {% block filters %}
             <form class="form-inline my-2 my-lg-0" method="get">
-                    <div class="col-mr-1 grid grid-flow-col gap-2">
-                        {{ filter.form|crispy }}
-                        <span class="tooltips_top">
-                            <button class="flex p-2 rounded-md gap-2 items-center border-black border dark:border-0 bg-[rgba(184,184,184,0.5)] btn-danger mx-2" href="{% url 'faculty-index' %}">
-                                <span class="tooltiptext_top"> Clear </span>                        
-                                <img src="{% static 'images/icon_remove_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
-                            </button>
-                        </span>
-
-                        <span class="tooltips_top">
-                            <button type="submit" class="flex p-2 rounded-md gap-2 items-center border-black border dark:border-none bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(93,93,93,0.5)]">
-                                <span class="tooltiptext_top"> Filter </span>                        
-                                <img src="{% static 'images/icon_filter.png' %}" style="width:18px; height:18px;" alt="Add">                        
-                            </button>
-                        </span>
-                    </div>
                     {% endblock %}
                     {% comment %} <div class="col">
                         <div class="float-right">
@@ -62,83 +46,12 @@
                         </div>
                     </div> {% endcomment %}
             </form>
-
-            {% comment %} EXPORT {% endcomment %}
-            <div class="col">
-                <div class="float-right">
-                    <span class="tooltips_top">
-                        <div class="btn-group" style="width:auto">
-                            <button type="button" class="translate-y-[-10px] flex p-2 rounded-md gap-2 items-center border-black border dark:border-0 bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(93,93,93,0.5)] dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="tooltiptext_top"> Export </span>  
-                                <img src="{% static 'images/icon_download.png' %}" style="width:15px; height:15px;" class="invert dark:invert-0" alt="Download">
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" style="width:auto">
-                                {% for format in view.export_formats %}
-                                    <button class="dropdown-item" onclick="window.location.href = '{% export_url format %}'">
-                                        <code>.{{ format }}</code>
-                                    </button>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </span>
-                </div>
-            </div> 
             
         </div>
         <div id="item-list">
             <div>
                 {% render_table table %}
             </div>
-
-            <!-- SHOWING X OF X STAFF -->
-            <p class="font-sans ml-4 text-muted mt-4 dark:text-white/70">  
-                Showing <strong> {{count}} </strong>  of  <strong> {{count}} </strong> Faculty
-                &nbsp;&nbsp; | &nbsp;&nbsp; 
-                Page: <strong> {{ page.number }} </strong> / <strong> {{ page.paginator.num_pages }} </strong> 
-            </p>
-
-                <!-- PAGINATION -->
-                <div class="row my-1">
-                    <div class="col d-flex justify-content-center">
-                        <nav aria-label="...">
-                            <ul class="pagination dark:[&>li>a.page-link]:bg-[rgba(74,74,74,0.5)] dark:[&>li>a.page-link]:white dark:[&>li>a.page-link]:border-[rgba(88,88,88,0.5)]">
-                                <li class="dark:bg-[rgba(61,61,61,0.9)]">
-                                {% if page.has_previous %}
-                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ page.previous_page_number }}">Previous</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="">Previous</a>
-                                </li>
-                                {% endif %}
-
-                                {% for num_page in page.paginator.page_range %}
-                                <br>
-                                {% if page.number == num_page %}
-                                <li class="page-item bg-gray-400 dark:bg-[rgba(200,200,200,0.2)]" aria-current="page">
-                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ num_page }}">{{ num_page }}</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item" aria-current="page">
-                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ num_page }}">{{ num_page }}</a>
-                                </li>
-                                {% endif %}
-                                <br>
-                                {% endfor %}
-                            
-                                <li class="page-item">
-                                {% if page.has_next %}
-                                    <a class="page-link" href="{% url 'faculty-index' %}?page={{ page.next_page_number }}">Next</a>
-                                </li>
-                                {% else %}
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="">Next</a>
-                                </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
 {% block table-wrapper %}
     <div id="table-container" class="table-container">
         {% block table %}
-            <table id="table" class="dark:white text-center border-black" {% render_attrs table.attrs class="table" %}>
+            <table id="faculty-table" class="dark:white text-center border-black" {% render_attrs table.attrs class="table" %}>
                 {% block table.thead %}
                     {% if table.show_header %}
                         <thead {{ table.attrs.thead.as_html }}>
@@ -55,98 +55,15 @@
                 {% endblock table.tfoot %}
             </table>
         {% endblock table %}
-
-        <p class="font-sans text-muted d-inline">
-            {% with rows=table.rows|length rows_per_page=table.page.object_list|length row_count=table.page.object_list|length|mul:table.page.number %}
-            
-                Showing <strong>
-
-                {% if table.page.number == 1 %}
-                    1
-                {% elif table.page.number == table.paginator.num_pages %}
-                    {{ rows|sub:rows_per_page|add:1 }}
-                {% else %}
-                    {{ rows_per_page|add:1|mul:table.page.previous_page_number }}
-                {% endif %}
-                
-                </strong>- <strong>
-
-                {% if table.page.number == table.paginator.num_pages %}
-                    {{ rows }}
-                {% else %}
-                    {{ row_count }}
-                {% endif %}
-
-                </strong> of <strong> {{ rows }} </strong>
-
-                {% if rows <= 1 %}
-                    {{ table.data.verbose_name|capfirst }}
-                {% else %}
-                    {{ table.data.verbose_name_plural|capfirst }}
-                {% endif %}
-
-            {% endwith %}
-            &nbsp; | &nbsp;&nbsp;Page: <strong>{{ table.page.number }}</strong> / <strong>{{ table.paginator.num_pages }}</strong>
-        </p>
-
-        <div class="row m-1"> 
-            <div class="col d-flex justify-content-center">               
-        {% block pagination %}
-                <nav aria-label="Table navigation">
-                    <ul class="pagination dark:[&>li>a.page-link]:bg-[rgba(74,74,74,0.5)] dark:[&>li>a.page-link]:white dark:[&>li>a.page-link]:border-[rgba(88,88,88,0.5)]">
-                        {% if table.page.has_previous %}
-                            {% block pagination.previous %}
-                                <li class="previous page-item" role="button">
-                                    <a hx-get="{% querystring table.prefixed_page_field=table.page.previous_page_number %}" hx-trigger="click" hx-target="#table-container" hx-swap="outerHTML" class="page-link">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        {% trans 'Previous' %}
-                                    </a>
-                                </li>
-                            {% endblock pagination.previous %}
-                        {% else %}
-                            <li class="previous page-item disabled" role="button">
-                                <a class="page-link">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    {% trans 'Previous' %}
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if table.page.has_previous or table.page.has_next %}
-                            {% block pagination.range %}
-                                {% for p in table.page|table_page_range:table.paginator %}
-                                    <li class="page-item{% if table.page.number == p %} active{% endif %}" role="button">
-                                        <a class="page-link" {% if p != '...' %}hx-get="{% querystring table.prefixed_page_field=p %}"{% endif %} hx-trigger="click" hx-target="#table-container" hx-swap="outerHTML">
-                                            {{ p }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            {% endblock pagination.range %}
-                        {% else %}
-                            <li class="page-item active" role="button">
-                                <a class="page-link">1</a>
-                            </li>
-                        {% endif %}
-                        {% if table.page.has_next %}
-                            {% block pagination.next %}
-                                <li class="next page-item user-select" role="button">
-                                    <a hx-get="{% querystring table.prefixed_page_field=table.page.next_page_number %}" hx-trigger="click" hx-target="#table-container" hx-swap="outerHTML" class="page-link">
-                                        {% trans 'Next' %}
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            {% endblock pagination.next %}
-                        {% else %}
-                            <li class="next page-item user-select disabled" role="button">
-                                <a class="page-link">
-                                    {% trans 'Next' %}
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-        {% endblock pagination %}
-            </div>
-        </div>
+        <script type="text/javascript" class="init">
+            $(document).ready(function() {
+            $('#faculty-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+        </script>
     </div>
 {% endblock table-wrapper %}

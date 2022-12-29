@@ -10,29 +10,52 @@
             <div class="absolute">
                 <p class="mb-2 font-sans font-bold text-white text-8xl">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
                 <p class="max-w-xl mx-auto font-sans text-lg text-white">Welcome to the BulSU-CICT Faculty Management System! To earn your productivity, we provide numerous tools and features to assist you in staying organized.</p>
-                <div class="grid max-w-screen-lg grid-cols-2 gap-2 mt-8">
+                <div class="grid max-w-screen-lg grid-cols-2 gap-2">
+
                     {% if not request.user.is_authenticated %}
-                        <a href="/user/login/">
-                        {% endif %}
-                            <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
-                                <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Feed</p>
-                                <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Stay informed about important deadlines, events, and announcements in your department. </p>
-                            </div>
-                        {% if not request.user.is_authenticated %}
-                        </a>
+                    <a href="{% url 'feed-index' %}">
                     {% endif %}
-                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
-                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Faculty Management</p>
-                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Learn more about the faculty members and the subjects they teach.</p>
-                    </div>
-                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
-                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Research and Extensions</p>
-                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Explore information regarding the college's research and extensions. </p>
-                    </div>
-                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
-                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Course Management</p>
-                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Manage the department's current curricular subjects. </p>
-                    </div>
+                        <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
+                            <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Feed</p>
+                            <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Stay informed about important deadlines, events, and announcements in your department. </p>
+                        </div></a>
+                    {% if not request.user.is_authenticated %}
+                    </a>
+                    {% endif %}
+
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'faculty-index' %}">
+                    {% endif %}
+                        <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
+                            <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Faculty Management</p>
+                            <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Learn more about the faculty members and the subjects they teach.</p>
+                        </div>
+                    {% if not request.user.is_authenticated %}
+                    </a>
+                    {% endif %}
+
+
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'researches-index' %}">
+                    {% endif %}
+                        <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
+                            <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Research and Extensions</p>
+                            <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Explore information regarding the college's research and extensions. </p>
+                        </div>
+                    {% if not request.user.is_authenticated %}
+                    </a>
+                    {% endif %}
+
+                    {% if not request.user.is_authenticated %}
+                    <a href="{% url 'subjects-index' %}">
+                    {% endif %}
+                        <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
+                            <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Course Management</p>
+                            <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Manage the department's current curricular subjects, you can add, delete, and update. </p>
+                        </div>
+                    {% if not request.user.is_authenticated %}
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@
             </div>
             <a href="./add_subject">Add Subjects</a>
             {% if all_subjects|length > 0 %}
-            <table>
+            <table class="table" id="subjects">
                 <thead>
                     <th>Course Code</th>
                     <th>Course Title</th>
@@ -47,7 +47,6 @@
                         <td>{{ e.course_type }} </td>
                         <td>
                             <button onclick="window.location.href='update_subject/{{e.id}}'">Update</a>
-                            <button onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -59,4 +58,14 @@
         </div>
     </div>
     {% endif %}
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#subjects').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
 {% endblock %}

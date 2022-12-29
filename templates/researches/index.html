@@ -13,7 +13,7 @@
             <div class="grid justify-between pr-2" style="grid-template-columns: 70fr 40fr;">
               <p id="drawer-title" class="font-bold tracking-[-2px] leading-[1]" style="font-size:25px;">Benefits of Lumpiang Shanghai</p>
               <div class="mb-4">
-                <div id="drawer-download" class="main-theme-bg white py-2 px-3 rounded-md text-sm inline-block cursor-pointer hover:opacity-50">Download</div>
+                <div id="drawer-download" class="download main-theme-bg white py-2 px-3 rounded-md text-sm inline-block cursor-pointer hover:opacity-50">Download</div>
               </div>
             </div>
             <div class="flex gap-2 items-center">
@@ -53,9 +53,11 @@
                 <p class="font-sans text-[13px] font-normal opacity-80 dark:text-white">Access hundreds of papers of the college.</p>
                 <div id="research-search-container" class="pt-6 search flex justify-center">
                     <div class="relative w-[95%]">
-                    <img src="/static/images/search_neutral.png" class="translate-y-[-2px]" style="height:20px;width:auto"/>
-                    <input placeholder="Search" class="p-2 w-full rounded-md border-black border" style="padding-left:45px !important"/>
-                        </div>
+                      <img src="/static/images/search_neutral.png" class="translate-y-[-2px]" style="height:20px;width:auto"/>
+                      <form method="get">
+                        <input type='text' placeholder="Search" name="q" class="p-2 w-full rounded-md border-black border" style="padding-left:45px !important"/>
+                      </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,66 @@
+<div>
+
+{% block ongoing %}
+    <a href="../">Go back to Home</a>
+
+    <br>
+    <a href="./add_research">Add Researches</a>
+
+    <!-- Research Ongoing -->
+    <h1>All Researches: </h1>
+    {% if research_ongoing|length > 0 %}
+    <table class="table" id="ongoing">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID</th>
+                <th>Research Title</th>
+                <th>Area</th>
+                <th>abstract</th>
+                <th>document</th>
+                <th>date_added</th>
+                <th>School</th>
+                <th>Degree Level</th>
+                <th>Progress</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for element in research_ongoing %}
+            <tr>
+                <td>{{ element.id }}</td>
+                <td>{{ element.faculty_id }}</td>
+                <td>{{ element.research_title }}</td>
+                <td>{{ element.research_area }}</td>
+                <td>{{ element.abstract }}</td>
+                <td>{{ element.document }}</td>
+                <td>{{ element.date_added }}</td>
+                <td>{{ element.researcher_school }}</td>
+                <td>{{ element.degree_level }}</td>
+                <td>{{ element.research_progress }}</td>
+
+                <td>
+                    <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
+                    <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <h3>No data available.</h3>
+    {% endif %}
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#ongoing').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
+{% endblock %}
+</div>
