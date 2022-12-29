@@ -109,7 +109,7 @@ class Research(models.Model):
     
     def __str__(self) -> str:
         # return f'Research Title: {self.research_title} | Research Progress: {self.research_progress} | Degree Level: {self.degree_level}'
-        return f'Research Title: {self.research_title}'
+        return f'{self.id}'
     
     def __references__(self):
         return self.faculty_id
@@ -150,7 +150,7 @@ class Research_Presented(models.Model):
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, default=None)
     
     def __str__(self) -> str:
-        return f'{self.presented_id} {self.short_name}: {self.event_name}, {self.date_presented}'
+        return f'{self.presented_id}'
     
 
 
@@ -173,7 +173,7 @@ class Research_Published(models.Model):
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     def __str__(self) -> str:
-        return f'{self.published_id} {self.publication}: {self.published_date}, {self.research_license}'
+        return f'{self.published_id}'
     
 
 

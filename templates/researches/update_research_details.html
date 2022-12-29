@@ -1,0 +1,46 @@
+{% extends "main.html" %} {% block title %} Faculty Member - Add Subject Taught
+{% endblock %} {% block content %}
+<p>Faculty Member - Add Subject Taught</p>
+
+<form method="POST" action="./{{ research.id }}">
+    {% csrf_token %}
+    <input type="text" name="research_title" maxlength="100" required="" value="{{ research.research_title }}" id="id_research_title" />
+
+
+    <select name="research_progress" id="id_research_progress">
+    {% for value, subject in form.research_progress.field.choices %}
+        {% if research.research_progress == value %}
+            <option value="{{value}}" selected>{{value}}</option>
+        {% else %}
+            <option value="{{value}}">{{value}}</option>
+        {% endif %}
+    {% endfor %}
+    </select>
+
+
+    <select name="research_area" id="id_research_area">
+        {% for value, subject in form.research_area.field.choices %}
+            {% if research.research_area == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+            {% else %}
+                <option value="{{value}}">{{value}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <select name="degree_level" id="id_degree_level">
+        {% for value, subject in form.degree_level.field.choices %}
+            {% if research.degree_level == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+            {% else %}
+                <option value="{{value}}">{{value}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+    <input type="text" name="researcher_school" maxlength="100" required="" value="{{ research.researcher_school }}" id="id_researcher_school" />
+
+    <button type="submit">Update Data</button>
+</form>
+
+{% endblock %}

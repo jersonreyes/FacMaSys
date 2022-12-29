@@ -54,8 +54,8 @@ class ExtensionServiceForm(forms.ModelForm):
 class Research_PresentedForm(forms.ModelForm):
     class Meta:
         model = Research_Presented
-        exclude = ('faculty_id',  )
-        # fields = "__all__"
+        # exclude = ('faculty_id',  )
+        fields = "__all__"
         widget = {
             'event_start_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
             'event_end_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),

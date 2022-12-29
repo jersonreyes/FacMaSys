@@ -141,9 +141,9 @@
                 <td>{{element.org_description}}</td> 
                 <td>{{element.date_presented}}</td> 
                 <td>
-                    <a href="./update_research/{{ element.id }}">Update</a>
-                    <a href="./delete_research/{{ element.id }}">Delete</a>
-                    <a href="#">Update Details</a>
+                    <!-- <a href="./update_research/{{ element.id }}">Update</a> -->
+                    <a href="./delete_details/a/{{ element.id }}">Delete</a>
+                    <a href="./update_details/a/{{element.presented_id}}">Update Details</a>
                 </td>
             </tr>
             {% endfor %}
@@ -181,9 +181,9 @@
                 <td>{{ element.research_license }}</td>
                 <td>{{ element.abstract }}</td>
                 <td>
-                    <a href="./update_research/{{ element.id }}">Update</a>
-                    <a href="./delete_research/{{ element.id }}">Delete</a>
-                    <a href="#">Update Details</a>
+                    <!-- <a href="./update_research/{{ element.id }}">Update</a> -->
+                    <a href="./delete_details/b/{{ element.id }}">Delete</a>
+                    <a href="./update_details/b/{{element.published_id}}">Update Details</a>
                 </td>
             </tr>
             {% endfor %}
