@@ -199,7 +199,7 @@ def faculty_subjects_taught(request):
     context = {
         'all_subjects': my_subject.handled_subjects.all()
     }
-    return render(request, "faculty_member/subject_taught.html", context)
+    return render(request, "subjects/subject_taught.html", context)
     
 def add_taught_subjects(request):
     
@@ -275,7 +275,7 @@ def faculty_researches(request):
         'research_presented': research_presented,
         'research_published': research_published,
     }
-    return render(request, "faculty_member/researches.html", context)
+    return render(request, "researches/researches.html", context)
 
 # Create your views here.
 def add_researches(request):  

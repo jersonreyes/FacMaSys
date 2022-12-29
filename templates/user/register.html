@@ -1,43 +1,86 @@
-{% extends 'partials/base.html' %}
-{% block title %} Registration {% endblock %}
-{% block headers %} REGISTER PAGE {% endblock %}
-{% load crispy_forms_tags %}
+{% load tailwind_tags %}
+<!DOCTYPE html>
+<html class="h-full {{theme}}" lang="en">
+  <head>
+   
+    {% tailwind_css %}
+    {% load static %}
+    {% load crispy_forms_tags %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block content %}
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
-
- <div style="margin-top: 64px;">
-
-    <nav class="mb-2 navbar navbar-expand-sm navbar-light" style="background-color: rgba(248, 249, 250, 0.85);">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     
-        <div class="mx-4" id="navbarSupportedContent">
-        <ul class="mr-auto navbar-nav">
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'user-login' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Login </a>               
-            </li>       
-        </ul>
-        </div>
-    </nav>
+    <!--<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen">--> 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"></script>
 
-    <div class="container">
-        <div class="mt-5 row">
-            <div class="col-md-6 offset-md-3">
-                <div class="p-5 border bg-light">
-                    <h3>Faculty Registration</h3>
-                    <hr>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <div class="mx-1 mt-3 row">
-                            <input class="btn btn-primary" type="submit" value="Register">
-                        </div>                       
-                    </form>
-                </div>
+    <link rel="stylesheet" href="{% static 'scss/style.css' %}" media="screen" />
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/overrides.css' %}" />
+    <link rel="SHORTCUT ICON" href="{% static 'images/logo.png' %}" media="screen" />
+
+    <title>FacMaSys - Login</title>
+  </head>
+
+  <body class="w-screen h-full transition-all dark:bg-[#212121]">
+    <div class="flex min-h-full" id="main-body">
+      <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
+        <div class="w-full max-w-sm mx-auto lg:w-96">
+          <div>
+            <div class="flex gap-x-4">
+              <div class="flex gap-x-2">
+                <img class="w-auto h-12" src="{% static '/images/logo_bulsu-colored.png' %}"/>
+                <img class="w-auto h-12" src="{% static '/images/logo_cict-colored.png' %}"/>
+              </div>
+              <img class="w-auto h-12" src="{% static '/images/logo.png' %}"/>
+            </div>  
+            <h2 class="mt-6 font-sans text-3xl font-bold text-gray-900 dark:white">Create an account</h2>
+          </div>
+    
+          <div class="mt-8">
+            <div class="mt-6">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="flex justify-center w-full px-4 py-2 mt-4 font-sans text-base font-medium text-white border border-transparent rounded-md bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2" value="Register" type="submit">Register</button>
+              
+              <div class="flex flex-col mt-3 first-letter:gap-y-4">
+                <span class="font-sans text-center">Already have an account? <a style="color: rgb(245 158 11 / var(--tw-text-opacity));" class="font-sans font-medium text-amber-600 hover:text-amber-700" href="{% url 'user-login' %}">Login</a></span>
+              </div>                           
+                </form>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="relative flex-1 hidden w-0 m-3 lg:block">
+        
+        <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
+          <p style="transform:translateY(10px) !important; right:40px;top:30px" value="Toggle Dark/Light Mode" class="z-[200] absolute animate glow delay-7 themeToggler sidebarItem cursor-pointer dark:white no-underline grid grid-flow-col gap-2 items-center place-items-center justify-center hover:sidebarItemActive" id="text_link">                                                                                    
+            <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="invert"/>                   
+          </p>
+          <div style="z-index:1;width:100vw;height:100vw;position:absolute; background: rgba(143, 76, 0, 0.5)"></div>
+          <div class="z-[200]">
+            <img src="{% static 'images/logo-fms_full.svg' %}" style="height: 256px" > 
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </body>
+  <script type="text/javascript" defer
+  src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+  crossorigin="anonymous"></script>
 
-
-
-{% endblock %}
+  <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js" crossorigin="anonymous"></script>
+  
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  <script>$('.dropdown-toggle').dropdown('toggle')</script>
+</html>

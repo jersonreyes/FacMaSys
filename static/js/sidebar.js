@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $('#page_title_body').stop().animate({
             'opacity' : 0
         }, 200, function(){
-            $(this).html('BulSU CICT Faculty').stop().animate({'opacity': 1}, 200);});
+            $(this).html('Faculty Management System').stop().animate({'opacity': 1}, 200);});
     })
     $('.selected-from-url').length==0 && $("#nav-highlighter").hide()
     var pos = $('.selected-from-url').position()
