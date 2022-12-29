@@ -34,17 +34,17 @@ urlpatterns = [
     
     # path('researches/delete', views.faculty_researches),
 
-    path('extension_services/', views.faculty_extension_services),
-    path('extension_services/add_service', views.add_extension_services),
-    path('extension_services/edit_service/<int:id>', views.edit_extension_services),
-    path('extension_services/update_service/<int:id>', views.update_extension_services),
-    path('extension_services/delete_service/<int:id>', views.delete_extension_services),
+    # path('extension_services/', views.faculty_extension_services),
+    # path('extension_services/add_service', views.add_extension_services),
+    # path('extension_services/edit_service/<int:id>', views.edit_extension_services),
+    # path('extension_services/update_service/<int:id>', views.update_extension_services),
+    # path('extension_services/delete_service/<int:id>', views.delete_extension_services),
 
-    path('view_announcements/', views.faculty_announcements),
-    path('view_announcements/add_announcements', views.add_announcements),
-    path('view_announcements/edit_announcements', views.edit_announcements),
-    path('view_announcements/update_announcements/<int:id>', views.update_announcements),
-    path('view_announcements/delete_announcements/<int:id>', views.delete_announcements),
+    # path('view_announcements/', views.faculty_announcements),
+    # path('view_announcements/add_announcements', views.add_announcements),
+    # path('view_announcements/edit_announcements', views.edit_announcements),
+    # path('view_announcements/update_announcements/<int:id>', views.update_announcements),
+    # path('view_announcements/delete_announcements/<int:id>', views.delete_announcements),
     # path('extensions/', views.extensions),
     # path('announcements/', views.announcements),
     
