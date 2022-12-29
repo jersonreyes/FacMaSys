@@ -9,7 +9,7 @@
 <h1>Add Researches</h1>
 
 <a href="../">Go back</a>
-<form action="" method="post">
+<form enctype="multipart/form-data" action="" method="post">
     {% csrf_token %}
 
     <div>
@@ -34,9 +34,29 @@
             {{ form.degree_level }}
         </div>
         <div>
+            <p>Content Type: </p>
+            {{ form.content_type }}
+        </div>
+        <div>
+            <p>Abstract: </p>
+            {{ form.abstract }}
+        </div>
+        <div>
+            <p>Document: </p>
+            {{ form.document }}
+        </div>
+        <div>
             <p>School: </p>
             {{ form.researcher_school }}
         </div>
+        <div>
+            <p>Degree Level: </p>
+            {{ form.degree_level }}
+        </div>
+        
+            {{ form.errors }}
+            {{ form.non_field_errors }}
+        
 
         <button type="submit">Add Research</button>
     </div>

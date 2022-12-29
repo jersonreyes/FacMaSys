@@ -62,9 +62,9 @@ INSTALLED_APPS = [
     'apps.feed',
     'apps.user',
     
-    'apps.department_head',
-    'apps.research_coord',
-    'apps.extension_coord',
+    # 'apps.department_head',
+    # 'apps.research_coord',
+    # 'apps.extension_coord',
 ]
 
 TAILWIND_APP_NAME = 'tailwind_theme'

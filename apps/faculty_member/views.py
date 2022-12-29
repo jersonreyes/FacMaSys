@@ -119,7 +119,7 @@ def add_announcements(request):
 def add_researches(request):  
     user_instance = request.user
     if request.method == "POST":  
-        form = ResearchForm(request.POST)  
+        form = ResearchForm(request.POST, request.FILES)  
         
         if form.is_valid():  
             try:  
