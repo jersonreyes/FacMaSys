@@ -148,7 +148,7 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
 
 @login_required
 def faculty(request):
-    if request.user.profile.user_role == 'depthead' or DEV:
+    if request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         
         if 'q' in request.GET:
             search_faculty = request.GET['q']
