@@ -275,3 +275,16 @@
   button.dt-button {
     background-color: white !important;
   }
+
+  .form-modal-toggler {
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    padding: 10px 10px;
+    border-radius:5px;
+    transition: 100ms ease;
+  }
+  .form-modal-toggler:hover {
+    color:White;
+    opacity: 0.5;
+  }
