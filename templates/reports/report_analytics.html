@@ -27,7 +27,7 @@
                 <div class= "card bg-light mb-3">
                     <div class="tab-content">
                         <div class="p-2"><br>
-                            <h5 class="mb-3 ml-3">Total Sales:</h5>
+                            <h5 class="font-sans mb-3 ml-3">Total Sales:</h5>
                             <img src="data:image/png;base64,{{ sales|safe }}">
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                 <div class= "card bg-light mb-1">
                     <div class="tab-content">
                         <div class="p-2"><br>
-                            <h5 class="mb-3 ml-3">Products Sold:</h5>
+                            <h5 class="font-sans mb-3 ml-3">Products Sold:</h5>
                             <img src="data:image/png;base64,{{ products_plot|safe }}">
                         </div>
                     </div>
@@ -46,8 +46,8 @@
             <div class="col-4">   
                 <div class= "card bg-light mb-3">
                     <div class="p-3">
-                        <h5 class="mb-3">Sales</h5>
-                        <h3 class="mb-3"><strong> {% if sales_change > 0%}+{% endif %} {{ sales_change|floatformat:-2 }}% </strong></h5>
+                        <h5 class="font-sans mb-3">Sales</h5>
+                        <h3 class="font-sans mb-3"><strong> {% if sales_change > 0%}+{% endif %} {{ sales_change|floatformat:-2 }}% </strong></h5>
                             <table class="table">
                                 <tr>
                                     <td>Total Sales<td>
@@ -63,8 +63,8 @@
         
                 <div class= "card bg-light mb-3">
                     <div class="p-3">
-                        <h5 class="mb-3">Order Count</h5>
-                        <h3 class="mb-3"><strong> {{ order_count }} </strong></h5>
+                        <h5 class="font-sans mb-3">Order Count</h5>
+                        <h3 class="font-sans mb-3"><strong> {{ order_count }} </strong></h5>
                         <table class="table">
                             <tr>
                                 <td>Products Sold<td>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="card bg-light mb-1">
                     <div class="p-3" id="cart">
-                        <h5 class="mb-3">Top products by units sold </h5>
+                        <h5 class="font-sans mb-3">Top products by units sold </h5>
                         <table class="table table-striped bg-white">
                             {% for product in products_count %}
                             <tr>
