@@ -9,37 +9,48 @@
 {% block content %}
     <h3>View Announcements</h3>
 
-
+    <p>User Type: {{user_type}}</p>
     <a href="../">Go back to Home</a>
     <br><br><br><br><br>
-    <a href="./add_announcements">Post Announcements</a>
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Subject</th>
-            <th>Message</th>
-            <th>Date of Announcement</th>
-            <th>Image</th>
-            <th>Links</th>
-            <th>
-                Actions
-            </th>
-        </thead>
-        <tbody>
-            {% for e in announcements %}
-                <tr>
-                    <td>{{ e.id }}</td>
-                    <td>{{ e.subject }}</td>
-                    <td>{{ e.description }}</td>
-                    <td>{{ e.date_created }}</td>
-                    <td><img src="../../media/{{e.image}}" alt=""></td>
-                    <td>{{ e.link }}</td>
-                    <td>
-                        <a href="./update/{{e.id}}">Update</a>
-                        <a href="./delete/{{e.id}}">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    
+    <!-- depthead -->
+    <!-- researchcoor -->
+    <!-- extensioncoor -->
+
+    {% if user_type != "faculty" %}
+        <a href="./add_announcements">Post Announcements</a>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date of Announcement</th>
+                <th>Image</th>
+                <th>Links</th>
+                <th>
+                    Actions
+                </th>
+            </thead>
+            <tbody>
+                {% for e in announcements %}
+                    <tr>
+                        <td>{{ e.id }}</td>
+                        <td>{{ e.subject }}</td>
+                        <td>{{ e.description }}</td>
+                        <td>{{ e.date_created }}</td>
+                        <td><img src="../../media/{{e.image}}" alt=""></td>
+                        <td>{{ e.link }}</td>
+                        <td>
+                            <a href="./update/{{e.id}}">Update</a>
+                            <a href="./delete/{{e.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nothing to see here...</p>
+    
+    {% endif %}
+    
 {% endblock %}

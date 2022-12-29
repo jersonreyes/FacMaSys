@@ -19,6 +19,7 @@ def index(request):
 from django.apps import apps
 
 Announcements = apps.get_model('feed', 'Announcements')
+Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
 
@@ -79,12 +80,21 @@ def add_announcements(request):
     }
     return render(request, 'announcements/add_announcements.html', context)  
     
+    
+""" ANNOUNCEMENTS """
 def show_announcements(request):
     announcements = Announcements.objects.all().filter(user_id=request.user)
+    profile = Profile.objects.filter(user=request.user).values().first()
+    
+    print('general profile: ', profile)
+    print('profile: ', profile['user_role'])
+    
     context = {
         'announcements': announcements,
         'state':'announcements',
+        'user_type': profile['user_role'],
     }
+    
     return render(request, "announcements/announcements.html", context)
 
 
