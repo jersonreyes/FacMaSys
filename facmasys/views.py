@@ -25,14 +25,8 @@ Announcements = apps.get_model('feed', 'Announcements')
 
 """ Department Head """
 def show_dept_summary(request):
-    return render(request, "department_head/summary.html", None)
+    return render(request, "subjects/summary.html", None)
 
-def show_ext_summary(request):
-    context = {
-        '': '',
-        'state':'extension_services',
-    }
-    return render(request, "announcements/summary.html", context)
 def show_ext_announcements(request):
     announcements = Announcements.objects.all().filter(user_id=request.user)
     context = {

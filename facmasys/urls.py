@@ -56,7 +56,6 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
 
     # path('', views.index),
-    path('show_summary_subjects/', views.show_dept_summary),
     path('announcements/', views.show_announcements, name='announcements-index'),
     path('announcements/add_announcements', views.add_announcements),
     path('announcements/update/<int:id>', views.update_announcements),
