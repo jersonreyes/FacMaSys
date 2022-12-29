@@ -83,7 +83,7 @@ def logout_view(request):
     return redirect('user-login')
 
 
-class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChangeView):
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('user-profile')
@@ -135,7 +135,7 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
         return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.profile.user_role != 'depthead' and not DEV:
+        if request.user.profile.user_role == 'faculty':
             return redirect('dashboard-index')
         
         return super().dispatch(request, *args, **kwargs)
@@ -145,35 +145,12 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
             self.label += f' filtered by {search}'
             
         return super().get(request)
-
-@login_required
-def faculty(request):
-    if request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         
-        if 'q' in request.GET:
-            search_faculty = request.GET['q']
-            multiple_search =  Q(Q(username__istartswith=search_faculty)|Q(email__istartswith=search_faculty))
-            workers = User.objects.filter(multiple_search)
-        else:
-            workers = User.objects.filter(profile__user_role='faculty')
-        page = Paginator(workers,10)
-        page_list = request.GET.get('page')
-        page = page.get_page(page_list)
-        context = {
-            'label':'Accounts',
-            'notifications':Notifications.objects.filter(user=request.user),
-            'page':page,
-            'count':workers.count(),
-            'state':'faculty',
-            
-        }
-        return render(request, 'user/faculty.html', context)
-    else:
-        return redirect('dashboard-index')
-    
     
 @login_required
 def faculty_detail(request, pk):
+    if request.user.profile.user_role == 'faculty':
+        return redirect('dashboard-index')
     worker = User.objects.get(id=pk)
     context = {
         'worker':worker,

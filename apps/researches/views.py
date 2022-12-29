@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.db.models import Q
 
@@ -18,30 +18,34 @@ from facmasys.models import *
 # Create your views here.
 @login_required
 def index(request):  
-    # Notifications
-    notifications = Notifications.objects.filter(user=request.user)
-    # Summary Research Object
-    if 'q' in request.GET:
-        all_researches = Research.objects.filter(Q(research_title__icontains=request.GET['q']) | Q(abstract__icontains=request.GET['q'])).order_by('-date_added')
-    else:
-        all_researches = Research.objects.order_by('-date_added')
-    users = Profile.objects.all()
-    context={
-        'state':'researches',
-        'notifications':notifications,
-        'users':users,
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
+        # Notifications
+        notifications = Notifications.objects.filter(user=request.user)
         # Summary Research Object
-        'all_researches': all_researches,
-    }
-    return render(request, 'researches/index.html', context)
+        if 'q' in request.GET:
+            all_researches = Research.objects.filter(Q(research_title__icontains=request.GET['q']) | Q(abstract__icontains=request.GET['q'])).order_by('-date_added')
+        else:
+            all_researches = Research.objects.order_by('-date_added')
+        users = Profile.objects.all()
+        context={
+            'state':'researches',
+            'notifications':notifications,
+            'users':users,
+            # Summary Research Object
+            'all_researches': all_researches,
+        }
+        return render(request, 'researches/index.html', context)
+    return redirect('index')
 
 
 @login_required
 def get_research(request, id): # May include more arguments depending on URL parameters
-    research = list(Research.objects.filter(id = id).values())[0]
-    user = list(Profile.objects.filter(id = research["faculty_id_id"]).values())[0]
-    response={
-        'research': research,
-        'user': user,
-    }
-    return JsonResponse(dict(response), safe=False)
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
+        research = list(Research.objects.filter(id = id).values())[0]
+        user = list(Profile.objects.filter(id = research["faculty_id_id"]).values())[0]
+        response={
+            'research': research,
+            'user': user,
+        }
+        return JsonResponse(dict(response), safe=False)
+    return redirect('index')
