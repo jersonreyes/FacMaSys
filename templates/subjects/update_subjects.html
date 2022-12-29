@@ -1,6 +1,6 @@
-{% extends "main.html" %} {% block title %} Update Subjects {% endblock %} 
-
-
+{% extends 'partials/base.html' %}
+{% block title %}Update Subject{% endblock %}
+{% block headers %} DASHBOARD {% endblock %}
 
 {% block content %}
   <form method="POST" action="./{{subjecttt.id}}">

@@ -42,9 +42,9 @@ urlpatterns = [
     path('subjects/delete_subject/<int:id>', views.delete_subject),
     
     path('faculty_index/', views.faculty_member_main), # subject is the default one.
-    path('subject_taught/', views.faculty_subjects_taught),
-    path('subject_taught/add_subject', views.add_taught_subjects),
-    path('subject_taught/update_taught_subjects/<int:id>', views.update_taught_subjects),
+    path('subjects_taught/', views.faculty_subjects_taught),
+    path('subjects_taught/add_subject', views.add_taught_subjects),
+    path('subjects_taught/update_taught_subjects/<int:id>', views.update_taught_subjects),
     
     path('', views.index, name='index'),
     path('dashboard/', include('apps.dashboard.urls')),

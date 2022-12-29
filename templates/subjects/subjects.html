@@ -46,8 +46,8 @@
                         <td>{{ e.pre_requisite }} </td>
                         <td>{{ e.course_type }} </td>
                         <td>
-                            <a href="./update_subject/{{e.id}}">Update</a>
-                            <a href="./delete_subject/{{e.id}}">Delete</a>
+                            <button onclick="window.location.href='update_subject/{{e.id}}'">Update</a>
+                            <button onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

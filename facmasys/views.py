@@ -158,7 +158,7 @@ def add_extension_services(request):
         'form': form,
         'state':'extension_services',
     }
-    return render(request, '/crud/add_extension_services.html', context) 
+    return render(request, 'extension_services/add_extension_services.html', context) 
 
 def edit_extension_services(request, id):
     print('update_extension_services')
@@ -170,7 +170,7 @@ def edit_extension_services(request, id):
         'form': form,
         'state':'extension_services',
     }
-    return render(request, 'crud/update_extension_service.html', context)  
+    return render(request, 'extension_services/update_extension_service.html', context)  
 
 def update_extension_services(request, id):
     extension = ExtensionService.objects.get(id=id)  
@@ -184,7 +184,7 @@ def update_extension_services(request, id):
         'form': form,
         'state':'extension_services',
     }
-    return render(request, '/crud/update_extension_service.html', context)  
+    return render(request, 'extension_services/update_extension_service.html', context)  
 
 def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
@@ -239,7 +239,7 @@ def add_taught_subjects(request):
         'selected_list': selected_list,
         'state':'subjects_taught',
     }
-    return render(request, 'crud/add_subject_taught.html', context) 
+    return render(request, 'subjects/add_subject_taught.html', context) 
 
 def update_taught_subjects(request, id):
     all_subjects = Subjects_Taught.objects.get(faculty_id=id)
@@ -255,7 +255,7 @@ def update_taught_subjects(request, id):
         'all_subjects': all_subjects.handled_subjects.all(),
         'state':'subjects_taught',
     }
-    return render(request, 'crud/add_subject_taught.html', context) 
+    return render(request, 'subjects/add_subject_taught.html', context) 
 
 
 def edit_extension_services(request, id):
@@ -268,7 +268,7 @@ def edit_extension_services(request, id):
         'form': form,
         'state':'extension_services',
     }
-    return render(request, 'crud/update_extension_service.html', context)  
+    return render(request, 'extension_services/update_extension_service.html', context)  
 
 # Researches
 def faculty_researches(request):
@@ -319,7 +319,7 @@ def add_researches(request):
         # 'form_published': form_published,
         'state':'researches',
     }
-    return render(request, 'crud/add_researches.html', context)  
+    return render(request, 'researches/add_researches.html', context)  
 
 def add_presented(request):
     user_instance = request.user
@@ -363,7 +363,7 @@ def add_presented(request):
         'all_presented2': all_presented2,
         'state':'researches',
     }
-    return render(request, 'crud/add_presented.html', context) 
+    return render(request, 'researches/add_presented.html', context) 
  
 def add_published(request):
     user_instance = request.user
@@ -398,7 +398,7 @@ def add_published(request):
         'all_published': all_published,
         'state':'researches',
     }
-    return render(request, 'crud/add_published.html', context)  
+    return render(request, 'researches/add_published.html', context)  
 
 # def show_updateform_researches(request, id):
 #     form = ResearchForm()  
@@ -414,7 +414,7 @@ def add_published(request):
 
 def edit_researches(request, id):
     research = Research.objects.get(id=id)
-    return render(request, 'crud/update_research_details.html', context)  
+    return render(request, 'researches/update_research_details.html', context)  
     
 def update_researches(request, id):
     form = ResearchForm()  
@@ -429,7 +429,7 @@ def update_researches(request, id):
         'form': form,
         'state':'researches',
     }
-    return render(request, 'crud/update_research_details.html', context)  
+    return render(request, 'researches/update_research_details.html', context)  
 
 """ DELETE FUNCTIONS """
 def delete_researches(request, id):  
@@ -492,7 +492,7 @@ def updateform_subject(request, id):
         'form': form,
         'state':'subjects',
     }
-    return render(request, 'crud/update_subjects.html', context)  
+    return render(request, 'subjects/update_subjects.html', context)  
 
 
 def update_subject(request, id):

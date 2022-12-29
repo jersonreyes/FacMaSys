@@ -1,28 +1,30 @@
 from time import localtime, strftime
+
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django_filters.views import FilterView
-from django_tables2 import SingleTableMixin
-from django_tables2.export.views import ExportMixin
-from .tables import FacultyTable
-from .filters import FacultyFilter
-
-from facmasys.utils import ExportPDF
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
+from django_filters.views import FilterView
+from django_tables2 import SingleTableMixin
+from django_tables2.export.views import ExportMixin
+
 from apps.reports.models import Notifications
+from facmasys.utils import ExportPDF
+
+from .filters import FacultyFilter
 # from facmasys.utils import add_activity
 from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
+from .tables import FacultyTable
 
+DEV = True
 
 # Create your views here.
 class RegisterView(View):
@@ -133,7 +135,7 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
         return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.profile.user_role != 'depthead':
+        if request.user.profile.user_role != 'depthead' and not DEV:
             return redirect('dashboard-index')
         
         return super().dispatch(request, *args, **kwargs)
@@ -146,7 +148,7 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
 
 @login_required
 def faculty(request):
-    if request.user.profile.user_role == 'depthead':
+    if request.user.profile.user_role == 'depthead' or DEV:
         
         if 'q' in request.GET:
             search_faculty = request.GET['q']
