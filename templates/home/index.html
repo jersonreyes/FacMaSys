@@ -8,7 +8,7 @@
         <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[700px] flex flex-col text-center justify-center items-center font-sans">
             <div class="w-full h-[100vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
             <div class="absolute">
-                <p class="font-sans font-bold text-white text-8xl">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
+                <p class="mb-2 font-sans font-bold text-white text-8xl">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
                 <p class="max-w-xl mx-auto font-sans text-lg text-white">Welcome to the BulSU-CICT Faculty Management System! To earn your productivity, we provide numerous tools and features to assist you in staying organized.</p>
                 <div class="grid max-w-screen-lg grid-cols-2 gap-2">
 
@@ -61,15 +61,14 @@
         </div>
         <div class="animate fade-animator delay-3 grid grid-cols-[45fr_55fr] mt-3 h-[50vh]">
             <div class="p-10 mt-[5vh] ml-[2vw]">
-                <h1 class="text-[66px]">About FacMaSys</h1>
-                <p class="font-sans text-md w-[499px]">FacMaSys is a faculty management system developed on December 2022 for the College of Information and Communications (CICT) of Bulacan State University. It provides information regarding the CICT faculty that includes the subjects they taught, as well as research and extensions.</p>
+                <h1 class="font-sans text-5xl font-bold ">About FacMaSys</h1>
+                <p class="font-sans mt-1 text-base text-gray-900 dark:text-gray-100  w-[512px]">FacMaSys is a faculty management system developed on December 2022 for the College of Information and Communications (CICT) of Bulacan State University. It provides information regarding the CICT faculty that includes the subjects they taught, as well as research and extensions.</p>
                 <div class="ml-[-1.4vw] mt-[5vh]">
-                    <div class="dropdownBlock bg-[rgba(200,200,200,0.2)] dark:bg-[#363636] flex items-center justify-between">
-                        <div class="flex flex-col items-center justify-start text-left">
-                            <p class="font-sans title text-left">Did you know?</p>
-                            <p class="font-sans text-black subtitle dark:white">The history of the College of Information and Communications Technology traces back in 1989 when it was the Computer Department of the College of Information Technology.</p>
+                    <div class="flex items-center justify-between bg-gray-200 rounded-lg dark:bg-neutral-700">
+                        <div class="flex flex-col items-center justify-start p-4 text-left">
+                            <p class="w-full mb-1 font-sans text-xl font-semibold text-left ">Did you know?</p>
+                            <p class="mb-0 font-sans text-black dark:white">The history of the College of Information and Communications Technology traces back in 1989 when it was the Computer Department of the College of Information Technology.</p>
                         </div>
-                        <img src="{% static 'images/arrow.png' %}" class="h-[20px] dark:invert"/>
                     </div>
                 </div>
             </div>
