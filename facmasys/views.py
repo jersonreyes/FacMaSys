@@ -18,8 +18,7 @@ def index(request):
 
 from django.apps import apps
 
-Announcements = apps.get_model('feed', 'Announcements')
-Profile = apps.get_model('user', 'Profile')
+Feeds = apps.get_model('feed', 'Feeds')
 
 # Create your views here.
 
@@ -29,15 +28,15 @@ def show_dept_summary(request):
     return render(request, "subjects/summary.html", None)
 
 def show_ext_announcements(request):
-    announcements = Announcements.objects.all().filter(user_id=request.user)
+    announcements = Feeds.objects.all().filter(user_id=request.user)
     context = {
         'announcements': announcements,
         'state':'extension_services',
     }
     return render(request, "announcements/announcements.html", context)
 def update_ext_announcements(request, id):
-    research = Announcements.objects.get(id=id)  
-    form = AnnouncementsForm(request.POST, instance=research)  
+    research = Feeds.objects.get(id=id)  
+    form = Feeds(request.POST, instance=research)  
     if form.is_valid():  
         form.save()  
         return redirect("../")  
@@ -49,7 +48,7 @@ def update_ext_announcements(request, id):
     }
     return render(request, 'announcements/update_announcements.html', context)
 def delete_ext_announcements(request, id):
-    announcements = Announcements.objects.get(id=id)
+    announcements = Feeds.objects.get(id=id)
     announcements.delete()
     return redirect("../")
 
@@ -59,7 +58,7 @@ def delete_ext_announcements(request, id):
 def add_announcements(request):
     user_instance = request.user
     if request.method == "POST":  
-        form = AnnouncementsForm(request.POST)  
+        form = FeedsForm(request.POST)  
         
         if form.is_valid():  
             try:  
@@ -71,7 +70,7 @@ def add_announcements(request):
             except:  
                 pass  
     else:  
-        form = AnnouncementsForm()         
+        form = FeedsForm()         
         print("Failed sadge!") 
         
     context = {
@@ -83,12 +82,7 @@ def add_announcements(request):
     
 """ ANNOUNCEMENTS """
 def show_announcements(request):
-    announcements = Announcements.objects.all().filter(user_id=request.user)
-    profile = Profile.objects.filter(user=request.user).values().first()
-    
-    print('general profile: ', profile)
-    print('profile: ', profile['user_role'])
-    
+    announcements = Feeds.objects.all().filter(user_id=request.user)
     context = {
         'announcements': announcements,
         'state':'announcements',
@@ -99,8 +93,8 @@ def show_announcements(request):
 
 
 def update_announcements(request, id):
-    research = Announcements.objects.get(id=id)  
-    form = AnnouncementsForm(request.POST, instance=research)  
+    research = Feeds.objects.get(id=id)  
+    form = FeedsForm(request.POST, instance=research)  
     if form.is_valid():  
         form.save()  
         return redirect("../")  
@@ -113,7 +107,7 @@ def update_announcements(request, id):
     return render(request, 'announcements/update_announcements.html', context)
 
 def delete_announcements(request, id):
-    announcements = Announcements.objects.get(id=id)
+    announcements = Feeds.objects.get(id=id)
     announcements.delete()
     return redirect("../")
 from django.shortcuts import get_object_or_404, render
@@ -418,6 +412,9 @@ def add_published(request):
 
 def edit_researches(request, id):
     research = Research.objects.get(id=id)
+    context = {
+        
+    }
     return render(request, 'researches/update_research_details.html', context)  
     
 def update_researches(request, id):

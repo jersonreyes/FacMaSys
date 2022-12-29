@@ -8,10 +8,11 @@ Announcements = apps.get_model('feed', 'Announcements')
 Announcements_DepartmentHead = apps.get_model('feed', 'Announcements_DepartmentHead')
 Announcements_ResearchCoord = apps.get_model('feed', 'Announcements_ResearchCoord')
 Announcements_ExtensionCoord = apps.get_model('feed', 'Announcements_ExtensionCoord')
+Feeds = apps.get_model('feed', 'Feeds')
 
-class AnnouncementsForm(forms.ModelForm):
+class FeedsForm(forms.ModelForm):
     class Meta:
-        model = Announcements
+        model = Feeds
         # fields = "__all__"
         exclude = ('user_id',  )
 
