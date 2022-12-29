@@ -11,8 +11,31 @@
     {% csrf_token %}
 
     
-    {{ form }}
-
+    <div>
+        <p>Subject: </p>
+        {{ form.subject }}
+    </div>
+    <div>
+        <p>Description: </p>
+        {{ form.description }}
+    </div>
+    <div>
+        <p>Image: </p>
+        {{ form.image }}
+    </div>
+    <div>
+        <p>Link: </p>
+        {{ form.link }}
+    </div>
+    <div>
+        <!-- <p>User Type: </p> -->
+        <select name="user_type" id="id_user_type" style="display: none;">
+            <option value="Deparment Head" {% if user_type == 'depthead' %} selected {% endif %}>Deparment Head</option>
+            <option value="Research Coordinator" {% if user_type == 'researchcoor' %} selected {% endif %}>Research Coordinator</option>
+            <option value="Extension Coordinator" {% if user_type == 'extensioncoor' %} selected {% endif %}>Extension Coordinator</option>
+        </select>
+    </div>
+    <br>
     {{ form.errors }}
     {{ form.non_field_errors }}
     <button type="submit">Add Announcements</button>

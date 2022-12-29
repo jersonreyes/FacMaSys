@@ -29,7 +29,7 @@ class ExtensionService(models.Model):
     contact_no = models.CharField(max_length=15, null=True, blank=True)
     website = models.CharField(max_length=100, null=True, blank=True)
     background = models.TextField(max_length=500)
-    extension_head = models.CharField(max_length=200, null=True, blank=True)
+    extension_head = models.ForeignKey(User, on_delete=models.CASCADE, default=None, related_name="ref_extension_head")
     ext_offeredprograms_id = models.ForeignKey(ExtensionService_OfferedPrograms, on_delete=models.CASCADE, blank=True, null=True)
     ext_collaborator_id = models.ForeignKey(ExtensionService_Collaborators, on_delete=models.CASCADE, blank=True, null=True)
     

@@ -5,12 +5,21 @@ from django.forms import ModelForm
 from .models import *
 
 Feeds = apps.get_model('feed', 'Feeds')
+Feeds_DepartmentHead = apps.get_model('feed', 'Feeds_DepartmentHead')
+Feeds_ResearchCoord = apps.get_model('feed', 'Feeds_ResearchCoord')
+Feeds_ExtensionCoord = apps.get_model('feed', 'Feeds_ExtensionCoord')
+Feeds = apps.get_model('feed', 'Feeds')
 
 class FeedsForm(forms.ModelForm):
     class Meta:
         model = Feeds
         # fields = "__all__"
-        exclude = ('user_id',  )
+        exclude = ('user_id', )
+
+class Feeds_DepartmentHead(forms.ModelForm):
+    class Meta:
+        model = Feeds_DepartmentHead
+        exclude = ('user_id', )
 
 class SubjectTaughtForm(forms.ModelForm):
     class Meta:

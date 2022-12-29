@@ -1,0 +1,37 @@
+{% extends "main.html" %}
+
+{% block title %}
+Update Announcements
+{% endblock %}
+
+{% block content %}
+<h1>Update Announcements</h1>
+<a href="../">Go back</a>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <p>Subject: </p><input type="text" value="{{research.subject}}" name="subject" maxlength="200" required="" id="id_subject">
+        </div>
+        <div>
+            <p>Description: </p><input type="text" value="{{research.description}}" name="description" maxlength="200" required="" id="id_description">
+        </div>
+        <div>
+            <p>Image: </p>
+            Currently: <a href="/media/profile_icon.png">profile_icon.png</a><br>
+            Change: <input type="file" name="image" accept="image/*" id="id_image">
+        </div>
+        <div>
+            <p>Link: </p>
+            <input type="text" value="{{research.link}}" name="link" maxlength="200" required="" id="id_link">
+        </div>
+        
+        <select name="user_type" id="id_user_type" style="display: none;">
+            <option value="Deparment Head" {% if user_type == 'depthead' %} selected {% endif %}>Deparment Head</option>
+            <option value="Research Coordinator" {% if user_type == 'researchcoor' %} selected {% endif %}>Research Coordinator</option>
+            <option value="Extension Coordinator" {% if user_type == 'extensioncoor' %} selected {% endif %}>Extension Coordinator</option>
+        </select>
+
+        <button type="submit">Update Announcements</button>
+    </form>
+{% endblock %}
