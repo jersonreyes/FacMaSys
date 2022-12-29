@@ -476,16 +476,32 @@ def update_details_a(request, id):
 
 def update_details_b(request, id):
     research = Research_Published.objects.get(published_id=id)  
+<<<<<<< HEAD
     form = Research_PublishedForm(request.POST, instance=research)  
     if form.is_valid():  
         form.save()  
         return redirect("../")  
+=======
+    research_all = Research_Published.objects.filter(published_id=id)  
+    current_edit__ = research_all.values().first()['published_id_id']
+    print('ccc', current_edit__)
+    
+    
+    form = Research_PublishedForm(request.POST, instance=research)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../../")  
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
     
     context = {
         'research': research,
         'form': form,
         'state':'researches',
         'is_other': True,
+<<<<<<< HEAD
+=======
+        'current_edit': current_edit__,
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
     }
     return render(request, 'researches/update_details.html', context)  
 
@@ -495,11 +511,19 @@ def update_details_b(request, id):
 def delete_details_a(request, id):
     subject = Research_Presented.objects.get(id=id)  
     subject.delete()  
+<<<<<<< HEAD
     return redirect("../")
 def delete_details_b(request, id):
     subject = Research_Published.objects.get(id=id)  
     subject.delete()  
     return redirect("../")
+=======
+    return redirect("../../")  
+def delete_details_b(request, id):
+    subject = Research_Published.objects.get(id=id)  
+    subject.delete()  
+    return redirect("../../")  
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
 
 def delete_researches(request, id):  
     subject = Research_Published.objects.get(id=id)  

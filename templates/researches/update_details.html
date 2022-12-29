@@ -10,7 +10,11 @@
 <form action="" method="post">
     {% csrf_token %}
     <label for="id_published_date">Published date:</label>
+<<<<<<< HEAD
     <input type="text" value="{{research.published_date}}" name="published_date" required="" id="id_published_date">
+=======
+    <input type="date" value="{{research.published_date|date:'Y-m-d'}}" name="published_date" required="" id="id_published_date">
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
 
     <label for="id_publication">Publication:</label>
     <input type="text" value="{{research.publication}}" name="publication" maxlength="200" required="" id="id_publication">
@@ -35,16 +39,27 @@
     <label for="id_published_id">Published id:</label>
     <select name="published_id" id="id_published_id">
         {% for value, subject in form.published_id.field.choices %}
+<<<<<<< HEAD
         {% if research.published_id == value %}
+=======
+        {% if current_edit == value %}
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
         <option value="{{value}}" selected>{{value}}</option>
         {% else %}
         <option value="{{value}}">{{value}}</option>
         {% endif %}
+<<<<<<< HEAD
 
         <p>{{research.published_id}}</p>
         <p>{{value}}</p>
         {% endfor %}
     </select>
+=======
+        {% endfor %}
+    </select>
+
+    <button type="submit">Update Value</button>
+>>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
 </form>
 {% else %}
 <form action="" method="post">
