@@ -36,8 +36,17 @@ urlpatterns = [
     # FacMyLyfe
     
     path('', views.faculty_member_main), # subject is the default one.
+    
+    
+    path('subjects', views.show_subject),
+    path('subjects/add_subjects', views.add_subject),
+    path('subjects/update_subjects/', views.updateform_subject),
+    path('subjects/update_subjects/<int:id>', views.update_subject),
+    path('subjects/delete_subjects/<int:id>', views.delete_subject),
+    
+    
     path('subject_taught/', views.faculty_subjects_taught),
-    path('subject_taught/add_subject', views.add_taught_subjects),
+    path('subject_taught/update_taught_subjects', views.add_taught_subjects),
     path('subject_taught/update_taught_subjects/<int:id>', views.update_taught_subjects),
     
     path('', views.index, name='index'),
