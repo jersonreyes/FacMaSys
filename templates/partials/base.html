@@ -54,7 +54,7 @@
         {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
             <div class="{% if not ajax and user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
                 {% if not ajax %}
-                    <div class="dark:bg-neutral-900 bg-neutral-50">
+                    <div class="dark:bg-neutral-900 bg-neutral-50 h-screen">
                         {% include 'partials/sidebar.html' %}
                     </div>
                 <!-- LOGOUT MODAL -->
@@ -87,7 +87,7 @@
                 <div class="z-10">
                     {% if not ajax %}
                     <div class="fixed" style="width: 94vw; z-index: 99;">
-                        <div id="header" class="flex items-center justify-between h-full gap-2 px-4 py-3 transition-all border-b bg-neutral-50 dark:bg-neutral-900 z-500 top-5" style="backdrop-filter: opacity(0.9);	backdrop-filter: blur(8px);	backdrop-filter: saturate(2); ">
+                        <div id="header" class="flex items-center justify-between h-full gap-2 px-4 py-3 transition-all border-b bg-neutral-50 dark:bg-neutral-900 dark:border-[rgba(200,200,200,0.2)] z-500 top-5" style="backdrop-filter: opacity(0.9);	backdrop-filter: blur(8px);	backdrop-filter: saturate(2); ">
                             <div id="collapseHeader" class=" my-auto dark:text-white dark:white leading-[0] flex">
                                 <div class="my-auto">
                                     <h3 id="page_title_body" class="mx-0 my-auto font-sans font-bold transition-all duration-75">Faculty Management System</h3>

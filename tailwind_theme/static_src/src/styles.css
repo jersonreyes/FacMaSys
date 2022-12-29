@@ -104,4 +104,7 @@
     .main-theme-color {
         color: #F07E00;
     }
+    .gray {
+        background-color:rgb(48, 48, 48) !important;
+    }
 }
