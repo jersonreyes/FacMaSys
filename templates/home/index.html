@@ -14,25 +14,29 @@
                     {% if not request.user.is_authenticated %}
                         <a href="/user/login/">
                         {% endif %}
-                            <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
+                        <a href="{% url 'feed-index' %}">
+                        <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
                                 <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Feed</p>
                                 <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Stay informed about important deadlines, events, and announcements in your department. </p>
-                            </div>
+                            </div></a>
                         {% if not request.user.is_authenticated %}
                         </a>
                     {% endif %}
+                    <a href="{% url 'faculty-index' %}">
                     <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
                         <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Faculty Management</p>
                         <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Learn more about the faculty members and the subjects they teach.</p>
-                    </div>
+                    </div></a>
+                    <a href="{% url 'researches-index' %}">
                     <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
                         <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Research and Extensions</p>
                         <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Explore information regarding the college's research and extensions. </p>
-                    </div>
+                    </div></a>
+                    <a href="{% url 'subjects-index' %}">
                     <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-[#212121] dark:white">
                         <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Course Management</p>
-                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Manage the department's current curricular subjects. </p>
-                    </div>
+                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Manage the department's current curricular subjects, you can add, delete, and update. </p>
+                    </div></a>
                 </div>
             </div>
         </div>
