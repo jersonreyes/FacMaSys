@@ -19,6 +19,7 @@ def index(request):
 from django.apps import apps
 
 Feeds = apps.get_model('feed', 'Feeds')
+Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
 
@@ -56,6 +57,9 @@ def delete_ext_announcements(request, id):
 
 
 def add_announcements(request):
+    profile = Profile.objects.filter(user=request.user).values().first()
+    
+    
     user_instance = request.user
     if request.method == "POST":  
         form = FeedsForm(request.POST)  
@@ -64,6 +68,14 @@ def add_announcements(request):
             try:  
                 new_form = form.save(commit=False)
                 new_form.user_id = user_instance
+                
+                # if profile['user_role'] == 'extensioncoor':
+                #     new_form.user_role = 'Extension Coordinator'
+                # elif profile['user_role'] == 'depthead':
+                #     new_form.user_role = 'Department Head'
+                # elif profile['user_role'] == 'researchcoor':
+                #     new_form.user_role = 'Research Coordinator'
+
                 new_form.save()
                 print("Success! done") 
                 return redirect('./')   # refresh
@@ -76,6 +88,7 @@ def add_announcements(request):
     context = {
         'form': form,
         'state':'announcements',
+        'user_type': profile['user_role'],
     }
     return render(request, 'announcements/add_announcements.html', context)  
     
@@ -83,6 +96,10 @@ def add_announcements(request):
 """ ANNOUNCEMENTS """
 def show_announcements(request):
     announcements = Feeds.objects.all().filter(user_id=request.user)
+    profile = Profile.objects.filter(user=request.user).values().first()
+
+    print('profile: ', profile)
+
     context = {
         'announcements': announcements,
         'state':'announcements',
@@ -94,15 +111,20 @@ def show_announcements(request):
 
 def update_announcements(request, id):
     research = Feeds.objects.get(id=id)  
+    profile = Profile.objects.filter(user=request.user).values().first()
+    
     form = FeedsForm(request.POST, instance=research)  
     if form.is_valid():  
+        print("True")
         form.save()  
         return redirect("../")  
     
+    print("False")
     context = {
         'research': research,
         'form': form,
-        'state':'announcements',
+        'state': 'announcements',
+        'user_type': profile['user_role'],
     }
     return render(request, 'announcements/update_announcements.html', context)
 

@@ -27,6 +27,7 @@
                 <th>Date of Announcement</th>
                 <th>Image</th>
                 <th>Links</th>
+                <th>Links</th>
                 <th>
                     Actions
                 </th>
@@ -40,6 +41,7 @@
                         <td>{{ e.date_created }}</td>
                         <td><img src="../../media/{{e.image}}" alt=""></td>
                         <td>{{ e.link }}</td>
+                        <td>{{ e.user_type }}</td>
                         <td>
                             <a href="./update/{{e.id}}">Update</a>
                             <a href="./delete/{{e.id}}">Delete</a>

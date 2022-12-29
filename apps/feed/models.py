@@ -4,6 +4,11 @@ from django.db import models
 
 # Create your models here.
 class Feeds(models.Model):
+  TYPE = (
+    ('Deparment Head', 'Deparment Head'),
+    ('Research Coordinator', 'Research Coordinator'),
+    ('Extension Coordinator', 'Extension Coordinator'),
+  )
   user_id = models.ForeignKey(User, on_delete=models.CASCADE)
   subject = models.CharField(max_length=200)
   description = models.CharField(max_length=200)
@@ -16,7 +21,7 @@ class Feeds(models.Model):
   def __str__(self) -> str:
     return f'ID: {self.user_id} | {self.subject}'
   
-class Announcements_DepartmentHead(models.Model):
+class Feeds_DepartmentHead(models.Model):
   AGENDA = (
     ('Urgent', 'Urgent'),
     ('Just In', 'Just In'),
@@ -30,13 +35,13 @@ class Announcements_DepartmentHead(models.Model):
     ('Others', 'Others'),
   )
   
-  reference_id = models.OneToOneField(Announcements, on_delete=models.CASCADE)
+  reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
   issued_by = models.CharField(max_length=200)
   agenda = models.CharField(choices=AGENDA, max_length=100, default='Greetings')
   
 
 
-class Announcements_ResearchCoord(models.Model):
+class Feeds_ResearchCoord(models.Model):
   AGENDA = (
     ('On Call Papers', 'On Call Papers'),
     ('Journal Publication', 'Journal Publication'),
@@ -49,14 +54,14 @@ class Announcements_ResearchCoord(models.Model):
     ('Others', 'Others'),
   )
   
-  reference_id = models.OneToOneField(Announcements, on_delete=models.CASCADE)
+  reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
   issued_by = models.CharField(max_length=200)
   deadline_start = models.DateField()
   deadline_end = models.DateField()
   agenda = models.CharField(choices=AGENDA, max_length=100, default='On Call Papers')
 
 
-class Announcements_ExtensionCoord(models.Model):
+class Feeds_ExtensionCoord(models.Model):
   AGENDA = (
     ('On Call Papers', 'On Call Papers'),
     ('Signing of MOA', 'Signing of MOA'),
@@ -69,7 +74,7 @@ class Announcements_ExtensionCoord(models.Model):
     ('Others', 'Others'),
   )
   
-  reference_id = models.OneToOneField(Announcements, on_delete=models.CASCADE)
+  reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
   issued_by = models.CharField(max_length=200)
   extension_address = models.CharField(max_length=200)
   email = models.CharField(max_length=100)
