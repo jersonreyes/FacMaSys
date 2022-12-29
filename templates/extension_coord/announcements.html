@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    Faculty Member - View Announcements
+    Extension Coordinator - View Announcements
 {% endblock %}
 
 
@@ -12,8 +12,6 @@
 
 
     <a href="../">Go back to Home</a>
-    <br><br><br><br><br>
-    <a href="./add_announcements">Add Announcements</a>
     <table>
         <thead>
             <th>ID</th>
@@ -26,7 +24,6 @@
                 Actions
             </th>
         </thead>
-
         <tbody>
             {% for e in announcements %}
                 <tr>
@@ -37,8 +34,8 @@
                     <td><img src="../../media/{{e.image}}" alt=""></td>
                     <td>{{ e.link }}</td>
                     <td>
-                        <a href="./update_announcements/{{e.id}}">Update</a>
-                        <a href="./delete_announcements/{{e.id}}">Delete</a>
+                        <a href="./update/{{e.id}}">Update</a>
+                        <a href="./delete/{{e.id}}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

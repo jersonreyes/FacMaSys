@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 from django.db.models import F
 import csv
 
+from django.apps import apps
+Announcements = apps.get_model('feed', 'Announcements')
+print('Announcements: ', Announcements)
 # with open('UpdatedSubjectLitsts.csv', mode ='r') as file:
 #     csvFile = csv.reader(file)
 #     # reading the CSV file
@@ -78,20 +81,43 @@ def faculty_extension_services(request):
 
 # View Announcements
 def faculty_announcements(request):
-    announcements = (
-        ("1", "BulSUFlex GCTalks Webinar", "August 24, 2020, at 8:24 PM", "All Concerned", "Department Head", "The BulSU webinar series for students will resume on Wednesday with the webinar regarding E-Learning using Google Classroom on August 26 at 2 PM. The webinar will be headed by Ms. Lilibeth Antonio MSIT, a faculty member of the College of Information and Communications Technology; and Dr. Joseline Santos, the university's Assistant Director for Student Policy Development.", "None", "None"),
-        ("2", "Faculty Adviser Orientation", "September 27, 2021, at 5:54 PM", "All Concerned", "Faculty", "FACULTY ADVISER ORIENTATION Tomorrow  at 8:00 AM. Please visit the link below for the Google Meet link.", "https://bit.ly/3rdYearCICT", "None"),
-    )
+    announcements = Announcements.objects.all().filter()
+    # announcements = (
+    #     ("1", "BulSUFlex GCTalks Webinar", "August 24, 2020, at 8:24 PM", "All Concerned", "Department Head", "The BulSU webinar series for students will resume on Wednesday with the webinar regarding E-Learning using Google Classroom on August 26 at 2 PM. The webinar will be headed by Ms. Lilibeth Antonio MSIT, a faculty member of the College of Information and Communications Technology; and Dr. Joseline Santos, the university's Assistant Director for Student Policy Development.", "None", "None"),
+    #     ("2", "Faculty Adviser Orientation", "September 27, 2021, at 5:54 PM", "All Concerned", "Faculty", "FACULTY ADVISER ORIENTATION Tomorrow  at 8:00 AM. Please visit the link below for the Google Meet link.", "https://bit.ly/3rdYearCICT", "None"),
+    # )
     
     return render(request, "faculty_member/view_announcements.html", {'announcements': announcements})
+
+def add_announcements(request):
+    user_instance = request.user
+    if request.method == "POST":  
+        form = AnnouncementsForm(request.POST)  
+        
+        if form.is_valid():  
+            try:  
+                new_form = form.save(commit=False)
+                new_form.user_id = user_instance
+                new_form.save()
+                print("Success! done") 
+                return redirect('./')   # refresh
+            except:  
+                pass  
+    else:  
+        form = AnnouncementsForm()         
+        print("Failed sadge!") 
+        
+    context = {
+        'form': form,
+    }
+    return render(request, 'faculty_member/crud/add_announcements.html', context)  
+
 
 
 """ CREATE FUNCTIONS """
 # Create your views here.
 def add_researches(request):  
     user_instance = request.user
-    # print(User.objects.all())
-    
     if request.method == "POST":  
         form = ResearchForm(request.POST)  
         
@@ -106,7 +132,6 @@ def add_researches(request):
                 pass  
     else:  
         form = ResearchForm()         
-
         print("Failed!") 
         
     context = {
@@ -326,6 +351,28 @@ def update_researches(request, id):
     }
     return render(request, 'faculty_member/crud/update_research_details.html', context)  
 
+
+def edit_announcements(request, id):
+    announcements = Announcements.objects.get(id=id)
+    return render(request, 'faculty_member/crud/update_announcements.html', context) 
+
+def update_announcements(request, id):
+    
+    # extension = ExtensionService.objects.get(id=id)  
+    # form = ExtensionServiceForm(request.POST, instance=extension)  
+
+    research = Announcements.objects.get(id=id)  
+    form = AnnouncementsForm(request.POST, instance=research)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../")  
+    
+    context = {
+        'research': research,
+        'form': form,
+    }
+    return render(request, 'faculty_member/crud/update_announcements.html', context)
+
 """ DELETE FUNCTIONS """
 def delete_researches(request, id):  
     subject = Research.objects.get(id=id)  
@@ -335,6 +382,11 @@ def delete_researches(request, id):
 def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
     ext.delete()  
+    return redirect("../")
+
+def delete_announcements(request, id):
+    announcements = Announcements.objects.get(id=id)
+    announcements.delete()
     return redirect("../")
 
 # <th>ID</th>

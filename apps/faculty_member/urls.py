@@ -41,6 +41,10 @@ urlpatterns = [
     path('extension_services/delete_service/<int:id>', views.delete_extension_services),
 
     path('view_announcements/', views.faculty_announcements),
+    path('view_announcements/add_announcements', views.add_announcements),
+    path('view_announcements/edit_announcements', views.edit_announcements),
+    path('view_announcements/update_announcements/<int:id>', views.update_announcements),
+    path('view_announcements/delete_announcements/<int:id>', views.delete_announcements),
     # path('extensions/', views.extensions),
     # path('announcements/', views.announcements),
     
