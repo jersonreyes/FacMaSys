@@ -67,11 +67,13 @@
         </div>
         {% endif %}
         {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
-            <div class="{% if not ajax and user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
+            <div class="{% if not ajax and request.user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
                 {% if not ajax %}
+                    {% if request.user.is_authenticated %}
                     <div class="dark:bg-neutral-900 bg-neutral-50 h-screen">
                         {% include 'partials/sidebar.html' %}
                     </div>
+                    {% endif %}
                 <!-- LOGOUT MODAL -->
                 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="false">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -157,9 +159,7 @@
                                                                                                                                                     
                                     </div>
                                 </div>
-                                {% endif %}
-                
-                                {% if request.user.is_authenticated %}
+                                
                                 <!-- PROFILE ICON -->
                                 <div class="transition dropdown">
                                     <button class="transition hover:opacity-[0.5] rounded-md flex gap-2 p-1 px-2 items-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

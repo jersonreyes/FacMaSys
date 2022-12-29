@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import F
 from django.http import HttpResponse
@@ -22,12 +23,13 @@ Feeds = apps.get_model('feed', 'Feeds')
 Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
-
-
 """ Department Head """
+@login_required
 def show_dept_summary(request):
     return render(request, "subjects/summary.html", None)
 
+
+@login_required
 def show_ext_announcements(request):
     announcements = Feeds.objects.all().filter(user_id=request.user)
     context = {
@@ -35,6 +37,9 @@ def show_ext_announcements(request):
         'state':'extension_services',
     }
     return render(request, "announcements/announcements.html", context)
+
+
+@login_required
 def update_ext_announcements(request, id):
     research = Feeds.objects.get(id=id)  
     form = Feeds(request.POST, instance=research)  
@@ -48,6 +53,9 @@ def update_ext_announcements(request, id):
         'state':'extension_services',
     }
     return render(request, 'announcements/update_announcements.html', context)
+
+
+@login_required
 def delete_ext_announcements(request, id):
     announcements = Feeds.objects.get(id=id)
     announcements.delete()
@@ -525,6 +533,7 @@ def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
     ext.delete()  
     return redirect("../")
+
 
 """ SUBJECTS """
 def show_subject(request):
