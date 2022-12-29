@@ -30,12 +30,14 @@ def show_dept_summary(request):
 def show_ext_summary(request):
     context = {
         '': '',
+        'state':'extension_services',
     }
     return render(request, "announcements/summary.html", context)
 def show_ext_announcements(request):
     announcements = Announcements.objects.all().filter(user_id=request.user)
     context = {
         'announcements': announcements,
+        'state':'extension_services',
     }
     return render(request, "announcements/announcements.html", context)
 def update_ext_announcements(request, id):
@@ -48,6 +50,7 @@ def update_ext_announcements(request, id):
     context = {
         'research': research,
         'form': form,
+        'state':'extension_services',
     }
     return render(request, 'announcements/update_announcements.html', context)
 def delete_ext_announcements(request, id):
@@ -78,6 +81,7 @@ def add_announcements(request):
         
     context = {
         'form': form,
+        'state':'announcements',
     }
     return render(request, 'announcements/add_announcements.html', context)  
     
@@ -85,6 +89,7 @@ def show_announcements(request):
     announcements = Announcements.objects.all().filter(user_id=request.user)
     context = {
         'announcements': announcements,
+        'state':'announcements',
     }
     return render(request, "announcements/announcements.html", context)
 
@@ -99,6 +104,7 @@ def update_announcements(request, id):
     context = {
         'research': research,
         'form': form,
+        'state':'announcements',
     }
     return render(request, 'announcements/update_announcements.html', context)
 
@@ -149,7 +155,8 @@ def add_extension_services(request):
         print("Failed!") 
         
     context = {
-        'form': form
+        'form': form,
+        'state':'extension_services',
     }
     return render(request, '/crud/add_extension_services.html', context) 
 
@@ -161,6 +168,7 @@ def edit_extension_services(request, id):
     context = {
         'extension': extension,
         'form': form,
+        'state':'extension_services',
     }
     return render(request, 'crud/update_extension_service.html', context)  
 
@@ -174,6 +182,7 @@ def update_extension_services(request, id):
     context = {
         'extension': extension,
         'form': form,
+        'state':'extension_services',
     }
     return render(request, '/crud/update_extension_service.html', context)  
 
@@ -197,7 +206,8 @@ def faculty_subjects_taught(request):
         # subject =  Subjects_Taught.filter.get(faculty_id=request.user)
     
     context = {
-        'all_subjects': my_subject.handled_subjects.all()
+        'all_subjects': my_subject.handled_subjects.all(),
+        'state':'subjects_taught',
     }
     return render(request, "subjects/subject_taught.html", context)
     
@@ -226,7 +236,8 @@ def add_taught_subjects(request):
         
     context = {
         'form': form,
-        'selected_list': selected_list
+        'selected_list': selected_list,
+        'state':'subjects_taught',
     }
     return render(request, 'crud/add_subject_taught.html', context) 
 
@@ -241,7 +252,8 @@ def update_taught_subjects(request, id):
         print("Noped!")
     
     context = {
-        'all_subjects': all_subjects.handled_subjects.all()
+        'all_subjects': all_subjects.handled_subjects.all(),
+        'state':'subjects_taught',
     }
     return render(request, 'crud/add_subject_taught.html', context) 
 
@@ -254,6 +266,7 @@ def edit_extension_services(request, id):
     context = {
         'extension': extension,
         'form': form,
+        'state':'extension_services',
     }
     return render(request, 'crud/update_extension_service.html', context)  
 
@@ -274,6 +287,7 @@ def faculty_researches(request):
         'research_ongoing_filtered': research_ongoing_filtered,
         'research_presented': research_presented,
         'research_published': research_published,
+        'state':'researches',
     }
     return render(request, "researches/researches.html", context)
 
@@ -303,6 +317,7 @@ def add_researches(request):
         'form': form,
         # 'form_presented': form_presented,
         # 'form_published': form_published,
+        'state':'researches',
     }
     return render(request, 'crud/add_researches.html', context)  
 
@@ -346,6 +361,7 @@ def add_presented(request):
         'form': form,
         'all_presented': all_presented,
         'all_presented2': all_presented2,
+        'state':'researches',
     }
     return render(request, 'crud/add_presented.html', context) 
  
@@ -380,6 +396,7 @@ def add_published(request):
     context = {
         'form': form,
         'all_published': all_published,
+        'state':'researches',
     }
     return render(request, 'crud/add_published.html', context)  
 
@@ -410,6 +427,7 @@ def update_researches(request, id):
     context = {
         'research': research,
         'form': form,
+        'state':'researches',
     }
     return render(request, 'crud/update_research_details.html', context)  
 
@@ -435,7 +453,11 @@ def delete_extension_services(request, id):
 """ SUBJECTS """
 def show_subject(request):
     all_subjects = Subjects.objects.all()
-    return render(request, "subjects/subjects.html", {'all_subjects': all_subjects})
+    context = {
+        'all_subjects': all_subjects,
+        'state':'subjects',
+    }
+    return render(request, "subjects/subjects.html", context)
 
 def add_subject(request):
     if request.method == "POST":  
@@ -455,7 +477,8 @@ def add_subject(request):
         print("Failed!") 
         
     context = {
-        'form': form
+        'form': form,
+        'state':'subjects',
     }
     return render(request, 'subjects/add_subjects.html', context) 
 
@@ -467,6 +490,7 @@ def updateform_subject(request, id):
     context = {
         'subjecttt': subjecttt,
         'form': form,
+        'state':'subjects',
     }
     return render(request, 'crud/update_subjects.html', context)  
 
@@ -490,6 +514,7 @@ def update_subject(request, id):
     context = {
         'subjecttt': subjecttt,
         'form': form,
+        'state':'subjects',
     }
     return render(request, 'subjects/update_subjects.html', context)  
 

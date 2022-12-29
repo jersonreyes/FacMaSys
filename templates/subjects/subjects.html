@@ -1,55 +1,62 @@
-{% extends "main.html" %}
-
-
-{% block title %}
-    Add Subjects
-{% endblock %}
-
+{% extends 'partials/base.html' %}
+{% block title %}Add Subjects{% endblock %}
+{% block headers %} DASHBOARD {% endblock %}
 
 {% block content %}
 
-    {% if all_subjects|length > 0 %}
-    <table>
-        <thead>
-            <th>course_code</th>
-            <th>course_title</th>
-            <th>course_credits</th>
-            <th>semester</th>
-            <th>year</th>
-            <th>course_lec_units</th>
-            <th>course_lab_units</th>
-            <th>course_hours_per_week</th>
-            <th>specialization</th>
-            <th>pre_requisite</th>
-            <th>course_type</th>
-            <th>
-                Actions
-            </th>
-        </thead>
+    {% if user.is_authenticated %}
+        <div class="mt-[10vh] dark:white w-full">
+            <div style="margin-bottom:2vh" class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
+                <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
+                <div class="z-[1] absolute">
+                    <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">College / <span class="font-normal">Subjects</span></p>
+                </div>
+            </div>
+            {% if all_subjects|length > 0 %}
+            <table>
+                <thead>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Credits</th>
+                    <th>Semester</th>
+                    <th>Year</th>
+                    <th>LEC Units</th>
+                    <th>Lab Units</th>
+                    <th>Hours per Week</th>
+                    <th>Specialization</th>
+                    <th>Pre-requisite</th>
+                    <th>Course Type</th>
+                    <th>
+                        Actions
+                    </th>
+                </thead>
 
-        <tbody>
-            {% for e in all_subjects %}
-            <tr>
-                <td>{{ e.course_code }} </td>
-                <td>{{ e.course_title }} </td>
-                <td>{{ e.course_credits }} </td>
-                <td>{{ e.semester }} </td>
-                <td>{{ e.year }} </td>
-                <td>{{ e.course_lec_units }} </td>
-                <td>{{ e.course_lab_units }} </td>
-                <td>{{ e.course_hours_per_week }} </td>
-                <td>{{ e.specialization }} </td>
-                <td>{{ e.pre_requisite }} </td>
-                <td>{{ e.course_type }} </td>
-                <td>
-                    <a href="./update_subject/{{e.id}}">Update</a>
-                    <a href="./delete_subject/{{e.id}}">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <h1>No data available.</h1>
+                <tbody>
+                    {% for e in all_subjects %}
+                    <tr>
+                        <td>{{ e.course_code }} </td>
+                        <td>{{ e.course_title }} </td>
+                        <td>{{ e.course_credits }} </td>
+                        <td>{{ e.semester }} </td>
+                        <td>{{ e.year }} </td>
+                        <td>{{ e.course_lec_units }} </td>
+                        <td>{{ e.course_lab_units }} </td>
+                        <td>{{ e.course_hours_per_week }} </td>
+                        <td>{{ e.specialization }} </td>
+                        <td>{{ e.pre_requisite }} </td>
+                        <td>{{ e.course_type }} </td>
+                        <td>
+                            <a href="./update_subject/{{e.id}}">Update</a>
+                            <a href="./delete_subject/{{e.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <h1>No data available.</h1>
+            {% endif %}
+        </div>
+    </div>
     {% endif %}
 {% endblock %}

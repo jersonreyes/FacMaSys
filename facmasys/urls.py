@@ -35,7 +35,7 @@ urlpatterns = [
     # path('extension_coord/', include('apps.extension_coord.urls')),
     # FacMyLyfe
     
-    path('subjects/', views.show_subject),
+    path('subjects/', views.show_subject, name='subjects-index'),
     path('subjects/add_subject', views.add_subject),
     path('subjects/updateform_subject', views.updateform_subject),
     path('subjects/update_subject/<int:id>', views.update_subject),
@@ -57,18 +57,18 @@ urlpatterns = [
 
     # path('', views.index),
     path('show_summary_subjects/', views.show_dept_summary),
-    path('announcements/', views.show_announcements),
+    path('announcements/', views.show_announcements, name='announcements-index'),
     path('announcements/add_announcements', views.add_announcements),
     path('announcements/update/<int:id>', views.update_announcements),
     path('announcements/delete/<int:id>', views.delete_announcements),
     
-    path('extension_services/', views.faculty_extension_services),
+    path('extension_services/', views.faculty_extension_services, name='extension_services-index'),
     path('extension_services/add_service', views.add_extension_services),
     path('extension_services/edit_service/<int:id>', views.edit_extension_services),
     path('extension_services/update_service/<int:id>', views.update_extension_services),
     path('extension_services/delete_service/<int:id>', views.delete_extension_services),
 
-    path('research/', views.faculty_researches),
+    path('research/', views.faculty_researches, name='research-index'),
     path('research/add_research', views.add_researches),
     path('research/add_presented', views.add_presented),
     path('research/add_published', views.add_published),

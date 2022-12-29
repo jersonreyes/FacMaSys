@@ -125,15 +125,8 @@
 
 
     
-    {% for value, subject in form.pre_requisite.field.choices %}
-        <p>Prereq: {{ subjecttt.pre_requisite }}</p>
-        <p>Value: {{ subject }}</p>    
-
-        {% if subjecttt.pre_requisite == subject %}
-            <p>True</p>
-        {% else %}
-            <p>False</p>
-        {% endif %}
+    {% for value, subject in form.pre_requisite.field.choices %}  
+        {{ subjecttt.pre_requisite }}
     {% endfor %}
     
     <div>
