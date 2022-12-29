@@ -35,7 +35,7 @@ class SubjectForm(forms.ModelForm):
 class ExtensionServiceForm(forms.ModelForm):
     class Meta:
         model = ExtensionService
-        fields = "__all__"
+        # fields = "__all__"
         exclude = ('faculty_id', 'ext_offeredprograms_id', 'ext_collaborator_id', )
         widget = {
             'email': forms.EmailInput(),
@@ -45,7 +45,7 @@ class Research_PresentedForm(forms.ModelForm):
     class Meta:
         model = Research_Presented
         exclude = ('faculty_id',  )
-        fields = "__all__"
+        # fields = "__all__"
         widget = {
             'event_start_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
             'event_end_date': forms.DateInput(attrs={'class':'form-control', 'type':'date'}),
@@ -56,7 +56,7 @@ class Research_PublishedForm(forms.ModelForm):
     class Meta:
         model = Research_Published
         exclude = ('faculty_id',  )
-        fields = "__all__"
+        # fields = "__all__"
         
 class ResearchForm(forms.ModelForm):
     class Meta:
@@ -68,4 +68,5 @@ class ResearchForm(forms.ModelForm):
             'research_progress': forms.ChoiceField(),
             'research_area': forms.ChoiceField(),
             'degree_level': forms.ChoiceField(),
+            'document':  forms.FileField(label='Select a file', help_text='max. 42 megabytes')
         }

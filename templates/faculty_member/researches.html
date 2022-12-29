@@ -22,10 +22,13 @@
                 <th>ID</th>
                 <th>ID</th>
                 <th>Research Title</th>
-                <th>Progress</th>
                 <th>Area</th>
+                <th>abstract</th>
+                <th>document</th>
+                <th>date_added</th>
                 <th>School</th>
                 <th>Degree Level</th>
+                <th>Progress</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,10 +39,13 @@
                 <td>{{ element.id }}</td>
                 <td>{{ element.faculty_id }}</td>
                 <td>{{ element.research_title }}</td>
-                <td>{{ element.research_progress }}</td>
                 <td>{{ element.research_area }}</td>
+                <td>{{ element.abstract }}</td>
+                <td>{{ element.document }}</td>
+                <td>{{ element.date_added }}</td>
                 <td>{{ element.researcher_school }}</td>
                 <td>{{ element.degree_level }}</td>
+                <td>{{ element.research_progress }}</td>
 
                 <td>
                     <a href="./update_research/{{ element.id }}">Update</a>
@@ -61,10 +67,13 @@
                 <th>ID</th>
                 <th>ID</th>
                 <th>Research Title</th>
-                <th>Progress</th>
                 <th>Area</th>
+                <th>abstract</th>
+                <th>document</th>
+                <th>date_added</th>
                 <th>School</th>
                 <th>Degree Level</th>
+                
                 <th>Actions</th>
             </tr>
         </thead>
@@ -76,8 +85,12 @@
                 <td>{{ element.faculty_id }}</td>
                 <td>{{ element.research_title }}</td>
                 <td>{{ element.research_area }}</td>
+                <td>{{ element.abstract }}</td>
+                <td>{{ element.document }}</td>
+                <td>{{ element.date_added }}</td>
                 <td>{{ element.researcher_school }}</td>
                 <td>{{ element.degree_level }}</td>
+                
 
                 <td>
                     <a href="./update_research/{{ element.id }}">Update</a>
