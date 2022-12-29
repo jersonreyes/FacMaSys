@@ -1,0 +1,119 @@
+{% extends "main.html" %} {% block title %} Update Subjects {% endblock %} 
+
+
+
+{% block content %}
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    
+    <a href="../">Go back to Home</a>
+    <div>
+      Course code
+      <input
+        type="text"
+        name="course_code"
+        maxlength="20"
+        required=""
+        id="id_course_code"
+      />
+    </div>
+
+    <div>
+      Course title
+      <input
+        type="text"
+        name="course_title"
+        maxlength="100"
+        required=""
+        id="id_course_title"
+      />
+    </div>
+
+    <div>
+      Course credits
+      <input
+        type="number"
+        name="course_credits"
+        required=""
+        id="id_course_credits"
+      />
+    </div>
+
+    <div>
+      Semester
+      <select name="semester" id="id_semester">
+        <option value="1st Semester">1st Semester</option>
+        <option value="2nd Semester">2nd Semester</option>
+      </select>
+    </div>
+
+    <div>
+        Year
+        <select name="year" id="id_year">
+        {% for value, subject in form.year.field.choices %}
+            <option value="{{value}}">{{value}}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div>
+      Course lec units
+      <input
+        type="number"
+        name="course_lec_units"
+        required=""
+        id="id_course_lec_units"
+      />
+    </div>
+
+    <div>
+      Course lab units
+      <input
+        type="number"
+        name="course_lab_units"
+        required=""
+        id="id_course_lab_units"
+      />
+    </div>
+
+    <div>
+      Course hours per week
+      <input
+        type="number"
+        name="course_hours_per_week"
+        required=""
+        id="id_course_hours_per_week"
+      />
+    </div>
+
+    <div>
+        Specialization
+        <select name="specialization" id="id_specialization">
+            {% for value, subject in form.specialization.field.choices %}
+                <option value="{{value}}">{{value}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        Pre requisite
+        <select name="pre_requisite" id="id_research_progress" multiple>
+        {% for value, subject in form.pre_requisite.field.choices %}
+            <option value="{{value}}">{{subject}}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        Course Type
+        <select name="course_type" id="course_type">
+        {% for value, subject in form.course_type.field.choices %}
+            <option value="{{value}}">{{value}}</option>
+        {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit">Update Subject</button>
+  </form>
+{% endblock %}

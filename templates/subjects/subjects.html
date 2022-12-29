@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<<<<<<< HEAD
     {% if user.is_authenticated %}
         <div class="mt-[10vh] dark:white w-full">
             <div style="margin-bottom:2vh" class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
@@ -30,6 +31,28 @@
                         Actions
                     </th>
                 </thead>
+=======
+
+    <a href="./add_subject">Add Subjects</a>
+    {% if all_subjects|length > 0 %}
+    <table>
+        <thead>
+            <th>course_code</th>
+            <th>course_title</th>
+            <th>course_credits</th>
+            <th>semester</th>
+            <th>year</th>
+            <th>course_lec_units</th>
+            <th>course_lab_units</th>
+            <th>course_hours_per_week</th>
+            <th>specialization</th>
+            <th>pre_requisite</th>
+            <th>course_type</th>
+            <th>
+                Actions
+            </th>
+        </thead>
+>>>>>>> 3e6befa7e0c4945b8cc066b21eaf8aaf9b9d8e59
 
                 <tbody>
                     {% for e in all_subjects %}

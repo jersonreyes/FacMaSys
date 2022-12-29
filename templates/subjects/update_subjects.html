@@ -6,6 +6,8 @@
   <form method="POST" action="./{{subjecttt.id}}">
     {% csrf_token %}
 
+
+    <a href="../">Go back to Home</a>
     <div>
       Course code
       <input
@@ -113,8 +115,7 @@
         Pre requisite
         <select name="pre_requisite" id="id_research_progress" multiple>
         {% for value, subject in form.pre_requisite.field.choices %}
-            
-            {% if subjecttt.pre_requisite == subject %}
+            {% if subjecttt.pre_requisite.id == value %}
                 <option value="{{value}}" selected>{{subject}}</option>
             {% else %}
                 <option value="{{value}}">{{subject}}</option>
@@ -123,15 +124,17 @@
         </select>
     </div>
 
+<<<<<<< HEAD
 
     
     {% for value, subject in form.pre_requisite.field.choices %}  
         {{ subjecttt.pre_requisite }}
     {% endfor %}
+=======
+>>>>>>> 3e6befa7e0c4945b8cc066b21eaf8aaf9b9d8e59
     
     <div>
       Course type
-
     <select name="course_type" id="course_type">
         {% for value, subject in form.course_type.field.choices %}
             {% if subjecttt.course_type == value %}
