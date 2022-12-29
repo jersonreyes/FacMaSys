@@ -71,12 +71,13 @@ urlpatterns = [
     path('research/add_research', views.add_researches),
     path('research/add_presented', views.add_presented),
     path('research/add_published', views.add_published),
-
+    path('research/update_details/a/<int:id>', views.update_details_a),
+    path('research/update_details/b/<int:id>', views.update_details_b),
+    path('research/delete_details/a/<int:id>', views.delete_details_a),
+    path('research/delete_details/b/<int:id>', views.delete_details_b),
 
     path('research/edit_research/<int:id>', views.edit_researches),
     path('research/update_research/<int:id>', views.update_researches),
     path('research/delete_research/<int:id>', views.delete_researches),
-    
-    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
