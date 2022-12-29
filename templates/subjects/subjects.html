@@ -49,7 +49,7 @@
                         <td>{{ e.course_type }} </td>
                         <td>
                             <a class="form-modal-toggler" href="javascript:void();" title="Update Subject" value="update_subject/{{e.id}}">Update</a>
-                            <button onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
+                            <button class="delete" onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

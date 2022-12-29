@@ -18,6 +18,7 @@ $(document).ready(function() {
         $('#form-modal').addClass('active')
         $('#form-modal form').attr("action", e.currentTarget.getAttribute('value') );
         $('#form-modal-title').html(e.currentTarget.title)
+        $('#form-modal-extra').html(e.currentTarget.getAttribute('value').split('/')[1] ? e.currentTarget.getAttribute('value').split('/')[1] : e.currentTarget.getAttribute('value'))
     })
     return false;
 })
@@ -275,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
         } 
     })
-    $(document).on("click", ".theme-toggler", function(e){
+    $('.themeToggler').click(function(e){
         var value = $.cookie("theme");
         if(value == 'dark') {
             $.cookie('theme', 'light', { expires: 9999999, path: '/' });
