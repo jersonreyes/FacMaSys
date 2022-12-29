@@ -228,7 +228,7 @@ def add_taught_subjects(request):
         'form': form,
         'selected_list': selected_list
     }
-    return render(request, '/crud/add_subject_taught.html', context) 
+    return render(request, 'crud/add_subject_taught.html', context) 
 
 def update_taught_subjects(request, id):
     all_subjects = Subjects_Taught.objects.get(faculty_id=id)
@@ -243,7 +243,7 @@ def update_taught_subjects(request, id):
     context = {
         'all_subjects': all_subjects.handled_subjects.all()
     }
-    return render(request, '/crud/add_subject_taught.html', context) 
+    return render(request, 'crud/add_subject_taught.html', context) 
 
 
 def edit_extension_services(request, id):
@@ -255,7 +255,7 @@ def edit_extension_services(request, id):
         'extension': extension,
         'form': form,
     }
-    return render(request, '/crud/update_extension_service.html', context)  
+    return render(request, 'crud/update_extension_service.html', context)  
 
 # Researches
 def faculty_researches(request):
@@ -423,3 +423,94 @@ def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
     ext.delete()  
     return redirect("../")
+
+
+
+
+
+
+
+
+
+""" SUBJECTS """
+def show_subject(request):
+    all_subjects = Subjects.objects.all()
+    return render(request, "subjects/subjects.html", {'all_subjects': all_subjects})
+
+def add_subject(request):
+    if request.method == "POST":  
+        form = SubjectForm(request.POST)  
+        if form.is_valid():
+            print("is valid")   
+            try:  
+                form.save()
+                print("Success!") 
+                return redirect('./')   # refresh
+            except:  
+                pass  
+        else:
+            print("not valid") 
+    else:  
+        form = SubjectForm()         
+        print("Failed!") 
+        
+    context = {
+        'form': form
+    }
+    return render(request, 'subjects/add_subjects.html', context) 
+
+
+def updateform_subject(request, id):
+    form = SubjectForm()
+    subjecttt = ExtensionService.objects.get(id=id)
+    
+    context = {
+        'subjecttt': subjecttt,
+        'form': form,
+    }
+    return render(request, 'crud/update_subjects.html', context)  
+
+
+def update_subject(request, id):
+    
+    # all_subjects = Subjects.objects.get(id=id)
+    
+    # values = list(all_subjects.pre_requisite)
+    # print("values: ", values)
+    # selected_list = []
+    # for e in values:
+    #     selected_list.append(e['id'])
+        
+    subjecttt = Subjects.objects.get(id=id)  
+    form = SubjectForm(request.POST, instance=subjecttt)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../")  
+    
+    context = {
+        'subjecttt': subjecttt,
+        'form': form,
+    }
+    return render(request, 'subjects/update_subjects.html', context)  
+
+
+def delete_subject(request, id):
+    ext = Subjects.objects.get(id=id)  
+    ext.delete()  
+    return redirect("../")
+
+""" SUBJECTS """
+# import csv
+# with open('UpdatedSubjectLitsts.csv', mode ='r') as file:
+#     csvFile = csv.reader(file)
+#     # reading the CSV file
+
+#     # displaying the contents of the CSV file
+#     for lines in csvFile:
+#         subj = Subjects.objects.create(course_code=lines[0], course_title=lines[1], course_credits=lines[2], semester=lines[3], year=lines[4], course_lec_units=lines[5], course_lab_units=lines[6], course_hours_per_week=lines[7], specialization="None", pre_requisite=None, course_type=lines[8])
+        
+#         print(f"course_code='{lines[0]}', course_title='{lines[1]}', course_credits={lines[2]}, semester='{lines[3]}', year='{lines[4]}', course_lec_units={lines[5]}, course_lab_units={lines[6]}, course_hours_per_week={lines[7]}, specialization='None', course_type={lines[8]},", end="\n\n")
+
+
+# Delete everything
+# Subjects.objects.all().delete()
