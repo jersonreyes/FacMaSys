@@ -18,7 +18,7 @@ Requires core.js and SelectBox.js.
 
             for (const p of from_box.parentNode.getElementsByTagName('p')) {
                 if (p.classList.contains("info")) {
-                    // Remove <p class="info">, because it just gets in the way.
+                    // Remove <p class="font-sans info">, because it just gets in the way.
                     from_box.parentNode.removeChild(p);
                 } else if (p.classList.contains("help")) {
                     // Move help text up to the top so it isn't below the select

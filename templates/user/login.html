@@ -10,12 +10,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     
     <!--<link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css" media="screen">--> 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     crossorigin="anonymous"></script>
 
@@ -27,7 +28,7 @@
     <title>FacMaSys - Login</title>
   </head>
 
-  <body class="w-screen h-full transition-all dark:bg-[#2A2A2A]">
+  <body class="w-screen h-full transition-all dark:bg-[#212121]">
     <div class="flex min-h-full" id="main-body">
       <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
         <div class="w-full max-w-sm mx-auto lg:w-96">
@@ -39,7 +40,7 @@
               </div>
               <img class="w-auto h-12" src="{% static '/images/logo.png' %}"/>
             </div>  
-            <h2 class="mt-6 text-3xl font-bold text-gray-900 dark:white">Sign in to your account</h2>
+            <h2 class="mt-6 font-sans text-3xl font-bold text-gray-900 dark:white">Sign in to your account</h2>
           </div>
     
           <div class="mt-8">
@@ -48,11 +49,11 @@
               {% csrf_token %}
               {{ form|crispy }}
               
-              <button class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" id="loginBtn" type="submit" style="background-color:#7a5117;">Login</button>
+              <button class="flex justify-center w-full px-4 py-2 mt-4 font-sans text-base font-medium text-white border border-transparent rounded-md bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2" id="loginBtn" type="submit">Login</button>
               
-              <div class="row d-flex justify-content-center">
-                <a class="mx-4 dark:white" href="{% url 'password_reset' %}" style="color:#173f7a;">Forgot Password</a>
-                <a class="mx-4 dark:white" href="{% url 'user-register' %}" style="color:#173f7a;">Don't have an account yet? Go to signup</a>
+              <div class="flex flex-col mt-2 gap-y-4">
+                <a class="font-sans font-medium text-center text-amber-600 hover:text-amber-700" style="color: rgb(245 158 11 / var(--tw-text-opacity));" href="{% url 'password_reset' %}">Forgot Password</a>
+                <span class="font-sans text-center">Don't have an account? <a style="color: rgb(245 158 11 / var(--tw-text-opacity));" class="font-sans font-medium text-amber-600 hover:text-amber-700" href="{% url 'user-register' %}">Sign up</a></span>
               </div>       
           </form>
             </div>
@@ -64,12 +65,10 @@
         <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
           <p style="transform:translateY(10px) !important; right:40px;top:30px" value="Toggle Dark/Light Mode" class="z-[200] absolute animate glow delay-7 themeToggler sidebarItem cursor-pointer dark:white no-underline grid grid-flow-col gap-2 items-center place-items-center justify-center hover:sidebarItemActive" id="text_link">                                                                                    
             <img src="{% static 'images/light.svg' %}" style="height: 30px; width:auto" class="invert"/>                   
-            <span class="text-white cursor-pointer">Toggle</span>
           </p>
           <div style="z-index:1;width:100vw;height:100vw;position:absolute; background: rgba(143, 76, 0, 0.5)"></div>
-          <div class="z-[200] grid grid-flow-col items-center">
-            <span class="font-bold text-white" style="line-height:0.8;font-size:8vw">FAC<br/>MA<br/>SYS</span>
-            <span class="ml-5 text-white" style="line-height:1;font-size:1vw">College of<br/>Information and <br/>Communications<br/>Technology<br/><br/><p class="text-[10px]">Faculty<br/>Management<br/>System</p></span>
+          <div class="z-[200]">
+            <img src="{% static 'images/logo-fms_full.svg' %}" style="height: 256px" > 
           </div>
         </div>
       </div>
