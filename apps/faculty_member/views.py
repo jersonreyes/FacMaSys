@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import F
 import csv
+from facmasys.utils import add_activity
 
 # with open('UpdatedSubjectLitsts.csv', mode ='r') as file:
 #     csvFile = csv.reader(file)
@@ -101,6 +102,7 @@ def add_researches(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
+                add_activity(logged_user=request.user,activity_type='ADD RESEARCH',activity_location='RESEARCH',activity_message=f"New research was added for {user_instance.username}")
                 print("Success!") 
                 print('asdf', new_form.get('research_progress'))
                 return redirect('./')   # refresh
@@ -147,6 +149,7 @@ def add_presented(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
+                add_activity(logged_user=request.user,activity_type='ADD RESEARCH PRESENTED',activity_location='RESEARCH PRESENTED',activity_message=f"Research Presented was added for {request.user.username}")
                 print("Success!") 
                 return redirect('./')   # refresh
             except:  
@@ -182,6 +185,7 @@ def add_published(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
+                add_activity(logged_user=request.user,activity_type='ADD RESEARCH PUBLISHED',activity_location='RESEARCH PUBLISHED',activity_message=f"Research Published was added for {request.user.username}")
                 print("Success!") 
                 return redirect('./')   # refresh
             except:  
@@ -209,6 +213,7 @@ def add_extension_services(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
+                add_activity(logged_user=request.user,activity_type='ADD EXTENSION SERVICE',activity_location='EXTENSION SERVICE',activity_message=f"Extension Service was added by {request.user.username}")
                 print("Success!") 
                 return redirect('./')   # refresh
             except:  
@@ -244,6 +249,7 @@ def add_taught_subjects(request):
         if form.is_valid():  
             try:  
                 form.save()
+                add_activity(logged_user=request.user,activity_type='ADD SUBJECT TAUGHT',activity_location='SUBJECT TAUGHT',activity_message=f"Subject Taught was added for {request.user.username}")
                 return redirect('/')   # refresh
             except:  
                 pass  
@@ -261,6 +267,7 @@ def update_taught_subjects(request, id):
     form = SubjectTaughtForm(request.POST, instance=all_subjects)  
     if form.is_valid():  
         form.save()  
+        add_activity(logged_user=request.user,activity_type='UPDATE SUBJECT TAUGHT',activity_location='SUBJECT TAUGHT',activity_message=f"Subject taught was updated by {request.user.username}")
         print("Saved!")
         return redirect("../")  
     else:
@@ -289,6 +296,7 @@ def update_extension_services(request, id):
     form = ExtensionServiceForm(request.POST, instance=extension)  
     if form.is_valid():  
         form.save()  
+        add_activity(logged_user=request.user,activity_type='UPDATE EXTENSION SERVICE',activity_location='EXTENSION SERVICE',activity_message=f"Extension Service was updated by {request.user.username}")
         return redirect("../")  
     
     context = {
@@ -320,6 +328,7 @@ def update_researches(request, id):
     form = ResearchForm(request.POST, instance=research)  
     if form.is_valid():  
         form.save()  
+        add_activity(logged_user=request.user,activity_type='UPDATE RESEARCH',activity_location='RESEARCH',activity_message=f"Research was updated by {request.user.username}")
         return redirect("../")  
     
     context = {
@@ -332,11 +341,13 @@ def update_researches(request, id):
 def delete_researches(request, id):  
     subject = Research.objects.get(id=id)  
     subject.delete()  
+    add_activity(logged_user=request.user,activity_type='DELETE RESEARCH',activity_location='RESEARCH',activity_message=f"Research was deleted by {request.user.username}")
     return redirect("../")
 
 def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
     ext.delete()  
+    add_activity(logged_user=request.user,activity_type='DELETE EXTENSION SERVICE',activity_location='EXTENSION SERVICE',activity_message=f"Extension Service was deleted by {request.user.username}")
     return redirect("../")
 
 # <th>ID</th>

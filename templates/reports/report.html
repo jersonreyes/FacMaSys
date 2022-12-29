@@ -52,11 +52,9 @@
     
     <header>
         <div class="row mb-3 pt-3 d-flex justify-content-center">
-            <img src="{% static 'images/facmasys.png' %}" alt="FacMaSys">
+            <img src="{% static 'images/logo.png' %}" alt="FacMaSys">
         </div>
-        <div class="row d-flex justify-content-center">
-            <h6> {{ storeinfo.address }} Tel: {{ storeinfo.telephone }}<h6>
-        </div>
+
         <div class="row d-flex justify-content-center">
             <p><strong> {{ title }}</strong></p>
         </div>
@@ -67,6 +65,6 @@
     </body>
 
     <footer>
-        <small> Date Printed: {% now "SHORT_DATETIME_FORMAT" %} &nbsp; Printed by: {{user}} &nbsp; Email: {{storeinfo.email}}</small>
+        <small> Date Printed: {% now "SHORT_DATETIME_FORMAT" %} &nbsp; Printed by: {{user}} </small>
     </footer>
 </html>

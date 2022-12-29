@@ -39,8 +39,8 @@ class RegisterView(View):
 
         if form.is_valid():
             form.save()
-
             username = form.cleaned_data.get('username')
+            add_activity(logged_user=request.user,activity_type='REGISTER',activity_location='USER',activity_message=f"Account was created for {username}")
             messages.success(request, f'Account created for {username}')
 
             return redirect('user-login')
@@ -62,6 +62,7 @@ class CustomLoginView(LoginView):
             self.request.session.modified = True
 
         # else browser session will be as long as the session cookie time "SESSION_COOKIE_AGE" defined in settings.py
+        add_activity(logged_user=self.request.user,activity_type='LOGIN',activity_location='USER',activity_message=f"User {self.request.user.username} logged in.")
         return super(CustomLoginView, self).form_valid(form)
     
 
@@ -69,6 +70,7 @@ class CustomLoginView(LoginView):
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
+        add_activity(logged_user=request.user,activity_type='LOGOUT',activity_location='USER',activity_message=f"User {request.user.username} logged out.")
     return redirect('user-login')
 
 
@@ -76,6 +78,10 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('user-profile')
+    
+    def form_valid(self, form):
+        add_activity(logged_user=self.request.user,activity_type='CHANGE PASSWORD',activity_location='USER',activity_message=f"Password has been updated for {self.request.user.username}.")
+        return super().form_valid(form)
     
 
 @login_required

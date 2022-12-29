@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'tinymce',
     'mathfilters',
     'facmasys',
-    'django_q',
     'tailwind',
     'tailwind_theme',
     'apps.reports',

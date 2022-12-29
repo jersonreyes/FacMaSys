@@ -4,4 +4,3 @@ from .models import *
 
 
 admin.site.site_header = 'FacMaSys Admin'
-admin.site.register(Announcements)

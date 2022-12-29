@@ -14,11 +14,17 @@ class ExtensionService_Collaborators(models.Model):
     name = models.CharField(max_length=200)
     position = models.CharField(max_length=200)
     # academe = models.CharField(max_length=200)
+    
+    class Meta:
+        verbose_name = 'Extension service collaborator'
 
 class ExtensionService_OfferedPrograms(models.Model):
     program_name = models.CharField(max_length=200)
     description = models.TextField(max_length=200, null=True, blank=True)
     # academe = models.CharField(max_length=200) 
+    
+    class Meta:
+        verbose_name = 'Extension service offered program'
 
 class ExtensionService(models.Model):
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
@@ -99,7 +105,9 @@ class Research(models.Model):
     
     def __references__(self):
         return self.faculty_id
-
+    
+    class Meta:
+        verbose_name_plural = 'Research'
 
 
 class Research_Presented(models.Model):
@@ -138,7 +146,9 @@ class Research_Presented(models.Model):
     def __str__(self) -> str:
         return f'{self.presented_id} {self.short_name}: {self.event_name}, {self.date_presented}'
     
-
+    class Meta:
+        verbose_name_plural = 'Research presented'
+    
 
 class Research_Published(models.Model):
     RESEARCH_LICENSE = (
@@ -161,8 +171,8 @@ class Research_Published(models.Model):
     def __str__(self) -> str:
         return f'{self.published_id} {self.publication}: {self.published_date}, {self.research_license}'
     
-
-
+    class Meta:
+        verbose_name_plural = 'Research published'
 
 
 """ ################################# SUBJECTS ################################# """
@@ -204,6 +214,9 @@ class Subjects(models.Model):
     
     def __str__(self) -> str:
         return f'{self.course_code} | Title: {self.course_title} | Credits: {self.course_credits}'
+    
+    class Meta:
+        verbose_name = 'Subject'
 
 
 class Subjects_Taught(models.Model):
@@ -212,6 +225,9 @@ class Subjects_Taught(models.Model):
     
     def __str__(self) -> str:
         return f'Faculty ID: {self.faculty_id} | Handled Subjects: {self.handled_subjects.values().all()}'
+    
+    class Meta:
+        verbose_name_plural = 'Subjects taught'
 
 
     
