@@ -14,11 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls import handler400, handler403, handler404, handler500
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
 from . import views
+
+handler400 = 'facmasys.views.bad_request'
+handler403 = 'facmasys.views.permission_denied'
+handler404 = 'facmasys.views.page_not_found'
+handler500 = 'facmasys.views.server_error'
 
 urlpatterns = [
     # FacMyLyfe
@@ -37,5 +43,21 @@ urlpatterns = [
     path('export/', include('apps.reports.urls')),
     path('user/', include('apps.user.urls')),
     path("__reload__/", include("django_browser_reload.urls")),
+
+    # path('', views.index),
+    path('show_summary_subjects/', views.show_dept_summary),
+    path('announcements/', views.show_announcements),
+    path('announcements/add_announcements', views.add_announcements),
+    path('announcements/update/<int:id>', views.update_announcements),
+    path('announcements/delete/<int:id>', views.delete_announcements),
+    
+    path('extension_services/', views.faculty_extension_services),
+    path('extension_services/add_service', views.add_extension_services),
+    path('extension_services/edit_service/<int:id>', views.edit_extension_services),
+    path('extension_services/update_service/<int:id>', views.update_extension_services),
+    path('extension_services/delete_service/<int:id>', views.delete_extension_services),
+
+    
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

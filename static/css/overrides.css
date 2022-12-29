@@ -167,4 +167,12 @@
   table th {
     padding: 10px;
   }
-  
+
+  .button-standard {
+    transition: 100ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .button-standard:hover {
+    opacity: 0.5;
+  }

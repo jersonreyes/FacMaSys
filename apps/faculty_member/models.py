@@ -80,6 +80,15 @@ class Research(models.Model):
         ("Independent", "Independent"),
     )
     
+    CONTENT_TYPE = (
+        ('Journal', 'Journal'),
+        ('Article', 'Article'),
+        ('Magazines', 'Magazines'),
+        ('Reviews', 'Reviews'),
+        ('Conference Paper', 'Conference Paper'),
+        ('Technical Reports', 'Technical Reports'),
+    )
+    
     # faculty_id = models.ForeignKey(Faculty, on_delete=models.CASCADE)
     # extension_service_id = models.ForeignKey(ExtensionService, on_delete=models.CASCADE)
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
@@ -87,6 +96,10 @@ class Research(models.Model):
     research_progress = models.CharField(max_length=100, choices=RESEARCH_PROGRESS, blank=False, null=False, default=None)
     research_area = models.CharField(max_length=100, choices=RESEARCH_AREA, blank=True, null=True, default=None)
     degree_level = models.CharField(max_length=100, choices=DEGREE_LEVEL, blank=True, null=True, default=None)
+    abstract = models.CharField(max_length=1500, blank=True, null=True, default=None)
+    content_type = models.CharField(max_length=100, choices=CONTENT_TYPE, blank=True, null=True, default="Journal")
+    date_added = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    document = models.FileField(upload_to='Researches/', blank=True, null=True, default=None)
     researcher_school = models.CharField(max_length=100, blank=False, null=False)
     # presented_id = models.ForeignKey(Research_Presented, on_delete=models.CASCADE, blank=True, null=True)
     # published_id = models.ForeignKey(Research_Published, on_delete=models.CASCADE, blank=True, null=True)
