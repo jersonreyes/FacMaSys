@@ -92,4 +92,10 @@
     .chart line{
       stroke: rgba(105, 105, 105, 0.327) !important;
     }
+    .main-theme-bg {
+        background-color: #F07E00;
+    }
+    .main-theme-color {
+        color: #F07E00;
+    }
 }

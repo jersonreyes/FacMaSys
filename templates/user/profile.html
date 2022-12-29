@@ -3,12 +3,6 @@
 {% block headers %} VIEW ACCOUNT {% endblock %}
 {% load static %}
 {% block content %}
-<style>
-    body {
-        background: rgb(230, 227, 227);
-        overflow: hidden;
-    }
-</style>
 
 <script type="text/javascript" defer>
     $(window).on('load', function() {
@@ -23,18 +17,57 @@
 
 </script>
 
-<div style="margin-top: 64px;">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-    
-        <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard-index' %}"> <img src="{% static 'images/icon_back_btn.png' %}" style="width:13px; height:13px;" alt="Back Button"> Back to Dashboard </a>               
-            </li>       
-        </ul>
+<div style="margin-top: 64px;" class="dark:white flex flex-col gap-3">
+    <div class="animate fade-animator h-[auto] delay-1 bg-[#ff880000] overflow-hidden w-full rounded-[20px] min-h-[240px] flex flex-col text-center justify-center items-center font-sans">
+        <div class="z-[0] h-[40vh] cover mix-blend-multiply saturate-0 w-full" style="mix-blend-mode: multiply;opacity:0.05;background:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;">
         </div>
-    </nav>
+        <div class="z-[1] absolute" style="width:80%">
+            <div class="dark:white">
+                <div class="flex justify-between">
+                    <div class="grid grid-flow-col gap-4 items-center">
+                        <div class="rounded-full" style="border-radius:100%;background-image: url('{{ user.profile.image.url }}');width:20vh;height:20vh;background-size: cover;"></div>
+                        <div class="leading-[1] text-left">
+                            <h1 class="font-bold tracking-[-2px]">{{ user.first_name }} {{ user.last_name }}</h1>
+                            <p class="capitalize opacity-50 text-sm mt-[-10px]">{{ user.profile.user_role }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="flex items-center gap-2 ">
+                            <div class="items-center dark:hover:bg-white dark:hover:text-black button-standard border border-[rgba(200,200,200,0.5)] px-2 py-1 rounded-md flex gap-2">
+                                <img src="/static/images/add_user.png" class="dark:invert" style="height:14px;width:14px"/>
+                                Share
+                            </div>
+                            <a href="{% url 'user-profile-update' %}" class="items-center button-standard flex main-theme-bg px-3 py-1 rounded-md">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p class="text-center text-lg font-bold">Posts</p>
+        <div class="grid gap-3 grid-cols-3 [&>div]:rounded-md w-full">
+            {% for i in "x"|rjust:"3" %}
+                <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}">
+                    <strong> TITLE </strong> <br>
+                    DESC
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <p class="text-center text-lg font-bold">Researches</p>
+        <div class="grid gap-3 grid-cols-3 [&>div]:rounded-md w-full">
+            {% for i in "x"|rjust:"3" %}
+                <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}">
+                    <strong> TITLE </strong> <br>
+                    DESC
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
     {% if messages %}
     {% for message in messages %}
@@ -44,70 +77,5 @@
     {% endfor %}
     {% endif %}
 
-    
-    
-    <div class="container-fluid">
-        <div class="container">
-            <div class="row my-3">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header bg-info text-white">
-                            Profile Information
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="row">
-                                <div class="col-md-4 p-5 d-flex justify-content-center">
-                                    <img class="img-thumbnail" src="{{ user.profile.image.url }}" alt="">
-                                </div>
-
-                                <div class="col-md-8 p-5">
-
-                                    <div class="pb-1">
-                                        <span class="h3"><span class="text-muted"> {{ user.profile.user_role|upper }} </span> &nbsp; <strong>{{ user.username }}</strong></span>                                                                               
-                                        <a class="btn btn-dark btn-sm float-right" href="{% url 'user-profile-update' %}"> &nbsp;&nbsp;Edit Profile&nbsp;&nbsp; </a>
-                                        <a class="btn btn-dark btn-sm float-right" href="{% url 'change-password' %}" style="margin-right:10px ;"> &nbsp;&nbsp;Change Password&nbsp;&nbsp; </a>
-                                    </div>                                 
-                                    <hr>
-
-                                    <table class="table bg-white table-borderless m-3">
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">First Name</th>
-                                                <td>{{ user.first_name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Last Name</th>
-                                                <td>{{ user.last_name }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Email</th>
-                                                <td>{{ user.email }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Age</th>
-                                                <td>{{ user.profile.age }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Phone</th>
-                                                <td>{{ user.profile.phone }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Address</th>
-                                                <td>{{ user.profile.address }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">City of Residence</th>
-                                                <td>{{ user.profile.city_of_residence }}</td>
-                                            </tr>
-                                        </tbody>                                
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    </div>
 </div>
 {% endblock %}
