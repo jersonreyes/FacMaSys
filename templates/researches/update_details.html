@@ -35,14 +35,13 @@
     <label for="id_published_id">Published id:</label>
     <select name="published_id" id="id_published_id">
         {% for value, subject in form.published_id.field.choices %}
+        
         {% if research.published_id == value %}
         <option value="{{value}}" selected>{{value}}</option>
         {% else %}
         <option value="{{value}}">{{value}}</option>
         {% endif %}
 
-        <p>{{research.published_id}}</p>
-        <p>{{value}}</p>
         {% endfor %}
     </select>
 </form>
