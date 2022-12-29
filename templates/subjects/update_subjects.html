@@ -1,0 +1,156 @@
+{% extends "main.html" %} {% block title %} Update Subjects {% endblock %} 
+
+
+
+{% block content %}
+  <form method="POST" action="./{{subjecttt.id}}">
+    {% csrf_token %}
+
+    <div>
+      Course code
+      <input
+        type="text"
+        name="course_code"
+        maxlength="20"
+        required=""
+        id="id_course_code"
+        value="{{subjecttt.course_code}}"
+      />
+    </div>
+
+    <div>
+      Course title
+      <input
+        type="text"
+        name="course_title"
+        maxlength="100"
+        required=""
+        id="id_course_title"
+        value="{{subjecttt.course_title}}"
+      />
+    </div>
+
+    <div>
+      Course credits
+      <input
+        type="number"
+        name="course_credits"
+        required=""
+        id="id_course_credits"
+        value="{{subjecttt.course_credits}}"
+      />
+    </div>
+
+    <div>
+      Semester
+      <select name="semester" id="id_semester">
+        <option value="1st Semester">1st Semester</option>
+
+        <option value="2nd Semester">2nd Semester</option>
+      </select>
+    </div>
+
+    <div>
+        Year
+        <select name="year" id="id_year">
+        {% for value, subject in form.year.field.choices %}
+            {% if research.year == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+            {% else %}
+                <option value="{{value}}">{{value}}</option>
+            {% endif %}
+        {% endfor %}
+        </select>
+    </div>
+
+    <div>
+      Course lec units
+      <input
+        type="number"
+        name="course_lec_units"
+        required=""
+        id="id_course_lec_units"
+        value="{{subjecttt.course_lec_units}}"
+      />
+    </div>
+
+    <div>
+      Course lab units
+      <input
+        type="number"
+        name="course_lab_units"
+        required=""
+        id="id_course_lab_units"
+        value="{{subjecttt.course_lab_units}}"
+      />
+    </div>
+
+    <div>
+      Course hours per week
+      <input
+        type="number"
+        name="course_hours_per_week"
+        required=""
+        id="id_course_hours_per_week"
+        value="{{ subjecttt.course_hours_per_week }}"
+      />
+    </div>
+
+    <div>
+        Specialization
+        <select name="specialization" id="id_specialization">
+            {% for value, subject in form.specialization.field.choices %}
+                {% if subjecttt.specialization in value %}
+                    <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                    <option value="{{value}}">{{value}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
+        Pre requisite
+        <select name="pre_requisite" id="id_research_progress" multiple>
+        {% for value, subject in form.pre_requisite.field.choices %}
+            
+            {% if subjecttt.pre_requisite == subject %}
+                <option value="{{value}}" selected>{{subject}}</option>
+            {% else %}
+                <option value="{{value}}">{{subject}}</option>
+            {% endif %}
+        {% endfor %}
+        </select>
+    </div>
+
+
+    
+    {% for value, subject in form.pre_requisite.field.choices %}
+        <p>Prereq: {{ subjecttt.pre_requisite }}</p>
+        <p>Value: {{ subject }}</p>    
+
+        {% if subjecttt.pre_requisite == subject %}
+            <p>True</p>
+        {% else %}
+            <p>False</p>
+        {% endif %}
+    {% endfor %}
+    
+    <div>
+      Course type
+
+    <select name="course_type" id="course_type">
+        {% for value, subject in form.course_type.field.choices %}
+            {% if subjecttt.course_type == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+            {% else %}
+                <option value="{{value}}">{{value}}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+
+
+    <button type="submit">Update Subject</button>
+    </div>
+  </form>
+{% endblock %}

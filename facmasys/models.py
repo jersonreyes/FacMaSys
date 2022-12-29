@@ -33,6 +33,7 @@ class ExtensionService(models.Model):
     ext_offeredprograms_id = models.ForeignKey(ExtensionService_OfferedPrograms, on_delete=models.CASCADE, blank=True, null=True)
     ext_collaborator_id = models.ForeignKey(ExtensionService_Collaborators, on_delete=models.CASCADE, blank=True, null=True)
     
+    
     def __str__(self) -> str:
         return f'Name: {self.name} | Website: {self.website}'
 
@@ -227,5 +228,4 @@ class Subjects_Taught(models.Model):
         return f'Faculty ID: {self.faculty_id} | Handled Subjects: {self.handled_subjects.values().all()}'
 
 
-    
     

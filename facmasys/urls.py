@@ -35,6 +35,12 @@ urlpatterns = [
     # path('extension_coord/', include('apps.extension_coord.urls')),
     # FacMyLyfe
     
+    path('subjects/', views.show_subject),
+    path('subjects/add_subject', views.add_subject),
+    path('subjects/updateform_subject', views.updateform_subject),
+    path('subjects/update_subject/<int:id>', views.update_subject),
+    path('subjects/delete_subject/<int:id>', views.delete_subject),
+    
     path('faculty_index/', views.faculty_member_main), # subject is the default one.
     path('subject_taught/', views.faculty_subjects_taught),
     path('subject_taught/add_subject', views.add_taught_subjects),

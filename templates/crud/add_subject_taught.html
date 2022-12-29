@@ -11,13 +11,14 @@
 
 <form action="./update_taught_subjects/{{ request.user.id }}" method="post">
     {% csrf_token %}
-.
+
+    <a href="./">Go back</a>
     {{ current_user }}
     <div>
         <select name="handled_subjects" required id="id_handled_subjects" multiple>
             {% for value, subject in form.handled_subjects.field.choices %}
                 {% if value in selected_list %}
-                    <option value="{{ value }}" selected="">{{ subject }}</option>
+                    <option value="{{ value }}" selected>{{ subject }}</option>
                 {% else %}
                     <option value="{{ value }}">{{ subject }}</option>
                 {% endif %}
