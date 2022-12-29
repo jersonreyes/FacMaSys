@@ -132,6 +132,12 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
 
         return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
     
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.profile.user_role != 'depthead':
+            return redirect('dashboard-index')
+        
+        return super().dispatch(request, *args, **kwargs)
+    
     def get(self, request):
         if (search := request.GET.get('q')) != None:
             self.label += f' filtered by {search}'
