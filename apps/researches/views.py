@@ -8,6 +8,7 @@ from django.db.models import Sum
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.db.models import Q
 
 from apps.reports.models import Notifications
 from apps.user.models import Profile
@@ -20,7 +21,10 @@ def index(request):
     # Notifications
     notifications = Notifications.objects.filter(user=request.user)
     # Summary Research Object
-    all_researches = Research.objects.order_by('-date_added')
+    if 'q' in request.GET:
+        all_researches = Research.objects.filter(Q(research_title__icontains=request.GET['q']) | Q(abstract__icontains=request.GET['q'])).order_by('-date_added')
+    else:
+        all_researches = Research.objects.order_by('-date_added')
     users = Profile.objects.all()
     context={
         'state':'researches',
