@@ -1,6 +1,15 @@
-from django.shortcuts import render
-from django.template import RequestContext
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models import F
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.template import RequestContext, loader
 from django.template.loader import render_to_string
+
+from facmasys.forms import ExtensionServiceForm
+
+from .forms import *
+from .models import *
 
 
 # Create your views here.
@@ -8,36 +17,16 @@ def index(request):
     return render(request, 'home/index.html', {'state':'home'})
 
 from django.apps import apps
-Subjects_Taught = apps.get_model('faculty_member', 'Subjects_Taught')
-Announcements = apps.get_model('feed', 'Announcements')
-ExtensionService = apps.get_model('faculty_member', 'ExtensionService')
 
+Announcements = apps.get_model('feed', 'Announcements')
 
 # Create your views here.
 
 
 """ Department Head """
-def index(request):
-    all_faculty_teach = Subjects_Taught.objects.all()
-    context = {
-        'all_faculty_teach': all_faculty_teach
-    }
-    return render(request, "department_head/index.html", context)
-    
 def show_dept_summary(request):
     return render(request, "department_head/summary.html", None)
 
-
-def index(request):
-    extensions = ExtensionService.objects.all()
-    context = {
-        'extensions': extensions,
-    }
-    return render(request, "extension_coord/index.html", context)
-
-
-
-    
 def show_ext_summary(request):
     context = {
         '': '',
@@ -131,3 +120,64 @@ def bad_request(request, exception):
 
 def server_error(request, *args, **argv):
     return render(request, '500.html', status=500)
+
+def faculty_extension_services(request):
+    all_extension_services = ExtensionService.objects.all().filter(faculty_id=request.user)
+    return render(request, "extension_services.html", {'all_extension_services': all_extension_services})
+
+def add_extension_services(request):  
+    user_instance = request.user
+    
+    print("Checking...") 
+    if request.method == "POST":  
+        print("Checking... POST") 
+        form = ExtensionServiceForm(request.POST)  
+        if form.is_valid():
+            print("is valid")   
+            try:  
+                new_form = form.save(commit=False)
+                new_form.faculty_id = user_instance
+                new_form.save()
+                print("Success!") 
+                return redirect('./')   # refresh
+            except:  
+                pass  
+        else:
+            print("not valid") 
+    else:  
+        form = ExtensionServiceForm()         
+        print("Failed!") 
+        
+    context = {
+        'form': form
+    }
+    return render(request, 'faculty_member/crud/add_extension_services.html', context) 
+
+def edit_extension_services(request, id):
+    print('update_extension_services')
+    form = ExtensionServiceForm()
+    extension = ExtensionService.objects.get(id=id)
+    
+    context = {
+        'extension': extension,
+        'form': form,
+    }
+    return render(request, 'crud/update_extension_service.html', context)  
+
+def update_extension_services(request, id):
+    extension = ExtensionService.objects.get(id=id)  
+    form = ExtensionServiceForm(request.POST, instance=extension)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../")  
+    
+    context = {
+        'extension': extension,
+        'form': form,
+    }
+    return render(request, 'faculty_member/crud/update_extension_service.html', context)  
+
+def delete_extension_services(request, id):
+    ext = ExtensionService.objects.get(id=id)  
+    ext.delete()  
+    return redirect("../")

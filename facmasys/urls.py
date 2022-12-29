@@ -29,10 +29,10 @@ handler500 = 'facmasys.views.server_error'
 urlpatterns = [
     # FacMyLyfe
     # path('accounts/', include('users.urls')),
-    path('user/', include('apps.faculty_member.urls')),
-    path('department_head/', include('apps.department_head.urls')),
-    path('research_coord/', include('apps.research_coord.urls')),
-    path('extension_coord/', include('apps.extension_coord.urls')),
+    # path('user/', include('apps.faculty_member.urls')),
+    # path('department_head/', include('apps.department_head.urls')),
+    # path('research_coord/', include('apps.research_coord.urls')),
+    # path('extension_coord/', include('apps.extension_coord.urls')),
     # FacMyLyfe
     
     path('', views.index, name='index'),

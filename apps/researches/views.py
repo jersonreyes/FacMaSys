@@ -6,8 +6,8 @@ from django.db.models import Sum
 from django.shortcuts import render
 from django.utils import timezone
 
-from apps.faculty_member.models import *
 from apps.reports.models import Notifications
+from facmasys.models import *
 
 
 # Create your views here.

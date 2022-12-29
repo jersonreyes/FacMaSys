@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'tailwind_theme',
     'apps.reports',
     'apps.researches',
-    'apps.faculty_member',
     'apps.dashboard',
     'apps.feed',
     'apps.user',

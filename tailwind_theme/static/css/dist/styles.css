@@ -844,14 +844,6 @@ select {
   top: 2.5rem;
 }
 
-.top-0 {
-  top: 0px;
-}
-
-.top-\[10px\] {
-  top: 10px;
-}
-
 .z-\[0\] {
   z-index: 0;
 }
@@ -1227,10 +1219,6 @@ select {
   height: auto;
 }
 
-.h-\[20vh\] {
-  height: 20vh;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1277,14 +1265,6 @@ select {
 
 .w-0 {
   width: 0px;
-}
-
-.w-\[93\%\] {
-  width: 93%;
-}
-
-.w-\[80\%\] {
-  width: 80%;
 }
 
 .max-w-sm {
@@ -1411,10 +1391,6 @@ select {
 
 .gap-4 {
   gap: 1rem;
-}
-
-.gap-5 {
-  gap: 1.25rem;
 }
 
 .gap-x-4 {
