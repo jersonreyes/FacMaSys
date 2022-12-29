@@ -9,7 +9,7 @@
     <!-- Research Ongoing -->
     <h1>All Researches: </h1>
     {% if research_ongoing|length > 0 %}
-    <table>
+    <table class="table" id="ongoing">
         <thead>
             <tr>
                 <th>ID</th>
@@ -52,5 +52,15 @@
         <h3>No data available.</h3>
     {% endif %}
 
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#ongoing').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
 {% endblock %}
 </div>

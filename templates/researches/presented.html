@@ -5,7 +5,7 @@
         <!-- Research Presented -->
         <h1>Presented: </h1>
         {% if research_presented|length > 0 %}
-        <table>
+        <table class="table" id="presented">
             <thead>
                 <tr>
                     <th>Research ID</th>
@@ -53,5 +53,15 @@
             <h3>No data available.</h3>
         {% endif %}
     
+        <script type="text/javascript" class="init">
+            $(document).ready(function() {
+            $('#presented').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+        </script>
     {% endblock %}
     </div>

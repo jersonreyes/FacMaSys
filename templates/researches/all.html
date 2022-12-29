@@ -1,6 +1,6 @@
 <h1>Ongoing: </h1>
     {% if research_ongoing_filtered|length > 0 %}
-    <table>
+    <table class="table" id="all">
         <thead>
             <tr>
                 <th>ID</th>
@@ -40,3 +40,13 @@
     {% else %}
         <h3>No data available.</h3>
     {% endif %}
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#all').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>

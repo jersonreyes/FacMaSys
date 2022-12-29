@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+
   var drawer = function () {
     /**
     * Element.closest() polyfill
