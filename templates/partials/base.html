@@ -55,8 +55,17 @@
             <link rel="stylesheet" href="{% static 'css/overrides.css' %}" />
             <link rel="SHORTCUT ICON" href="{% static 'images/logo.png' %}" media="screen" />
         </head>
-        {% endif %}
+        
 
+        <div id="form-modal" class="fixed w-full h-full hidden" style="z-index:200;">
+            <div id="form-modal-child" class="dark:white backdrop-blur-md hover:bg-[rgba(0,0,0,0.2)] bg-[rgba(0,0,0,0.5)] transition-all flex justify-center items-center w-full h-full">
+                <div style="min-height: 200px; min-width:200px;" class="bg-white dark:gray p-5 py-4 rounded-md grid gap-2">
+                    <p id="form-modal-title" class="font-bold text-xl tracking-[-1px]">Form Title</p>
+                    <div id="form-modal-body"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         {% if not ajax %}<body id="body-pd" class="transition-all dark:bg-[#2A2A2A]" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>{% endif %}
             <div class="{% if not ajax and user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
                 {% if not ajax %}
@@ -217,7 +226,11 @@
             
             <script src="{% static 'js/sidebar.js' %}"></script>
             <script>$('.dropdown-toggle').dropdown('toggle')</script>
-
+            <script type=text/javascript"">
+                $(".form-modal-toggler").click(function(e) {
+                    return false;
+                })
+            </script>
             {% endif %}
         {% if not ajax %}</body>{% endif %}
     </html>

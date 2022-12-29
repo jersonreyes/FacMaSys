@@ -78,7 +78,7 @@ def add_announcements(request):
 
                 new_form.save()
                 print("Success! done") 
-                return redirect('./')   # refresh
+                return redirect('/feed/')   # refresh
             except:  
                 pass  
     else:  
@@ -113,12 +113,10 @@ def update_announcements(request, id):
     research = Feeds.objects.get(id=id)  
     profile = Profile.objects.filter(user=request.user).values().first()
 
-
     form = FeedsForm(request.POST, instance=research)  
     if form.is_valid():  
         print("True")
         form.save()  
-        return redirect("../")
         return redirect("../")
     
     print("False")
@@ -167,7 +165,7 @@ def add_extension_services(request):
                 new_form.faculty_id = user_instance
                 new_form.save()
                 print("Success!") 
-                return redirect('./')   # refresh
+                return redirect('/extension_services/')   # refresh
             except:  
                 pass  
         else:
@@ -250,7 +248,7 @@ def add_taught_subjects(request):
         if form.is_valid():  
             try:  
                 form.save()
-                return redirect('/')   # refresh
+                return redirect('/subjects/')   # refresh
             except:  
                 pass  
     else:  
@@ -327,7 +325,7 @@ def add_researches(request):
                 new_form.faculty_id = user_instance
                 new_form.save()
                 print("Success! done") 
-                return redirect('./')   # refresh
+                return redirect('/researches/')   # refresh
             except:  
                 pass  
     else:  
@@ -372,7 +370,7 @@ def add_presented(request):
                 new_form.faculty_id = user_instance
                 new_form.save()
                 print("Success!") 
-                return redirect('./')   # refresh
+                return redirect('/researches/')   # refresh
             except:  
                 pass  
     else:  
@@ -408,7 +406,7 @@ def add_published(request):
                 new_form.faculty_id = user_instance
                 new_form.save()
                 print("Success!") 
-                return redirect('./')   # refresh
+                return redirect('/researches/')   # refresh
             except:  
                 pass  
     else:  
@@ -478,6 +476,11 @@ def update_details_a(request, id):
 
 def update_details_b(request, id):
     research = Research_Published.objects.get(published_id=id)  
+    form = Research_PublishedForm(request.POST, instance=research)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("../")  
+
     research_all = Research_Published.objects.filter(published_id=id)  
     current_edit__ = research_all.values().first()['published_id_id']
     print('ccc', current_edit__)
@@ -487,13 +490,12 @@ def update_details_b(request, id):
     if form.is_valid():  
         form.save()  
         return redirect("../../")  
-    
+
     context = {
         'research': research,
         'form': form,
         'state':'researches',
         'is_other': True,
-        'current_edit': current_edit__,
     }
     return render(request, 'researches/update_details.html', context)  
 
@@ -503,7 +505,12 @@ def update_details_b(request, id):
 def delete_details_a(request, id):
     subject = Research_Presented.objects.get(id=id)  
     subject.delete()  
-    return redirect("../../")  
+    return redirect("../")
+def delete_details_b(request, id):
+    subject = Research_Published.objects.get(id=id)  
+    subject.delete()  
+    return redirect("../")
+
 def delete_details_b(request, id):
     subject = Research_Published.objects.get(id=id)  
     subject.delete()  
@@ -518,14 +525,6 @@ def delete_extension_services(request, id):
     ext = ExtensionService.objects.get(id=id)  
     ext.delete()  
     return redirect("../")
-
-
-
-
-
-
-
-
 
 """ SUBJECTS """
 def show_subject(request):
@@ -544,7 +543,7 @@ def add_subject(request):
             try:  
                 form.save()
                 print("Success!") 
-                return redirect('./')   # refresh
+                return redirect('/subjects/')   # refresh
             except:  
                 pass  
         else:

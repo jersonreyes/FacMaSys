@@ -1,6 +1,34 @@
 
 $(document).ready(function() {
 
+  $(".form-modal-toggler").click(function(e) {
+    e.preventDefault();
+    fetch(e.currentTarget.getAttribute('value'), {
+        dataType: "html",
+        headers:{
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+    .then(response => {
+        return response.text();
+    })
+    .then(data => {
+      $("#form-modal").toggle();
+        $("#form-modal-body").html(data).animate({opacity: '1'}, 100);      
+        $('#form-modal').addClass('active')
+        $('#form-modal form').attr("action", e.currentTarget.getAttribute('value') );
+        $('#form-modal-title').html(e.currentTarget.title)
+    })
+    return false;
+})
+$("#form-modal-child").on("click", function(e){
+  if(e.target !== e.currentTarget) return;
+
+  $("#form-modal").hide();
+  $('#form-modal').removeClass('active')
+});
+
   var drawer = function () {
     /**
     * Element.closest() polyfill
@@ -124,7 +152,7 @@ $(document).ready(function() {
 
   $('.download').click(function(e) {
     e.preventDefault();  //stop the browser from following
-    window.location.assign = e.currentTarget.attr('href');
+    window.location.assign = '/media'+e.currentTarget.attr('href');
   })
     var $search = $('#top-search-button, #top-search-input');
     $(document).on('click', function (e) {
@@ -192,7 +220,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $('#drawer-title').html(data.research.research_title);
             $('#drawer-category').html(data.research.content_type);
             $('#drawer-download').html(data.research.document != '' ? 'File Available' : 'File Not Available');
-            $('#drawer-download').attr('onclick',"window.location.href = \'"+(data.research.document != '' ? data.research.document : '')+"\'");
+            console.log(`/media/`+data.research.document.split('/'))
+            $('#drawer-download').attr('onclick',`
+            var anchor = document.createElement('a');
+            anchor.href = '/media/`+data.research.document+`';
+            anchor.target = '_blank';
+            anchor.download = '`+data.research.document.split('/')[1]+`';
+            anchor.click();
+            `);
             $('#drawer-abstract').html(data.research.abstract);
             $('#drawer-date').html(data.research.date_added);
             $('#drawer-author').html('User '+data.research.user_id);
@@ -223,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     */
     $("a").click(function(e) {
         e.preventDefault();
-        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode") {
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler")) {
             e.preventDefault();
             var root = this;
             var pos;

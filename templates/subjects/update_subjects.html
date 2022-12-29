@@ -3,11 +3,9 @@
 {% block headers %} DASHBOARD {% endblock %}
 
 {% block content %}
-  <form method="POST" action="./{{subjecttt.id}}">
+  <form method="POST" action="./update_subject/{{subjecttt.id}}">
     {% csrf_token %}
 
-
-    <a href="../">Go back to Home</a>
 
     <a href="../">Go back to Home</a>
     <div>

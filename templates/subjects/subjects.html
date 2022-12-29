@@ -12,7 +12,7 @@
                     <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">College / <span class="font-normal">Subjects</span></p>
                 </div>
             </div>
-            <a href="./add_subject">Add Subjects</a>
+            <a class="form-modal-toggler" title="Add Subject" href="javascript:void();" value="./add_subject">Add Subjects</a>
             {% if all_subjects|length > 0 %}
             <table class="table" id="subjects">
                 <thead>
@@ -46,8 +46,8 @@
                         <td>{{ e.pre_requisite }} </td>
                         <td>{{ e.course_type }} </td>
                         <td>
-                            <button onclick="window.location.href='update_subject/{{e.id}}'">Update</a>
-                            <button onclick="window.location.href='update_subject/{{e.id}}'">Update</a>
+                            <a class="form-modal-toggler" href="javascript:void();" title="Update Subject" value="update_subject/{{e.id}}">Update</a>
+                            <button onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

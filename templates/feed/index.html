@@ -13,23 +13,16 @@
                 <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Posts / <span class="font-normal">Feed</span></p>
             </div>
         </div>
-        <div class="mt-[4vh] grid gap-3 grid-cols-3 grid-rows-4 [&>div]:rounded-md min-h-screen w-full">
-            {# For displaying the list of registered feed #}
-            {% if feed|length > 0 %}
-                {% for element in feed %}
+        <a class="form-modal-toggler" title="Add Post / Announcement" href="javascript:void();" value="/announcements/add_announcements">Add Post / Announcement</a>
+        <div class="mt-[4vh] grid gap-3 grid-cols-3 [&>div]:rounded-md w-full">
+            {% if feeds|length > 0 %}
+                {% for element in feeds %}
                     <div class="dark:bg-[#363636] bg-[#F4F4F4] p-[10px] animate glow delay-{{forloop.counter}}">
                         <strong> {{ element.title}} </strong> <br>
                         {{ element.description }}
                     </div>
                 {% endfor %}
             {% endif %}
-
-
-            {% comment %}
-            {% for i in "x"|rjust:"9" %}
- 
-            {% endfor %}
-            {% endcomment %}
         </div>
         </div>
     </div>
