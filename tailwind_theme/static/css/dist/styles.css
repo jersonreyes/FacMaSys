@@ -1482,21 +1482,17 @@ select {
   background-color: rgba(142,142,142,0.5);
 }
 
-.bg-indigo-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
-}
-
-.bg-\[rgba\(200\2c 200\2c 200\2c 0\.5\)\] {
-  background-color: rgba(200,200,200,0.5);
+.bg-\[rgba\(184\2c 184\2c 184\2c 0\.5\)\] {
+  background-color: rgba(184,184,184,0.5);
 }
 
 .bg-\[rgba\(255\2c 255\2c 255\2c 0\.5\)\] {
   background-color: rgba(255,255,255,0.5);
 }
 
-.bg-\[rgba\(184\2c 184\2c 184\2c 0\.5\)\] {
-  background-color: rgba(184,184,184,0.5);
+.bg-indigo-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
 
 .bg-center {
