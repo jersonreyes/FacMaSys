@@ -16,7 +16,6 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    print('here')
     return render(request, 'home/index.html', {'state':'home'})
 
 from django.apps import apps
