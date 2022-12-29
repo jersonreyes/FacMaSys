@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'tinymce',
     'mathfilters',
     'facmasys',
-    'django_q',
     'tailwind',
     'tailwind_theme',
     'apps.reports',
@@ -190,18 +189,3 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'one.time.sales.405@gmail.com'
 # Generate an app password in the google account to be able to send emails
 EMAIL_HOST_PASSWORD = 'uiajrojfxxdyjzhu'
-
-GRAPH_MODELS = {
-  'all_applications': True,
-  'group_models': True,
-}
-
-
-Q_CLUSTER = {
-    'orm': 'default',  # should use django's ORM and database as a broker.
-    'workers': 4,
-    'timeout': 30,
-    'retry': 60,
-    'queue_limit': 50,
-    'bulk': 10,
-}

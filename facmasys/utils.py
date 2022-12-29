@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from weasyprint import HTML
-# from apps.reports.models import ActivityLog
+from apps.reports.models import ActivityLog
 
 
 def render_to_pdf(request, template_src, filename, context_dict={}, scale=1.0):
@@ -50,6 +50,6 @@ class ExportPDF:
         return super().render_to_response(context, **kwargs)
 
 
-# def add_activity(logged_user, activity_type, activity_location, activity_message):
-#     activity = ActivityLog.objects.create(type=activity_type,location=activity_location,user=logged_user,message=activity_message) 
-#     return activity.save()
+def add_activity(logged_user, activity_type, activity_location, activity_message):
+    activity = ActivityLog.objects.create(type=activity_type,location=activity_location,user=logged_user,message=activity_message) 
+    return activity.save()
