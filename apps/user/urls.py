@@ -6,6 +6,7 @@ from apps.user.forms import LoginForm
 from . import views
 
 urlpatterns = [
+    path('get/<int:id>',views.get_user, name="user-get"),
     path('login/', views.LoginView.as_view(redirect_authenticated_user=True, template_name='user/login.html',
                                            authentication_form=LoginForm), name='user-login'),
     path('register/', views.RegisterView.as_view(), name='user-register'),
