@@ -69,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $('#drawer-download').html(data.research.document != '' ? 'File Available' : 'File Not Available');
             $('#drawer-download').attr('onclick',"window.location.href = \'"+(data.research.document != '' ? data.research.document : '')+"\'");
             $('#drawer-abstract').html(data.research.abstract);
+            $('#drawer-date').html(data.research.date_added);
             $('#drawer-author').html('User '+data.research.user_id);
         })
 
