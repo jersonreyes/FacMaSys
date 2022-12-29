@@ -1,26 +1,24 @@
 <div>
 
     {% block published %}
-        <a href="./add_presented">Add Presented</a>
-        <!-- Research Presented -->
-        <h1>Presented: </h1>
+        <h3>Published: </h3>
         {% if research_presented|length > 0 %}
         <table class="table" id="published">
             <thead>
                 <tr>
                     <th>Research ID</th>
-                    <td>short_name</td>
-                    <td>event_name</td>
-                    <td>event_venue</td>
-                    <td>event_start_date</td>
-                    <td>event_end_date</td>
-                    <td>presentation_type</td>
-                    <td>event_type</td>
-                    <td>org_name</td>
-                    <td>org_website_url</td>
-                    <td>org_support</td>
-                    <td>org_description</td>
-                    <td>date_presented</td>
+                    <td>Name</td>
+                    <td>Event Name</td>
+                    <td>Event Venue</td>
+                    <td>Event Start Date</td>
+                    <td>Event End Date</td>
+                    <td>Presentation Type</td>
+                    <td>Event Type</td>
+                    <td>Org Name</td>
+                    <td>Org Website URL</td>
+                    <td>Org Support</td>
+                    <td>Org Description</td>
+                    <td>Date Presented</td>
                 </tr>
             </thead>
     
@@ -31,8 +29,8 @@
                     <td>{{element.short_name}}</td> 
                     <td>{{element.event_name}}</td> 
                     <td>{{element.event_venue}}</td> 
-                    <td>{{element.event_start_date}}</td> 
-                    <td>{{element.event_end_date}}</td> 
+                    <td>{{element.event_start_date|date:"M, d Y"}}</td> 
+                    <td>{{element.event_end_date|date:"M d, Y"}}</td> 
                     <td>{{element.presentation_type}}</td> 
                     <td>{{element.event_type}}</td> 
                     <td>{{element.org_name}}</td> 
@@ -50,7 +48,7 @@
         </table>
     
         {% else %}
-            <h3>No data available.</h3>
+            <h5>No data available.</h5>
         {% endif %}
     
         <script type="text/javascript" class="init">

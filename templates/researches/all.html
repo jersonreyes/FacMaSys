@@ -1,52 +1,61 @@
-<h1>Ongoing: </h1>
-    {% if research_ongoing_filtered|length > 0 %}
-    <table class="table" id="all">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>ID</th>
-                <th>Research Title</th>
-                <th>Area</th>
-                <th>abstract</th>
-                <th>document</th>
-                <th>date_added</th>
-                <th>School</th>
-                <th>Degree Level</th>
-                
-                <th>Actions</th>
-            </tr>
-        </thead>
+<div>
 
-        <tbody>
-            {% for element in research_ongoing_filtered %}
-            <tr>
-                <td>{{ element.id }}</td>
-                <td>{{ element.faculty_id }}</td>
-                <td>{{ element.research_title }}</td>
-                <td>{{ element.research_area }}</td>
-                <td>{{ element.abstract }}</td>
-                <td>{{ element.document }}</td>
-                <td>{{ element.date_added }}</td>
-                <td>{{ element.researcher_school }}</td>
-                <td>{{ element.degree_level }}</td>
-                <td>
-                    <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
-                    <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <h3>No data available.</h3>
-    {% endif %}
-    <script type="text/javascript" class="init">
-        $(document).ready(function() {
-        $('#all').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+    {% block ongoing %}
+        <!-- Research Ongoing -->
+        <h3>All Researches: </h3>
+        {% if research_ongoing|length > 0 %}
+        <table class="table" id="ongoing">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Research Title</th>
+                    <th>Area</th>
+                    <th>Abstract</th>
+                    <th>Document URL</th>
+                    <th>Date Added</th>
+                    <th>School</th>
+                    <th>Degree Level</th>
+                    <th>Progress</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                {% for element in research_ongoing %}
+                <tr>
+                    <td>{{ element.id }}</td>
+                    <td>{{ element.faculty_id }}</td>
+                    <td>{{ element.research_title }}</td>
+                    <td>{{ element.research_area }}</td>
+                    <td>{{ element.abstract }}</td>
+                    <td><button onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</a></td>
+                    <td>{{ element.date_added|date:"M d, Y" }}</td>
+                    <td>{{ element.researcher_school }}</td>
+                    <td>{{ element.degree_level }}</td>
+                    <td>{{ element.research_progress }}</td>
+    
+                    <td>
+                        <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
+                        <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <h5>No data available.</h5>
+        {% endif %}
+    
+        <script type="text/javascript" class="init">
+            $(document).ready(function() {
+            $('#ongoing').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
         } );
-    } );
-    </script>
+        </script>
+    {% endblock %}
+    </div>

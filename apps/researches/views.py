@@ -4,11 +4,10 @@ import pandas as pd
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.utils import timezone
-from django.db.models import Q
 
 from apps.reports.models import Notifications
 from apps.user.models import Profile
@@ -49,3 +48,9 @@ def get_research(request, id): # May include more arguments depending on URL par
         }
         return JsonResponse(dict(response), safe=False)
     return redirect('index')
+
+def selector(request):
+    context={
+        'state':'feed',
+    }
+    return render(request, 'researches/selector.html', context)

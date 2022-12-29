@@ -5,16 +5,13 @@
 {% endblock %} 
 
 {% block content %}
-<h1>Add Presented</h1>
-<a href="./">Go back</a>
 <form action="" method="post">
     {% csrf_token %}
 
 
     <div class="container_form_presented">
-        <h1>Presented: </h1>
         {% for e in form %}
-            <div><p>{{ e.label }}</p>{{ e }}</div>
+            <div><p>{{ e.label }}</p><p>{{ e }}</p></div>
         {% endfor %}
 
         <!-- {{ form.presented_id }} -->

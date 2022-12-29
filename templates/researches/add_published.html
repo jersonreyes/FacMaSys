@@ -1,13 +1,9 @@
-
-<h1>Add Published</h1>
-<a href="./">Go back</a>
 <form action="" method="post">
     {% csrf_token %}
 
     <div>
-        <h1>Published: </h1>
         {% for e in form %}
-            <div><p>{{ e.label }}</p>{{ e }}</div>
+            <div><p>{{ e.label }}</p><p>{{ e }}</p></div>
         {% endfor %}
 
         {{ form.errors }}

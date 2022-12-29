@@ -149,11 +149,6 @@ $("#form-modal-child").on("click", function(e){
 
   };
   drawer();
-
-  $(document).on("click", ".download", function(e){
-    e.preventDefault();  //stop the browser from following
-    window.location.assign = '/media'+e.currentTarget.attr('href');
-  })
     var $search = $('#top-search-button, #top-search-input');
     $(document).on('click', function (e) {
         // If element is opened and click target is outside it, hide it
@@ -219,18 +214,33 @@ document.addEventListener("DOMContentLoaded", function(event) {
         .then(data => {
             $('#drawer-title').html(data.research.research_title);
             $('#drawer-category').html(data.research.content_type);
+            $('#drawer-available').html(data.research.research_progress);
             $('#drawer-download').html(data.research.document != '' ? 'File Available' : 'File Not Available');
+            data.research.document != '' ? $('#drawer-download').addClass('available') : $('#drawer-download').removeClass('available');
             console.log(`/media/`+data.research.document.split('/'))
             $('#drawer-download').attr('onclick',`
             var anchor = document.createElement('a');
             anchor.href = '/media/`+data.research.document+`';
             anchor.target = '_blank';
             anchor.download = '`+data.research.document.split('/')[1]+`';
-            anchor.click();
+            $('#drawer-download').hasClass('available') && anchor.click();
             `);
             $('#drawer-abstract').html(data.research.abstract);
-            $('#drawer-date').html(data.research.date_added);
-            $('#drawer-author').html('User '+data.research.user_id);
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            $('#drawer-date').html(new Date(data.research.date_added).toLocaleDateString("en-US", options));
+            fetch("http://127.0.0.1:8000/user/get/"+data.user.user_id, {
+                headers:{
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(response => {
+                return response.json() //Convert response to JSON
+            })
+            .then(data => {
+              $('#drawer-author').html(data[0].first_name + ' ' + data[0].last_name );
+            })
+            
         })
 
     })
@@ -271,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 $("#nav-highlighter").css('left', pos.left);
 
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
-            window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
+            !e.currentTarget.classList.contains('nest') && window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
             $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
             $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
         } 

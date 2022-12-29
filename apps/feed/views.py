@@ -9,10 +9,11 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from apps.reports.models import Notifications
+from apps.user.models import Profile
+from facmasys.models import *
 
 from .models import *
 
-Profile = apps.get_model('user', 'Profile')
 
 # Create your views here.
 @login_required
@@ -28,12 +29,14 @@ def index(request):
     obj = Profile.objects.first()
     field_object = Profile._meta.get_field(field_name)
     field_value = field_object.value_from_object(obj)
+    users = Profile.objects.all()
     print('field value: ', field_value)
     
     
     context={
         'state':'feed',
         'notifications': notifications,
+        'users':users,
         
         # Announcement Objects
         'feeds':feeds,

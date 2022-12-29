@@ -9,6 +9,7 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
@@ -16,7 +17,10 @@ from django_filters.views import FilterView
 from django_tables2 import SingleTableMixin
 from django_tables2.export.views import ExportMixin
 
+from apps.feed.models import Feeds
 from apps.reports.models import Notifications
+from apps.user.models import Profile
+from facmasys.models import Research
 from facmasys.utils import ExportPDF
 
 from .filters import FacultyFilter
@@ -91,7 +95,13 @@ class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChange
 
 @login_required
 def profile(request):
-    return render(request, 'user/profile.html')
+    feeds = Feeds.objects.filter(user_id_id=request.user.id),
+    researches = Research.objects.filter(faculty_id_id=request.user.id),
+    context = {
+        'feeds': feeds,
+        'researches': researches
+    }
+    return render(request, 'user/profile.html', context)
 
 
 @login_required
@@ -158,7 +168,10 @@ def faculty_detail(request, pk):
     }
     return render(request, 'user/faculty_detail.html', context)
 
-
+@login_required
+def get_user(request, id): # May include more arguments depending on URL parameters
+    """user = list(Profile.objects.filter(id = id).values())[0]"""
+    return JsonResponse(list(User.objects.filter(id = id).values()), safe=False)
 
 # def register(request):
 #     if request.method == 'POST':

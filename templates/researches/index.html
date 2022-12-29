@@ -18,7 +18,7 @@
             </div>
             <div class="flex gap-2 items-center">
               <div id="drawer-category" class="inline-block py px-3 text-xs" style="border: 1px solid #f07e00; color: #f07e00">Journal</div>
-              <div id="drawer-available" class="inline-block py px-3 text-xs" style="border: 1px solid #f07e00; color: #f07e00">PDF Available</div>
+              <div id="drawer-available" class="inline-block py px-3 text-xs" style="border: 1px solid #f07e00; color: #f07e00">-</div>
               <span id="drawer-date" class="text-xs">December 25, 2022</span>
             </div>
           </div>
@@ -61,7 +61,8 @@
                 </div>
                 <br/>
                 {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
-                  <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="javascript:void();" value="/research/add_research">Add Research</a>
+                  <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="javascript:void();" value="/researches/selector">Add Research</a>
+                  <a class="form-modal-toggler" style="margin-top:30px" title="View Summary" href="javascript:void();" value="/research/">View Summary</a>
                 {% endif %}
             </div>
         </div>
@@ -92,13 +93,6 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
-
-            {% comment %}
-            {% for i in "x"|rjust:"9" %}
- 
-            {% endfor %}
-            {% endcomment %}
         </div>
     </div>
 <!--End Graphs-->
