@@ -5,27 +5,23 @@
 {% endblock %} 
 
 {% block content %}
-<h1>Add Presented</h1>
-<a href="./">Go back</a>
-<form action="" method="post">
+<form action="" method="post" class="grid gap-3">
     {% csrf_token %}
-
-    
     <div>
         <p>Subject: </p>
         {{ form.subject }}
     </div>
     <div>
         <p>Description: </p>
-        {{ form.description }}
+        <p>{{ form.description }}</p>
     </div>
     <div>
         <p>Image: </p>
-        {{ form.image }}
+        <p>{{ form.image }}</p>
     </div>
     <div>
         <p>Link: </p>
-        {{ form.link }}
+        <p>{{ form.link }}</p>
     </div>
     <div>
         <!-- <p>User Type: </p> -->
@@ -38,6 +34,6 @@
     <br>
     {{ form.errors }}
     {{ form.non_field_errors }}
-    <button type="submit">Add Announcements</button>
+    <button type="submit">Add Announcement</button>
 </form>
 {% endblock %} 

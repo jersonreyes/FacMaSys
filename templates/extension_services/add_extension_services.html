@@ -7,23 +7,17 @@
 
 
 {% block content %}
-
-    <a href="../">Go back</a>
-    <p>Faculty Member - Add Extension Services</p>
-
     <form action="" method="post">
         {% csrf_token %}
-
-
-        <div>
-            <div><p>Extension Name: </p>{{ form.name }}</div>
-            <div><p>Logo: </p>{{ form.logo }}</div>
-            <div><p>Geo. Address: </p>{{ form.address }}</div>
-            <div><p>E-mail Address: </p>{{ form.email }}</div>
-            <div><p>Contact No.: </p>{{ form.contact_no }}</div>
-            <div><p>Website URL: </p>{{ form.website }}</div>
-            <div><p>Background: </p>{{ form.background }}</div>
-            <div><p>Extension Head: </p>{{ form.extension_head }}</div>
+        <div class="grid gap-3">
+            <div><p>Extension Name: </p><p>{{ form.name }}</p></div>
+            <div><p>Logo: </p><p>{{ form.logo }}</p></div>
+            <div><p>Geo. Address: </p><p>{{ form.address }}</p></div>
+            <div><p>E-mail Address: </p><p>{{ form.email }}</p></div>
+            <div><p>Contact No.: </p><p>{{ form.contact_no }}</p></div>
+            <div><p>Website URL: </p><p>{{ form.website }}</p></div>
+            <div><p>Background: </p><p>{{ form.background }}</p></div>
+            <div><p>Extension Head: </p><p>{{ form.extension_head }}</p></div>
             {{ form.errors }}
             {{ form.non_field_errors }}
             

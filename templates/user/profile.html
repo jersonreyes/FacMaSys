@@ -37,9 +37,8 @@
                                 <img src="/static/images/add_user.png" class="dark:invert" style="height:14px;width:14px"/>
                                 Share
                             </div>
-                            <a href="{% url 'user-profile-update' %}" class="items-center button-standard flex main-theme-bg px-3 py-1 rounded-md">
-                                Edit
-                            </a>
+                            <a class="form-modal-toggler main-theme-bg" title="Update Profile" href="javascript:void();" value="{% url 'user-profile-update' %}">Edit Profile</a>
+        
                         </div>
                     </div>
                 </div>

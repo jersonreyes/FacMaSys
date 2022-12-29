@@ -35,7 +35,7 @@
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_subject.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Subjects</span>                      
                 </a>
-                <a value="Extension" href="{% url 'extension_services-index' %}" class="animate glow delay-5 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'subjects' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
+                <a value="Extension" href="{% url 'extension_services-index' %}" class="animate glow delay-5 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'extension_services' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_extension.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Extension</span>                      
                 </a>

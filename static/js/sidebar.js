@@ -1,8 +1,7 @@
 
 $(document).ready(function() {
 
-  $(".form-modal-toggler").click(function(e) {
-    e.preventDefault();
+  $(document).on("click", ".form-modal-toggler", function(e){
     fetch(e.currentTarget.getAttribute('value'), {
         dataType: "html",
         headers:{
@@ -150,7 +149,7 @@ $("#form-modal-child").on("click", function(e){
   };
   drawer();
 
-  $('.download').click(function(e) {
+  $(document).on("click", ".download", function(e){
     e.preventDefault();  //stop the browser from following
     window.location.assign = '/media'+e.currentTarget.attr('href');
   })
@@ -163,7 +162,7 @@ $("#form-modal-child").on("click", function(e){
             $('#center-logo').show();
         }
     });
-    $('#top-search-button').click(function() {
+    $(document).on("click", "#top-search-button", function(e){
         $('#top-search-input').addClass('toggled');
         $('#top-search-button').addClass('toggled');
         $('#center-logo').hide();
@@ -206,7 +205,7 @@ $("#form-modal-child").on("click", function(e){
     });
 });
 document.addEventListener("DOMContentLoaded", function(event) {
-    $(".research-item").click(function(e) {
+    $(document).on("click", ".research-item", function(e){
         fetch("http://127.0.0.1:8000/researches/get/"+e.currentTarget.id.split('-')[1], {
             headers:{
                 'Accept': 'application/json',
@@ -256,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     OWN IMPLEMENTATION OF NO-RELOAD NAVIGATION BY JERSON REYES 
     INSPIRED BY REACTJS (WITH MATCHING TRANSITION ANIMATIONS PLUS ELEMENT DELAYS)
     */
-    $("a").click(function(e) {
+    $(document).on("click", "a", function(e){
         e.preventDefault();
         if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler")) {
             e.preventDefault();
@@ -276,8 +275,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
         } 
     })
-    
-    $('.themeToggler').click(function() {
+    $(document).on("click", ".theme-toggler", function(e){
         var value = $.cookie("theme");
         if(value == 'dark') {
             $.cookie('theme', 'light', { expires: 9999999, path: '/' });

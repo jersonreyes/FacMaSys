@@ -164,7 +164,7 @@ def faculty(request):
             'notifications':Notifications.objects.filter(user=request.user),
             'page':page,
             'count':workers.count(),
-            'state':'accounts',
+            'state':'faculty',
             
         }
         return render(request, 'user/faculty.html', context)

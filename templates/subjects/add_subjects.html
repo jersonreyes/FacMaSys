@@ -3,11 +3,9 @@
 
 
 {% block content %}
-  <form method="POST" action="">
+  <form method="POST" action="" class="grid gap-3">
     {% csrf_token %}
 
-    
-    <a href="../">Go back to Home</a>
     <div>
       Course code
       <input
@@ -97,7 +95,7 @@
     </div>
 
     <div>
-        Pre requisite
+        Pre-requisite [ctrl-click]
         <select name="pre_requisite" id="id_research_progress" multiple>
         {% for value, subject in form.pre_requisite.field.choices %}
             <option value="{{value}}">{{subject}}</option>

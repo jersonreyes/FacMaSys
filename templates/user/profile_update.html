@@ -3,58 +3,19 @@
 {% block headers %} UPDATE ACCOUNT {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<style>
-    body {
-        background: rgb(230, 227, 227);
-    }
-</style>
 
-
-<div style="margin-top: 64px;">
-    <!-- NAVIGATION LAYER 1
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <h3 class="font-sans navbar-brand ml-3 p-2" href="#">CUSTOMER ORDER DETAILS</h3>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav> -->  
-    <!-- NAVIGATION LAYER 2 -->
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
-    
-        <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            <a class="nav-link" href="{% url 'user-profile' %}"> <img src="/static/images/icon_back_btn.png" style="width:13px; height:13px;" alt="Back Button"> Back to Account </a>               
-            </li>       
-        </ul>
-        </div>
-    </nav>
+{% if not ajax %}
+<div style="margin-top: 10vh;">
     <div class="container-fluid">
-            <div class="container">
-                <div class="row my-3">
-                    <div class="col-md-8">
-            
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header bg-info text-white">
-                               Update Account Information
-                                                                                                                         
-                            </div>
-                            <div class="card-body px-5 py-4">
-                                <form method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {{ user_form|crispy }}
-                                    {{ profile_form|crispy }}
-                                    <input class="btn btn-info" type="submit" value="Update">
-                                </form>                 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form|crispy }}
+            {{ profile_form|crispy }}
+            <input class="btn btn-info" type="submit" value="Update">
+        </form>      
+            {% if not ajax %}
     </div>
 </div>
+{% endif %}
 {% endblock %}

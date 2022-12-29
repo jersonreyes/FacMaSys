@@ -5,55 +5,46 @@
 {% endblock %} 
 
 {% block content %}
-
-<h1>Add Researches</h1>
-
-<a href="../">Go back</a>
 <form enctype="multipart/form-data" action="" method="post">
     {% csrf_token %}
 
-    <div>
-        <div>
-            <p>Research ID: </p>
-            {{ form.faculty_id }}
-        </div>
-        <div>
+    <div class="grid gap-2">
+        <div class="grid">
             <p>Research Title: </p>
-            {{ form.research_title }}
+            <p>{{ form.research_title }}</p>
         </div>
         <div>
-            <p>Reserach Progress: </p>
-            {{ form.research_progress }}
+            <p>Research Progress: </p>
+            <p>{{ form.research_progress }}</p>
         </div>
         <div>
             <p>Area: </p>
-            {{ form.research_area }}
+            <p>{{ form.research_area }}</p>
         </div>
         <div>
             <p>Degree Level: </p>
-            {{ form.degree_level }}
+            <p>{{ form.degree_level }}</p>
         </div>
         <div>
             <p>Content Type: </p>
-            {{ form.content_type }}
+            <p>{{ form.content_type }}</p>
         </div>
         <div>
             <p>Abstract: </p>
-            {{ form.abstract }}
+            <p>{{ form.abstract }}</p>
         </div>
         <div>
             <p>Document: </p>
-            {{ form.document }}
+            {{ form.document }}</p>
         </div>
         <div>
             <p>School: </p>
-            {{ form.researcher_school }}
+            <p>{{ form.researcher_school }}</p>
         </div>
         <div>
             <p>Degree Level: </p>
-            {{ form.degree_level }}
+            <p>{{ form.degree_level }}</p>
         </div>
-        
             {{ form.errors }}
             {{ form.non_field_errors }}
         

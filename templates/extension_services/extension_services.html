@@ -4,11 +4,14 @@
 
 
 {% block content %}
-    <h3>Extension Services</h3>
-    <a href="../">Go back to Home</a>
-    <br>
-    <a class="form-modal-toggler" href="javascript:void();" title="Add Services" value="./add_service">Add Services</a>
-    
+<div class="mt-[10vh] dark:white w-full">
+    <div style="margin-bottom:2vh" class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
+        <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
+        <div class="z-[1] absolute">
+            <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Extension / <span class="font-normal">Services</span></p>
+            <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Service" href="javascript:void();" value="./add_service">Add Service</a>
+        </div>
+    </div>
     {% if all_extension_services|length > 0 %}
     <table>
         <thead>
@@ -47,6 +50,7 @@
         </tbody>
     </table>
     {% else %}
-        <h1>No data available.</h1>
+        <p class="text-center mt-5">No data available.</p>
     {% endif %}
 {% endblock %}
+</div>

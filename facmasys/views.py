@@ -157,7 +157,7 @@ def server_error(request, *args, **argv):
 
 def faculty_extension_services(request):
     all_extension_services = ExtensionService.objects.all().filter(faculty_id=request.user)
-    return render(request, "extension_services/extension_services.html", {'all_extension_services': all_extension_services})
+    return render(request, "extension_services/extension_services.html", {'all_extension_services': all_extension_services, 'state': 'extension_services'})
 
 def add_extension_services(request):  
     user_instance = request.user

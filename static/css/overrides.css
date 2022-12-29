@@ -288,3 +288,75 @@
     color:White;
     opacity: 0.5;
   }
+
+  
+/* SCROLLBAR */
+/* DARK */
+/* Firefox */
+.dark * {
+  scrollbar-width: thin;
+  scrollbar-color: #5c5c5c #383838;
+}
+
+/* Chrome, Edge, and Safari */
+.dark *::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark *::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0);
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background-color: #5c5c5c;
+  border-radius: 10px;
+  border: 0px double #ffffff;
+}
+
+/* LIGHT */
+/* Firefox */
+* {
+scrollbar-width: thin;
+scrollbar-color: #c9c9c9 #f2f2f2;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+background-color: #dddddd;
+border-radius: 10px;
+border: 0px double #ffffff;
+}
+
+form > div > div {
+  line-height: 1;
+}
+
+button[type="submit"] {
+  border: 1px solid rgb(170, 170, 170);
+  display: inline;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 5px;
+  background:rgba(0, 0, 0, 0.03);
+}
+
+button[type="submit"]:hover {
+  background:rgba(0, 0, 0, 0.152);
+}
+
+form input, form select {
+  width: 100%;
+}
+
+.dark button[type="submit"] {
+  border: 1px solid rgb(193, 193, 193);
+  color: white;
+}
