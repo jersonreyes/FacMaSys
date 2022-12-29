@@ -56,7 +56,7 @@
             </table>
         {% endblock table %}
 
-        <p class="ml-4 text-muted mt-4 dark:text-white/70">
+        <p class="font-sans text-muted d-inline">
             {% with rows=table.rows|length rows_per_page=table.page.object_list|length row_count=table.page.object_list|length|mul:table.page.number %}
             
                 Showing <strong>

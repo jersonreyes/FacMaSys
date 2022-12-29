@@ -145,7 +145,7 @@
             //         <li><a href="#">Noon</a></li>
             //         <li><a href="#">6 p.m.</a></li>
             //     </ul>
-            //     <p class="calendar-cancel"><a href="#">Cancel</a></p>
+            //     <p class="font-sans calendar-cancel"><a href="#">Cancel</a></p>
             // </div>
 
             const clock_box = document.createElement('div');
@@ -275,7 +275,7 @@
             //     <div class="calendar-shortcuts">
             //          <a href="#">Yesterday</a> | <a href="#">Today</a> | <a href="#">Tomorrow</a>
             //     </div>
-            //     <p class="calendar-cancel"><a href="#">Cancel</a></p>
+            //     <p class="font-sans calendar-cancel"><a href="#">Cancel</a></p>
             // </div>
             const cal_box = document.createElement('div');
             cal_box.style.display = 'none';

@@ -1,3 +1,8 @@
+/** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors')
+
+
 /**
  * This is a minimal config.
  *
@@ -48,7 +53,11 @@ module.exports = {
         '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+              sans: ['Inter var'],
+            },
+          },
     },
     variants: ['dark', 'dark-hover', 'dark-group-hover', 'dark-even', 'dark-odd'],
     plugins: [

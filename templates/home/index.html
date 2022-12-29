@@ -4,34 +4,34 @@
 {% load static %}
 
 {% block content %}
-    <div class="text-black dark:white mt-[9vh]">
+    <div class="text-black dark:white mt-[9vh]" style="z-index:-500">
         <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[700px] flex flex-col text-center justify-center items-center font-sans">
-            <div class="z-[0] w-full h-[100vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
-            <div class="z-[1] absolute">
-                <p class="text-[82px] tracking-[-2px] font-bold text-white">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
-                <p class="text-[18px] w-[570px] ml-[18%] leading-[1] mt-[-25px] text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-                <div class="grid grid-cols-2 gap-2 mt-[5vh]">
+            <div class="w-full h-[100vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
+            <div class="absolute">
+                <p class="font-sans font-bold text-white text-8xl">{% if request.user.is_authenticated %}Get Started{% else %}FacMaSys{% endif %}</p>
+                <p class="max-w-xl mx-auto font-sans text-lg text-white">Welcome to the BulSU-CICT Faculty Management System! To earn your productivity, we provide numerous tools and features to assist you in staying organized.</p>
+                <div class="grid max-w-screen-lg grid-cols-2 gap-2">
                     {% if not request.user.is_authenticated %}
                         <a href="/user/login/">
                         {% endif %}
-                            <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8] text-black dark:white">
-                                <p class="title animate glow delay-6">Get Started</p>
-                                <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                            <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-gray-800 dark:white">
+                                <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Feed</p>
+                                <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Stay informed about important deadlines, events, and announcements in your department. </p>
                             </div>
                         {% if not request.user.is_authenticated %}
                         </a>
                     {% endif %}
-                    <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
-                        <p class="title animate glow delay-7">Faculty Management</p>
-                        <p class="subtitle">Know more about the faculty members and their subjects </p>
+                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-gray-800 dark:white">
+                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Faculty Management</p>
+                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Learn more about the faculty members and the subjects they teach.</p>
                     </div>
-                    <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
-                        <p class="title animate glow delay-8">Research and Extensions</p>
-                        <p class="subtitle">Search and explore information about research and extensions of the college </p>
+                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-gray-800 dark:white">
+                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Research and Extensions</p>
+                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Explore information regarding the college's research and extensions. </p>
                     </div>
-                    <div class="navigatorBlock bg-[#ffffff] dark:bg-[#363636a8]">
-                        <p class="title animate glow delay-9">Post and Announcements</p>
-                        <p class="subtitle">Be updated with the latest news and announcements from the college </p>
+                    <div class="text-black rounded-lg navigatorBlock bg-gray-50 dark:bg-gray-800 dark:white">
+                        <p class="mb-1 font-sans text-2xl font-bold text-amber-600 animate glow delay-6">Course Management</p>
+                        <p class="mb-0 font-sans text-base text-gray-700 dark:text-gray-200">Manage the department's current curricular subjects. </p>
                     </div>
                 </div>
             </div>
@@ -39,12 +39,12 @@
         <div class="animate fade-animator delay-3 grid grid-cols-[45fr_55fr] mt-3 h-[50vh]">
             <div class="p-10 mt-[5vh] ml-[2vw]">
                 <h1 class="text-[66px]">Meow?</h1>
-                <p class="text-md w-[499px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
+                <p class="font-sans text-md w-[499px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
                 <div class="ml-[-1.4vw] mt-[5vh]">
                     <div class="dropdownBlock bg-[rgba(200,200,200,0.2)] dark:bg-[#363636] flex items-center justify-between">
                         <div class="flex flex-col items-center">
-                            <p class="title">Just Meow and Meow</p>
-                            <p class="subtitle text-black dark:white">You never know when you’ll meow</p>
+                            <p class="font-sans title">Just Meow and Meow</p>
+                            <p class="font-sans text-black subtitle dark:white">You never know when you’ll meow</p>
                         </div>
                         <img src="{% static 'images/arrow.png' %}" class="h-[20px] dark:invert"/>
                     </div>
