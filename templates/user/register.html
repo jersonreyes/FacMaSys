@@ -1,4 +1,5 @@
 {% load tailwind_tags %}
+{% if not ajax %}
 <!DOCTYPE html>
 <html class="h-full {{theme}}" lang="en">
   <head>
@@ -27,11 +28,12 @@
 
     <title>FacMaSys - Login</title>
   </head>
-
+  
   <body class="w-screen h-full transition-all dark:bg-[#212121]">
-    <div class="flex min-h-full" id="main-body">
+    <div class="flex min-h-full">
       <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
-        <div class="w-full max-w-sm mx-auto lg:w-96">
+        {% endif %}
+        <div class="w-full max-w-sm mx-auto lg:w-96" id="main-body">
           <div>
             <div class="flex gap-x-4">
               <div class="flex gap-x-2">
@@ -42,7 +44,7 @@
             </div>  
             <h2 class="mt-6 font-sans text-3xl font-bold text-gray-900 dark:white">Create an account</h2>
           </div>
-    
+          
           <div class="mt-8">
             <div class="mt-6">
                 <form method="POST">
@@ -58,6 +60,7 @@
           </div>
         </div>
       </div>
+      {% if not ajax %}
       <div class="relative flex-1 hidden w-0 m-3 lg:block">
         
         <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
@@ -83,4 +86,5 @@
   
   <script src="{% static 'js/sidebar.js' %}"></script>
   <script>$('.dropdown-toggle').dropdown('toggle')</script>
+  {% endif %}
 </html>

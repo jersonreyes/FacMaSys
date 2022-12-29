@@ -1,3 +1,4 @@
+{% if not ajax %}
 {% load tailwind_tags %}
 <!DOCTYPE html>
 <html class="h-full {{theme}}" lang="en">
@@ -29,9 +30,10 @@
   </head>
 
   <body class="w-screen h-full transition-all dark:bg-[#212121]">
-    <div class="flex min-h-full" id="main-body">
+    <div class="flex min-h-full">
       <div class="flex flex-col justify-center flex-1 px-4 my-12 sm:mx-6 lg:flex-none lg:mx-20 xl:mx-24 ">
-        <div class="w-full max-w-sm mx-auto lg:w-96">
+        {% endif %}
+        <div class="w-full max-w-sm mx-auto lg:w-96" id="main-body">
           <div>
             <div class="flex gap-x-4">
               <div class="flex gap-x-2">
@@ -52,7 +54,7 @@
               <button class="flex justify-center w-full px-4 py-2 mt-4 font-sans text-base font-medium text-white border border-transparent rounded-md bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2" id="loginBtn" type="submit">Login</button>
               
               <div class="flex flex-col mt-2 gap-y-4">
-                <a class="font-sans font-medium text-center text-amber-600 hover:text-amber-700" style="color: rgb(245 158 11 / var(--tw-text-opacity));" href="{% url 'password_reset' %}">Forgot Password</a>
+                {% comment %}<a class="font-sans font-medium text-center text-amber-600 hover:text-amber-700" style="color: rgb(245 158 11 / var(--tw-text-opacity));" href="{% url 'password_reset' %}">Forgot Password</a>{% endcomment %}
                 <span class="font-sans text-center">Don't have an account? <a style="color: rgb(245 158 11 / var(--tw-text-opacity));" class="font-sans font-medium text-amber-600 hover:text-amber-700" href="{% url 'user-register' %}">Sign up</a></span>
               </div>       
           </form>
@@ -60,6 +62,7 @@
           </div>
         </div>
       </div>
+      {% if not ajax %}
       <div class="relative flex-1 hidden w-0 m-3 lg:block">
         
         <div class="flex justify-center items-center absolute inset-0 rounded-[20px] w-full h-full overflow-hidden bg-center" style="background-position:bottom !important;background-size:cover !important;background:url('{% static '/images/bg_login.JPG' %}')" alt="">
@@ -85,4 +88,5 @@
   
   <script src="{% static 'js/sidebar.js' %}"></script>
   <script>$('.dropdown-toggle').dropdown('toggle')</script>
+  {% endif %}
 </html>
