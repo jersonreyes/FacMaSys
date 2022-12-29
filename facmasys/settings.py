@@ -110,7 +110,7 @@ TEMPLATES = [
         },
     },
 ]
-
+TEMPLATE_DEBUG = DEBUG
 WSGI_APPLICATION = 'facmasys.wsgi.application'
 
 
