@@ -10,7 +10,9 @@
                 <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
                 <div class="z-[1] absolute">
                     <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">College / <span class="font-normal">Subjects</span></p>
-                    <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Subject" href="javascript:void();" value="./add_subject">Add Subjects</a>
+                    {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
+                        <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Subject" href="javascript:void();" value="./add_subject">Add Subjects</a>
+                    {% endif %}
                 </div>
             </div>
             {% if all_subjects|length > 0 %}

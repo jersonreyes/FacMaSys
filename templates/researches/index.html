@@ -60,7 +60,9 @@
                     </div>
                 </div>
                 <br/>
-                <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="javascript:void();" value="/research/add_research">Add Research</a>
+                {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
+                  <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="javascript:void();" value="/research/add_research">Add Research</a>
+                {% endif %}
             </div>
         </div>
         <p class="font-sans mt-[2vh] tracking-[-2px] text-[25px] font-bold text-center animate glow delay-4">Recent</p>

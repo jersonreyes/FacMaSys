@@ -7,7 +7,9 @@
     <h3>Extension Services</h3>
     <a href="../">Go back to Home</a>
     <br>
-    <a class="form-modal-toggler" href="javascript:void();" title="Add Services" value="./add_service">Add Services</a>
+    {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
+        <a class="form-modal-toggler" href="javascript:void();" title="Add Services" value="./add_service">Add Services</a>
+    {% endif %}
     
     {% if all_extension_services|length > 0 %}
     <table>

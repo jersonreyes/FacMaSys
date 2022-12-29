@@ -21,24 +21,35 @@
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_feed.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Feed</span>                      
                 </a>
-                {% if request.user.profile.user_role == 'depthead' or request.user.is_superuser %}
+
+                {% if not request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
                 <a value="Faculty" href="{% url 'faculty-index' %}" class="animate glow delay-4 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'faculty' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_faculty.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Faculty</span>                      
                 </a>
                 {% endif %}
+
+                {% if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser %}
                 <a value="Researches" href="{% url 'researches-index' %}" class="animate glow delay-4 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'researches' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_research.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Researches</span>                      
                 </a>
+                {% endif %}
+
+
+                {% if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser %}
                 <a value="Subjects" href="{% url 'subjects-index' %}" class="animate glow delay-5 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'subjects' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_subject.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Subjects</span>                      
                 </a>
+                {% endif %}
+
+                {% if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser %}
                 <a value="Extension" href="{% url 'extension_services-index' %}" class="animate glow delay-5 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'subjects' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_extension.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Extension</span>                      
                 </a>
+                {% endif %}
             </div>
             <div>
 

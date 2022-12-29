@@ -11,7 +11,9 @@
             <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
             <div class="z-[1] absolute">
                 <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Posts / <span class="font-normal">Feed</span></p>
+                {% if not request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
                 <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Post / Announcement" href="javascript:void();" value="/announcements/add_announcements">Add Post / Announcement</a>
+                {% endif %}
             </div>
         </div>
         
