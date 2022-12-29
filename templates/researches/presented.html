@@ -41,9 +41,8 @@
                     <td>{{element.org_description}}</td> 
                     <td>{{element.date_presented}}</td> 
                     <td>
-                        <a href="./update_research/{{ element.id }}">Update</a>
-                        <a href="./delete_research/{{ element.id }}">Delete</a>
-                        <a href="#">Update Details</a>
+                        <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
+                        <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
                     </td>
                 </tr>
                 {% endfor %}
