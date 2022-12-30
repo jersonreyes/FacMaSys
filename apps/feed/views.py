@@ -24,6 +24,9 @@ def index(request):
 
     # Announcement Objects
     feeds = Feeds.objects.all()
+    feeds_dept = Feeds_DepartmentHead.objects.all()
+    feeds_ext = Feeds_ExtensionCoord.objects.all()
+    feeds_research = Feeds_ResearchCoord.objects.all()
     
     field_name = 'user_role'
     obj = Profile.objects.first()
@@ -40,6 +43,9 @@ def index(request):
         
         # Announcement Objects
         'feeds':feeds,
+        'feeds_dept': feeds_dept,
+        'feeds_ext': feeds_ext,
+        'feeds_research': feeds_research,
         'user_types':field_value,
     }
     return render(request, 'feed/index.html', context)

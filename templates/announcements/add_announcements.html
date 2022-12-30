@@ -11,8 +11,6 @@
 
     {% if user_type == 'extensioncoor' %}
     <div>
-        <h1>Post Announcement: </h1>
-        <p>Extension Coordinator</p>
         <input type='hidden' value='{{form2.pk}}' name='pk'>
 
         <div>
@@ -30,9 +28,6 @@
     </div>
     {% elif user_type == 'depthead' %}
     <div>
-        <h1>Post Announcement: </h1>
-        <p>Department Head</p>
-    
         <div>
 
             <div><p>Agenda: </p>{{ form2.agenda }}</div>
@@ -40,8 +35,6 @@
     </div>
     {% elif user_type == 'researchcoor' %}
     <div>
-        <h1>Post Announcement: </h1>
-        <p>Research Coordinator</p>
         <div>
             <div>
                 Agenda<br />
