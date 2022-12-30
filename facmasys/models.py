@@ -108,8 +108,8 @@ class Research(models.Model):
     # models.OneToOneField(User, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
-        # return f'Research Title: {self.research_title} | Research Progress: {self.research_progress} | Degree Level: {self.degree_level}'
-        return f'{self.id}'
+        return f'{self.id}: {self.research_title}, {self.researcher_school}'
+        # return f'{self.id}'
     
     def __references__(self):
         return self.faculty_id
@@ -168,7 +168,6 @@ class Research_Published(models.Model):
     publication = models.CharField(max_length=200, blank=False, null=False)
     source = models.CharField(max_length=200, blank=False, null=False)
     research_license = models.CharField(max_length=200, choices=RESEARCH_LICENSE, default="None", blank=False, null=True)
-    abstract = models.TextField(max_length=1200, blank=False, null=False)
     published_id = models.OneToOneField(Research, on_delete=models.CASCADE, blank=True, null=True)
     faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, default=None)
 
@@ -217,7 +216,7 @@ class Subjects(models.Model):
     course_type = models.CharField(max_length=50, choices=COURSES_TYPE, blank=False, default="None")
     
     def __str__(self) -> str:
-        return f'{self.course_code} | Title: {self.course_title} | Credits: {self.course_credits}'
+        return f'{self.course_code}: {self.course_title}'
 
 
 class Subjects_Taught(models.Model):

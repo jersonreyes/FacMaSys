@@ -1,10 +1,15 @@
+
+
 <h3>Ongoing: </h3>
-    {% if research_ongoing_filtered|length > 0 %}
+    {% comment %}
+        Display: ONGOING RESEARCHES
+    {% endcomment %}
+
     <table class="table" id="all">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID</th>
+                <th>Faculty</th>
                 <th>Research Title</th>
                 <th>Area</th>
                 <th>Abstract</th>
@@ -25,21 +30,19 @@
                 <td>{{ element.research_title }}</td>
                 <td>{{ element.research_area }}</td>
                 <td>{{ element.abstract }}</td>
-                <td><button onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</a></td>
+                <td><button class="document-link" onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</button></td>
                 <td>{{ element.date_added|date:"M d, Y" }}</td>
                 <td>{{ element.researcher_school }}</td>
                 <td>{{ element.degree_level }}</td>
-                <td>
-                    <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
-                    <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
+                <td class="action-buttons">
+                    <button class="button-9" role="button" onclick="window.location.href = '/research/update_research/{{ element.id }}'"><span class="iconify" data-icon="material-symbols:edit-square"></span></button>
+                    <button class="button-9" role="button" onclick="window.location.href = '/research/delete_research/{{ element.id }}'"{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></button>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    {% else %}
-        <h5>No data available.</h5>
-    {% endif %}
+    
     <script type="text/javascript" class="init">
         $(document).ready(function() {
         $('#all').DataTable( {

@@ -9,7 +9,7 @@
 
     <a href="../">Go back to Home</a>
     <div>
-      Course code
+      Course Code: 
       <input
         type="text"
         name="course_code"
@@ -19,9 +19,9 @@
         value="{{subjecttt.course_code}}"
       />
     </div>
-
+    <br>
     <div>
-      Course title
+      Course Title: 
       <input
         type="text"
         name="course_title"
@@ -31,9 +31,9 @@
         value="{{subjecttt.course_title}}"
       />
     </div>
-
+    <br>
     <div>
-      Course credits
+      Course Credits: 
       <input
         type="number"
         name="course_credits"
@@ -42,18 +42,18 @@
         value="{{subjecttt.course_credits}}"
       />
     </div>
-
+    <br>
     <div>
-      Semester
+      Semester: 
       <select name="semester" id="id_semester">
         <option value="1st Semester">1st Semester</option>
 
         <option value="2nd Semester">2nd Semester</option>
       </select>
     </div>
-
+    <br>
     <div>
-        Year
+        Year: 
         <select name="year" id="id_year">
         {% for value, subject in form.year.field.choices %}
             {% if research.year == value %}
@@ -64,9 +64,9 @@
         {% endfor %}
         </select>
     </div>
-
+    <br>
     <div>
-      Course lec units
+      Course LEC. Units: 
       <input
         type="number"
         name="course_lec_units"
@@ -75,9 +75,9 @@
         value="{{subjecttt.course_lec_units}}"
       />
     </div>
-
+    <br>
     <div>
-      Course lab units
+      Course LAB. Units:
       <input
         type="number"
         name="course_lab_units"
@@ -86,9 +86,9 @@
         value="{{subjecttt.course_lab_units}}"
       />
     </div>
-
+    <br>
     <div>
-      Course hours per week
+      Hours per Week: 
       <input
         type="number"
         name="course_hours_per_week"
@@ -97,9 +97,9 @@
         value="{{ subjecttt.course_hours_per_week }}"
       />
     </div>
-
+    <br>
     <div>
-        Specialization
+        Specialization: 
         <select name="specialization" id="id_specialization">
             {% for value, subject in form.specialization.field.choices %}
                 {% if subjecttt.specialization in value %}
@@ -110,9 +110,9 @@
             {% endfor %}
         </select>
     </div>
-
+    <br>
     <div>
-        Pre requisite
+        Pre-requisite: 
         <select name="pre_requisite" id="id_research_progress" multiple>
         {% for value, subject in form.pre_requisite.field.choices %}
             {% if subjecttt.pre_requisite.id == value %}
@@ -120,13 +120,13 @@
             {% else %}
                 <option value="{{value}}">{{subject}}</option>
             {% endif %}
+
         {% endfor %}
         </select>
     </div>
-
-    
+    <br>
     <div>
-      Course type
+      Course Type: 
     <select name="course_type" id="course_type">
         {% for value, subject in form.course_type.field.choices %}
             {% if subjecttt.course_type == value %}

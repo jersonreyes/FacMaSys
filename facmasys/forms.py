@@ -78,5 +78,6 @@ class ResearchForm(forms.ModelForm):
             'research_progress': forms.ChoiceField(),
             'research_area': forms.ChoiceField(),
             'degree_level': forms.ChoiceField(),
+            'abstract': forms.Textarea(),
             'document':  forms.FileField(label='Select a file', help_text='max. 42 megabytes')
         }
