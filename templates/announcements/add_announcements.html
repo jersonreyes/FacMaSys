@@ -20,24 +20,24 @@
             {{form2.reference_id}}
         </div>
         <div>
-            <p>agenda: </p>
-            {{form2.agenda}}
+            <p>Agenda: </p>
+            <p>{{form2.agenda}}</p>
         </div>
         <div>
-            <p>issued_by: </p>
-            {{form2.issued_by}}
+            <p>Issued By: </p>
+            <p>{{form2.issued_by}}</p>
         </div>
         <div>
-            <p>extension_address: </p>
-            {{form2.extension_address}}
+            <p>Extension Address: </p>
+            <p>{{form2.extension_address}}</p>
         </div>
         <div>
             <p for="id_email">Email:</p>
-            <input type="email" name="email" maxlength="100" required="" id="id_email">
+            <p><input type="email" name="email" maxlength="100" required="" id="id_email"></p>
         </div>
         <div>
             <p for="id_event_date">Event date:</p>
-            <input type="date" name="event_date" required="" id="id_event_date">
+            <p><input type="date" name="event_date" required="" id="id_event_date"></p>
         </div>
     </div>
     {% elif user_type == 'depthead' %}

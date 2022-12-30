@@ -85,8 +85,8 @@
                     <td>{{element.org_description}}</td> 
                     <td>{{element.date_presented}}</td> 
                     <td action-buttons>
-                        <button class="button-9" role="button" onclick="window.location.href = '/research/update_details/a/{{ element.id }}'"><span class="iconify" data-icon="material-symbols:edit-square"></button>
-                        <button class="button-9" role="button" onclick="window.location.href = '/research/delete_details/a/{{ element.id }}'"{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></button>
+                        <a class="form-modal-toggle button-9" role="button" href="/research/update_details/a/{{ element.id }}"><span class="iconify" data-icon="material-symbols:edit-square"></a>
+                        <a class="form-modal-toggle button-9" role="button" href="/research/delete_details/a/{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></a>
                     </td>
                 </tr>
                 {% endfor %}

@@ -7,10 +7,11 @@ from django.shortcuts import redirect, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
 
-# from facmasys.forms import ExtensionServiceForm
-
 from .forms import *
 from .models import *
+
+# from facmasys.forms import ExtensionServiceForm
+
 
 
 # Create your views here.
@@ -18,7 +19,6 @@ def index(request):
     return render(request, 'home/index.html', {'state':'home'})
 
 from django.apps import apps
-
 
 Feeds_DepartmentHead = apps.get_model('feed', 'Feeds_DepartmentHead')
 Feeds_ResearchCoord = apps.get_model('feed', 'Feeds_ResearchCoord')
@@ -51,8 +51,9 @@ def update_ext_announcements(request, id):
         form = Feeds(request.POST, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
-        
+            return redirect("/feed")  
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'research': research,
             'form': form,
@@ -66,7 +67,7 @@ def delete_ext_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
-        return redirect("../")
+        return redirect("/feed")
     return redirect('index')
 
 @login_required
@@ -140,6 +141,8 @@ def add_announcements(request):
             'state':'announcements',
             'user_type': profile['user_role'],
         }
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         return render(request, 'announcements/add_announcements.html', context)
     return redirect('index')
     
@@ -210,11 +213,10 @@ def update_announcements(request, id):
             print("True")
             
             form.save()  
-            form2.save()
-            
-            return redirect("../")
-        else:
-            print("False")
+            return redirect("feed")
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
+        print("False")
         context = {
             'research': research,
             'research2': research2,
@@ -233,7 +235,7 @@ def delete_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
-        return redirect("../")
+        return redirect("/feed/")
     return redirect('index')
 
 from django.shortcuts import get_object_or_404, render
@@ -283,6 +285,8 @@ def add_extension_services(request):
             form = ExtensionServiceForm()         
             print("Failed!") 
             
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'form': form,
             'state':'extension_services',
@@ -296,7 +300,8 @@ def edit_extension_services(request, id):
         print('update_extension_services')
         form = ExtensionServiceForm()
         extension = ExtensionService.objects.get(id=id)
-        
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'extension': extension,
             'form': form,
@@ -312,8 +317,9 @@ def update_extension_services(request, id):
         form = ExtensionServiceForm(request.POST, instance=extension)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
-        
+            return redirect("/extension_services")  
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'extension': extension,
             'form': form,
@@ -327,7 +333,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/extension_services")
     return redirect('index')
 
 def faculty_member_main(request):
@@ -377,6 +383,9 @@ def add_taught_subjects(request):
         else:  
             form = SubjectTaughtForm()  
             
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
+            
         context = {
             'form': form,
             'selected_list': selected_list,
@@ -396,7 +405,8 @@ def update_taught_subjects(request, id):
             return redirect('/subjects/')
         else:
             print("Noped!")
-        
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'all_subjects': all_subjects.handled_subjects.all(),
             'state':'subjects_taught',
@@ -415,7 +425,8 @@ def edit_extension_services(request, id):
         
         form = ExtensionServiceForm()
         extension = ExtensionService.objects.get(id=id)
-        
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'extension': extension,
             'form': form,
@@ -428,7 +439,7 @@ def edit_extension_services(request, id):
 # Researches
 @login_required
 def faculty_researches(request):
-    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
+    if request.user.profile.user_role != 'faculty' or request.user.is_superuser:
         research_ongoing = Research.objects.all().filter(faculty_id=request.user)
         research_ongoing_filtered = research_ongoing.filter(research_progress__exact='Ongoing')
         
@@ -484,6 +495,8 @@ def add_researches(request):
             'research_published': research_published,
             'state':'researches',
         }
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         return render(request, "researches/researches.html", context)
     return redirect('index')
 
@@ -516,6 +529,8 @@ def add_researches(request):
             # 'form_published': form_published,
             'state':'researches',
         }
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         return render(request, 'researches/add_researches.html', context)
     return redirect('index') 
 
@@ -557,6 +572,9 @@ def add_presented(request):
             form = Research_PresentedForm()         
             print("Failed!") 
             
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
+
         context = {
             'form': form,
             'all_presented': all_presented,
@@ -580,7 +598,8 @@ def add_published(request):
         #     selected_list.append(e['id'])
         # print('published values: ', val)
         
-        
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         if request.method == "POST":  
             form = Research_PublishedForm(request.POST)  
             if form.is_valid():  
@@ -622,6 +641,8 @@ def edit_researches(request, id):
         context = {
             
         }
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         return render(request, 'researches/update_research_details.html', context)
     return redirect('index')
     
@@ -634,6 +655,8 @@ def update_researches(request, id):
         if form.is_valid():  
             form.save()  
             return redirect("/researches/")  
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../")  
         
         context = {
             'research': research,
@@ -655,6 +678,8 @@ def update_details_a(request, id):
             print("Done!")
             form.save()  
             return redirect("/researches/")  
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         print("asfdasfd!")
         context = {
             'research': research,
@@ -673,6 +698,8 @@ def update_details_b(request, id):
         if form.is_valid():  
             form.save()  
             return redirect("/researches/")  
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
 
         research_all = Research_Published.objects.filter(id=id)  
         current_edit__ = research_all.values().first()['published_id_id']
@@ -759,6 +786,8 @@ def add_subject(request):
             'form': form,
             'state':'subjects',
         }
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         return render(request, 'subjects/add_subjects.html', context) 
     return redirect('index')
 
@@ -767,7 +796,8 @@ def updateform_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         form = SubjectForm()
         subjecttt = Subjects.objects.get(id=id)
-        
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'subjecttt': subjecttt,
             'form': form,
@@ -807,8 +837,9 @@ def update_subject(request, id):
         
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
-        
+            return  redirect("/subjects")
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return redirect("../") 
         context = {
             'subjecttt': subjecttt,
             'form': form,
@@ -823,14 +854,14 @@ def delete_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/subjects")
     return redirect('index')
 
 def delete_subject_taught(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects_Taught.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/subjects")
     return redirect('index')
 
 """ SUBJECTS """

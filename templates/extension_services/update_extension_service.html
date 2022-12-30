@@ -1,9 +1,5 @@
-{% extends "main.html" %} {% block title %} Faculty Member - Update Extension
-Service {% endblock %} {% block content %}
-<p>Faculty Member - Update Extension Service</p>
-
-<a href="../">Go back</a>
-<form action="../update_service/{{ extension.id }}" method="post">
+{% block content %}
+<form action="/extension_services/update_service/{{ extension.id }}" method="post">
     {% csrf_token %}
 
     <div>
@@ -32,11 +28,10 @@ Service {% endblock %} {% block content %}
     </div>
 
     <div>
-        <label for="id_background">Background:</label>
+        <label for="id_background">Background:</label><br/>
         <textarea name="background" cols="40" rows="10" maxlength="500" required="" id="id_background">{{extension.background}}</textarea>
     </div>
-
-    <select name="extension_head" required="" id="id_extension_head" style="display: none;">
+    <select name="extension_head" id="id_extension_head" style="display: none;">
         {% for value, subject in form.extension_head.field.choices %}
             {% if current_edit == value %}
                 <option value="{{value}}" selected>{{value}}</option>
@@ -45,11 +40,7 @@ Service {% endblock %} {% block content %}
             {% endif %}
         {% endfor %}
     </select>
-    
-    
-    {{ form.errors }}
-    {{ form.non_field_errors }}
-
+    <br/>
     <button type="submit">Update Data</button>
 </form>
 {% endblock %}
