@@ -286,7 +286,7 @@ def add_extension_services(request):
                     new_form.save()
                     add_activity(logged_user=request.user,activity_type='ADD',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} added an extension service.")
                     print("Success!") 
-                    return redirect('/extension_services')   # refresh
+                    return redirect('extension_services-index')   # refresh
                 except:  
                     pass  
             else:

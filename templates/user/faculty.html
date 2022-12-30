@@ -46,7 +46,13 @@
                         </div>
                     </div> {% endcomment %}
             </form>
-            
+            <a href="{% url 'faculty-index'%}">All</a>
+            {% if request.user.is_superuser or request.user.profile.user_role == 'researchcoor' %}
+            <a href="{% url 'faculty-with-research'%}">With Research</a>
+            {% endif %}
+            {% if request.user.is_superuser or request.user.profile.user_role == 'extensioncoor' %}
+            <a href="{% url 'faculty-with-extension'%}">With Extension</a>
+            {% endif %}
         </div>
         <div id="item-list">
             <div>
