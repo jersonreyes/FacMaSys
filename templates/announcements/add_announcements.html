@@ -7,21 +7,69 @@
 {% block content %}
 <form action="" method="post" class="grid gap-3">
     {% csrf_token %}
+    
+    <!-- User-based Announcements -->
+    {% if user_type == 'extensioncoor' %}
+    <div>
+        <h1>Post Announcement: </h1>
+        <p>Extension Coordinator</p>
+        
+        <div>
+            <p>agenda: </p>
+            {{form2.agenda}}
+        </div>
+        <div>
+            <p>issued_by: </p>
+            {{form2.issued_by}}
+        </div>
+        <div>
+            <p>extension_address: </p>
+            {{form2.extension_address}}
+        </div>
+        <div>
+            <p for="id_email">Email:</p>
+            <input type="email" name="email" maxlength="100" required="" id="id_email">
+        </div>
+        <div>
+            <p for="id_event_date">Event date:</p>
+            <input type="date" name="event_date" required="" id="id_event_date">
+        </div>
+    </div>
+    {% elif user_type == 'depthead' %}
+    <div>
+        <h1>Post Announcement: </h1>
+        <p>Department Head</p>
+    
+        <div>
+            <div><p>Issued by: </p>{{ form2.issued_by }}</div>
+            <div><p>Agenda: </p>{{ form2.agenda }}</div>
+        </div>
+    </div>
+    {% elif user_type == 'researchcoor' %}
+    <div>
+        <h1>Post Announcement: </h1>
+        <p>Research Coordinator</p>
+    </div>
+    {% endif %}
+    
+
+
+    <!-- General Announcements  -->
     <div>
         <p>Subject: </p>
         {{ form.subject }}
     </div>
     <div>
-        <p>Details: </p>
-        <p>{{ form.description }}</p>
+        <p>Message / Description: </p>
+        <textarea name="description" id="id_description" maxlength="200" cols="30" rows="10"></textarea>
     </div>
     <div>
         <p>Image: </p>
-        <p>{{ form.image }}</p>
+        <input type="file" name="image" accept="image/*" id="id_image">
     </div>
     <div>
         <p>Link: </p>
-        <p>{{ form.link }}</p>
+        <input type="text" name="link" value="N/A" maxlength="200" required="" id="id_link">
     </div>
     <div>
         <!-- <p>User Type: </p> -->
@@ -32,8 +80,17 @@
         </select>
     </div>
     <br>
-    {{ form.errors }}
-    {{ form.non_field_errors }}
+
+    
+    <div>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+    </div>
+
+    <div>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+    </div>
     <button type="submit">Add Announcement</button>
 </form>
 {% endblock %} 
