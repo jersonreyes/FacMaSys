@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
-from django.db.models import Q, Count
+from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -25,8 +25,10 @@ from facmasys.utils import ExportPDF, add_activity
 
 from .filters import FacultyFilter
 # from facmasys.utils import add_activity
-from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm, AddSubjectTaughtForm
-from .tables import FacultyTable, FacultyWithResearchTable, FacultyWithExtensionTable
+from .forms import (AddSubjectTaughtForm, LoginForm, ProfileUpdateForm,
+                    RegisterForm, UserUpdateForm)
+from .tables import (FacultyTable, FacultyWithExtensionTable,
+                     FacultyWithResearchTable)
 
 DEV = True
 
@@ -163,7 +165,6 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
     table_class = FacultyTable
     filterset_class = FacultyFilter
     queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile', 'profile__spec_track')
-    paginate_by = 10
     state = 'accounts'
     label = 'Faculty'
     export_formats = ('xlsx','pdf')
@@ -191,7 +192,6 @@ class FacultyWithResearchView(LoginRequiredMixin, SingleTableMixin, ExportMixin,
     table_class = FacultyWithResearchTable
     filterset_class = FacultyFilter
     queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile').annotate(number_of_research=Count('research')).filter(number_of_research__gt=0)
-    paginate_by = 10
     state = 'accounts'
     label = 'Faculty'
     export_formats = ('xlsx','pdf')
@@ -219,7 +219,6 @@ class FacultyWithExtensionView(LoginRequiredMixin, SingleTableMixin, ExportMixin
     table_class = FacultyWithExtensionTable
     filterset_class = FacultyFilter
     queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile').annotate(number_of_extension=Count('extensionservice')).filter(number_of_extension__gt=0).distinct()
-    paginate_by = 10
     state = 'accounts'
     label = 'Faculty'
     export_formats = ('xlsx','pdf')

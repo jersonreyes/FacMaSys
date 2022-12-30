@@ -33,7 +33,6 @@ class ActivityView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF,
     table_class = ActivityTable
     filterset_class = ActivityFilter
     queryset = ActivityLog.objects.values('id','datetime','type','location','user__username','message')
-    paginate_by = 10
     state = 'settings'
     label = 'Settings'
     export_formats = ('xlsx','csv','pdf')
@@ -64,7 +63,6 @@ class view_reports(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF,
     table_class = FacultyTable
     filterset_class = FacultyFilter
     queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile')
-    paginate_by = 10
     state = 'reports'
     label = 'Faculty'
     export_formats = ('xlsx','pdf')
