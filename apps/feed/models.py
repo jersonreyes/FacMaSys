@@ -36,7 +36,7 @@ class Feeds_DepartmentHead(models.Model):
   )
   
   reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
-  issued_by = models.CharField(max_length=200)
+  # issued_by = models.CharField(max_length=200)
   agenda = models.CharField(choices=AGENDA, max_length=100, default='Greetings')
   
 
@@ -55,7 +55,7 @@ class Feeds_ResearchCoord(models.Model):
   )
   
   reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
-  issued_by = models.CharField(max_length=200)
+  # issued_by = models.CharField(max_length=200)
   deadline_start = models.DateField()
   deadline_end = models.DateField()
   agenda = models.CharField(choices=AGENDA, max_length=100, default='On Call Papers')
@@ -75,9 +75,9 @@ class Feeds_ExtensionCoord(models.Model):
   )
   
   reference_id = models.OneToOneField(Feeds, on_delete=models.CASCADE)
-  issued_by = models.CharField(max_length=200)
-  extension_address = models.CharField(max_length=200)
-  email = models.CharField(max_length=100)
+  # issued_by = models.CharField(max_length=200)
+  # email = models.CharField(max_length=100)
+  # extension_address = models.CharField(max_length=200)
   event_date = models.DateField()
   agenda = models.CharField(choices=AGENDA, max_length=100, default='On Call Papers')
   

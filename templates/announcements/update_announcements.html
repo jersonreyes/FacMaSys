@@ -22,18 +22,6 @@
                 </select>
             </div>
             <div>
-                <p>issued_by:</p>
-                <input type="text" name="issued_by" maxlength="200" required="" id="id_issued_by" value="{{research2.issued_by}}" />
-            </div>
-            <div>
-                <p>extension_address:</p>
-                <input type="text" name="extension_address" maxlength="200" required="" id="id_extension_address" value="{{research2.extension_address}}" />
-            </div>
-            <div>
-                <p for="id_email">Email:</p>
-                <input type="email" name="email" maxlength="100" required="" id="id_email" value="{{research2.email}}" />
-            </div>
-            <div>
                 <p for="id_event_date">Event date:</p>
                 <input type="date" name="event_date" required="" id="id_event_date" value="{{research2.event_date|date:'Y-m-d'}}" />
             </div>
@@ -46,10 +34,7 @@
                 <p>Department Head</p>
             
                 <div>
-                    <div>
-                        <p>Issued by:</p>
-                        <input type="text" name="issued_by" maxlength="200" required="" id="id_issued_by" value="{{research2.issued_by}}"/>
-                    </div>
+
                     <div>
                         <p>Agenda:</p>
                         <select name="agenda" required="" id="id_agenda">
@@ -79,17 +64,7 @@
                 {% endfor %}
             </select>
             </div><br>
-            <div>
-              Issued by<br />
-              <input
-                type="text"
-                name="issued_by"
-                maxlength="200"
-                required=""
-                id="id_issued_by"
-                value="{{research2.issued_by}}"
-              />
-            </div>
+
             <br>
             <div>
               Deadline start<br />
