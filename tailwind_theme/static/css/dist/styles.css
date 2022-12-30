@@ -1992,10 +1992,6 @@ a, a:visited, a:hover {
   background-color:rgb(48, 48, 48) !important;
 }
 
-.\[b\:\FFFDJv\FFFD\] {
-  b: �Jv�;
-}
-
 .first-letter\:gap-y-4::first-letter {
   row-gap: 1rem;
 }
