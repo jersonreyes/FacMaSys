@@ -139,6 +139,18 @@ def profile_update(request):
     notif.save()
     return render(request, 'user/profile_update.html', context)
 
+@login_required
+def del_current_user(request):    
+    try:
+        user = request.user
+        user.delete()
+        messages.success(request, "Your account was deleted.")
+        return redirect('index')
+
+    except User.DoesNotExist:
+        messages.error(request, "User does not exist")    
+        return render('index')
+
 
 class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
     table_class = FacultyTable
