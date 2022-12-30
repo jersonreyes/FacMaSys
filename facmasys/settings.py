@@ -66,7 +66,7 @@ INSTALLED_APPS = [
 ]
 
 TAILWIND_APP_NAME = 'tailwind_theme'
-
+APPEND_SLASH=False
 INTERNAL_IPS = [
     "127.0.0.1",
 ]

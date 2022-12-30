@@ -19,7 +19,7 @@ $(document).ready(function() {
         $('#form-modal').addClass('active')
         $('#form-modal form').attr("action", e.currentTarget.getAttribute('value') );
         $('#form-modal-title').html(e.currentTarget.title)
-        $('#form-modal-extra').html(e.currentTarget.getAttribute('value').split('/')[1] ? e.currentTarget.href.split('/')[1] : e.currentTarget.getAttribute('value'))
+        $('#form-modal-extra').html(e.currentTarget.href.split('/').slice(3).join('/'))
     })
     return false;
 })

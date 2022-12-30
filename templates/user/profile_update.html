@@ -21,14 +21,20 @@
             {{ profile_form.city_of_residence }}<br/><br/>
             {{ profile_form.phone.label }}*
             {{ profile_form.phone }}
+            <br/>
+            <br/>
             <p>
-                Currently: 
-                {{ profile_form.image.value }}
-                <img src="/media/Profile_Images/{{ profile_form.image.value }}" style="height: 100px"/>
+                Currently:
+                <br/>
+                <img src="/media/{{ profile_form.image.value }}" style="height: 100px"/>
             </p>
             {{ profile_form.image }}
-            <input class="btn btn-info" type="submit" value="Update">
-            <button type="button" onclick="window.location.href = '/user/profile/delete'" class="btn btn-danger" >DELETE ACCOUNT</button>
+
+            <div style="margin-top: 4vh;color:white">
+                <input class="btn btn-info w-auto" type="submit" value="Update My Account">
+                <a class="nest text-black" title="Change Password" style="background-color:rgb(255, 255, 255)" href="/user/password_change">Change Password</a>
+                <button type="button" onclick="window.location.href = '/user/profile/delete'" style="background-color:rgb(205, 61, 61);padding:10px" class="rounded-md">Delete</button>
+            </div>
         </form>      
             {% if not ajax %}
     </div>
