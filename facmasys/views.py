@@ -116,7 +116,7 @@ def add_announcements(request):
                 print('new_form: ', new_form)
                 print('new_form2: ', new_form2)
                 print("end")
-                return redirect('./')   # refresh
+                return redirect('/subjects/')   # refresh
             except:  
                 pass  
         else:
@@ -281,7 +281,7 @@ def add_extension_services(request):
                     new_form.faculty_id = user_instance
                     new_form.save()
                     print("Success!") 
-                    return redirect('./')   # refresh
+                    return redirect('/extension_services')   # refresh
                 except:  
                     pass  
             else:
