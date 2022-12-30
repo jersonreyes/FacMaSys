@@ -50,6 +50,12 @@
                     <span class="mt-1 font-sans text-xs text-black dark:white">Extension</span>                      
                 </a>
                 {% endif %}
+                {% if request.user.is_superuser %}
+                <a value="Faculty" href="{% url 'reports_view' %}" class="animate glow delay-4 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'faculty' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
+                    <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_reports.svg' %}" id="tooltip_img" alt="Dashboard">                                               
+                    <span class="mt-1 font-sans text-xs text-black dark:white">Reports</span>                      
+                </a>
+                {% endif %}
             </div>
             <div>
 
