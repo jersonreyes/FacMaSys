@@ -175,7 +175,7 @@ class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, 
         return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.profile.user_role == 'faculty':
+        if request.user.profile.user_role == 'faculty' and not request.user.is_superuser:
             return redirect('dashboard-index')
         
         return super().dispatch(request, *args, **kwargs)
