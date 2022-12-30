@@ -76,7 +76,7 @@ def add_announcements(request):
         
         user_instance = request.user
         if request.method == "POST":  
-            form = FeedsForm(request.POST)  
+            form = FeedsForm(request.POST, request.FILES)  
             # Extension Coordinator
             if request.user.profile.user_role == 'extensioncoor':
                 form2 = Feeds_ExtensionCoordForm(request.POST)
@@ -91,6 +91,7 @@ def add_announcements(request):
             
             # Faculty
             else:
+                form = Feeds()
                 form2 = FeedsForm() # submit invalid form
             
             print('Starting...')
@@ -100,24 +101,21 @@ def add_announcements(request):
                     new_form = form.save(commit=False)
                     new_form.user_id = user_instance
                     print('ID: ', form.cleaned_data)
-                    print()
-                    # new_form.save()
+                    new_form.save()
                     
+                    # form2.save()
+                    recent_add = Feeds.objects.last()
+                    print("recent_add: ", recent_add)
                     
-                    # print('form_instance', form.initial['id'])
-                    # getId = Feeds.objects.all()[-1]
-                    # print('getId', getId)
-                    
-                    # new_form2 = form2.save(commit=False)
-                    # new_form2.reference_id = getId
-                    
-                    # # reference_id <- Feeds
-                    # # new_form2.save()
+                
+                    new_form2 = form2.save(commit=False)
+                    new_form2.reference_id = recent_add
+                    new_form2.save()
 
-                    # print('new_form: ', new_form)
-                    # print('new_form2: ', new_form2)
-                    # print("end")
-                    # return redirect('./')   # refresh
+                    print('new_form: ', new_form)
+                    print('new_form2: ', new_form2)
+                    print("end")
+                    return redirect('./')   # refresh
                 except:  
                     pass  
             else:
@@ -185,18 +183,45 @@ def update_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         research = Feeds.objects.get(id=id)  
         profile = Profile.objects.filter(user=request.user).values().first()
+        form = FeedsForm(request.POST, request.FILES, instance=research)  
+        
+        
+        
+            # Extension Coordinator
+        if request.user.profile.user_role == 'extensioncoor':
+            research2 = Feeds_ExtensionCoord.objects.get(reference_id=research)  
+            form2 = Feeds_ExtensionCoordForm(request.POST, instance=research2)
+            print('extensioncoor')
+
+        # Department Head
+        elif request.user.profile.user_role == 'depthead':
+            research2 = Feeds_DepartmentHead.objects.get(reference_id=research)  
+            form2 = Feeds_DepartmentHeadForm(request.POST, instance=research2)
+            print('depthead')
+            
+        # Research Coordinator
+        elif request.user.profile.user_role == 'researchcoor':
+            research2 = Feeds_ResearchCoord.objects.get(reference_id=research)  
+            form2 = Feeds_ResearchCoordForm(request.POST, instance=research2)
+            print('researchcoor')
 
         
-        form = FeedsForm(request.POST, instance=research)  
-        if form.is_valid():  
+        if form.is_valid() and form2.is_valid():  
             print("True")
+            
             form.save()  
+            form2.save()
+            
             return redirect("../")
-        
-        print("False")
+        else:
+            print("False")
         context = {
             'research': research,
+            'research2': research2,
+            
             'form': form,
+            'form2': form2,
+
             'state': 'announcements',
             'user_type': profile['user_role'],
         }
