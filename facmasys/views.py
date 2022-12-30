@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
+from facmasys.utils import add_activity
 
 from .forms import *
 from .models import *
@@ -50,7 +51,8 @@ def update_ext_announcements(request, id):
         research = Feeds.objects.get(id=id)  
         form = Feeds(request.POST, instance=research)  
         if form.is_valid():  
-            form.save()  
+            form.save()
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='EXT ANNOUNCEMENT',activity_message=f"User {request.user.username} updated an ext announcement.")
             return redirect("/feed")  
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
@@ -67,6 +69,7 @@ def delete_ext_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='EXT ANNOUNCEMENT',activity_message=f"User {request.user.username} deleted an ext announcement.")
         return redirect("/feed")
     return redirect('index')
 
@@ -116,7 +119,8 @@ def add_announcements(request):
                 print('new_form: ', new_form)
                 print('new_form2: ', new_form2)
                 print("end")
-                return redirect('/subjects/')   # refresh
+                add_activity(logged_user=request.user,activity_type='ADD',activity_location='ANNOUNCEMENT',activity_message=f"User {request.user.username} added an announcement.")
+                return redirect('feed')   # refresh
             except:  
                 pass  
         else:
@@ -194,8 +198,6 @@ def update_announcements(request, id):
     profile = Profile.objects.filter(user=request.user).values().first()
     form = FeedsForm(request.POST, request.FILES, instance=research)  
     
-    
-    
         # Extension Coordinator
     if request.user.profile.user_role == 'extensioncoor':
         research2 = Feeds_ExtensionCoord.objects.get(reference_id=research)  
@@ -218,7 +220,8 @@ def update_announcements(request, id):
     if form.is_valid() and form2.is_valid():  
         print("True")
         
-        form.save()  
+        form.save()
+        add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='ANNOUNCEMENT',activity_message=f"User {request.user.username} updated an announcement.")
         return redirect("feed")
     
     # Ayaw pumuta sa update dahil dito
@@ -244,6 +247,7 @@ def delete_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='ANNOUNCEMENT',activity_message=f"User {request.user.username} deleted an announcement.")
         return redirect("/feed/")
     return redirect('index')
 
@@ -284,8 +288,9 @@ def add_extension_services(request):
                     new_form = form.save(commit=False)
                     new_form.faculty_id = user_instance
                     new_form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} added an extension service.")
                     print("Success!") 
-                    return redirect('/extension_services')   # refresh
+                    return redirect('extension_services-index')   # refresh
                 except:  
                     pass  
             else:
@@ -326,6 +331,7 @@ def update_extension_services(request, id):
         form = ExtensionServiceForm(request.POST, instance=extension)  
         if form.is_valid():  
             form.save()  
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} updated an extension service.")
             return redirect("/extension_services")  
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
@@ -342,6 +348,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} deleted an extension service.")
         return redirect("/extension_services")
     return redirect('index')
 
@@ -386,6 +393,7 @@ def add_taught_subjects(request):
             if form.is_valid():  
                 try:  
                     form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='SUBJECT TAUGHT',activity_message=f"User {request.user.username} added subject taught.")
                     return redirect('/subjects/')   # refresh
                 except:  
                     pass  
@@ -410,6 +418,7 @@ def update_taught_subjects(request, id):
         form = SubjectTaughtForm(request.POST, instance=all_subjects)  
         if form.is_valid():  
             form.save()  
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='SUBJECT TAUGHT',activity_message=f"User {request.user.username} updated subject taught.")
             print("Saved!")
             return redirect('/subjects/')
         else:
@@ -482,6 +491,7 @@ def add_researches(request):
                 new_form = form.save(commit=False)
                 new_form.faculty_id = user_instance
                 new_form.save()
+                add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH',activity_message=f"User {request.user.username} added a research.")
                 print("Success! done") 
                 return redirect('/researches/')   # refresh
             except:  
@@ -515,14 +525,15 @@ def add_researches(request):
         user_instance = request.user
         # print(User.objects.all())
         
-        if request.method == "POST":  
-            form = ResearchForm(request.POST, request.FILES)  
+        if request.method == "POST":
+            form = ResearchForm(request.POST, request.FILES)
             
             if form.is_valid():  
                 try:  
                     new_form = form.save(commit=False)
                     new_form.faculty_id = user_instance
                     new_form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH',activity_message=f"User {request.user.username} added a research.")
                     print("Success! done") 
                     return redirect('/researches/')   # refresh
                 except:  
@@ -573,6 +584,7 @@ def add_presented(request):
                     new_form = form.save(commit=False)
                     new_form.faculty_id = user_instance
                     new_form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH PRESENTED',activity_message=f"User {request.user.username} added a presented research.")
                     print("Success!") 
                     return redirect('/researches/')   # refresh
                 except:  
@@ -616,6 +628,7 @@ def add_published(request):
                     new_form = form.save(commit=False)
                     new_form.faculty_id = user_instance
                     new_form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH PUBLISHED',activity_message=f"User {request.user.username} added a published research.")
                     print("Success!") 
                     return redirect('/researches/')  # refresh
                 except:  
@@ -663,6 +676,7 @@ def update_researches(request, id):
         form = ResearchForm(request.POST, request.FILES, instance=research)  
         if form.is_valid():  
             form.save()  
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='RESEARCH',activity_message=f"User {request.user.username} updated a research.")
             return redirect("/researches/")  
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../")  
@@ -685,7 +699,8 @@ def update_details_a(request, id):
         
         if form.is_valid():  
             print("Done!")
-            form.save()  
+            form.save()
+            add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH PRESENTED',activity_message=f"User {request.user.username} updated a presented research.")
             return redirect("/researches/")  
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
@@ -706,6 +721,7 @@ def update_details_b(request, id):
         form = Research_PublishedForm(request.POST, instance=research)  
         if form.is_valid():  
             form.save()  
+            add_activity(logged_user=request.user,activity_type='ADD',activity_location='RESEARCH PUBLISHED',activity_message=f"User {request.user.username} added a published research.")
             return redirect("/researches/")  
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
@@ -732,6 +748,7 @@ def delete_details_a(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Presented.objects.get(id=id)  
         subject.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='RESEARCH PRESENTED',activity_message=f"User {request.user.username} deleted a presented research.")
         return redirect("/researches/")
     return redirect('index')
 
@@ -740,6 +757,7 @@ def delete_details_b(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
         subject.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='RESEARCH PUBLISHED',activity_message=f"User {request.user.username} added a published research.")
         return redirect("/researches/")
     return redirect('index')
 
@@ -747,7 +765,8 @@ def delete_details_b(request, id):
 def delete_researches(request, id):  
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
-        subject.delete()  
+        subject.delete()
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='RESEARCH',activity_message=f"User {request.user.username} deleted a research.")
         return redirect("/researches/")
     return redirect('index')
 
@@ -756,6 +775,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} deleted an extension service.")
         return redirect("/extension_services/")
     return redirect('index')
 
@@ -781,6 +801,7 @@ def add_subject(request):
                 print("is valid")   
                 try:  
                     form.save()
+                    add_activity(logged_user=request.user,activity_type='ADD',activity_location='SUBJECT',activity_message=f"User {request.user.username} added a subject.")
                     print("Success!") 
                     return redirect('/subjects/')   # refresh
                 except:  
@@ -846,6 +867,7 @@ def update_subject(request, id):
         
         if form.is_valid():  
             form.save()  
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='SUBJECT',activity_message=f"User {request.user.username} updated a subject.")
             return  redirect("/subjects")
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
@@ -863,6 +885,7 @@ def delete_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects.objects.get(id=id)  
         ext.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='SUBJECT',activity_message=f"User {request.user.username} deleted a subject.")
         return redirect("/subjects")
     return redirect('index')
 
@@ -870,6 +893,7 @@ def delete_subject_taught(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects_Taught.objects.get(id=id)  
         ext.delete()  
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='SUBJECT TAUGHT',activity_message=f"User {request.user.username} deleted a subject taught.")
         return redirect("/subjects")
     return redirect('index')
 

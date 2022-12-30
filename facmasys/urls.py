@@ -51,6 +51,7 @@ urlpatterns = [
     path('dashboard/', include('apps.dashboard.urls')),
     path('researches/', include('apps.researches.urls')),
     path('feed/', include('apps.feed.urls')),
+    path('reports/', include('apps.reports.urls')),
     path('admin/', admin.site.urls),
     path('export/', include('apps.reports.urls')),
     path('user/', include('apps.user.urls')),

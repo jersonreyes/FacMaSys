@@ -6,7 +6,7 @@ class ActivityLog(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     type = models.CharField(max_length=50, null=True)
     location = models.CharField(max_length=50, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     message = models.CharField(max_length=255, null=True, blank=True)
     
     def __str__(self) -> str:

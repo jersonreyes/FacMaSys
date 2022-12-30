@@ -8,7 +8,7 @@
                 <img class="w-12 h-12 mx-auto" src="{% static 'images/logo.png' %}"  alt="Dashboard">   
                 <div class="absolute transition-all sidebarItemActive" id="nav-highlighter" style="height:75px;width:75px;transform: translateX(2px)"></div>
                 
-                <a value="Home" href="{% url 'index' %}" class="animate glow delay-2 sidebarItem selection:text-white no-underline grid items-center place-items-center justify-center {% if state == 'dashboard' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
+                <a value="Home" id="home-nav-item" href="{% url 'index' %}" class="animate glow delay-2 sidebarItem selection:text-white no-underline grid items-center place-items-center justify-center {% if state == 'home' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_home.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Home</span>                      
                 </a>

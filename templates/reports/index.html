@@ -1,0 +1,95 @@
+{% extends 'partials/base.html' %}
+{% load django_tables2 %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}Reports{% endblock %}
+{% block headers %} REPORTS {% endblock %}
+
+{% block content %}
+<div style="margin-top:10vh;gap:20px;" class="grid">
+    <div class="animate fade-animator delay-1 bg-[#FF8A00] overflow-hidden w-full rounded-[20px] h-[240px] flex flex-col text-center justify-center items-center font-sans">
+        <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
+        <div class="z-[1] absolute">
+            <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Admin / <span class="font-normal">Reports</span></p>
+        </div>
+    </div>
+    <div class="p-5 flex flex-col">
+        <div style="margin-top: 20px" class="hide-btns">
+            <h3>All Activity</h3>
+            <div id="all_activity_report" style="transform:translateY(-50px)"></div>
+        </div>
+        <div class="hide-btns" style="margin-top:20px">
+            <h3>Users</h3>
+            <div style="transform:translateY(-50px)">
+                {% include 'reports/users.html' %}
+            </div>
+        </div>
+
+        <div style="margin-top: -20px" class="p-5">
+        {% include 'researches/all.html' %}
+        </div>
+        <div style="margin-top: 0px" class="p-5">
+            <h3>All Extension Services</h3>
+            <table class="table" id="extension_services">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Extension Name</th>
+                        <th>Extension Head</th>
+                        <!-- <th>Logo</th> -->
+                        <th>Geo. Address</th>
+                        <th>Email Address</th>
+                        <th>Contact</th>
+                        <th>Website</th>
+                        <th>Background</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for element in all_extension_services %}
+                    <tr>
+                        <td>{{ element.id }}</td>
+                        <td>{{ element.name }}</td>
+                        <!-- <td>{{ element.logo }}</td> -->
+                        <td>{{ element.address }}</td>
+                        <td>{{ element.email }}</td>
+                        <td>{{ element.contact_no }}</td>
+                        <td>{{ element.website }}</td>
+                        <td>{{ element.background }}</td>
+                        <td>{{ element.extension_head }}</td>
+                        <td>
+                            <a class="form-modal-toggler ignore-url" title="Update Extension Service" href="/extension_services/edit_service/{{element.id}}">Update</a>
+                            <button class="delete" onclick="window.location.href='delete_service/{{element.id}}'">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" class="init">
+    $(document).ready(function() {
+    $('#extension_services').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+    fetch('/reports/log', {
+        dataType: "html",
+        headers:{
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+        },
+    })
+    .then(response => {
+        return response.text();
+    })
+    .then(data => {
+        $("#all_activity_report").html(data)      
+    })
+} );
+</script>
+{% endblock %}

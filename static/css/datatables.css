@@ -823,6 +823,10 @@ div.dt-button-collection span.dt-button-spacer.bar {
 .dark table {
   color: rgb(198, 198, 198);
 }
+
+.hide-btns *.dt-buttons {
+  display: none !important;
+}
 button.dt-button,
 div.dt-button,
 a.dt-button,

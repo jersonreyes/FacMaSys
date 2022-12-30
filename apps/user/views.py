@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -21,12 +21,12 @@ from apps.feed.models import Feeds
 from apps.reports.models import Notifications
 from apps.user.models import Profile
 from facmasys.models import Research
-from facmasys.utils import ExportPDF
+from facmasys.utils import ExportPDF, add_activity
 
 from .filters import FacultyFilter
 # from facmasys.utils import add_activity
 from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
-from .tables import FacultyTable
+from .tables import FacultyTable, FacultyWithResearchTable, FacultyWithExtensionTable
 
 DEV = True
 
@@ -57,7 +57,7 @@ class RegisterView(View):
 
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
-
+            add_activity(activity_type='REGISTER',activity_location='USER',activity_message=f"User {username} has registered.")
             return redirect('user-login')
 
         return render(request, self.template_name, {'form': form})
@@ -67,6 +67,7 @@ class CustomLoginView(LoginView):
     form_class = LoginForm
 
     def form_valid(self, form):
+        add_activity(logged_user=self.request.user,activity_type='LOGIN',activity_location='USER',activity_message=f"User {form.cleaned_data.get('username')} has logged in.")
         remember_me = form.cleaned_data.get('remember_me')
 
         if not remember_me:
@@ -83,6 +84,7 @@ class CustomLoginView(LoginView):
 @login_required
 def logout_view(request):
     if request.user.is_authenticated:
+        add_activity(logged_user=request.user,activity_type='LOGOUT',activity_location='USER',activity_message=f"User {request.user.username} has logged out.")
         logout(request)
     return redirect('user-login')
 
@@ -91,6 +93,10 @@ class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChange
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('user-profile')
+    
+    def form_valid(self, form):
+        add_activity(logged_user=self.request.user,activity_type='CHANGE PASSWORD',activity_location='USER',activity_message=f"User {self.request.user.username} changed his/her password.")
+        return super().form_valid(form)
     
 
 @login_required
@@ -124,7 +130,7 @@ def profile_update(request):
             user_form.save()
             profile_form.save()
             name = request.user.username
-            # add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
             messages.success(request,"Your profile has been successfully updated.")
             return redirect('user-profile')
     else:
@@ -139,11 +145,80 @@ def profile_update(request):
     notif.save()
     return render(request, 'user/profile_update.html', context)
 
+@login_required
+def del_current_user(request):    
+    try:
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='USER',activity_message=f"User {request.user.username} deleted his/her account.")
+        user = request.user
+        user.delete()
+        messages.success(request, "Your account was deleted.")
+        return redirect('index')
+
+    except User.DoesNotExist:
+        messages.error(request, "User does not exist")    
+        return render('index')
+
 
 class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
     table_class = FacultyTable
     filterset_class = FacultyFilter
     queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile')
+    paginate_by = 10
+    state = 'accounts'
+    label = 'Faculty'
+    export_formats = ('xlsx','pdf')
+    export_name = f"Faculty_List_Report_{strftime('%Y-%m-%d', localtime())}"
+    dataset_kwargs = {"title": "Faculty"}
+    
+    def get_template_names(self):
+
+        return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.profile.user_role == 'faculty':
+            return redirect('dashboard-index')
+        
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request):
+        if (search := request.GET.get('q')) != None:
+            self.label += f' filtered by {search}'
+            
+        return super().get(request)
+    
+
+class FacultyWithResearchView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
+    table_class = FacultyWithResearchTable
+    filterset_class = FacultyFilter
+    queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile').annotate(number_of_research=Count('research')).filter(number_of_research__gt=0)
+    paginate_by = 10
+    state = 'accounts'
+    label = 'Faculty'
+    export_formats = ('xlsx','pdf')
+    export_name = f"Faculty_List_Report_{strftime('%Y-%m-%d', localtime())}"
+    dataset_kwargs = {"title": "Faculty"}
+    
+    def get_template_names(self):
+
+        return 'partials/table.html' if self.request.htmx else 'user/faculty.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.profile.user_role == 'faculty':
+            return redirect('dashboard-index')
+        
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get(self, request):
+        if (search := request.GET.get('q')) != None:
+            self.label += f' filtered by {search}'
+            
+        return super().get(request)
+    
+
+class FacultyWithExtensionView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
+    table_class = FacultyWithExtensionTable
+    filterset_class = FacultyFilter
+    queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile').annotate(number_of_extension=Count('extensionservice')).filter(number_of_extension__gt=0).distinct()
     paginate_by = 10
     state = 'accounts'
     label = 'Faculty'

@@ -28,7 +28,7 @@
     </div>
 </div>
 {% if request.user.is_staff or request.user.is_authenticated %}
-<div id="item-list" style="transform:translateY(0px)">
+<div id="item-list" style="margin-top:-10px;transform:translateY(0px)">
     <div class="mx-4">
         {% render_table table %}
     </div>

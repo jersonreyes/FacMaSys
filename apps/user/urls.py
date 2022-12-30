@@ -16,7 +16,10 @@ urlpatterns = [
     path('profile/', views.profile, name='user-profile'),
     path('profile/<int:id>',views.profile_viewer, name="user-profile-view"),
     path('profile/update', views.profile_update, name='user-profile-update'),
+    path('profile/delete', views.del_current_user, name='user-profile-delete'),
     path('faculty/',views.FacultyView.as_view(), name='faculty-index'),
+    path('faculty/with-research',views.FacultyWithResearchView.as_view(), name='faculty-with-research'),
+    path('faculty/with-extension',views.FacultyWithExtensionView.as_view(), name='faculty-with-extension'),
     
     path('faculty/detail/<int:pk>/',views.faculty_detail, name='faculty-index-detail'),
     
