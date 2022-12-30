@@ -2643,7 +2643,11 @@ div.dtsr-creation-form div.dtsr-form-row label.dtsr-toggle-title {
 
 
 .dashboard-item {
-  background: #2D2D2D;
+  transition: 0s;
+  box-shadow: 0 2px 0 2px rgba(73, 80, 87,0.05);
+}
+
+.dark .dashboard-item {
   transition: 0s;
   box-shadow: 0 2px 0 2px rgba(73, 80, 87,0.35);
 }
