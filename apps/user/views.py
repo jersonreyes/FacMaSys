@@ -25,7 +25,7 @@ from facmasys.utils import ExportPDF, add_activity
 
 from .filters import FacultyFilter
 # from facmasys.utils import add_activity
-from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm
+from .forms import LoginForm, ProfileUpdateForm, RegisterForm, UserUpdateForm, AddSubjectTaughtForm
 from .tables import FacultyTable, FacultyWithResearchTable, FacultyWithExtensionTable
 
 DEV = True
@@ -162,7 +162,7 @@ def del_current_user(request):
 class FacultyView(LoginRequiredMixin, SingleTableMixin, ExportMixin, ExportPDF, FilterView):
     table_class = FacultyTable
     filterset_class = FacultyFilter
-    queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile')
+    queryset = User.objects.filter(profile__user_role='faculty').values('id','first_name','last_name','username','email','profile', 'profile__spec_track')
     paginate_by = 10
     state = 'accounts'
     label = 'Faculty'
@@ -242,6 +242,30 @@ class FacultyWithExtensionView(LoginRequiredMixin, SingleTableMixin, ExportMixin
             
         return super().get(request)
         
+        
+@login_required
+def add_to_dept(request, pk):
+    my_department = request.user.profile.spec_track
+    user = User.objects.get(id=pk)
+    user.profile.spec_track = my_department
+    user.save()
+    return redirect('faculty-index')
+
+
+def add_subject_taught(request, pk):
+    user = User.objects.get(id=pk)
+    if request.method == "POST":
+        form = AddSubjectTaughtForm(request.POST, instance=user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('faculty-index')
+    else:
+        form = AddSubjectTaughtForm(instance=user.profile)
+    context = {
+        'subjectform':form,
+    }
+    return render(request, 'user/faculty_addsubject.html',context)
+
     
 @login_required
 def faculty_detail(request, pk):

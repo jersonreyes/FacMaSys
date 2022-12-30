@@ -22,6 +22,8 @@ urlpatterns = [
     path('faculty/with-extension',views.FacultyWithExtensionView.as_view(), name='faculty-with-extension'),
     
     path('faculty/detail/<int:pk>/',views.faculty_detail, name='faculty-index-detail'),
+    path('faculty/add-dept/<int:pk>/',views.add_to_dept, name='faculty-add-dept'),
+    path('faculty/add-subjects/<int:pk>/',views.add_subject_taught, name='faculty-add-subjects'),
     
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='user/password_reset.html'), name='password_reset'),
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='user/password_reset_sent.html'), name='password_reset_done'),

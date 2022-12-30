@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import Profile
-
+from facmasys.models import Subjects
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100,
@@ -45,4 +45,14 @@ class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ('age', 'address', 'city_of_residence', 'phone', 'image')
+        fields = ('age', 'address', 'city_of_residence', 'phone', 'spec_track' ,'image')
+
+
+class AddSubjectTaughtForm(forms.ModelForm):
+    handled_subjects = forms.ModelMultipleChoiceField(
+        queryset=Subjects.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+    class Meta:
+        model = Profile
+        fields = ('handled_subjects',)
