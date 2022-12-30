@@ -19,7 +19,7 @@ $(document).ready(function() {
         $('#form-modal').addClass('active')
         $('#form-modal form').attr("action", e.currentTarget.getAttribute('value') );
         $('#form-modal-title').html(e.currentTarget.title)
-        $('#form-modal-extra').html(e.currentTarget.getAttribute('value').split('/')[1] ? e.currentTarget.getAttribute('value').split('/')[1] : e.currentTarget.getAttribute('value'))
+        $('#form-modal-extra').html(e.currentTarget.getAttribute('value').split('/')[1] ? e.currentTarget.href.split('/')[1] : e.currentTarget.getAttribute('value'))
     })
     return false;
 })
@@ -271,22 +271,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
         e.preventDefault();
         if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("paginate_button")) {
             e.preventDefault();
-            if(e.currentTarget.getAttribute('sidebarItem')) {
+            if(e.currentTarget.classList.contains('sidebarItem')) {
               var root = this;
-              var pos;
-              if(e.currentTarget.getAttribute('sidebarItem') || e.currentTarget.href == '/') {
-                  pos = $('#home-nav-item').position()
-              } else {
-                  pos = $(root).position()
-              }
+              console.log(e.currentTarget.classList.contains('sidebarItem'))
+              pos = $(root).position()
               $("#nav-highlighter").css('top', pos.top);
-                  $("#nav-highlighter").css('left', pos.left);
+              $("#nav-highlighter").css('left', pos.left);
               }
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
             
-            window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
-            
-            $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
+            window.history.pushState('FacMaSys', 'FacMaSys' + (e.currentTarget.getAttribute('title') ? " - " + e.currentTarget.getAttribute('title') : ''), e.currentTarget.href);
+            $('title').html('FacMaSys' + (e.currentTarget.getAttribute('title') ? " - " + e.currentTarget.getAttribute('title') : ''))
             if(e.currentTarget.classList.contains('form-modal-toggler'))
               $("#form-modal-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#form-modal-body").animate({opacity: '1'}, 100);      
             else $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
