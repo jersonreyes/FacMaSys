@@ -11,7 +11,22 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form|crispy }}
-            {{ profile_form|crispy }}
+            {{ profile_form.first_name }}
+            {{ profile_form.last_name }}
+            {{ profile_form.username }}
+            {{ profile_form.email }}
+            {{ profile_form.address.label }}*
+            {{ profile_form.address }}<br/><br/>
+            {{ profile_form.city_of_residence.label }}*
+            {{ profile_form.city_of_residence }}<br/><br/>
+            {{ profile_form.phone.label }}*
+            {{ profile_form.phone }}
+            <p>
+                Currently: 
+                {{ profile_form.image.value }}
+                <img src="/media/Profile_Images/{{ profile_form.image.value }}" style="height: 100px"/>
+            </p>
+            {{ profile_form.image }}
             <input class="btn btn-info" type="submit" value="Update">
         </form>      
             {% if not ajax %}

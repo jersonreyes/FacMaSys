@@ -95,14 +95,25 @@ class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChange
 
 @login_required
 def profile(request):
-    feeds = Feeds.objects.filter(user_id_id=request.user.id),
-    researches = Research.objects.filter(faculty_id_id=request.user.id),
+    feeds = list(Feeds.objects.filter(user_id_id=request.user.id).values()),
+    researches = list(Research.objects.filter(faculty_id_id=request.user.id).values()),
     context = {
         'feeds': feeds,
         'researches': researches
     }
     return render(request, 'user/profile.html', context)
 
+def profile_viewer(request, id):
+    feeds = list(Feeds.objects.filter(user_id_id=id).values()),
+    researches = list(Research.objects.filter(faculty_id_id=id).values()),
+    user_data = list(User.objects.filter(id=id).values())[0],
+    context = {
+        'feeds': feeds,
+        'view': 'outside',
+        'user_data': user_data,
+        'researches': researches
+    }
+    return render(request, 'user/profile.html', context)
 
 @login_required
 def profile_update(request):

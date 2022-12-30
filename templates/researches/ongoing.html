@@ -29,7 +29,7 @@
                 <td>{{ element.faculty_id }}</td>
                 <td>{{ element.research_title }}</td>
                 <td>{{ element.research_area }}</td>
-                <td>{{ element.abstract }}</td>
+                <td><div class="abstract">{{ element.abstract }}</div></td>
                 <td><button class="document-link" onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</button></td>
                 <td>{{ element.date_added|date:"M d, Y" }}</td>
                 <td>{{ element.researcher_school }}</td>

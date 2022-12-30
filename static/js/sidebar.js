@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 
+  new ClipboardJS('.copy');
   $(document).on("click", ".form-modal-toggler", function(e){
     fetch(e.currentTarget.getAttribute('value'), {
         dataType: "html",
@@ -268,7 +269,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     */
     $(document).on("click", "a", function(e){
         e.preventDefault();
-        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler")) {
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler") 
+          && !e.currentTarget.classList.contains("paginate_button")) {
             e.preventDefault();
             var root = this;
             var pos;
@@ -279,11 +281,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
             }
             $("#nav-highlighter").css('top', pos.top);
                 $("#nav-highlighter").css('left', pos.left);
-
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
             !e.currentTarget.classList.contains('nest') && window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
             $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
-            $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
+            if(e.currentTarget.classList.contains('nest'))
+              $("#form-modal-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#nest-parent").animate({opacity: '1'}, 100);      
+            else $("#main-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#main-body").animate({opacity: '1'}, 100);      
         } 
     })
     $('.themeToggler').click(function(e){

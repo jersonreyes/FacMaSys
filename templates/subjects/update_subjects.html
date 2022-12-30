@@ -5,9 +5,6 @@
 {% block content %}
   <form method="POST" action="./update_subject/{{subjecttt.id}}">
     {% csrf_token %}
-
-
-    <a href="../">Go back to Home</a>
     <div>
       Course Code: 
       <input
@@ -136,7 +133,6 @@
             {% endif %}
         {% endfor %}
     </select>
-
 
     <button type="submit">Update Subject</button>
     </div>
