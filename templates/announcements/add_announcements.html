@@ -5,34 +5,39 @@
 {% endblock %} 
 
 {% block content %}
-<form action="" method="post" class="grid gap-3">
+<form enctype="multipart/form-data" action="" method="post" class="grid gap-3">
     {% csrf_token %}
     
-    <!-- User-based Announcements -->
+
     {% if user_type == 'extensioncoor' %}
     <div>
         <h1>Post Announcement: </h1>
         <p>Extension Coordinator</p>
-        
+        <input type='hidden' value='{{form2.pk}}' name='pk'>
+
         <div>
-            <p>agenda: </p>
-            {{form2.agenda}}
+            <p>id</p>
+            {{form2.reference_id}}
         </div>
         <div>
-            <p>issued_by: </p>
-            {{form2.issued_by}}
+            <p>Agenda: </p>
+            <p>{{form2.agenda}}</p>
         </div>
         <div>
-            <p>extension_address: </p>
-            {{form2.extension_address}}
+            <p>Issued By: </p>
+            <p>{{form2.issued_by}}</p>
+        </div>
+        <div>
+            <p>Extension Address: </p>
+            <p>{{form2.extension_address}}</p>
         </div>
         <div>
             <p for="id_email">Email:</p>
-            <input type="email" name="email" maxlength="100" required="" id="id_email">
+            <p><input type="email" name="email" maxlength="100" required="" id="id_email"></p>
         </div>
         <div>
             <p for="id_event_date">Event date:</p>
-            <input type="date" name="event_date" required="" id="id_event_date">
+            <p><input type="date" name="event_date" required="" id="id_event_date"></p>
         </div>
     </div>
     {% elif user_type == 'depthead' %}
@@ -49,19 +54,77 @@
     <div>
         <h1>Post Announcement: </h1>
         <p>Research Coordinator</p>
+        <div>
+            <div>
+                Agenda<br />
+                <select name="agenda" id="id_agenda">
+                  <option value="On Call Papers">On Call Papers</option>
+            
+                  <option value="Journal Publication">Journal Publication</option>
+            
+                  <option value="Special Issues">Special Issues</option>
+            
+                  <option value="Intellectual Property Rights">
+                    Intellectual Property Rights
+                  </option>
+            
+                  <option value="Preparation of Instructional Materials">
+                    Preparation of Instructional Materials
+                  </option>
+            
+                  <option value="Revision of Research Guidelines">
+                    Revision of Research Guidelines
+                  </option>
+            
+                  <option value="Acknowledgement of Research Guidelines">
+                    Acknowledgement of Research Guidelines
+                  </option>
+            
+                  <option value="Research and Innovation">Research and Innovation</option>
+            
+                  <option value="Others">Others</option>
+                </select>
+            </div><br>
+            <div>
+              Issued by<br />
+              <input
+                type="text"
+                name="issued_by"
+                maxlength="200"
+                required=""
+                id="id_issued_by"
+              />
+            </div>
+            <br>
+            <div>
+              Deadline start<br />
+              <input
+                type="date"
+                name="deadline_start"
+                required=""
+                id="id_deadline_start"
+              />
+            </div>
+            <br>
+            <div>
+              Deadline end<br />
+              <input type="date" name="deadline_end" required="" id="id_deadline_end" />
+            </div>
+            <br>
+            
+        </div>
     </div>
     {% endif %}
     
 
-
     <!-- General Announcements  -->
     <div>
         <p>Subject: </p>
-        {{ form.subject }}
+        <input type="text" name="subject" value="|PPPPP|" maxlength="200" required="" id="id_subject">
     </div>
     <div>
         <p>Message / Description: </p>
-        <textarea name="description" id="id_description" maxlength="200" cols="30" rows="10"></textarea>
+        <textarea name="description" id="id_description" maxlength="200" cols="30" rows="10">|PPPPP|</textarea>
     </div>
     <div>
         <p>Image: </p>
@@ -83,8 +146,8 @@
 
     
     <div>
-        {{ form.errors }}
-        {{ form.non_field_errors }}
+        {{ form2.errors }}
+        {{ form2.non_field_errors }}
     </div>
 
     <div>

@@ -74,9 +74,9 @@
                             <td> {% if worker.is_superuser %}Super Admin{% elif worker.is_staff %}Admin{% else %}Cashier {% endif %}</td>
                             <th scope="row">                                
                                 <span class="tooltips_top"> 
-                                    <a class="btn btn-info btn-sm" href="{% url 'faculty-index-detail' worker.id %}">
-                                    <span class="tooltiptext_top"> View Staff </span> 
-                                    <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
+                                    <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Post / Announcement" href="{% url 'faculty-index-detail' worker.id %}">
+                                        <span class="tooltiptext_top"> View Staff </span> 
+                                        <img src="{% static 'images/icon_view.png' %}" style="width:18px; height:18px;" alt="View Product">
                                     </a>
                                 </span>
                             

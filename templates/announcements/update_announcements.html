@@ -1,0 +1,164 @@
+{% extends "main.html" %} {% block title %} Faculty Member - Add Subject Taught
+{% endblock %} {% block content %}
+<form enctype="multipart/form-data" method="POST" action="./{{ research.id }}">
+    {% csrf_token %}
+
+    <a href="../">Go back</a>
+
+    {% if user_type == 'extensioncoor' %}
+    <div>
+        <div>
+            <h1>Post Announcement:</h1>
+            <div>
+                <p>Agenda:</p>
+                <select name="agenda" required="" id="id_agenda">
+                    {% for value, subject in form2.agenda.field.choices %}
+                        {% if research2.agenda == value %}
+                            <option value="{{value}}" selected>{{value}}</option>
+                        {% else %}
+                            <option value="{{value}}">{{value}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <p>issued_by:</p>
+                <input type="text" name="issued_by" maxlength="200" required="" id="id_issued_by" value="{{research2.issued_by}}" />
+            </div>
+            <div>
+                <p>extension_address:</p>
+                <input type="text" name="extension_address" maxlength="200" required="" id="id_extension_address" value="{{research2.extension_address}}" />
+            </div>
+            <div>
+                <p for="id_email">Email:</p>
+                <input type="email" name="email" maxlength="100" required="" id="id_email" value="{{research2.email}}" />
+            </div>
+            <div>
+                <p for="id_event_date">Event date:</p>
+                <input type="date" name="event_date" required="" id="id_event_date" value="{{research2.event_date|date:'Y-m-d'}}" />
+            </div>
+        </div>
+    </div>
+    {% elif user_type == 'depthead' %}
+        <div>
+            <div>
+                <h1>Post Announcement:</h1>
+                <p>Department Head</p>
+            
+                <div>
+                    <div>
+                        <p>Issued by:</p>
+                        <input type="text" name="issued_by" maxlength="200" required="" id="id_issued_by" value="{{research2.issued_by}}"/>
+                    </div>
+                    <div>
+                        <p>Agenda:</p>
+                        <select name="agenda" required="" id="id_agenda">
+                            {% for value, subject in form2.agenda.field.choices %}
+                                {% if research2.agenda == value %}
+                                    <option value="{{value}}" selected>{{value}}</option>
+                                {% else %}
+                                    <option value="{{value}}">{{value}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% elif user_type == 'researchcoor' %}
+        <div>
+            <div>
+            <p>Agenda</p>
+            <select name="agenda" required="" id="id_agenda">
+                {% for value, subject in form2.agenda.field.choices %}
+                    {% if research2.agenda == value %}
+                        <option value="{{value}}" selected>{{value}}</option>
+                    {% else %}
+                        <option value="{{value}}">{{value}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            </div><br>
+            <div>
+              Issued by<br />
+              <input
+                type="text"
+                name="issued_by"
+                maxlength="200"
+                required=""
+                id="id_issued_by"
+                value="{{research2.issued_by}}"
+              />
+            </div>
+            <br>
+            <div>
+              Deadline start<br />
+              <input
+                type="date"
+                name="deadline_start"
+
+                required=""
+                id="id_deadline_start"
+                value="{{research2.deadline_start|date:'Y-m-d'}}"
+              />
+            </div>
+            <br>
+            <div>
+              Deadline end<br />
+              <input type="date" name="deadline_end" required="" id="id_deadline_end" value="{{research2.deadline_end|date:'Y-m-d'}}" />
+            </div>
+            <br>
+        </div>
+    {% endif %}
+    
+    
+    <br /><br /><br /><br /><br />
+    <!-- GENERAL -->
+    <div>
+        <div>
+            <div>
+              Subject<br />
+              <input
+                type="text"
+                name="subject"
+                maxlength="200"
+                required=""
+                id="id_subject"
+                value="{{research.subject}}"
+              />
+            </div>
+            <br>
+            <div>
+              Description<br />
+              <textarea name="description" maxlength="200" id="id_description" cols="30" rows="10" required>{{research.description}}</textarea>
+            </div>
+            <br>
+            <div>
+              Image<br />
+              Currently: <a href="/media/profile_icon.png">profile_icon.png</a><br />
+              Change:
+              <input type="file" name="image" accept="image/*" id="id_image" />
+            </div>
+            <br>
+            <div>
+              Link<br />
+              <input type="text" name="link" maxlength="200" required="" id="id_link" value="{{research.link}}"/>
+            </div>
+            <input type="hidden" name="user_type" value="{{research.user_type}}">
+          </div>          
+    </div>
+
+    <div>
+        {{ form.error }}
+        {{ form.non_field_errors }}
+    </div>
+
+    <div>
+        {{ form2.error }}
+        {{ form2.non_field_errors }}
+    </div>
+
+
+    <button type="submit">Update Announcements</button>
+</form>
+{% endblock %}

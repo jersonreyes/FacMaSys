@@ -5,6 +5,9 @@
 
 {% block content %}
 
+{% if not ajax  %}
+    <meta http-equiv="REFRESH" content="/">
+{% endif %}
 
 {% if is_other == True %}
     <form action="" method="post">

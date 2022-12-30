@@ -7,18 +7,7 @@
 
 
 {% block content %}
-    <h3>View Announcements</h3>
-
-    <p>User Type: {{user_type}}</p>
-    <a href="../">Go back to Home</a>
-    <br><br><br><br><br>
-    
-    <!-- depthead -->
-    <!-- researchcoor -->
-    <!-- extensioncoor -->
-
     {% if user_type != "faculty" %}
-        <a href="./add_announcements">Post Announcements</a>
         <table>
             <thead>
                 <th>ID</th>
@@ -51,24 +40,44 @@
             </tbody>
         </table>
 
-
+    <a href="./add_announcements">Post Announcement</a>
         {% if user_type == 'extensioncoor' %}
             <p>Extension Coord.</p>
             <table>
                 <thead>
-                    <th>issued_by</th>
-                    <th>extension_address</th>
-                    <th>email</th>
-                    <th>event_date</th>
-                    <th>agenda</th>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Image Cover</th>
+                    <th>Link</th>
+
+                    <th>Issued_by</th>
+                    <th>Extension Address</th>
+                    <th>Email</th>
+                    <th>Event_date</th>
+                    <th>Agenda</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
-                        <td>{{ e.issued_by }}</td>
+                    <tr>
+                        <td>{{ e.reference_id.id }}</td>
+                        <td>{{ e.reference_id.subject }}</td>
+                        <td>{{ e.reference_id.description }}</td>
+                        <td>{{ e.reference_id.date_created }}</td>
+                        <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt=""></td>
+                        <td>{{ e.reference_id.link }}</td>
                         <td>{{ e.extension_address }}</td>
+                        <td>{{ e.issued_by }}</td>
                         <td>{{ e.email }}</td>
                         <td>{{ e.event_date }}</td>
                         <td>{{ e.agenda }}</td>
+                        <td>
+                            <a href="./update/{{e.reference_id.pk}}">Update</a>
+                            <a href="./delete/{{e.reference_id.pk}}">Delete</a>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -76,13 +85,33 @@
             <p>Department Head</p>
             <table>
                 <thead>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Image Cover</th>
+                    <th>Link</th>
+
                     <th>issued_by</th>
                     <th>agenda</th>
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
+                    <tr>
+                        <td>{{ e.reference_id.id }}</td>
+                        <td>{{ e.reference_id.subject }}</td>
+                        <td>{{ e.reference_id.description }}</td>
+                        <td>{{ e.reference_id.date_created }}</td>
+                        <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt=""></td>
+                        <td>{{ e.reference_id.link }}</td>
+
                         <td>{{ e.issued_by }}</td>
                         <td>{{ e.agenda }}</td>
+                        <td>
+                            <a href="./update/{{e.reference_id.id}}">Update</a>
+                            <a href="./delete/{{e.reference_id.id}}">Delete</a>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -90,19 +119,38 @@
             <p>Research Coord.</p>
             <table>
                 <thead>
-                    <th>issued_by</th>
-                    <th>extension_address</th>
-                    <th>email</th>
-                    <th>event_date</th>
-                    <th>agenda</th>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Image Cover</th>
+                    <th>Link</th>
+
+                    <th>Issued By</th>
+                    <th>Deadline Start</th>
+                    <th>Deadline End</th>
+                    <th>Agenda</th>
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
+                    <tr>
+                        <td>{{ e.reference_id.id }}</td>
+                        <td>{{ e.reference_id.subject }}</td>
+                        <td>{{ e.reference_id.description }}</td>
+                        <td>{{ e.reference_id.date_created }}</td>
+                        <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt="e.reference_id.image"></td>
+                        <td>{{ e.reference_id.link }}</td>
+                        
                         <td>{{ e.issued_by }}</td>
-                        <td>{{ e.extension_address }}</td>
-                        <td>{{ e.email }}</td>
-                        <td>{{ e.event_date }}</td>
+                        <td>{{ e.deadline_start }}</td>
+                        <td>{{ e.deadline_end }}</td>
                         <td>{{ e.agenda }}</td>
+
+                        <td>
+                            <a href="./update/{{e.reference_id.pk}}">Update</a>
+                            <a href="./delete/{{e.reference_id.pk}}">Delete</a>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -111,5 +159,7 @@
     {% else %}
         <p>Nothing to see here...</p>
     {% endif %}
+    
+
     
 {% endblock %}

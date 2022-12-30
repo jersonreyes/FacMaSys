@@ -9,7 +9,7 @@
         <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
         <div class="z-[1] absolute">
             <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Extension / <span class="font-normal">Services</span></p>
-            <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Service" href="javascript:void();" value="./add_service">Add Service</a>
+            <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Service" href="./add_service">Add Service</a>
         </div>
     </div>
  
@@ -42,8 +42,8 @@
                 <td>{{ element.background }}</td>
                 <td>{{ element.extension_head }}</td>
                 <td>
-                    <a href="./edit_service/{{ element.id }}">Update</a>
-                    <a href="./delete_service/{{ element.id }}">Delete</a>
+                    <a class="form-modal-toggler ignore-url" title="Update Extension Service" href="/extension_services/edit_service/{{element.id}}">Update</a>
+                    <button class="delete" onclick="window.location.href='delete_service/{{element.id}}'">Delete</a>
                 </td>
             </tr>
             {% endfor %}

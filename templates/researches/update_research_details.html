@@ -1,7 +1,9 @@
 {% extends "main.html" %} {% block title %} Faculty Member - Add Subject Taught
 {% endblock %} {% block content %}
 <p>Faculty Member - Add Subject Taught</p>
-
+{% if not ajax  %}
+    <meta http-equiv="REFRESH" content="/">
+{% endif %}
 <form enctype="multipart/form-data" method="POST" action="./{{ research.id }}">
     {% csrf_token %}
     <input type="text" name="research_title" maxlength="100" required="" value="{{ research.research_title }}" id="id_research_title" />
