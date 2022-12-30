@@ -72,79 +72,81 @@ def delete_ext_announcements(request, id):
 
 @login_required
 def add_announcements(request):
-    if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
-        profile = Profile.objects.filter(user=request.user).values().first()
+
+    profile = Profile.objects.filter(user=request.user).values().first()
+    
+    user_instance = request.user
+    if request.method == "POST":  
+        form = FeedsForm(request.POST, request.FILES)  
+        # Extension Coordinator
+        if request.user.profile.user_role == 'extensioncoor':
+            form2 = Feeds_ExtensionCoordForm(request.POST)
+
+        # Department Head
+        elif request.user.profile.user_role == 'depthead':
+            form2 = Feeds_DepartmentHeadForm(request.POST)
+            
+        # Research Coordinator
+        elif request.user.profile.user_role == 'researchcoor':
+            form2 = Feeds_ResearchCoordForm(request.POST)
         
-        user_instance = request.user
-        if request.method == "POST":  
-            form = FeedsForm(request.POST, request.FILES)  
-            # Extension Coordinator
-            if request.user.profile.user_role == 'extensioncoor':
-                form2 = Feeds_ExtensionCoordForm(request.POST)
+        # Faculty
+        else:
+            form = Feeds()
+            form2 = FeedsForm() # submit invalid form
+        
+        print('Starting...')
+        
+        if form.is_valid() and form2.is_valid():  
+            try:  
+                new_form = form.save(commit=False)
+                new_form.user_id = user_instance
+                print('ID: ', form.cleaned_data)
+                new_form.save()
+                
+                # form2.save()
+                recent_add = Feeds.objects.last()
+                print("recent_add: ", recent_add)
+                
+            
+                new_form2 = form2.save(commit=False)
+                new_form2.reference_id = recent_add
+                new_form2.save()
 
-            # Department Head
-            elif request.user.profile.user_role == 'depthead':
-                form2 = Feeds_DepartmentHeadForm(request.POST)
-                
-            # Research Coordinator
-            elif request.user.profile.user_role == 'researchcoor':
-                form2 = Feeds_ResearchCoordForm(request.POST)
+                print('new_form: ', new_form)
+                print('new_form2: ', new_form2)
+                print("end")
+                return redirect('./')   # refresh
+            except:  
+                pass  
+        else:
+            print("Invalid Form!")
+    else:  
+        form = FeedsForm()         
+        # Extension Coordinator
+        if request.user.profile.user_role == 'extensioncoor':
+            form2 = Feeds_ExtensionCoordForm()
+        elif request.user.profile.user_role == 'depthead':
+            form2 = Feeds_DepartmentHeadForm()
+        elif request.user.profile.user_role == 'researchcoor':
+            form2 = Feeds_ResearchCoordForm()
+        else:
+            form2 = FeedsForm() # set invalid form    
             
-            # Faculty
-            else:
-                form = Feeds()
-                form2 = FeedsForm() # submit invalid form
-            
-            print('Starting...')
-            
-            if form.is_valid() and form2.is_valid():  
-                try:  
-                    new_form = form.save(commit=False)
-                    new_form.user_id = user_instance
-                    print('ID: ', form.cleaned_data)
-                    new_form.save()
-                    
-                    # form2.save()
-                    recent_add = Feeds.objects.last()
-                    print("recent_add: ", recent_add)
-                    
-                
-                    new_form2 = form2.save(commit=False)
-                    new_form2.reference_id = recent_add
-                    new_form2.save()
+        print("Failed sadge!") 
+        
+    context = {
+        'form': form,
+        'form2': form2,
+        'state':'announcements',
+        'user_type': profile['user_role'],
+    }
+    
+    
+    # if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+    #     return redirect("../") 
+    return render(request, 'announcements/add_announcements.html', context)
 
-                    print('new_form: ', new_form)
-                    print('new_form2: ', new_form2)
-                    print("end")
-                    return redirect('./')   # refresh
-                except:  
-                    pass  
-            else:
-                print("Invalid Form!")
-        else:  
-            form = FeedsForm()         
-            # Extension Coordinator
-            if request.user.profile.user_role == 'extensioncoor':
-                form2 = Feeds_ExtensionCoordForm()
-            elif request.user.profile.user_role == 'depthead':
-                form2 = Feeds_DepartmentHeadForm()
-            elif request.user.profile.user_role == 'researchcoor':
-                form2 = Feeds_ResearchCoordForm()
-            else:
-                form2 = FeedsForm() # set invalid form    
-                
-            print("Failed sadge!") 
-            
-        context = {
-            'form': form,
-            'form2': form2,
-            'state':'announcements',
-            'user_type': profile['user_role'],
-        }
-        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            return redirect("../") 
-        return render(request, 'announcements/add_announcements.html', context)
-    return redirect('index')
     
     
 """ ANNOUNCEMENTS """
@@ -183,52 +185,55 @@ def show_announcements(request):
 
 @login_required
 def update_announcements(request, id):
-    if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
-        research = Feeds.objects.get(id=id)  
-        profile = Profile.objects.filter(user=request.user).values().first()
-        form = FeedsForm(request.POST, request.FILES, instance=research)  
-        
-        
-        
-            # Extension Coordinator
-        if request.user.profile.user_role == 'extensioncoor':
-            research2 = Feeds_ExtensionCoord.objects.get(reference_id=research)  
-            form2 = Feeds_ExtensionCoordForm(request.POST, instance=research2)
-            print('extensioncoor')
+    # if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
+    research = Feeds.objects.get(id=id)  
+    profile = Profile.objects.filter(user=request.user).values().first()
+    form = FeedsForm(request.POST, request.FILES, instance=research)  
+    
+    
+    
+        # Extension Coordinator
+    if request.user.profile.user_role == 'extensioncoor':
+        research2 = Feeds_ExtensionCoord.objects.get(reference_id=research)  
+        form2 = Feeds_ExtensionCoordForm(request.POST, instance=research2)
+        print('extensioncoor')
 
-        # Department Head
-        elif request.user.profile.user_role == 'depthead':
-            research2 = Feeds_DepartmentHead.objects.get(reference_id=research)  
-            form2 = Feeds_DepartmentHeadForm(request.POST, instance=research2)
-            print('depthead')
-            
-        # Research Coordinator
-        elif request.user.profile.user_role == 'researchcoor':
-            research2 = Feeds_ResearchCoord.objects.get(reference_id=research)  
-            form2 = Feeds_ResearchCoordForm(request.POST, instance=research2)
-            print('researchcoor')
-
+    # Department Head
+    elif request.user.profile.user_role == 'depthead':
+        research2 = Feeds_DepartmentHead.objects.get(reference_id=research)  
+        form2 = Feeds_DepartmentHeadForm(request.POST, instance=research2)
+        print('depthead')
         
-        if form.is_valid() and form2.is_valid():  
-            print("True")
-            
-            form.save()  
-            return redirect("feed")
-        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            return redirect("../") 
-        print("False")
-        context = {
-            'research': research,
-            'research2': research2,
-            
-            'form': form,
-            'form2': form2,
+    # Research Coordinator
+    elif request.user.profile.user_role == 'researchcoor':
+        research2 = Feeds_ResearchCoord.objects.get(reference_id=research)  
+        form2 = Feeds_ResearchCoordForm(request.POST, instance=research2)
+        print('researchcoor')
 
-            'state': 'announcements',
-            'user_type': profile['user_role'],
-        }
-        return render(request, 'announcements/update_announcements.html', context)
-    return redirect('index')
+    
+    if form.is_valid() and form2.is_valid():  
+        print("True")
+        
+        form.save()  
+        return redirect("feed")
+    
+    # Ayaw pumuta sa update dahil dito
+    # if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+    #     return redirect("../") 
+    
+    print("False")
+    context = {
+        'research': research,
+        'research2': research2,
+        
+        'form': form,
+        'form2': form2,
+
+        'state': 'announcements',
+        'user_type': profile['user_role'],
+    }
+    return render(request, 'announcements/update_announcements.html', context)
+    # return redirect('index')
 
 @login_required
 def delete_announcements(request, id):
