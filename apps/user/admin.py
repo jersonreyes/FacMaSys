@@ -7,7 +7,7 @@ from facmasys.utils import render_to_pdf, add_activity
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
     list_display = ('first_name','last_name','email','phone','role')
-    actions = ['export_pdf']
+    actions = ('export_pdf',)
     
     @admin.display(empty_value='None')
     def phone(self, obj):

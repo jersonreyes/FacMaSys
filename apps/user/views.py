@@ -21,7 +21,7 @@ from apps.feed.models import Feeds
 from apps.reports.models import Notifications
 from apps.user.models import Profile
 from facmasys.models import Research
-from facmasys.utils import ExportPDF
+from facmasys.utils import ExportPDF, add_activity
 
 from .filters import FacultyFilter
 # from facmasys.utils import add_activity
@@ -57,7 +57,7 @@ class RegisterView(View):
 
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
-
+            add_activity(activity_type='REGISTER',activity_location='USER',activity_message=f"User {username} has registered.")
             return redirect('user-login')
 
         return render(request, self.template_name, {'form': form})
@@ -67,6 +67,7 @@ class CustomLoginView(LoginView):
     form_class = LoginForm
 
     def form_valid(self, form):
+        add_activity(logged_user=self.request.user,activity_type='LOGIN',activity_location='USER',activity_message=f"User {form.cleaned_data.get('username')} has logged in.")
         remember_me = form.cleaned_data.get('remember_me')
 
         if not remember_me:
@@ -83,6 +84,7 @@ class CustomLoginView(LoginView):
 @login_required
 def logout_view(request):
     if request.user.is_authenticated:
+        add_activity(logged_user=request.user,activity_type='LOGOUT',activity_location='USER',activity_message=f"User {request.user.username} has logged out.")
         logout(request)
     return redirect('user-login')
 
@@ -91,6 +93,10 @@ class ChangePasswordView(LoginRequiredMixin, SuccessMessageMixin, PasswordChange
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('user-profile')
+    
+    def form_valid(self, form):
+        add_activity(logged_user=self.request.user,activity_type='CHANGE PASSWORD',activity_location='USER',activity_message=f"User {self.request.user.username} changed his/her password.")
+        return super().form_valid(form)
     
 
 @login_required
@@ -124,7 +130,7 @@ def profile_update(request):
             user_form.save()
             profile_form.save()
             name = request.user.username
-            # add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
+            add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='USER',activity_message=f'Account has been updated for {name}.')
             messages.success(request,"Your profile has been successfully updated.")
             return redirect('user-profile')
     else:
@@ -142,6 +148,7 @@ def profile_update(request):
 @login_required
 def del_current_user(request):    
     try:
+        add_activity(logged_user=request.user,activity_type='DELETE',activity_location='USER',activity_message=f"User {request.user.username} deleted his/her account.")
         user = request.user
         user.delete()
         messages.success(request, "Your account was deleted.")

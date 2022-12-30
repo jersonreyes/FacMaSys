@@ -50,6 +50,6 @@ class ExportPDF:
         return super().render_to_response(context, **kwargs)
 
 
-def add_activity(logged_user, activity_type, activity_location, activity_message):
+def add_activity(activity_type, activity_location, activity_message,logged_user=None):
     activity = ActivityLog.objects.create(type=activity_type,location=activity_location,user=logged_user,message=activity_message) 
     return activity.save()
