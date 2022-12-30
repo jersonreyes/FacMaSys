@@ -62,6 +62,7 @@ urlpatterns = [
     path('announcements/add_announcements', views.add_announcements),
     path('announcements/update/<int:id>', views.update_announcements),
     path('announcements/delete/<int:id>', views.delete_announcements),
+    path('announcements/agendas', views.show_announcements),
     
     path('extension_services/', views.faculty_extension_services, name='extension_services-index'),
     path('extension_services/add_service', views.add_extension_services),
@@ -81,5 +82,10 @@ urlpatterns = [
     path('research/edit_research/<int:id>', views.edit_researches),
     path('research/update_research/<int:id>', views.update_researches),
     path('research/delete_research/<int:id>', views.delete_researches),
+    
+    path('departments/', views.departments),
+    path('departments/add_faculty/', views.departments_addfaculty),
+    path('departments/add_subjects/<int:id>', views.departments_addsubjects),
+    # path('deparments/', views.departments),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

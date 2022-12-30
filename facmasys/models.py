@@ -227,4 +227,29 @@ class Subjects_Taught(models.Model):
         return f'Faculty ID: {self.faculty_id} | Handled Subjects: {self.handled_subjects.values().all()}'
 
 
+class Departments(models.Model):
+    SPECIALIZATION_TRACK = (
+        ('Web and Mobile Development', 'Web and Mobile Development'),
+        ('Service Management Program', 'Service Management Program'),
+        ('Business Analytics', 'Business Analytics'),
+        ('None', 'None'),
+    )
+    spec_track = models.CharField(max_length=50, choices=SPECIALIZATION_TRACK, blank=True, null=True, default="None")
+    faculty_id = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+# Department..
+    # Manage and Assign the faculty under that Department
+
+# Gawa ng form, add the user in the department
+# As a Department Head
+    # makikita yung department
+    # wag ipapakita yung may department na mayroon na
+    # unenroll, kamukha yung department
     
+    # Under that User
+        # Add subject
+        
+        
+# Create user on department
+# Create subject on user

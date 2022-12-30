@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+
+{% block title %} 
+    Faculty Member - Update Details
+{% endblock %}
+
+{% block content %}
+
+    <h1>Departments: </h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Add Faculty</button>
+    </form>
+    <!-- <form action="">
+        <select name="" id="" multiple>
+            {% for x in all_faculty %}
+                <option value="{{ x.id }}">{{ x.id }}, This is a user</option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Add Faculty</button>
+    </form> -->
+
+    {% if all_department|length > 0 %}
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Specialization Track</th>
+            <th>Date Added</th>
+            <th>E-mail Address</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for e in all_department %}
+            <tr>
+                <td>{{e.id}}</td>
+                <td>{{ e.spec_track }}</td>
+                <td>{{ e.faculty_id.last_name }}, {{ e.faculty_id.first_name }}</td>
+                <td>{{ e.faculty_id.email }} </td>
+                <td>
+                    <a href="./add_subjects/{{e.id}}">Add Subjects</a>
+                    <a href="./unenroll/{{e.id}}">Unenroll</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No data available.</p>
+    {% endif %}
+{% endblock %}

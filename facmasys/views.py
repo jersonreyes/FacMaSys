@@ -159,7 +159,7 @@ def show_announcements(request):
     announcements = Feeds.objects.all().filter(user_id=request.user)
     profile = Profile.objects.filter(user=request.user).values().first()
 
-
+    
     context = {
         'announcements': announcements,
         'state':'announcements',
@@ -182,7 +182,11 @@ def show_announcements(request):
         context['announcements2'] = research_coord
         
     else:
-        pass
+        # Faculty Announcement Lists
+        context['vext'] = Feeds_ExtensionCoord.objects.all()
+        context['dpt'] = Feeds_DepartmentHead.objects.all()
+        context['rsh'] = Feeds_ResearchCoord.objects.all()
+        
 
     
     return render(request, "announcements/announcements.html", context)
@@ -286,7 +290,7 @@ def add_extension_services(request):
                     new_form.save()
                     add_activity(logged_user=request.user,activity_type='ADD',activity_location='EXTENSION SERVICE',activity_message=f"User {request.user.username} added an extension service.")
                     print("Success!") 
-                    return redirect('/extension_services')   # refresh
+                    return redirect('extension_services-index')   # refresh
                 except:  
                     pass  
             else:
@@ -908,3 +912,116 @@ def delete_subject_taught(request, id):
 
 # Delete everything
 # Subjects.objects.all().delete()
+
+
+@login_required
+def departments(request):
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
+        all_department = Departments.objects.all()        
+
+        all_faculty = Profile.objects.all().select_related('user').filter(user_role='faculty').values()
+        form = DeparmentsForm()
+        
+        context = {
+            'all_department': all_department,
+            'all_faculty': all_faculty,
+            'form': form,
+        }
+        
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
+        if request.method == "POST":  
+            all_department = Departments.objects.all()        
+            all_faculty = Profile.objects.all().select_related('user').filter(user_role='faculty').values()
+            
+           
+            # facmasys_subjects
+            # facmasys_subjects_taught
+            # facmasys_subjects_taught_handled_subjects
+            # print('all_subject_taught', all_subject_taught)
+            
+            form = DeparmentsForm(request.POST)  
+            
+            if form.is_valid():
+                print("is valid")   
+                try:  
+                    form.save()
+                    print("Success!") 
+                    return redirect('../')   # refresh
+                except:  
+                    pass  
+            else:
+                print("not valid") 
+        else:  
+            form = DeparmentsForm()         
+            print("Failed!")
+            
+        context = {
+            'all_department': all_department,
+            'all_faculty': all_faculty,
+            'form': form,
+        }
+        
+        return render(request, 'department/department.html', context)
+    return redirect('index')
+
+
+@login_required
+def departments_addfaculty(request):
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
+        all_subjects = Subjects_Taught.objects.get(faculty_id=request.user)
+        
+        if request.method == "POST":  
+            form = SubjectTaughtForm(request.POST)  
+            if form.is_valid():  
+                try:  
+                    form.save()
+                    return redirect('/subjects/')   # refresh
+                except:  
+                    pass  
+        else:  
+            form = SubjectTaughtForm()  
+
+            
+        context = {
+            'form': form,
+            'state':'subjects_taught',
+        }
+        
+        return render(request, 'department/department.html', context)
+    return redirect('./')
+
+
+@login_required
+def departments_addsubjects(request, id):
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
+        print("Start!")
+        
+        # user_instance = request.user
+        if request.method == "POST":  
+            print("Start posting")
+            # all_subjects = Subjects_Taught.objects.get(faculty_id=id)
+            form = SubjectTaughtForm(request.POST)  
+            
+            
+            print(form.request.POST(''))
+            if form.is_valid():  
+                print("Vlaid")
+                new_form = form.save(commit=False)
+                new_form.faculty_id_id = id
+                new_form.save()
+                try:  
+                    return redirect('../')   # refresh
+                except:  
+                    pass  
+        else:  
+            form = SubjectTaughtForm()  
+            print("Failed!")
+        
+
+        context = {
+            'form': form,
+            'state':'subjects_taught',
+        }
+        
+        return render(request, "department/add_facultysubjects.html", context)
+    return redirect('../')
