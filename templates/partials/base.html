@@ -238,4 +238,11 @@
             <script>$('.dropdown-toggle').dropdown('toggle')</script>
             {% endif %}
         {% if not ajax %}</body>{% endif %}
+        {% if not request.user.profile.user_role.is_superuser %}
+            <script>
+                $( document ).ready(function() {
+                    $('.dt-buttons').remove();
+                })
+            </script>
+        {% endif %}
     </html>
