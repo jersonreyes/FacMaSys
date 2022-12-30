@@ -7,10 +7,11 @@ from django.shortcuts import redirect, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
 
-from facmasys.forms import ExtensionServiceForm
-
 from .forms import *
 from .models import *
+
+# from facmasys.forms import ExtensionServiceForm
+
 
 
 # Create your views here.
@@ -18,6 +19,10 @@ def index(request):
     return render(request, 'home/index.html', {'state':'home'})
 
 from django.apps import apps
+
+Feeds_DepartmentHead = apps.get_model('feed', 'Feeds_DepartmentHead')
+Feeds_ResearchCoord = apps.get_model('feed', 'Feeds_ResearchCoord')
+Feeds_ExtensionCoord = apps.get_model('feed', 'Feeds_ExtensionCoord')
 
 Feeds = apps.get_model('feed', 'Feeds')
 Profile = apps.get_model('user', 'Profile')
@@ -72,30 +77,68 @@ def add_announcements(request):
         user_instance = request.user
         if request.method == "POST":  
             form = FeedsForm(request.POST)  
+            # Extension Coordinator
+            if request.user.profile.user_role == 'extensioncoor':
+                form2 = Feeds_ExtensionCoordForm(request.POST)
+
+            # Department Head
+            elif request.user.profile.user_role == 'depthead':
+                form2 = Feeds_DepartmentHeadForm(request.POST)
+                
+            # Research Coordinator
+            elif request.user.profile.user_role == 'researchcoor':
+                form2 = Feeds_ResearchCoordForm(request.POST)
             
-            if form.is_valid():  
+            # Faculty
+            else:
+                form2 = FeedsForm() # submit invalid form
+            
+            print('Starting...')
+            
+            if form.is_valid() and form2.is_valid():  
                 try:  
                     new_form = form.save(commit=False)
                     new_form.user_id = user_instance
+                    print('ID: ', form.cleaned_data)
+                    print()
+                    # new_form.save()
                     
-                    # if profile['user_role'] == 'extensioncoor':
-                    #     new_form.user_role = 'Extension Coordinator'
-                    # elif profile['user_role'] == 'depthead':
-                    #     new_form.user_role = 'Department Head'
-                    # elif profile['user_role'] == 'researchcoor':
-                    #     new_form.user_role = 'Research Coordinator'
+                    
+                    # print('form_instance', form.initial['id'])
+                    # getId = Feeds.objects.all()[-1]
+                    # print('getId', getId)
+                    
+                    # new_form2 = form2.save(commit=False)
+                    # new_form2.reference_id = getId
+                    
+                    # # reference_id <- Feeds
+                    # # new_form2.save()
 
-                    new_form.save()
-                    print("Success! done") 
-                    return redirect('/feed/')   # refresh
+                    # print('new_form: ', new_form)
+                    # print('new_form2: ', new_form2)
+                    # print("end")
+                    # return redirect('./')   # refresh
                 except:  
                     pass  
+            else:
+                print("Invalid Form!")
         else:  
             form = FeedsForm()         
+            # Extension Coordinator
+            if request.user.profile.user_role == 'extensioncoor':
+                form2 = Feeds_ExtensionCoordForm()
+            elif request.user.profile.user_role == 'depthead':
+                form2 = Feeds_DepartmentHeadForm()
+            elif request.user.profile.user_role == 'researchcoor':
+                form2 = Feeds_ResearchCoordForm()
+            else:
+                form2 = FeedsForm() # set invalid form    
+                
             print("Failed sadge!") 
             
         context = {
             'form': form,
+            'form2': form2,
             'state':'announcements',
             'user_type': profile['user_role'],
         }
@@ -109,13 +152,31 @@ def show_announcements(request):
     announcements = Feeds.objects.all().filter(user_id=request.user)
     profile = Profile.objects.filter(user=request.user).values().first()
 
-    print('profile: ', profile)
 
     context = {
         'announcements': announcements,
         'state':'announcements',
         'user_type': profile['user_role'],
     }
+    
+    # Extension Coordinator
+    if request.user.profile.user_role == 'extensioncoor':
+        ext_coord = Feeds_ExtensionCoord.objects.all()
+        context['announcements2'] = ext_coord
+
+    # Department Head
+    elif request.user.profile.user_role == 'depthead':
+        dpt_head = Feeds_DepartmentHead.objects.all()
+        context['announcements2'] = dpt_head
+        
+    # Research Coordinator
+    elif request.user.profile.user_role == 'researchcoor':
+        research_coord = Feeds_ResearchCoord.objects.all()
+        context['announcements2'] = research_coord
+        
+    else:
+        pass
+
     
     return render(request, "announcements/announcements.html", context)
 
@@ -125,7 +186,7 @@ def update_announcements(request, id):
         research = Feeds.objects.get(id=id)  
         profile = Profile.objects.filter(user=request.user).values().first()
 
-
+        
         form = FeedsForm(request.POST, instance=research)  
         if form.is_valid():  
             print("True")
@@ -322,6 +383,11 @@ def update_taught_subjects(request, id):
 def edit_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         print('update_extension_services')
+        
+        currently_logged = ExtensionService.objects.filter(id=id)  
+        current_edit = currently_logged.values().first()['extension_head_id']
+        # print('current_edit: ', current_edit)
+        
         form = ExtensionServiceForm()
         extension = ExtensionService.objects.get(id=id)
         
@@ -329,6 +395,7 @@ def edit_extension_services(request, id):
             'extension': extension,
             'form': form,
             'state':'extension_services',
+            'current_edit': current_edit,
         }
         return render(request, 'extension_services/update_extension_service.html', context)
     return redirect('index') 
@@ -604,7 +671,7 @@ def delete_details_a(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Presented.objects.get(id=id)  
         subject.delete()  
-        return redirect("../../")
+        return redirect("/researches/")
     return redirect('index')
 
 @login_required
@@ -612,7 +679,7 @@ def delete_details_b(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
         subject.delete()  
-        return redirect("../../")
+        return redirect("/researches/")
     return redirect('index')
 
 @login_required
@@ -620,7 +687,7 @@ def delete_researches(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
         subject.delete()  
-        return redirect("researches")
+        return redirect("/researches/")
     return redirect('index')
 
 @login_required
@@ -628,7 +695,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
-        return redirect("/extension_services")
+        return redirect("/extension_services/")
     return redirect('index')
 
 
@@ -695,14 +762,23 @@ def update_subject(request, id):
         # for e in values:
         #     selected_list.append(e['id'])
         
+        
         subjecttt = Subjects.objects.get(id=id)  
         form = SubjectForm(request.POST, instance=subjecttt)  
         
-        subject_all = Subjects.objects.filter(id=id)
-        current_edit = subject_all.values().first()
+        subject_all = Subjects.objects.all()
+        current_edit = subject_all.values()
+        # all_subjects = []
+        # for x in current_edit:
+        #     print(list[x])
+        # print(all_subjects)
+        
+        
+
         subject_object_data = current_edit
-        print('asdfasdfsaf')
-        print("all subjects: ", current_edit)
+        
+        # print('asdfasdfsaf')
+        # print("all subjects: ", current_edit)
         
         if form.is_valid():  
             form.save()  

@@ -50,9 +50,66 @@
                 {% endfor %}
             </tbody>
         </table>
+
+
+        {% if user_type == 'extensioncoor' %}
+            <p>Extension Coord.</p>
+            <table>
+                <thead>
+                    <th>issued_by</th>
+                    <th>extension_address</th>
+                    <th>email</th>
+                    <th>event_date</th>
+                    <th>agenda</th>
+                </thead>
+                <tbody>
+                    {% for e in announcements2 %}
+                        <td>{{ e.issued_by }}</td>
+                        <td>{{ e.extension_address }}</td>
+                        <td>{{ e.email }}</td>
+                        <td>{{ e.event_date }}</td>
+                        <td>{{ e.agenda }}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif user_type == 'depthead' %}
+            <p>Department Head</p>
+            <table>
+                <thead>
+                    <th>issued_by</th>
+                    <th>agenda</th>
+                </thead>
+                <tbody>
+                    {% for e in announcements2 %}
+                        <td>{{ e.issued_by }}</td>
+                        <td>{{ e.agenda }}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% elif user_type == 'researchcoor' %}
+            <p>Research Coord.</p>
+            <table>
+                <thead>
+                    <th>issued_by</th>
+                    <th>extension_address</th>
+                    <th>email</th>
+                    <th>event_date</th>
+                    <th>agenda</th>
+                </thead>
+                <tbody>
+                    {% for e in announcements2 %}
+                        <td>{{ e.issued_by }}</td>
+                        <td>{{ e.extension_address }}</td>
+                        <td>{{ e.email }}</td>
+                        <td>{{ e.event_date }}</td>
+                        <td>{{ e.agenda }}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
     {% else %}
         <p>Nothing to see here...</p>
-    
     {% endif %}
     
 {% endblock %}

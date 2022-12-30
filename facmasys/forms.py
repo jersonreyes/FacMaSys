@@ -10,6 +10,26 @@ Feeds_ResearchCoord = apps.get_model('feed', 'Feeds_ResearchCoord')
 Feeds_ExtensionCoord = apps.get_model('feed', 'Feeds_ExtensionCoord')
 Feeds = apps.get_model('feed', 'Feeds')
 
+class Feeds_DepartmentHeadForm(forms.ModelForm):
+    class Meta:
+        model = Feeds_DepartmentHead
+        exclude = ('reference_id', )
+        # fields = "__all__"
+
+class Feeds_ResearchCoordForm(forms.ModelForm):
+    class Meta:
+        model = Feeds_ResearchCoord
+        exclude = ('reference_id', )
+        # fields = "__all__"
+
+class Feeds_ExtensionCoordForm(forms.ModelForm):
+    class Meta:
+        model = Feeds_ExtensionCoord
+        exclude = ('reference_id', )
+        # fields = "__all__"
+        
+
+
 class FeedsForm(forms.ModelForm):
     class Meta:
         model = Feeds
