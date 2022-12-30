@@ -11,6 +11,13 @@
         <div class="z-[0] w-full h-[30vh] cover" style="opacity:0.1;background-image:url('/static/images/bulsu_logo.png');background-size:cover; background-position: center;"></div>
         <div class="z-[1] absolute">
             <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Faculty / <span class="font-normal">Users</span></p>
+            <a class="font-bold rounded-md hover:opacity-50" style="background-color:white; color: orange; padding: 10px;" title="All" href="{% url 'faculty-index'%}">All</a>
+            {% if request.user.is_superuser or request.user.profile.user_role == 'researchcoor' %}
+            <a class="font-bold rounded-md hover:opacity-50" style="background-color:white; color: orange; padding: 10px;" title="All" href="{% url 'faculty-with-research'%}">With Research</a>
+            {% endif %}
+            {% if request.user.is_superuser or request.user.profile.user_role == 'extensioncoor' %}
+            <a class="font-bold rounded-md hover:opacity-50" style="background-color:white; color: orange; padding: 10px;" title="All" href="{% url 'faculty-with-extension'%}">With Extensions</a>
+            {% endif %}
         </div>
     </div>
     
@@ -46,13 +53,6 @@
                         </div>
                     </div> {% endcomment %}
             </form>
-            <a href="{% url 'faculty-index'%}">All</a>
-            {% if request.user.is_superuser or request.user.profile.user_role == 'researchcoor' %}
-            <a href="{% url 'faculty-with-research'%}">With Research</a>
-            {% endif %}
-            {% if request.user.is_superuser or request.user.profile.user_role == 'extensioncoor' %}
-            <a href="{% url 'faculty-with-extension'%}">With Extension</a>
-            {% endif %}
         </div>
         <div id="item-list">
             <div>
