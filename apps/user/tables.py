@@ -7,7 +7,7 @@ class FacultyTable(tables.Table):
     
     action = tables.TemplateColumn(exclude_from_export=True,template_code='''{% load static %} 
                 <span class="tooltips_top"> 
-                    <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Post / Announcement" href="javascript:void();" href="javascript:void();" value="{% url 'faculty-index-detail' record.id %}">
+                    <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="View Staff" href="{% url 'faculty-index-detail' record.id %}">
                         <div class="gap-2 flex items-center">
                             <span class="tooltiptext_top">View Staff</span><img src="{% static 'images/icon_view.png' %}" class="invert dark:invert-0" style="width:18px; height:18px;" alt="View Staff">
                         </div>

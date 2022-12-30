@@ -7,18 +7,7 @@
 
 
 {% block content %}
-    <h3>View Announcements</h3>
-
-    <p>User Type: {{user_type}}</p>
-    <a href="../">Go back to Home</a>
-    <br><br><br><br><br>
-    
-    <!-- depthead -->
-    <!-- researchcoor -->
-    <!-- extensioncoor -->
-
     {% if user_type != "faculty" %}
-        <a href="./add_announcements">Post Announcements</a>
         <table>
             <thead>
                 <th>ID</th>

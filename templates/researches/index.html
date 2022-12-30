@@ -61,8 +61,8 @@
                 </div>
                 <br/>
                 {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
-                  <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="javascript:void();" value="/researches/selector">Add Research</a>
-                  <a class="form-modal-toggler" style="margin-top:30px" title="View Summary" href="javascript:void();" value="/research/">View Summary</a>
+                  <a class="form-modal-toggler" style="margin-top:30px" title="Add Research" href="/researches/selector">Add Research</a>
+                  <a class="form-modal-toggler" style="margin-top:30px" title="View Summary" href="/research/">View Summary</a>
                 {% endif %}
             </div>
         </div>

@@ -287,7 +287,7 @@ def update_extension_services(request, id):
         form = ExtensionServiceForm(request.POST, instance=extension)  
         if form.is_valid():  
             form.save()  
-            return redirect("/extension_services/")  
+            return redirect("/extension_services")  
         
         context = {
             'extension': extension,
@@ -403,7 +403,7 @@ def edit_extension_services(request, id):
 # Researches
 @login_required
 def faculty_researches(request):
-    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
+    if request.user.profile.user_role != 'faculty' or request.user.is_superuser:
         research_ongoing = Research.objects.all().filter(faculty_id=request.user)
         research_ongoing_filtered = research_ongoing.filter(research_progress__exact='Ongoing')
         

@@ -352,7 +352,7 @@ form > div > div {
   line-height: 1;
 }
 
-button[type="submit"] {
+button[type="submit"]:not(.auth-btn) {
   border: 1px solid rgb(170, 170, 170);
   display: inline;
   color: black;
@@ -361,7 +361,7 @@ button[type="submit"] {
   background:rgba(0, 0, 0, 0.03);
 }
 
-button[type="submit"]:hover {
+button[type="submit"]:not(.auth-btn):hover {
   background:rgba(0, 0, 0, 0.152);
 }
 

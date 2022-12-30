@@ -57,9 +57,9 @@
     <div style="{% if not ajax %}margin-top:10vh{% endif %}" class="grid gap-4">
         {% if not ajax %}
         <div>
-            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Ongoing Research" href="javascript:void();" value="/research/add_research">Add Research</a>
-            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Presented Research" href="javascript:void();" value="/research/add_presented">Add Presented</a>
-            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Published Research" href="javascript:void();" value="/research/add_published">Add Published</a>
+            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Ongoing Research" href="/research/add_research">Add Research</a>
+            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Presented Research" href="/research/add_presented">Add Presented</a>
+            <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Published Research" href="/research/add_published">Add Published</a>
         </div>
         {% endif %}
         {% include 'researches/all.html' %}

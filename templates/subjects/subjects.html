@@ -11,8 +11,8 @@
                 <div class="z-[1] absolute">
                     <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">College / <span class="font-normal">Subjects</span></p>
                     {% if request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
-                        <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Subject" href="javascript:void();" value="./add_subject">Add Subjects</a>
-                        <a class="form-modal-toggler" style="background-color:white; color: orange" title="View Subjects Taught" href="javascript:void();" value="/subjects_taught/">View Subjects Taught</a>
+                        <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Subject" href="./add_subject">Add Subjects</a>
+                        <a class="form-modal-toggler" style="background-color:white; color: orange" title="View Subjects Taught" href="/subjects_taught/">View Subjects Taught</a>
                     {% endif %}
                 </div>
             </div>
@@ -49,7 +49,7 @@
                         <td>{{ e.pre_requisite }} </td>
                         <td>{{ e.course_type }} </td>
                         <td>
-                            <a class="form-modal-toggler" href="javascript:void();" title="Update Subject" value="update_subject/{{e.id}}">Update</a>
+                            <a class="form-modal-toggler" title="Update Subject" href="update_subject/{{e.id}}">Update</a>
                             <button class="delete" onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>

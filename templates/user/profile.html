@@ -51,7 +51,7 @@
                             </div>
                             {% endif %}
                             {% if view != 'outside' %}
-                            <a class="form-modal-toggler main-theme-bg" title="Update Profile" href="javascript:void();" value="{% url 'user-profile-update' %}">Edit Profile</a>
+                            <a class="form-modal-toggler main-theme-bg" title="Update Profile" href="{% url 'user-profile-update' %}">Edit Profile</a>
                             {% endif %}
                         </div>
                     </div>
@@ -63,9 +63,9 @@
         {% if view != 'outside' %}
         <div class="grid grid-flow-col gap-2 justify-center m-4">
             {% if request.user.profile.user_role != 'faculty' %}
-            <a class="form-modal-toggler main-theme-bg" title="Add Post" href="javascript:void();" value="/announcements/add_announcements">Add Post</a>
+            <a class="form-modal-toggler main-theme-bg" title="Add Post" href="/announcements/add_announcements">Add Post</a>
             {% endif %}
-            <a class="form-modal-toggler main-theme-bg" title="Add Research" href="javascript:void();" value="/research/add_research">Add Research</a>
+            <a class="form-modal-toggler main-theme-bg" title="Add Research" href="/research/add_research">Add Research</a>
         </div>
         {% endif %}
         {% if request.user.profile.user_role != 'faculty' %}
@@ -83,7 +83,7 @@
                                     <button class="font-bold transition hover:opacity-[0.5]" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transform: translateY(-13px);">...</button>
                 
                                     <div class="p-3 dropdown-menu dropdown-menu-right" style="z-index:1000">                                                 
-                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Post / Announcement" href="javascript:void();" value="/announcements/update/{{ feed.id }}">Edit</a>
+                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Post / Announcement" href="/announcements/update/{{ feed.id }}">Edit</a>
                                         <div class="dropdown-divider"></div>    
                                         <a class="font-bold ignore-url dropdown-item p-2 bg-transparent" title="Edit Post / Announcement" href="/announcements/delete/{{ feed.id }}">Delete</a>
                                     </div>
@@ -129,7 +129,7 @@
                                     <button class="font-bold transition hover:opacity-[0.5]" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transform: translateY(-13px);">...</button>
                 
                                     <div class="p-3 dropdown-menu dropdown-menu-right" style="z-index:1000">                                                 
-                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Research" href="javascript:void();" value="/research/update_research/{{ feed.id }}">Edit</a>
+                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Research" href="/research/update_research/{{ feed.id }}">Edit</a>
                                         <div class="dropdown-divider"></div>    
                                         <a class="font-bold ignore-url dropdown-item p-2 bg-transparent" title="Delete Research" href="/research/delete_research/{{ feed.id }}">Delete</a>
                                     </div>
