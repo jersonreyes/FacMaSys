@@ -10,6 +10,12 @@ Feeds_ResearchCoord = apps.get_model('feed', 'Feeds_ResearchCoord')
 Feeds_ExtensionCoord = apps.get_model('feed', 'Feeds_ExtensionCoord')
 Feeds = apps.get_model('feed', 'Feeds')
 
+
+class DeparmentsForm(forms.ModelForm):
+    class Meta:
+        model = Departments
+        fields = "__all__"
+
 class Feeds_DepartmentHeadForm(forms.ModelForm):
     class Meta:
         model = Feeds_DepartmentHead

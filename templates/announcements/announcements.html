@@ -7,9 +7,8 @@
 
 
 {% block content %}
-    {% if user_type != "faculty" %}
 
-    <a href="./add_announcements">Post Announcement</a>
+        <a href="./add_announcements">Post Announcement</a>
         {% if user_type == 'extensioncoor' %}
             <table>
                 <thead>
@@ -45,7 +44,6 @@
                 </tbody>
             </table>
         {% elif user_type == 'depthead' %}
-            <p>Department Head</p>
             <table>
                 <thead>
                     <th>ID</th>
@@ -78,7 +76,6 @@
                 </tbody>
             </table>
         {% elif user_type == 'researchcoor' %}
-            <p>Research Coord.</p>
             <table>
                 <thead>
                     <th>ID</th>
@@ -115,12 +112,73 @@
                     {% endfor %}
                 </tbody>
             </table>
+        {% else %}
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Posted by</th>
+                    <th>Agenda</th>
+                    <th>User Type</th>
+                    <th>E-mail</th>
+                    <th>Subject</th>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Image Cover</th>
+                    <th>Link</th>
+                </thead>
+                <tbody>
+                    {% comment %} ExtensionCoor {% endcomment %}
+                    {% for e in vext %}
+                        <tr>
+                            <td>{{ e.reference_id.id }}</td>
+                            <td>{{ e.reference_id.user_id.last_name}}, {{ e.reference_id.user_id.first_name}}</td>
+                            <td>{{ e.agenda }}</td>
+                            <td>{{ e.reference_id.user_type }}</td>
+                            <td>{{ e.reference_id.user_id.email}}</td>
+                            <td>{{ e.reference_id.subject }}</td>
+                            <td>{{ e.reference_id.description }}</td>
+                            <td>{{ e.reference_id.date_created }}</td>
+                            <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt="e.reference_id.image"></td>
+                            <td>{{ e.reference_id.link }}</td>
+                        </tr>
+                    {% endfor %}
+    
+                    {% comment %} DepartmentHead {% endcomment %}
+                    {% for e in dpt %}
+                        <tr>
+                            <td>{{ e.reference_id.id }}</td>
+                            <td>{{ e.reference_id.user_id.last_name}}, {{ e.reference_id.user_id.first_name}}</td>
+                            <td>{{ e.agenda }}</td>
+                            <td>{{ e.reference_id.user_type }}</td>
+                            <td>{{ e.reference_id.user_id.email}}</td>
+                            <td>{{ e.reference_id.subject }}</td>
+                            <td>{{ e.reference_id.description }}</td>
+                            <td>{{ e.reference_id.date_created }}</td>
+                            <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt="e.reference_id.image"></td>
+                            <td>{{ e.reference_id.link }}</td>
+                        </tr>
+                    {% endfor %}
+    
+                    {% comment %} ResearchCoord {% endcomment %}
+                    {% for e in rsh %}
+                        <tr>
+                            <td>{{ e.reference_id.id }}</td>
+                            <td>{{ e.reference_id.user_id.last_name}}, {{ e.reference_id.user_id.first_name}}</td>
+                            <td>{{ e.agenda }}</td>
+                            <td>{{ e.reference_id.user_type }}</td>
+                            <td>{{ e.reference_id.user_id.email}}</td>
+                            <td>{{ e.reference_id.subject }}</td>
+                            <td>{{ e.reference_id.description }}</td>
+                            <td>{{ e.reference_id.date_created }}</td>
+                            <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt="e.reference_id.image"></td>
+                            <td>{{ e.reference_id.link }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
         {% endif %}
 
-    {% else %}
-        <p>Nothing to see here...</p>
-    {% endif %}
-    
 
     
 {% endblock %}

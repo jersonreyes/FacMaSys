@@ -1,0 +1,28 @@
+{% extends "main.html" %}
+
+
+{% block title %}
+    Faculty Member - Subject Taught
+{% endblock %}
+
+
+{% block content %}    
+<div class="grid items-start gap-5">
+    <div>
+        <a href="/subjects_taught/add_subject">Add Subjects Taught</a>
+    </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Handled Subjects: </p>
+        {{ form.handled_subjects }}
+        <br><br>
+
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+        
+        <button type="submit">Add Handled Subjects</button>
+    </form>
+    </script>
+</div>
+{% endblock %}
