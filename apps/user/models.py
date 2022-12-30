@@ -1,7 +1,7 @@
 from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
-
+from facmasys.models import Subjects
 
 # Make user email unique to avoid conflict logging in with email.
 User._meta.get_field('email')._unique = True
@@ -19,6 +19,12 @@ class Profile(models.Model):
         ('researchcoor', 'Research Coordinator'),
         ('extensioncoor', 'Extension Coordinator')
     )
+    SPECIALIZATION_TRACK = (
+        ('Web and Mobile Development', 'Web and Mobile Development'),
+        ('Service Management Program', 'Service Management Program'),
+        ('Business Analytics', 'Business Analytics'),
+        ('None', 'None'),
+    )
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     image = models.ImageField(default='profile_icon.png', upload_to='Profile_Images')
@@ -28,6 +34,8 @@ class Profile(models.Model):
     address =  models.CharField(max_length=200, null=True, blank=True)
     city_of_residence = models.CharField(max_length=100, null=True,blank=True)
     phone = models.CharField(max_length=13, null=True,blank=True)
+    spec_track = models.CharField(max_length=50, choices=SPECIALIZATION_TRACK, default='None', null=True)
+    handled_subjects =  models.ManyToManyField(Subjects)
     
     def __str__(self):
         return self.user.username    
