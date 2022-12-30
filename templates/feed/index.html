@@ -12,7 +12,7 @@
             <div class="z-[1] absolute">
                 <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Posts / <span class="font-normal">Feed</span></p>
                 {% if not request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
-                <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Post / Announcement" href="/announcements/add_announcements">Add Post / Announcement</a>
+                <a class="form-modal-toggler font-bold ignore-url" style="background-color:white; color: orange" title="Add Post / Announcement" href="/announcements/add_announcements">Add Post / Announcement</a>
                 {% endif %}
             </div>
         </div>

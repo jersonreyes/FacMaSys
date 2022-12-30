@@ -63,9 +63,9 @@
         {% if view != 'outside' %}
         <div class="grid grid-flow-col gap-2 justify-center m-4">
             {% if request.user.profile.user_role != 'faculty' %}
-            <a class="form-modal-toggler main-theme-bg" title="Add Post" href="/announcements/add_announcements">Add Post</a>
+            <a class="form-modal-toggler main-theme-bg ignore-url" title="Add Post" href="/announcements/add_announcements">Add Post</a>
             {% endif %}
-            <a class="form-modal-toggler main-theme-bg" title="Add Research" href="/research/add_research">Add Research</a>
+            <a class="form-modal-toggler main-theme-bg ignore-url" title="Add Research" href="/research/add_research">Add Research</a>
         </div>
         {% endif %}
         {% if request.user.profile.user_role != 'faculty' %}
