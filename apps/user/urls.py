@@ -14,6 +14,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='user-logout'),
     
     path('profile/', views.profile, name='user-profile'),
+    path('profile/<int:id>',views.profile_viewer, name="user-profile-view"),
     path('profile/update', views.profile_update, name='user-profile-update'),
     path('faculty/',views.FacultyView.as_view(), name='faculty-index'),
     

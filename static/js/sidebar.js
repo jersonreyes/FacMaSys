@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 
+  new ClipboardJS('.copy');
   $(document).on("click", ".form-modal-toggler", function(e){
     fetch(e.currentTarget.getAttribute('value'), {
         dataType: "html",
@@ -268,7 +269,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     */
     $(document).on("click", "a", function(e){
         e.preventDefault();
-        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler")) {
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("form-modal-toggler") 
+          && !e.currentTarget.classList.contains("paginate_button")) {
             e.preventDefault();
             var root = this;
             var pos;
