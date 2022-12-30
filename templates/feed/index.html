@@ -12,20 +12,20 @@
             <div class="z-[1] absolute">
                 <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Posts / <span class="font-normal">Feed</span></p>
                 {% if not request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
-                <a class="form-modal-toggler font-bold" style="background-color:white; color: orange" title="Add Post / Announcement" href="javascript:void();" value="/announcements/add_announcements">Add Post / Announcement</a>
+                <a class="font-semibold form-modal-toggler" style="background-color:white; color: orange" title="Add Post / Announcement" href="javascript:void();" value="/announcements/add_announcements">Add Post / Announcement</a>
                 {% endif %}
             </div>
         </div>
         <div class="grid gap-3 mt-5" style="grid-template-columns: 70fr 30fr;">
             <div class="[&>div]:rounded-md w-full">
-                <p class="font-bold text-lg ml-5">Posts Feed</p>
+                <p class="text-lg font-bold">Posts Feed</p>
                 <div class="grid gap-3">
                     {% if feeds|length > 0 %}
                         {% for feed in feeds %}
                             <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
                                 <div class="flex justify-between">
                                     <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ feed.subject|slice:":50" }}</p>
-                                    <p class="text-right text-sm">{{ feed.date_created|date:"M d, Y" }}</p>
+                                    <p class="text-sm text-right">{{ feed.date_created|date:"M d, Y" }}</p>
                                 </div>
                                 <div>
                                     <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ feed.description }}</p>
@@ -40,7 +40,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     </div>
-                                    <p class="px-2 py flex items-center" style="font-size:10px;border:1px solid #d59c31; color:#d59c31">Post</p>
+                                    <p class="flex items-center px-2 py" style="font-size:10px;border:1px solid #d59c31; color:#d59c31">Post</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -50,14 +50,14 @@
                 </div>
             </div>
             <div class="[&>div]:rounded-md w-full">
-                <p class="font-bold text-lg ml-5">Announcements Feed</p>
+                <p class="text-lg font-bold">Announcements Feed</p>
                 <div class="grid gap-3">
                     {% if feeds|length > 0 %}
                         {% for feed in feeds %}
                             <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between max-h-[200px] bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
                                 <div class="flex justify-between">
                                     <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ feed.subject|slice:":50" }}</p>
-                                    <p class="text-right text-sm">{{ feed.date_created|date:"M d, Y" }}</p>
+                                    <p class="text-sm text-right">{{ feed.date_created|date:"M d, Y" }}</p>
                                 </div>
                                 <div>
                                     <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ feed.description }}</p>

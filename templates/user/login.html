@@ -42,7 +42,7 @@
               </div>
               <img class="w-auto h-12" src="{% static '/images/logo.png' %}"/>
             </div>  
-            <h2 class="font-sans mt-6 font-sans text-3xl font-bold text-gray-900 dark:white">Sign in to your account</h2>
+            <h2 class="mt-6 font-sans text-3xl font-bold text-gray-900 dark:white">Sign in to your account</h2>
           </div>
     
           <div class="mt-8">
@@ -51,9 +51,9 @@
               {% csrf_token %}
               {{ form|crispy }}
               
-              <button class="flex justify-center w-full px-4 py-2 mt-4 font-sans text-base font-medium text-white border border-transparent rounded-md bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2" id="loginBtn" type="submit">Login</button>
+              <button class="flex justify-center w-full px-4 py-2 mt-4 font-sans text-base font-medium text-white border border-transparent rounded-md login-btn hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2" id="loginBtn" type="submit">Login</button>
               
-              <div class="flex flex-col mt-2 gap-y-4">
+              <div class="flex flex-col mt-3 gap-y-4">
                 {% comment %}<a class="font-sans font-medium text-center text-amber-600 hover:text-amber-700" style="color: rgb(245 158 11 / var(--tw-text-opacity));" href="{% url 'password_reset' %}">Forgot Password</a>{% endcomment %}
                 <span class="font-sans text-center">Don't have an account? <a style="color: rgb(245 158 11 / var(--tw-text-opacity));" class="font-sans font-medium text-amber-600 hover:text-amber-700" href="{% url 'user-register' %}">Sign up</a></span>
               </div>       

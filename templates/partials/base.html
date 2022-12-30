@@ -59,15 +59,18 @@
         </head>
         
 
-        <div id="form-modal" class="fixed w-full min-h-full hidden" style="z-index:200;">
+        <div id="form-modal" class="fixed hidden w-full min-h-full font-sans" style="z-index:200;">
             <div id="form-modal-child" class="dark:white backdrop-blur-md hover:bg-[rgba(0,0,0,0.2)] bg-[rgba(0,0,0,0.5)] transition-all flex justify-center items-center w-full min-h-screen">
-                <div style="border-radius:10px;align-items: stretch;overflow:hidden" class="bg-white dark:gray grid grid-flow-col justify-center gap-5 h-full">
-                    <div style="min-height: 200px; min-width:200px;height:70vh;overflow:scroll;padding: 30px" class="grid gap-2">
-                        <p id="form-modal-title" class="font-bold text-xl tracking-[-1px]">Form Title</p>
-                        <div id="form-modal-body"></div>
+                <div style="border-radius:10px;align-items: stretch;overflow:hidden" class="grid justify-center h-full grid-flow-col bg-white dark:gray">
+                    
+                    <div class="flex flex-col justify-between px-4 py-8 bg-amber-600" >
+                        <p class="font-sans text-lg text-white uppercase" id="form-modal-extra">Extension Services</p>
+                        <img class="w-48" src="/static/images/logo-fms_full.svg"/>
+                        
                     </div>
-                    <div style="align-items: stretch;padding: 30px;display:grid; align-items:center; flex-direction: column; background-size:cover;font-size:4vw; line-height:1;letter-spacing: -3px;text-align:left;height:100%;width:100%;border-radius:15px;border-top-right-radius: 0;border-bottom-right-radius: 0;color:white;background-image:url('{% static 'images/bg_login.jpg' %}')">
-                        <img src="/static/images/logo-fms_full.svg" style="width:20vw"/><br/><p id="form-modal-extra" style="font-size:20px;letter-spacing: 0px; text-transform: capitalize;">Extension Services</p>
+                    <div style="min-height: 200px; min-width:200px;height:70vh;overflow:scroll;padding: 30px" class="grid gap-2">
+                        <p id="form-modal-title" class="font-bold text-xl tracking-[-1px]  font-sans">Form Title</p>
+                        <div id="form-modal-body"></div>
                     </div>
                 </div>
             </div>
@@ -77,7 +80,7 @@
             <div class="{% if not ajax and request.user.is_authenticated %}grid grid-cols-[100px_90fr]{% endif %}">
                 {% if not ajax %}
                     {% if request.user.is_authenticated %}
-                    <div class="dark:bg-neutral-900 bg-neutral-50 h-screen">
+                    <div class="h-full dark:bg-neutral-900 bg-neutral-50">
                         {% include 'partials/sidebar.html' %}
                     </div>
                     {% endif %}

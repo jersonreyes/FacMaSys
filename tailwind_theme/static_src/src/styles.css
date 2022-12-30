@@ -9,6 +9,9 @@
   }
 
 @layer utilities {
+    .login-btn {
+        background-color: #d97706 !important;
+    }
     .white {
         color: white !important;
     }
