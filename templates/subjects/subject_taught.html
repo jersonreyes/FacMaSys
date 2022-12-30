@@ -6,28 +6,27 @@
 {% endblock %}
 
 
-{% block content %}
-    <h3>Subject Taught</h3>
-    <a href="../">Go back to Home</a>
-    
+{% block content %}    
+<div class="grid items-start gap-5">
+    <div>
+        <a class="nest font-bold" style="background-color:white; color: orange" title="Add Subjects Taught" href="/subjects_taught/add_subject">Add Subjects Taught</a>
+    </div>
     {% if all_subjects|length > 0 %}
-        {% for subject in all_subjects %}
-            <p>User UID: {{ request.user.id }}, Subject Taught: {{ subject }}</p>
-        {% endfor %}
-        <!-- <table>
+        <table id="nest-parent">
             <thead>
                 <tr>
-                    <th>course_code</th>
-                    <th>course_title</th>
-                    <th>course_credits</th>
-                    <th>semester</th>
-                    <th>year</th>
-                    <th>course_lec_units</th>
-                    <th>course_lab_units</th>
-                    <th>course_hours_per_week</th>
-                    <th>specialization</th>
-                    <th>pre_requisite</th>
-                    <th>course_type</th>
+                    <th>Subject</th>
+                    <th>Course Title</th>
+                    <th>Credits</th>
+                    <th>Semester</th>
+                    <th>Year>
+                    <th>Course LEC Units</th>
+                    <th>Lab Units</th>
+                    <th>Hours per Week</th>
+                    <th>Specialization</th>
+                    <th>Pre-requisite</th>
+                    <th>Course Type</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,16 +44,22 @@
                         <td>{{ subject.pre_requisite }}</td>
                         <td>{{ subject.course_type }}</td>
                         <td>
-                            <a href="../delete/{{subject.id}}">Delete</a>
+                            <a href="/subjects_taught/delete_subject_taught/{{id_subject_taught}}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
-        </table> -->
-    {% else %}
-        <h1>No data available.</h1>
+        </table>
     {% endif %}
-
-
-    <a href="./add_subject">Add Subject Taught</a>
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#subjects_taught').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
+</div>
 {% endblock %}

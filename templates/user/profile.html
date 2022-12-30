@@ -38,6 +38,7 @@
                     </div>
                     <div class="flex items-center">
                         <div class="flex items-center gap-2 ">
+                            {% if request.user.profile.user_role != 'faculty' %}
                             <div class="items-center dark:hover:bg-white dark:hover:text-black button-standard border border-[rgba(200,200,200,0.5)] px-2 py-1 rounded-md flex gap-2">
                                 <img src="/static/images/add_user.png" class="dark:invert" style="height:14px;width:14px"/>
                                 {% if user_data %}
@@ -48,6 +49,7 @@
                                 {% endif %}
                                 </button>
                             </div>
+                            {% endif %}
                             {% if view != 'outside' %}
                             <a class="form-modal-toggler main-theme-bg" title="Update Profile" href="javascript:void();" value="{% url 'user-profile-update' %}">Edit Profile</a>
                             {% endif %}
@@ -60,10 +62,13 @@
     <div>
         {% if view != 'outside' %}
         <div class="grid grid-flow-col gap-2 justify-center m-4">
+            {% if request.user.profile.user_role != 'faculty' %}
             <a class="form-modal-toggler main-theme-bg" title="Add Post" href="javascript:void();" value="/announcements/add_announcements">Add Post</a>
-            <a class="form-modal-toggler main-theme-bg" title="Add Research" href="javascript:void();" value="/announcements/add_announcements">Add Research</a>
+            {% endif %}
+            <a class="form-modal-toggler main-theme-bg" title="Add Research" href="javascript:void();" value="/research/add_research">Add Research</a>
         </div>
         {% endif %}
+        {% if request.user.profile.user_role != 'faculty' %}
         <p class="text-center text-lg font-bold">Posts</p>
         <div class="grid gap-3 grid-cols-3 [&>div]:rounded-md w-full">
             {% if feeds.0|length > 0 %}
@@ -95,6 +100,7 @@
             <p class="text-center">No Data</p>    
         {% endif %}
     </div>
+    {% endif %}
     <div>
         <p class="text-center text-lg font-bold">Researches</p>
         <div class="grid gap-3 grid-cols-3 [&>div]:rounded-md w-full">
@@ -123,7 +129,7 @@
                 {% endfor %}   
             {% endif %}
         </div>
-        {% if feeds.0|length <= 0 %}
+        {% if researches.0|length <= 0 %}
             <p class="text-center">No Data</p>    
         {% endif %}
     </div>

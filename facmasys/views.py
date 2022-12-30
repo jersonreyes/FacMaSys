@@ -307,7 +307,7 @@ def update_taught_subjects(request, id):
         if form.is_valid():  
             form.save()  
             print("Saved!")
-            return redirect("../")  
+            return redirect('/subjects/')
         else:
             print("Noped!")
         
@@ -410,7 +410,7 @@ def add_researches(request):
                     new_form.faculty_id = user_instance
                     new_form.save()
                     print("Success! done") 
-                    return redirect('./')   # refresh
+                    return redirect('/researches/')   # refresh
                 except:  
                     pass  
         else:  
@@ -458,7 +458,7 @@ def add_presented(request):
                     new_form.faculty_id = user_instance
                     new_form.save()
                     print("Success!") 
-                    return redirect('./')   # refresh
+                    return redirect('/researches/')   # refresh
                 except:  
                     pass  
         else:  
@@ -497,7 +497,7 @@ def add_published(request):
                     new_form.faculty_id = user_instance
                     new_form.save()
                     print("Success!") 
-                    return redirect('./')   # refresh
+                    return redirect('/researches/')  # refresh
                 except:  
                     pass  
         else:  
@@ -721,6 +721,13 @@ def update_subject(request, id):
 def delete_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects.objects.get(id=id)  
+        ext.delete()  
+        return redirect("../")
+    return redirect('index')
+
+def delete_subject_taught(request, id):
+    if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
+        ext = Subjects_Taught.objects.get(id=id)  
         ext.delete()  
         return redirect("../")
     return redirect('index')

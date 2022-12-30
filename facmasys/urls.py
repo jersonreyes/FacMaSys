@@ -45,6 +45,7 @@ urlpatterns = [
     path('subjects_taught/', views.faculty_subjects_taught),
     path('subjects_taught/add_subject', views.add_taught_subjects),
     path('subjects_taught/update_taught_subjects/<int:id>', views.update_taught_subjects),
+    path('subjects_taught/delete_subject_taught/<int:id>', views.delete_subject_taught),
     
     path('', views.index, name='index'),
     path('dashboard/', include('apps.dashboard.urls')),
