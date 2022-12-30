@@ -538,10 +538,10 @@ def update_researches(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         form = ResearchForm()  
         research = Research.objects.get(id=id)  
-        form = ResearchForm(request.POST, instance=research)  
+        form = ResearchForm(request.POST, request.FILES, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return redirect("/researches/")  
         
         context = {
             'research': research,
@@ -562,7 +562,7 @@ def update_details_a(request, id):
         if form.is_valid():  
             print("Done!")
             form.save()  
-            return redirect("../../")  
+            return redirect("/researches/")  
         print("asfdasfd!")
         context = {
             'research': research,
@@ -580,7 +580,7 @@ def update_details_b(request, id):
         form = Research_PublishedForm(request.POST, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../../")  
+            return redirect("/researches/")  
 
         research_all = Research_Published.objects.filter(id=id)  
         current_edit__ = research_all.values().first()['published_id_id']
