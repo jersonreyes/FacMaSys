@@ -29,7 +29,7 @@
                 </a>
                 {% endif %}
 
-                {% if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser %}
+                {% if request.user.profile.user_role == 'researchcoor' or request.user.is_superuser %}
                 <a value="Researches" href="{% url 'researches-index' %}" class="animate glow delay-4 sidebarItem text-white no-underline grid items-center place-items-center justify-center {% if state == 'researches' %}selected-from-url{% endif %} hover:sidebarItemActive" id="text_link">                                                                                    
                     <img class="invert dark:invert-0" style="width:36px; height:36px;" src="{% static 'images/icon-nav_research.svg' %}" id="tooltip_img" alt="Dashboard">                                               
                     <span class="mt-1 font-sans text-xs text-black dark:white">Researches</span>                      
