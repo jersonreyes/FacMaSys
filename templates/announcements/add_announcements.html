@@ -24,18 +24,6 @@
             <p>{{form2.agenda}}</p>
         </div>
         <div>
-            <p>Issued By: </p>
-            <p>{{form2.issued_by}}</p>
-        </div>
-        <div>
-            <p>Extension Address: </p>
-            <p>{{form2.extension_address}}</p>
-        </div>
-        <div>
-            <p for="id_email">Email:</p>
-            <p><input type="email" name="email" maxlength="100" required="" id="id_email"></p>
-        </div>
-        <div>
             <p for="id_event_date">Event date:</p>
             <p><input type="date" name="event_date" required="" id="id_event_date"></p>
         </div>
@@ -46,7 +34,7 @@
         <p>Department Head</p>
     
         <div>
-            <div><p>Issued by: </p>{{ form2.issued_by }}</div>
+
             <div><p>Agenda: </p>{{ form2.agenda }}</div>
         </div>
     </div>
@@ -85,16 +73,8 @@
                   <option value="Others">Others</option>
                 </select>
             </div><br>
-            <div>
-              Issued by<br />
-              <input
-                type="text"
-                name="issued_by"
-                maxlength="200"
-                required=""
-                id="id_issued_by"
-              />
-            </div>
+            
+            
             <br>
             <div>
               Deadline start<br />
@@ -120,11 +100,11 @@
     <!-- General Announcements  -->
     <div>
         <p>Subject: </p>
-        <input type="text" name="subject" value="|PPPPP|" maxlength="200" required="" id="id_subject">
+        <input type="text" name="subject" value="" maxlength="200" required="" id="id_subject">
     </div>
     <div>
         <p>Message / Description: </p>
-        <textarea name="description" id="id_description" maxlength="200" cols="30" rows="10">|PPPPP|</textarea>
+        <textarea name="description" id="id_description" maxlength="200" cols="30" rows="10"></textarea>
     </div>
     <div>
         <p>Image: </p>

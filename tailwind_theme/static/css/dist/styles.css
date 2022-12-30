@@ -1020,6 +1020,10 @@ html {
   margin-top: 10vh;
 }
 
+.ml-5 {
+  margin-left: 1.25rem;
+}
+
 .mt-\[9vh\] {
   margin-top: 9vh;
 }
@@ -1376,10 +1380,6 @@ html {
   align-items: center;
 }
 
-.items-stretch {
-  align-items: stretch;
-}
-
 .justify-start {
   justify-content: flex-start;
 }
@@ -1593,6 +1593,11 @@ html {
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(113 63 18 / var(--tw-bg-opacity));
+}
+
 .bg-center {
   background-position: center;
 }
@@ -1609,6 +1614,10 @@ html {
   padding: 0.5rem;
 }
 
+.p-3 {
+  padding: 0.75rem;
+}
+
 .p-10 {
   padding: 2.5rem;
 }
@@ -1619,10 +1628,6 @@ html {
 
 .p-1 {
   padding: 0.25rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
 }
 
 .p-2\.5 {
@@ -1709,10 +1714,6 @@ html {
 
 .pt-6 {
   padding-top: 1.5rem;
-}
-
-.pr-0 {
-  padding-right: 0px;
 }
 
 .text-left {
@@ -1994,16 +1995,16 @@ html {
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
 
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }

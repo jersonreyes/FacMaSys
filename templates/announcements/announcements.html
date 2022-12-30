@@ -11,7 +11,6 @@
 
     <a href="./add_announcements">Post Announcement</a>
         {% if user_type == 'extensioncoor' %}
-            <p>Extension Coord.</p>
             <table>
                 <thead>
                     <th>ID</th>
@@ -21,9 +20,6 @@
                     <th>Image Cover</th>
                     <th>Link</th>
 
-                    <th>Issued_by</th>
-                    <th>Extension Address</th>
-                    <th>Email</th>
                     <th>Event_date</th>
                     <th>Agenda</th>
                     <th>Actions</th>
@@ -36,9 +32,7 @@
                         <td>{{ e.reference_id.description }}</td>
                         <td>{{ e.reference_id.date_created }}</td>
                         <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt=""></td>
-                        <td>{{ e.reference_id.link }}</td>
-                        <td>{{ e.extension_address }}</td>
-                        <td>{{ e.issued_by }}</td>
+
                         <td>{{ e.email }}</td>
                         <td>{{ e.event_date }}</td>
                         <td>{{ e.agenda }}</td>
@@ -61,8 +55,8 @@
                     <th>Image Cover</th>
                     <th>Link</th>
 
-                    <th>issued_by</th>
-                    <th>agenda</th>
+                    <th>Agenda</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
@@ -74,7 +68,6 @@
                         <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt=""></td>
                         <td>{{ e.reference_id.link }}</td>
 
-                        <td>{{ e.issued_by }}</td>
                         <td>{{ e.agenda }}</td>
                         <td>
                             <a href="./update/{{e.reference_id.id}}">Update</a>
@@ -95,10 +88,10 @@
                     <th>Image Cover</th>
                     <th>Link</th>
 
-                    <th>Issued By</th>
                     <th>Deadline Start</th>
                     <th>Deadline End</th>
                     <th>Agenda</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
@@ -110,7 +103,6 @@
                         <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt="e.reference_id.image"></td>
                         <td>{{ e.reference_id.link }}</td>
                         
-                        <td>{{ e.issued_by }}</td>
                         <td>{{ e.deadline_start }}</td>
                         <td>{{ e.deadline_end }}</td>
                         <td>{{ e.agenda }}</td>
