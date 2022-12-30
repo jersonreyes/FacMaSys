@@ -76,7 +76,20 @@
                     <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between max-h-[200px] bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
                         <div class="flex justify-between">
                             <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ feed.subject|slice:":50" }}</p>
-                            <p class="text-right text-sm">{{ feed.date_added|date:"M d Y" }}</p>
+                            {% if request.user.profile.user_role != 'faculty' %}
+                            <div class="flex gap-3 items-center">
+                                <p class="text-right text-sm">{{ feed.date_created|date:"M d, Y" }}</p>
+                                <div class="transition dropdown">
+                                    <button class="font-bold transition hover:opacity-[0.5]" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transform: translateY(-13px);">...</button>
+                
+                                    <div class="p-3 dropdown-menu dropdown-menu-right" style="z-index:1000">                                                 
+                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Post / Announcement" href="javascript:void();" value="/announcements/update/{{ feed.id }}">Edit</a>
+                                        <div class="dropdown-divider"></div>    
+                                        <a class="font-bold ignore-url dropdown-item p-2 bg-transparent" title="Edit Post / Announcement" href="/announcements/delete/{{ feed.id }}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                         <div>
                             <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ feed.description }}</p>
@@ -109,7 +122,20 @@
                     <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between max-h-[200px] bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
                         <div class="flex justify-between">
                             <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ feed.research_title|slice:":50" }}</p>
-                            <p class="text-right text-sm">{{ feed.date_added|date:"M d Y" }}</p>
+                            {% if request.user.profile.user_role != 'faculty' %}
+                            <div class="flex gap-3 items-center">
+                                <p class="text-right text-sm">{{ feed.date_added|date:"M d, Y" }}</p>
+                                <div class="transition dropdown">
+                                    <button class="font-bold transition hover:opacity-[0.5]" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="transform: translateY(-13px);">...</button>
+                
+                                    <div class="p-3 dropdown-menu dropdown-menu-right" style="z-index:1000">                                                 
+                                        <a class="form-modal-toggler bg-transparent border-0 text-black dark:white hover:main-theme font-bold dropdown-item p-2" title="Edit Research" href="javascript:void();" value="/research/update_research/{{ feed.id }}">Edit</a>
+                                        <div class="dropdown-divider"></div>    
+                                        <a class="font-bold ignore-url dropdown-item p-2 bg-transparent" title="Delete Research" href="/research/delete_research/{{ feed.id }}">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                         <div>
                             <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ feed.abstract }}</p>

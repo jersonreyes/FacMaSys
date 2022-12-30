@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $("#nav-highlighter").css('top', pos.top);
                 $("#nav-highlighter").css('left', pos.left);
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
-            !e.currentTarget.classList.contains('nest') && window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
+            !e.currentTarget.classList.contains('nest') && !e.currentTarget.classList.contains('ignore-url') && window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
             $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
             if(e.currentTarget.classList.contains('nest'))
               $("#form-modal-body").animate({opacity: '0'}, 100).load(e.currentTarget.href + "#nest-parent").animate({opacity: '1'}, 100);      

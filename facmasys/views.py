@@ -46,7 +46,7 @@ def update_ext_announcements(request, id):
         form = Feeds(request.POST, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return redirect("/feed")  
         
         context = {
             'research': research,
@@ -61,7 +61,7 @@ def delete_ext_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
-        return redirect("../")
+        return redirect("/feed")
     return redirect('index')
 
 @login_required
@@ -130,7 +130,7 @@ def update_announcements(request, id):
         if form.is_valid():  
             print("True")
             form.save()  
-            return redirect("../")
+            return redirect("feed")
         
         print("False")
         context = {
@@ -147,7 +147,7 @@ def delete_announcements(request, id):
     if not request.user.profile.user_role == 'faculty' or request.user.is_superuser:
         announcements = Feeds.objects.get(id=id)
         announcements.delete()
-        return redirect("../")
+        return redirect("/feed/")
     return redirect('index')
 
 from django.shortcuts import get_object_or_404, render
@@ -226,7 +226,7 @@ def update_extension_services(request, id):
         form = ExtensionServiceForm(request.POST, instance=extension)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return redirect("/extension_services/")  
         
         context = {
             'extension': extension,
@@ -241,7 +241,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/extension_services")
     return redirect('index')
 
 def faculty_member_main(request):
@@ -620,7 +620,7 @@ def delete_researches(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
         subject.delete()  
-        return redirect("../")
+        return redirect("researches")
     return redirect('index')
 
 @login_required
@@ -628,7 +628,7 @@ def delete_extension_services(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'extensioncoor' or request.user.is_superuser:
         ext = ExtensionService.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/extension_services")
     return redirect('index')
 
 
@@ -706,7 +706,7 @@ def update_subject(request, id):
         
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return  redirect("/subjects")
         
         context = {
             'subjecttt': subjecttt,
@@ -722,14 +722,14 @@ def delete_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/subjects")
     return redirect('index')
 
 def delete_subject_taught(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         ext = Subjects_Taught.objects.get(id=id)  
         ext.delete()  
-        return redirect("../")
+        return redirect("/subjects")
     return redirect('index')
 
 """ SUBJECTS """

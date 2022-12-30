@@ -8,8 +8,6 @@ Faculty Member - Add Subject Taught
 {% block content %}
 <form method="POST" action="./{{ research.id }}">
     {% csrf_token %}
-
-    <a href="../">Go back</a>
     <div>
         <label for="id_subject">Subject:</label>
         <input type="text" name="subject" maxlength="200" required="" value="{{research.subject}}" id="id_subject">
