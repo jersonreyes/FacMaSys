@@ -116,7 +116,7 @@ def add_announcements(request):
                 print('new_form: ', new_form)
                 print('new_form2: ', new_form2)
                 print("end")
-                return redirect('/subjects/')   # refresh
+                return redirect('feed')   # refresh
             except:  
                 pass  
         else:
@@ -189,8 +189,6 @@ def update_announcements(request, id):
     research = Feeds.objects.get(id=id)  
     profile = Profile.objects.filter(user=request.user).values().first()
     form = FeedsForm(request.POST, request.FILES, instance=research)  
-    
-    
     
         # Extension Coordinator
     if request.user.profile.user_role == 'extensioncoor':
