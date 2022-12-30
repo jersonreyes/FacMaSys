@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import RequestContext, loader
 from django.template.loader import render_to_string
+
 from facmasys.utils import add_activity
 
 from .forms import *
@@ -120,7 +121,7 @@ def add_announcements(request):
                 print('new_form2: ', new_form2)
                 print("end")
                 add_activity(logged_user=request.user,activity_type='ADD',activity_location='ANNOUNCEMENT',activity_message=f"User {request.user.username} added an announcement.")
-                return redirect('feed')   # refresh
+                return redirect('/feed/')   # refresh
             except:  
                 pass  
         else:
@@ -592,10 +593,7 @@ def add_presented(request):
         else:  
             form = Research_PresentedForm()         
             print("Failed!") 
-            
-        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            return redirect("../") 
-
+        
         context = {
             'form': form,
             'all_presented': all_presented,
@@ -619,8 +617,6 @@ def add_published(request):
         #     selected_list.append(e['id'])
         # print('published values: ', val)
         
-        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-            return redirect("../") 
         if request.method == "POST":  
             form = Research_PublishedForm(request.POST)  
             if form.is_valid():  
@@ -868,7 +864,7 @@ def update_subject(request, id):
         if form.is_valid():  
             form.save()  
             add_activity(logged_user=request.user,activity_type='UPDATE',activity_location='SUBJECT',activity_message=f"User {request.user.username} updated a subject.")
-            return  redirect("/subjects")
+            return  redirect("/subjects/")
         if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return redirect("../") 
         context = {

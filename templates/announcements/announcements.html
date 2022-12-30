@@ -1,14 +1,4 @@
-{% extends "main.html" %}
 
-
-{% block title %}
-    View Announcements
-{% endblock %}
-
-
-{% block content %}
-
-        <a href="./add_announcements">Post Announcement</a>
         {% if user_type == 'extensioncoor' %}
             <table>
                 <thead>
@@ -21,7 +11,9 @@
 
                     <th>Event_date</th>
                     <th>Agenda</th>
+                    {% if not ajax %}
                     <th>Actions</th>
+                    {%endif%}
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
@@ -35,10 +27,12 @@
                         <td>{{ e.email }}</td>
                         <td>{{ e.event_date }}</td>
                         <td>{{ e.agenda }}</td>
+                        {% if not ajax %}
                         <td>
                             <a href="./update/{{e.reference_id.pk}}">Update</a>
                             <a href="./delete/{{e.reference_id.pk}}">Delete</a>
                         </td>
+                        {%endif%}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -54,7 +48,9 @@
                     <th>Link</th>
 
                     <th>Agenda</th>
+                    {% if not ajax %}
                     <th>Actions</th>
+                    {%endif%}
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
@@ -64,13 +60,15 @@
                         <td>{{ e.reference_id.description }}</td>
                         <td>{{ e.reference_id.date_created }}</td>
                         <td><img style="max-height: 50px; max-width: 100px;" src="../../media/{{e.reference_id.image}}" alt=""></td>
-                        <td>{{ e.reference_id.link }}</td>
+                        <td><a href="{{ e.reference_id.link }}">{{ e.reference_id.link }}</a></td>
 
                         <td>{{ e.agenda }}</td>
+                        {% if not ajax %}
                         <td>
-                            <a href="./update/{{e.reference_id.id}}">Update</a>
-                            <a href="./delete/{{e.reference_id.id}}">Delete</a>
+                            <a class="font-bold form-modal-toggler ignore-url" title="Add Post / Announcement" href="/announcements/update/{{e.reference_id.id}}">Update</a>
+                            <a href="/announcements/delete/{{e.reference_id.id}}">Delete</a>
                         </td>
+                        {%endif%}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -88,7 +86,9 @@
                     <th>Deadline Start</th>
                     <th>Deadline End</th>
                     <th>Agenda</th>
+                    {% if not ajax %}
                     <th>Actions</th>
+                    {% endif %}
                 </thead>
                 <tbody>
                     {% for e in announcements2 %}
@@ -103,11 +103,12 @@
                         <td>{{ e.deadline_start }}</td>
                         <td>{{ e.deadline_end }}</td>
                         <td>{{ e.agenda }}</td>
-
+                        {% if not ajax %}
                         <td>
-                            <a href="./update/{{e.reference_id.id}}">Update</a>
+                            <a class="font-bold form-modal-toggler ignore-url" style="background-color:white; color: orange" title="Edit Post / Announcement" href="/announcements/update/{{e.reference_id.id}}">Edit Post / Announcement</a>
                             <a href="./delete/{{e.reference_id.id}}">Delete</a>
                         </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -178,7 +179,3 @@
             </table>
             
         {% endif %}
-
-
-    
-{% endblock %}

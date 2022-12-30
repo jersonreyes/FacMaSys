@@ -13,6 +13,7 @@
                 <p class="font-sans text-[82px] tracking-[-2px] font-bold text-white">Posts / <span class="font-normal">Feed</span></p>
                 {% if not request.user.profile.user_role == 'faculty' or request.user.is_superuser %}
                 <a class="font-bold form-modal-toggler ignore-url" style="background-color:white; color: orange" title="Add Post / Announcement" href="/announcements/add_announcements">Add Post / Announcement</a>
+                <a class="font-bold form-modal-toggler ignore-url" style="background-color:white; color: orange" title="View Summary of Posts" href="/announcements/">View Summary of Posts</a>
                 {% endif %}
             </div>
         </div>
@@ -60,40 +61,33 @@
                         {% if feed.agenda == 'On Call Papers' %}
                             {% for main_feed in feeds %}
                                 {% if main_feed.id == feed.reference_id_id %}
-                                    {{ main_feed.subject }}
+                                    <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between max-h-[200px] bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
+                                        <div class="flex justify-between">
+                                            <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ main_feed.subject|slice:":50" }}</p>
+                                            {% if request.user.profile.user_role != 'faculty' %}
+                                            <div class="flex items-center gap-3">
+                                                <p class="text-sm text-right">{{ main_feed.date_created|date:"M d, Y" }}</p>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ main_feed.description }}</p>
+                                        </div>              
+                                        <div class="flex justify-between">
+                                            <div class="flex gap-2">
+                                                {% for user in users %}
+                                                    {% if main_feed.user_id|slugify  == user.user.username|slugify %}                           
+                                                        <img src="/media/{{ user.image }}" class="rounded-full" style="height:20px;width:20px"/>
+                                                        <p class="font-bold">{{ user.user.first_name }}  {{ user.user.last_name }}</p>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
                     {% endfor %}
-                    {% if feeds|length > 0 %}
-                        {% for feed in feeds_research %}
-                            <div aria-expanded="false" aria-controls="drawer-name" data-drawer-trigger id="research-{{ research.id }}" class="trigger research-item flex flex-col justify-between max-h-[200px] bg-[#f5f5f5] dark:bg-[#363636] animate glow delay-{{forloop.counter}}" style="padding: 25px">
-                                <div class="flex justify-between">
-                                    <p class="font-bold" style="font-weight:bold;font-size:20px; letter-spacing: -1px; line-height: 1">{{ feed.subject|slice:":50" }}</p>
-                                    {% if request.user.profile.user_role != 'faculty' %}
-                                    <div class="flex items-center gap-3">
-                                        <p class="text-sm text-right">{{ feed.date_created|date:"M d, Y" }}</p>
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                <div>
-                                    <p style="white-space:normal; max-height:70px; overflow:hidden; text-overflow:ellipsis; word-wrap: break-word">{{ feed.description }}</p>
-                                </div>              
-                                <div class="flex justify-between">
-                                    <div class="flex gap-2">
-                                        {% for user in users %}
-                                            {% if feed.user_id|slugify  == user.user.username|slugify %}                           
-                                                <img src="/media/{{ user.image }}" class="rounded-full" style="height:20px;width:20px"/>
-                                                <p class="font-bold">{{ user.user.first_name }}  {{ user.user.last_name }}</p>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        {% else %}
-                        <p class="text-center">No data yet.</p>
-                    {% endif %}
                 </div>
             </div>
         </div>

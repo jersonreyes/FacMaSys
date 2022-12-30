@@ -3,6 +3,7 @@ $(document).ready(function() {
 
   new ClipboardJS('.copy');
   $(document).on("click", ".form-modal-toggler", function(e){
+    
     fetch(e.currentTarget.getAttribute('href'), {
         dataType: "html",
         headers:{
@@ -269,7 +270,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     */
     $(document).on("click", "a", function(e){
         e.preventDefault();
-        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains("paginate_button")) {
+        if(e.currentTarget.classList.contains("form-modal-toggler")) {
+          window.history.pushState('FacMaSys', 'FacMaSys' + (e.currentTarget.getAttribute('title') ? " - " + e.currentTarget.getAttribute('title') : ''), e.currentTarget.href);
+        }
+        if(e.currentTarget.getAttribute('value') != "Toggle Dark/Light Mode" && !e.currentTarget.classList.contains('form-modal-toggler')) {
             e.preventDefault();
             if(e.currentTarget.classList.contains('sidebarItem')) {
               var root = this;

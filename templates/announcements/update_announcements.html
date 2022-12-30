@@ -1,10 +1,6 @@
-{% extends "main.html" %} {% block title %} Faculty Member - Add Subject Taught
-{% endblock %} {% block content %}
+
 <form enctype="multipart/form-data" method="POST" action="./{{ research.id }}">
     {% csrf_token %}
-
-    <a href="../">Go back</a>
-
     {% if user_type == 'extensioncoor' %}
     <div>
         <div>
@@ -136,4 +132,3 @@
 
     <button type="submit">Update Announcements</button>
 </form>
-{% endblock %}

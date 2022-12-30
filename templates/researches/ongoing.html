@@ -17,8 +17,9 @@
                 <th>Date Added</th>
                 <th>School</th>
                 <th>Degree Level</th>
-                
+                {% if not ajax %}
                 <th>Actions</th>
+                {%endif%}
             </tr>
         </thead>
 
@@ -34,10 +35,12 @@
                 <td>{{ element.date_added|date:"M d, Y" }}</td>
                 <td>{{ element.researcher_school }}</td>
                 <td>{{ element.degree_level }}</td>
+                {% if not ajax %}
                 <td class="action-buttons">
                     <button class="button-9" role="button" onclick="window.location.href = '/research/update_research/{{ element.id }}'"><span class="iconify" data-icon="material-symbols:edit-square"></span></button>
                     <button class="button-9" role="button" onclick="window.location.href = '/research/delete_research/{{ element.id }}'"{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></button>
                 </td>
+                {%endif%}
             </tr>
             {% endfor %}
         </tbody>

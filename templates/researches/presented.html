@@ -64,7 +64,9 @@
                     <th>Org Support</th>
                     <th>Org Description</th>
                     <th>Date Presented</th>
+                    {% if not ajax %}
                     <th>Actions</th>
+                    {%endif%}
                 </tr>
             </thead>
     
@@ -84,10 +86,12 @@
                     <td>{{element.org_support}}</td> 
                     <td>{{element.org_description}}</td> 
                     <td>{{element.date_presented}}</td> 
+                    {% if not ajax %}
                     <td action-buttons>
                         <a class="form-modal-toggle button-9" role="button" href="/research/update_details/a/{{ element.id }}"><span class="iconify" data-icon="material-symbols:edit-square"></a>
                         <a class="form-modal-toggle button-9" role="button" href="/research/delete_details/a/{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></a>
                     </td>
+                    {%endif%}
                 </tr>
                 {% endfor %}
             </tbody>

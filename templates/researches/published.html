@@ -10,7 +10,9 @@
                     <th>Publication</th>
                     <th>Source</th>
                     <th>License</th>
+                    {% if not ajax %}
                     <th>Action</th>
+                    {%endif%}
                 </tr>
             </thead>
 
@@ -22,10 +24,12 @@
                     <td>{{ element.publication }}</td>
                     <td>{{ element.source }}</td>
                     <td>{{ element.research_license }}</td>
+                    {% if not ajax %}
                     <td class="action-buttons">
                         <button class="button-9" role="button" onclick="window.location.href = '/research/update_details/b/{{ element.id }}'"><span class="iconify" data-icon="material-symbols:edit-square"></button>
                         <button class="button-9" role="button" onclick="window.location.href = '/research/delete_details/b/{{ element.id }}'"{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></button>
                     </td>
+                    {%endif%}
                 </tr>
                 {% endfor %}
             </tbody>

@@ -16,7 +16,9 @@
                 <th>School</th>
                 <th>Degree Level</th>
                 <th>Progress</th>
+                {% if not ajax %}
                 <th>Actions</th>
+                {%endif%}
             </tr>
         </thead>
 
@@ -33,11 +35,12 @@
                 <td>{{ element.researcher_school }}</td>
                 <td>{{ element.degree_level }}</td>
                 <td>{{ element.research_progress }}</td>
-
+                {% if not ajax %}
                 <td>
                     <a class="form-modal-toggler" title="Update Subject" href="/research/update_research/{{ element.id }}">Update</a>
                     <button class="delete" onclick="window.location.href='/research/delete_research/{{ element.id }}'">Delete</a>
                 </td>
+                {%endif%}
             </tr>
             {% endfor %}
         </tbody>

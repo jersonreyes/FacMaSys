@@ -8,9 +8,6 @@
 
 {% block content %}    
 <div class="grid items-start gap-5">
-    <div>
-        <a class="nest font-bold" style="background-color:white; color: orange" title="Add Subjects Taught" href="/subjects_taught/add_subject">Add Subjects Taught</a>
-    </div>
     {% if all_subjects|length > 0 %}
         <table id="nest-parent">
             <thead>
@@ -26,7 +23,6 @@
                     <th>Specialization</th>
                     <th>Pre-requisite</th>
                     <th>Course Type</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,9 +39,6 @@
                         <td>{{ subject.specialization }}</td>
                         <td>{{ subject.pre_requisite }}</td>
                         <td>{{ subject.course_type }}</td>
-                        <td>
-                            <a href="/subjects_taught/delete_subject_taught/{{id_subject_taught}}">Delete</a>
-                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
