@@ -1,14 +1,63 @@
 <form action="" method="post">
-    {% csrf_token %}
-
+  {% csrf_token %}
+  <div>
     <div>
-        {% for e in form %}
-            <div><p>{{ e.label }}</p><p>{{ e }}</p></div>
-        {% endfor %}
-
-        {{ form.errors }}
-        {{ form.non_field_errors }}
-
-        <button type="submit">Add Presented</button>
+        <p>Select the Publised Research</p>
+        {{ form.published_id }}
     </div>
+    <br>
+    <div>
+      <p>Publication Date</p>
+        <input
+            type="date"
+            name="published_date"
+            required=""
+            id="id_published_date"
+        />
+    </div>
+    <br>
+    <div>
+      <p>Publication Company/Organization</p>
+        <input
+          type="text"
+          name="publication"
+          maxlength="200"
+          required=""
+          id="id_publication"
+        />
+    </div>
+    <br>
+    <div>
+      <p>Source</p>
+        <input
+          type="text"
+          name="source"
+          maxlength="200"
+          required=""
+          placeholder="https://doi..."
+          id="id_source"
+        />
+    </div>
+    <br>
+    <div>
+      <p>Research license</p>
+        <select name="research_license" id="id_research_license">
+          <option value="Creative Commons Licenses">
+            Creative Commons Licenses
+          </option>
+          <option value="Alternatives Publishing Licenses">
+            Alternatives Publishing Licenses
+          </option>
+          <option value="Research Repository Licences">
+            Research Repository Licences
+          </option>
+          <option value="Open Access">Open Access</option>
+          <option value="None" selected="">None</option>
+        </select>
+    </div>
+    <br>
+   
+
+    <button type="submit" style="width: 100%;">Add Presented</button>
+  </div>
 </form>

@@ -7,32 +7,188 @@
 {% block content %}
 <form action="" method="post">
     {% csrf_token %}
-
-
-    <div class="container_form_presented">
-        {% for e in form %}
-            <div><p>{{ e.label }}</p><p>{{ e }}</p></div>
-        {% endfor %}
-
-        <!-- {{ form.presented_id }} -->
-        <!-- <select>
-        {% for value, subject in form.presented_id.field.choices %}
-            {% if subject in all_presented %}
-                <option value="{{ value }}">{{ subject }}</option>
-            {% else %}
-            {% endif %}
-        {% endfor %}
-        </select>
-
-        <p>All: {{ form.presented_id }}</p>
-        <p>All: {{ all_presented }}</p>
-        <p>All: {{ all_presented2 }}</p>
-
-        {{ form.errors }}
-        {{ form.non_field_errors }} -->
-
-        <button type="submit">Add Presented</button>
-
+    <div>
+        <p>Select the Research Title</p>
+        <p>
+            {{ form.presented_id }}
+        </p>
     </div>
+
+  <div class="container_form_presented">
+    <div>
+      <p>Event Codename</p>
+      <p>
+        <input
+          type="text"
+          name="short_name"
+          maxlength="50"
+          required=""
+          id="id_short_name"
+          placeholder="(e.g) MIEEE"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Event Name</p>
+      <p>
+        <input
+          type="text"
+          name="event_name"
+          maxlength="200"
+          required=""
+          id="id_event_name"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Event Venue</p>
+      <p>
+        <input
+          type="text"
+          name="event_venue"
+          maxlength="200"
+          required=""
+          id="id_event_venue"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Event Start Date: </p>
+      <p>
+        <input
+          type="date"
+          name="event_start_date"
+          required=""
+          id="id_event_start_date"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Event End Date</p>
+      <p>
+        <input
+          type="date"
+          name="event_end_date"
+          required=""
+          id="id_event_end_date"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Presentation Type</p>
+      <p>
+        <select name="presentation_type" id="id_presentation_type">
+          <option value="Physical">Physical</option>
+
+          <option value="Virtual">Virtual</option>
+
+          <option value="Hyrbrid">Hyrbrid</option>
+        </select>
+      </p>
+    </div>
+
+    <div>
+      <p>Event Type</p>
+      <p>
+        <select name="event_type" id="id_event_type">
+          <option value="Conference">Conference</option>
+
+          <option value="Seminars">Seminars</option>
+
+          <option value="Product Launch">Product Launch</option>
+
+          <option value="Corporate / Executive Meetings">
+            Corporate / Executive Meetings
+          </option>
+
+          <option value="Summits">Summits</option>
+
+          <option value="Symposium">Symposium</option>
+
+          <option value="Trade Shows">Trade Shows</option>
+
+          <option value="Others">Others</option>
+        </select>
+      </p>
+    </div>
+
+    <div>
+      <p>Organizer Name</p>
+      <p>
+        <input
+          type="text"
+          name="org_name"
+          maxlength="200"
+          required=""
+          id="id_org_name"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Organizer Website URL</p>
+      <p>
+        <input
+          type="text"
+          name="org_website_url"
+          maxlength="200"
+          required=""
+          id="id_org_website_url"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Organizer Contact</p>
+      <p>
+        <input
+          type="number"
+          name="org_support"
+          maxlength="200"
+          required=""
+          id="id_org_support"
+        />
+      </p>
+    </div>
+
+    <div>
+      <p>Org Description</p>
+      <p>
+        <textarea
+          name="org_description"
+          cols="40"
+          rows="10"
+          maxlength="500"
+          required=""
+          id="id_org_description"
+        ></textarea>
+      </p>
+    </div>
+
+    <div>
+      <p>Date of your Research Presentation</p>
+      <p>
+        <input
+          type="date"
+          name="date_presented"
+          required=""
+          id="id_date_presented"
+        />
+      </p>
+    </div>
+    
+
+
+    {{ form.errors }}
+    {{ form.non_field_errors }}
+
+    <button type="submit" style="width: 100%;">Add Presented</button>
+  </div>
 </form>
+
 {% endblock %} 

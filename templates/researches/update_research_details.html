@@ -2,7 +2,7 @@
 {% endblock %} {% block content %}
 <p>Faculty Member - Add Subject Taught</p>
 
-<form method="POST" action="./{{ research.id }}">
+<form enctype="multipart/form-data" method="POST" action="./{{ research.id }}">
     {% csrf_token %}
     <input type="text" name="research_title" maxlength="100" required="" value="{{ research.research_title }}" id="id_research_title" />
 
@@ -38,7 +38,21 @@
         {% endfor %}
     </select>
 
+    
+    <div>
+        <span>
+            Current File Uploaded: 
+            <a href="/media/{{research.document}}">{{research.document}}</a>
+        </span>
+
+        <p>Document: </p>
+        <input type="file" name="document" id="id_document" accept="application/pdf,application/msword,
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    </div>
+
     <input type="text" name="researcher_school" maxlength="100" required="" value="{{ research.researcher_school }}" id="id_researcher_school" />
+
+
 
     <button type="submit">Update Data</button>
 </form>

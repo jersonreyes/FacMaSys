@@ -3,302 +3,181 @@
 {% block title %} Faculty Member - Update Details
 {%endblock %}
 
-
 {% block content %}
 
-{% if is_other == True %}
-<form action="" method="post">
-    {% csrf_token %}
-    <label for="id_published_date">Published date:</label>
-    <input type="date" value="{{research.published_date|date:'Y-m-d'}}" name="published_date" required="" id="id_published_date">
-
-    <label for="id_publication">Publication:</label>
-    <input type="text" value="{{research.publication}}" name="publication" maxlength="200" required="" id="id_publication">
-
-    <label for="id_source">Source:</label>
-    <input type="text" value="{{research.source}}" name="source" maxlength="200" required="" id="id_source">
-
-    <label for="id_research_license">Research license:</label>
-    <select name="research_license" id="id_research_license">
-        {% for value, subject in form.research_license.field.choices %}
-        {% if research.research_license == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <label for="id_abstract">Abstract:</label>
-    <textarea name="abstract" cols="40" rows="10" maxlength="1200" required="" id="id_abstract">{{research.abstract}}</textarea>
-
-    <label for="id_published_id">Published id:</label>
-    <select name="published_id" id="id_published_id">
-        {% for value, subject in form.published_id.field.choices %}
-        {% if current_edit == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <button type="submit">Update Value</button>
-</form>
-{% else %}
-<form action="" method="post">
-    {% csrf_token %}
-
-    <label for="id_short_name">Short name:</label>
-    <input type="text" value="{{research.short_name}}" name="short_name" maxlength="50" required=""
-        id="id_short_name" />
-
-    <label for="id_event_name">Event name:</label>
-    <input type="text" value="{{research.event_name}}" name="event_name" maxlength="200" required=""
-        id="id_event_name" />
-
-    <label for="id_event_venue">Event venue:</label>
-    <input type="text" value="{{research.event_venue}}" name="event_venue" maxlength="200" required=""
-        id="id_event_venue" />
-
-    <label for="id_event_start_date">Event start date:</label>
-    <input type="date" value="{{research.event_start_date|date:'Y-m-d'}}" name="event_start_date" required=""
-        id="id_event_start_date" />
-
-    <label for="id_event_end_date">Event end date:</label>
-    <input type="date" value="{{research.event_end_date|date:'Y-m-d'}}" name="event_end_date" required=""
-        id="id_event_end_date" />
-
-    <label for="id_presentation_type">Presentation type:</label>
-    <select name="presentation_type" id="id_presentation_type">
-        {% for value, subject in form.presentation_type.field.choices %}
-        {% if research.presentation_type == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <label for="id_event_type">Event type:</label>
-    <select name="event_type" id="id_event_type">
-        {% for value, subject in form.event_type.field.choices %}
-        {% if research.event_type == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <label for="id_org_name">Org name:</label>
-    <input type="text" value="{{research.org_name}}" name="org_name" maxlength="200" required="" id="id_org_name" />
-
-    <label for="id_org_website_url">Org website url:</label>
-    <input type="text" value="{{research.org_website_url}}" name="org_website_url" maxlength="200" required=""
-        id="id_org_website_url" />
-
-    <label for="id_org_support">Org support:</label>
-    <input type="text" value="{{research.org_support}}" name="org_support" maxlength="200" required=""
-        id="id_org_support" />
-
-    <label for="id_org_description">Org description:</label>
-    <textarea name="org_description" cols="40" rows="10" maxlength="500" required=""
-        id="id_org_description">{{research.org_description}}</textarea>
-
-
-    <label for="id_date_presented">Date presented:</label>
-    <input type="date" value="{{research.date_presented|date:'Y-m-d'}}" name="date_presented" required=""
-        id="id_date_presented" />
-
-    <label for="id_presented_id">Presented id:</label>
-    <select name="presented_id" id="id_presented_id">
-        {% for value, subject in form.presented_id.field.choices %}
-        {% if research.presented_id == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-
-    <label for="id_faculty_id">Faculty id:</label>
-    <select name="faculty_id" id="id_faculty_id">
-        {% for value, subject in form.faculty_id.field.choices %}
-        {% if value == current_edit %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <!-- {{ form.errors }}
-        {{ form.non_field_errors }} -->
-    <button type="submit">Update Value</button>
-</form>
-{% endif %}
-
-
-{% extends "main.html" %}
-
-{% block title %} Faculty Member - Update Details
-{%endblock %}
-
-
-{% block content %}
 
 {% if is_other == True %}
-<form action="" method="post">
-    {% csrf_token %}
-    <label for="id_published_date">Published date:</label>
-<<<<<<< HEAD
-    <input type="text" value="{{research.published_date}}" name="published_date" required="" id="id_published_date">
-=======
-    <input type="date" value="{{research.published_date|date:'Y-m-d'}}" name="published_date" required="" id="id_published_date">
->>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
+    <form action="" method="post">
+        {% csrf_token %}
 
-    <label for="id_publication">Publication:</label>
-    <input type="text" value="{{research.publication}}" name="publication" maxlength="200" required="" id="id_publication">
+        <div>
+            <label for="id_published_date">Published date:</label>
+            <input type="date" value="{{research.published_date|date:'Y-m-d'}}" name="published_date" required="" id="id_published_date">
+        </div>
 
-    <label for="id_source">Source:</label>
-    <input type="text" value="{{research.source}}" name="source" maxlength="200" required="" id="id_source">
+        <div>
+            <label for="id_publication">Publication:</label>
+            <input type="text" value="{{research.publication}}" name="publication" maxlength="200" required="" id="id_publication">
+        </div>
 
-    <label for="id_research_license">Research license:</label>
-    <select name="research_license" id="id_research_license">
-        {% for value, subject in form.research_license.field.choices %}
-        {% if research.research_license == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
+        <div>
+            <label for="id_source">Source:</label>
+            <input type="text" value="{{research.source}}" name="source" maxlength="200" required="" id="id_source">
+        </div>
 
-    <label for="id_abstract">Abstract:</label>
-    <textarea name="abstract" cols="40" rows="10" maxlength="1200" required="" id="id_abstract">{{research.abstract}}</textarea>
 
-    <label for="id_published_id">Published id:</label>
-    <select name="published_id" id="id_published_id">
-        {% for value, subject in form.published_id.field.choices %}
-<<<<<<< HEAD
-        {% if research.published_id == value %}
-=======
-        {% if current_edit == value %}
->>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-<<<<<<< HEAD
+        <div>
+            <label for="id_research_license">Research license:</label>
+            <select name="research_license" id="id_research_license">
+                {% for value, subject in form.research_license.field.choices %}
+                {% if research.research_license == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                <option value="{{value}}">{{value}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-        <p>{{research.published_id}}</p>
-        <p>{{value}}</p>
-        {% endfor %}
-    </select>
-=======
-        {% endfor %}
-    </select>
 
-    <button type="submit">Update Value</button>
->>>>>>> 4f6c094b2ffe4bf4a03d97da8c6e3aa66e4680d2
-</form>
+        <div style="display: none;">
+            <label for="id_published_id">Published id:</label>
+            <select name="published_id" id="id_published_id">
+                {% for value, subject in form.published_id.field.choices %}
+                    {% if current_edit == value %}
+                        <option value="{{value}}" selected>{{value}}</option>
+                    {% else %}
+                        <option value="{{value}}">{{value}}</option>
+                    {% endif %}
+    
+                    
+                    <p>v: {{value}}</p>
+                    <p>c: {{current_edit}}</p>
+                    
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Update Value</button>
+    </form>
 {% else %}
-<form action="" method="post">
-    {% csrf_token %}
+    <form action="" method="post">
+        {% csrf_token %}
 
-    <label for="id_short_name">Short name:</label>
-    <input type="text" value="{{research.short_name}}" name="short_name" maxlength="50" required=""
-        id="id_short_name" />
+        <div>
+            <label for="id_short_name">Event Codename:</label><br>
+            <input type="text" value="{{research.short_name}}" name="short_name" maxlength="50" required=""
+                id="id_short_name" />
+        </div>
 
-    <label for="id_event_name">Event name:</label>
-    <input type="text" value="{{research.event_name}}" name="event_name" maxlength="200" required=""
-        id="id_event_name" />
+        <div>
+            <label for="id_event_name">Event name:</label><br>
+            <input type="text" value="{{research.event_name}}" name="event_name" maxlength="200" required=""
+                id="id_event_name" />
+        </div>
 
-    <label for="id_event_venue">Event venue:</label>
-    <input type="text" value="{{research.event_venue}}" name="event_venue" maxlength="200" required=""
-        id="id_event_venue" />
+        <div>
+            <label for="id_event_venue">Event venue:</label><br>
+            <input type="text" value="{{research.event_venue}}" name="event_venue" maxlength="200" required=""
+                id="id_event_venue" />
+        </div>
 
-    <label for="id_event_start_date">Event start date:</label>
-    <input type="date" value="{{research.event_start_date|date:'Y-m-d'}}" name="event_start_date" required=""
-        id="id_event_start_date" />
+        <div>
+            <label for="id_event_start_date">Event start date:</label><br>
+            <input type="date" value="{{research.event_start_date|date:'Y-m-d'}}" name="event_start_date" required=""
+                id="id_event_start_date" />
+        </div>
 
-    <label for="id_event_end_date">Event end date:</label>
-    <input type="date" value="{{research.event_end_date|date:'Y-m-d'}}" name="event_end_date" required=""
-        id="id_event_end_date" />
+        <div>
+            <label for="id_event_end_date">Event end date:</label><br>
+            <input type="date" value="{{research.event_end_date|date:'Y-m-d'}}" name="event_end_date" required=""
+                id="id_event_end_date" />
+        </div>
 
-    <label for="id_presentation_type">Presentation type:</label>
-    <select name="presentation_type" id="id_presentation_type">
-        {% for value, subject in form.presentation_type.field.choices %}
-        {% if research.presentation_type == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
+        <div>
+            <label for="id_presentation_type">Presentation Type:</label><br>
+            <select name="presentation_type" id="id_presentation_type">
+                {% for value, subject in form.presentation_type.field.choices %}
+                {% if research.presentation_type == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                <option value="{{value}}">{{value}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-    <label for="id_event_type">Event type:</label>
-    <select name="event_type" id="id_event_type">
-        {% for value, subject in form.event_type.field.choices %}
-        {% if research.event_type == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
+        <div>
+            <label for="id_event_type">Event Type:</label><br>
+            <select name="event_type" id="id_event_type">
+                {% for value, subject in form.event_type.field.choices %}
+                {% if research.event_type == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                <option value="{{value}}">{{value}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-    <label for="id_org_name">Org name:</label>
-    <input type="text" value="{{research.org_name}}" name="org_name" maxlength="200" required="" id="id_org_name" />
+        <div>
+            <label for="id_org_name">Organizer Name:</label><br>
+            <input type="text" value="{{research.org_name}}" name="org_name" maxlength="200" required="" id="id_org_name" />
+        </div>
 
-    <label for="id_org_website_url">Org website url:</label>
-    <input type="text" value="{{research.org_website_url}}" name="org_website_url" maxlength="200" required=""
-        id="id_org_website_url" />
+        <div>
+            <label for="id_org_website_url">Organizer Website URL:</label><br>
+            <input type="text" value="{{research.org_website_url}}" name="org_website_url" maxlength="200" required=""
+                id="id_org_website_url" />
+        </div>
 
-    <label for="id_org_support">Org support:</label>
-    <input type="text" value="{{research.org_support}}" name="org_support" maxlength="200" required=""
-        id="id_org_support" />
+        <div>
+            <label for="id_org_support">Organizer Contact:</label><br>
+            <input type="text" value="{{research.org_support}}" name="org_support" maxlength="200" required=""
+                id="id_org_support" />
+        </div>
 
-    <label for="id_org_description">Org description:</label>
-    <textarea name="org_description" cols="40" rows="10" maxlength="500" required=""
-        id="id_org_description">{{research.org_description}}</textarea>
+        <div>
+            <label for="id_org_description">Organizer Description:</label><br>
+            <textarea name="org_description" cols="40" rows="10" maxlength="500" required=""
+                id="id_org_description">{{research.org_description}}</textarea>
+        </div>
 
+        <div>
+            <label for="id_date_presented">Date of your Research Presentation:</label><br>
+            <input type="date" value="{{research.date_presented|date:'Y-m-d'}}" name="date_presented" required=""
+                id="id_date_presented" />
+        </div>
 
-    <label for="id_date_presented">Date presented:</label>
-    <input type="date" value="{{research.date_presented|date:'Y-m-d'}}" name="date_presented" required=""
-        id="id_date_presented" />
+        <div style="display: none;">
+            <label for="id_presented_id">Presented id:</label><br>
+            <select name="presented_id" id="id_presented_id">
+                {% for value, subject in form.presented_id.field.choices %}
+                {% if research.presented_id == value %}
+                <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                <option value="{{value}}">{{value}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-    <label for="id_presented_id">Presented id:</label>
-    <select name="presented_id" id="id_presented_id">
-        {% for value, subject in form.presented_id.field.choices %}
-        {% if research.presented_id == value %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
+        <div style="display: none;">
+            <label for="id_faculty_id">Faculty id:</label><br>
+            <select name="faculty_id" id="id_faculty_id">
+                {% for value, subject in form.faculty_id.field.choices %}
+                {% if value == current_edit %}
+                <option value="{{value}}" selected>{{value}}</option>
+                {% else %}
+                <option value="{{value}}">{{value}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
 
-
-    <label for="id_faculty_id">Faculty id:</label>
-    <select name="faculty_id" id="id_faculty_id">
-        {% for value, subject in form.faculty_id.field.choices %}
-        {% if value == current_edit %}
-        <option value="{{value}}" selected>{{value}}</option>
-        {% else %}
-        <option value="{{value}}">{{value}}</option>
-        {% endif %}
-        {% endfor %}
-    </select>
-
-    <!-- {{ form.errors }}
-        {{ form.non_field_errors }} -->
-    <button type="submit">Update Value</button>
-</form>
+        <!-- {{ form.errors }}
+            {{ form.non_field_errors }} -->
+        <button type="submit">Update Value</button>
+    </form>
 {% endif %}
-
-
-
 {% endblock %}

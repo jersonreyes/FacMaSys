@@ -1,61 +1,58 @@
 <div>
+{% block ongoing %}
+    <!-- Research Ongoing -->
+    <h3>All Researches: </h3>
+    
+    <table class="table" id="ongoing">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Research Title</th>
+                <th>Area</th>
+                <th>Abstract</th>
+                <th>Document URL</th>
+                <th>Date Added</th>
+                <th>School</th>
+                <th>Degree Level</th>
+                <th>Progress</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-    {% block ongoing %}
-        <!-- Research Ongoing -->
-        <h3>All Researches: </h3>
-        {% if research_ongoing|length > 0 %}
-        <table class="table" id="ongoing">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Research Title</th>
-                    <th>Area</th>
-                    <th>Abstract</th>
-                    <th>Document URL</th>
-                    <th>Date Added</th>
-                    <th>School</th>
-                    <th>Degree Level</th>
-                    <th>Progress</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                {% for element in research_ongoing %}
-                <tr>
-                    <td>{{ element.id }}</td>
-                    <td>{{ element.faculty_id }}</td>
-                    <td>{{ element.research_title }}</td>
-                    <td>{{ element.research_area }}</td>
-                    <td>{{ element.abstract }}</td>
-                    <td><button onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</a></td>
-                    <td>{{ element.date_added|date:"M d, Y" }}</td>
-                    <td>{{ element.researcher_school }}</td>
-                    <td>{{ element.degree_level }}</td>
-                    <td>{{ element.research_progress }}</td>
-    
-                    <td>
-                        <button onclick="window.location.href = '/update_research/{{ element.id }}'">Update</button>
-                        <button onclick="window.location.href = '/delete_research/{{ element.id }}'"{{ element.id }}">Delete</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-            <h5>No data available.</h5>
-        {% endif %}
-    
-        <script type="text/javascript" class="init">
-            $(document).ready(function() {
-            $('#ongoing').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
-            } );
+        <tbody>
+            {% for element in research_ongoing %}
+            <tr>
+                <td>{{ element.id }}</td>
+                <td>{{ element.faculty_id }}</td>
+                <td>{{ element.research_title }}</td>
+                <td>{{ element.research_area }}</td>
+                <td>{{ element.abstract }}</td>
+                <td><button class="document-link" onclick="window.location.href = '/media/{{ element.document }}'">{{ element.document }}</button></td>
+                <td>{{ element.date_added|date:"M d, Y" }}</td>
+                <td>{{ element.researcher_school }}</td>
+                <td>{{ element.degree_level }}</td>
+                <td>{{ element.research_progress }}</td>
+
+                <td class="action-buttons">
+                    <button class="button-9" role="button" onclick="window.location.href = '/research/update_research/{{ element.id }}'"><span class="iconify" data-icon="material-symbols:edit-square"></button>
+                    <button class="button-9" role="button" onclick="window.location.href = '/research/delete_research/{{ element.id }}'"{{ element.id }}"><span class="iconify" data-icon="ic:round-delete"></span></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#ongoing').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
         } );
-        </script>
-    {% endblock %}
-    </div>
+    } );
+    </script>
+{% endblock %}
+</div>

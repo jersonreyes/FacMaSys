@@ -7,7 +7,7 @@
 {% block content %}
 <form enctype="multipart/form-data" action="" method="post">
     {% csrf_token %}
-
+    <p>Hello</p>
     <div class="grid gap-2">
         <div class="grid">
             <p>Research Title: </p>
@@ -31,11 +31,14 @@
         </div>
         <div>
             <p>Abstract: </p>
-            <p>{{ form.abstract }}</p>
+
+            <textarea name="abstract" id="id_abstract" cols="30" rows="10" maxlength="1500" style="width: 100%;"></textarea>
+            
         </div>
         <div>
             <p>Document: </p>
-            {{ form.document }}</p>
+            <input type="file" name="document" id="id_document" accept="application/pdf,application/msword,
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document">
         </div>
         <div>
             <p>School: </p>

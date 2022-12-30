@@ -497,7 +497,7 @@ def add_published(request):
                     new_form.faculty_id = user_instance
                     new_form.save()
                     print("Success!") 
-                    return redirect('/researches/')   # refresh
+                    return redirect('./')   # refresh
                 except:  
                     pass  
         else:  
@@ -538,10 +538,10 @@ def update_researches(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         form = ResearchForm()  
         research = Research.objects.get(id=id)  
-        form = ResearchForm(request.POST, instance=research)  
+        form = ResearchForm(request.POST, request.FILES, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return redirect("/researches/")  
         
         context = {
             'research': research,
@@ -554,15 +554,15 @@ def update_researches(request, id):
 @login_required
 def update_details_a(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
-        research = Research_Presented.objects.get(presented_id=id)  
-        research_all = Research_Presented.objects.filter(presented_id=id)  
+        research = Research_Presented.objects.get(id=id)  
+        research_all = Research_Presented.objects.filter(id=id)  
         form = Research_PresentedForm(request.POST, instance=research) 
         current_edit = research_all.values().first()['faculty_id_id']
         
         if form.is_valid():  
             print("Done!")
             form.save()  
-            return redirect("../../")  
+            return redirect("/researches/")  
         print("asfdasfd!")
         context = {
             'research': research,
@@ -576,26 +576,21 @@ def update_details_a(request, id):
 @login_required
 def update_details_b(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
-        research = Research_Published.objects.get(published_id=id)  
+        research = Research_Published.objects.get(id=id)  
         form = Research_PublishedForm(request.POST, instance=research)  
         if form.is_valid():  
             form.save()  
-            return redirect("../")  
+            return redirect("/researches/")  
 
-        research_all = Research_Published.objects.filter(published_id=id)  
+        research_all = Research_Published.objects.filter(id=id)  
         current_edit__ = research_all.values().first()['published_id_id']
         print('ccc', current_edit__)
         
-        
-        form = Research_PublishedForm(request.POST, instance=research)  
-        if form.is_valid():  
-            form.save()  
-            return redirect("../../")  
-
         context = {
             'research': research,
             'form': form,
             'state':'researches',
+            'current_edit': current_edit__,
             'is_other': True,
         }
         return render(request, 'researches/update_details.html', context)
@@ -609,7 +604,7 @@ def delete_details_a(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Presented.objects.get(id=id)  
         subject.delete()  
-        return redirect("../")
+        return redirect("../../")
     return redirect('index')
 
 @login_required
@@ -617,7 +612,7 @@ def delete_details_b(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'researchcoor' or request.user.is_superuser:
         subject = Research_Published.objects.get(id=id)  
         subject.delete()  
-        return redirect("../")
+        return redirect("../../")
     return redirect('index')
 
 @login_required
@@ -679,7 +674,7 @@ def add_subject(request):
 def updateform_subject(request, id):
     if request.user.profile.user_role == 'faculty' or request.user.profile.user_role == 'depthead' or request.user.is_superuser:
         form = SubjectForm()
-        subjecttt = ExtensionService.objects.get(id=id)
+        subjecttt = Subjects.objects.get(id=id)
         
         context = {
             'subjecttt': subjecttt,
@@ -699,9 +694,16 @@ def update_subject(request, id):
         # selected_list = []
         # for e in values:
         #     selected_list.append(e['id'])
-            
+        
         subjecttt = Subjects.objects.get(id=id)  
         form = SubjectForm(request.POST, instance=subjecttt)  
+        
+        subject_all = Subjects.objects.filter(id=id)
+        current_edit = subject_all.values().first()
+        subject_object_data = current_edit
+        print('asdfasdfsaf')
+        print("all subjects: ", current_edit)
+        
         if form.is_valid():  
             form.save()  
             return redirect("../")  
@@ -710,6 +712,7 @@ def update_subject(request, id):
             'subjecttt': subjecttt,
             'form': form,
             'state':'subjects',
+            'subject_object_data': subject_object_data,
         }
         return render(request, 'subjects/update_subjects.html', context)
     return redirect('index') 

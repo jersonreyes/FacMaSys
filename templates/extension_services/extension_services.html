@@ -12,8 +12,8 @@
             <a class="form-modal-toggler" style="background-color:white; color: orange" title="Add Service" href="javascript:void();" value="./add_service">Add Service</a>
         </div>
     </div>
-    {% if all_extension_services|length > 0 %}
-    <table>
+ 
+    <table class="table" id="extension_services">
         <thead>
             <tr>
                 <th>ID</th>
@@ -49,8 +49,16 @@
             {% endfor %}
         </tbody>
     </table>
-    {% else %}
-        <p class="text-center mt-5">No data available.</p>
-    {% endif %}
+    
+    <script type="text/javascript" class="init">
+        $(document).ready(function() {
+        $('#extension_services').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+    </script>
 {% endblock %}
 </div>
