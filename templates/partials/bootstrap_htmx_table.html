@@ -5,7 +5,7 @@
 {% block table-wrapper %}
     <div id="table-container" class="table-container">
         {% block table %}
-            <table id="faculty-table" class="dark:white text-center border-black" {% render_attrs table.attrs class="table" %}>
+            <table id="tabb" class="tabb dark:white text-center border-black" {% render_attrs table.attrs class="table" %}>
                 {% block table.thead %}
                     {% if table.show_header %}
                         <thead {{ table.attrs.thead.as_html }}>
@@ -42,22 +42,11 @@
                     {% endfor %}
                     </tbody>
                 {% endblock table.tbody %}
-                {% block table.tfoot %}
-                    {% if table.has_footer %}
-                        <tfoot {{ table.attrs.tfoot.as_html }}>
-                        <tr>
-                            {% for column in table.columns %}
-                                <td {{ column.attrs.tf.as_html }}>{{ column.footer }}</td>
-                            {% endfor %}
-                        </tr>
-                        </tfoot>
-                    {% endif %}
-                {% endblock table.tfoot %}
             </table>
         {% endblock table %}
         <script type="text/javascript" class="init">
             $(document).ready(function() {
-            $('#faculty-table').DataTable( {
+            $('#tabb').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
