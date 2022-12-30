@@ -49,8 +49,8 @@
                         <td>{{ e.pre_requisite }} </td>
                         <td>{{ e.course_type }} </td>
                         <td>
-                            <a class="form-modal-toggler" title="Update Subject" href="update_subject/{{e.id}}">Update</a>
-                            <button class="delete" onclick="window.location.href='delete_subject/{{e.id}}'">Delete</a>
+                            <a class="form-modal-toggler" title="Update Subject" href="/subjects/update_subject/{{e.id}}">Update</a>
+                            <button class="delete" onclick="window.location.href='/subjects/delete_subject/{{e.id}}'">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

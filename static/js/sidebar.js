@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
               }
             e.currentTarget.getAttribute('value') ? $("#nav-highlighter").fadeIn() : $("#nav-highlighter").fadeOut();
             
-            (!e.currentTarget.classList.contains('ignore-url') && !e.currentTarget.classList.contains('form-modal-toggler')) && window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
+            window.history.pushState('FacMaSys', 'FacMaSys - ' + e.currentTarget.getAttribute('value') ? e.currentTarget.getAttribute('value') : '', e.currentTarget.href);
             
             $('title').html('FacMaSys - ' + e.currentTarget.getAttribute('value'))
             if(e.currentTarget.classList.contains('form-modal-toggler'))
